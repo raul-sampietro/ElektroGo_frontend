@@ -23,6 +23,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     companion object{
         const val REQUEST_CODE_LOCATION= 0
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
