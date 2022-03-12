@@ -1,5 +1,6 @@
 package elektrogo.front.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import elektrogo.front.AddVehicle
 import elektrogo.front.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -28,9 +30,11 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val AddVehicleButton = binding.AddVehicleButton
+        AddVehicleButton.setOnClickListener{
+            val addVehicleIntent = Intent(activity, AddVehicle::class.java)
+            startActivity(addVehicleIntent)
+
         }
         return root
     }
