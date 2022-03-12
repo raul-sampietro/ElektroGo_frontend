@@ -1,6 +1,8 @@
 package elektrogo.front
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -8,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import elektrogo.front.databinding.ActivityMainBinding
+import elektrogo.front.ui.MapsActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,5 +34,10 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    fun ChangeActivity(view: View){ //provisional function. Catches de click action over de button "Veure el mapa"
+        val intent: Intent = Intent(this, MapsActivity::class.java)
+        startActivity(intent)
     }
 }
