@@ -11,9 +11,19 @@
         android:id="@+id/EliminaVehicleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:backgroundTint="#D40000"
         android:text="@string/EliminaVehicleButton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LicensePlate" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/LicensePlate"
+        android:layout_width="284dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="150dp"
+        android:hint="@string/introdueix_matr_cula"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

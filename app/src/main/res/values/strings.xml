@@ -4,4 +4,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="EliminaVehicleButton">Elimina</string>
+    <string name="introdueix_matr_cula">Introdueix matrícula</string>
 </resources>

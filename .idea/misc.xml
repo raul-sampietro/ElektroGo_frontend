@@ -4,10 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_add_vehicle.xml" value="0.264" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_eliminar_vehicle.xml" value="0.176" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_eliminar_vehicle.xml" value="0.2" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_menu_navegable.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_splash_screen.xml" value="0.2477355072463768" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/content_menu_navegable.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/content_scrolling.xml" value="0.176" />
         <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_dashboard.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_notifications.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_slideshow.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/nav_header_menu_navegable.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.333786231884058" />
       </map>
     </option>
