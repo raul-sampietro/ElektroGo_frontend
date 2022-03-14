@@ -1,5 +1,6 @@
 package elektrogo.front
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -38,7 +39,10 @@ class AddVehicle : AppCompatActivity() {
                 isValid = false
             }
 
-            //if(isValid) //crida a la base de dades (per fer)
+            if(isValid){
+                //crida a la base de dades (per fer)
+                finish() //Back to menu
+            }
         }
     }
 
