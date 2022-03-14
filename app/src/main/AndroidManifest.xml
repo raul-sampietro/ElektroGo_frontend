@@ -11,6 +11,7 @@
         android:theme="@style/Theme.ElektroGo">
         <activity
             android:name=".AddVehicle"
+            android:label="@string/AddVehicle"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
