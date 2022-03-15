@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 
     fun ChangeActivity(view: View){ //provisional function. Catches de click action over de button "Veure el mapa"
