@@ -66,29 +66,27 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
         mMap = googleMap
         checkAndEnableLocation()
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(mainActivity)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        val barcelona = LatLng(41.3879, 2.16992)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
         if (isLocationPermissionGranted()) {
-            if (ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-                return@OnMapReadyCallback
-            } else {
                 val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(
                     LocationRequest.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token)
                 currentLocationTask.addOnCompleteListener { task: Task<Location> ->
                     val currentLoc = if (task.isSuccessful) {
                         val currentLoc: Location = task.result
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(currentLoc.latitude, currentLoc.longitude)))
-                        mMap.moveCamera(CameraUpdateFactory.zoomTo(12.0f))
+                        val loc = LatLng(currentLoc.latitude,currentLoc.longitude)
+                        mMap.moveCamera(CameraUpdateFactory.newLatLng(loc))
+                        mMap.moveCamera(CameraUpdateFactory.zoomTo(14.0f))
                     } else {
                         val exception = task.exception
                     }
                 }
-            }
         } else {
             val barcelona = LatLng(41.3879, 2.16992)
             mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(13.0f))
 
         }
     }
@@ -98,8 +96,8 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      * @pre
      * @return Retorna un bolea segons si els permisos estan donats o no.
      */
-    private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(mainActivity, Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED
+    private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED
     /**
      * @brief Metode que comprova si els permissos necessaris estan donats i si no ho estan, els demana.
      * @pre
@@ -144,7 +142,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      * @pre
      * @post Si el codi correpont al que s'esperava, s'activa MyLocation al mapa, en cas contrari es mostra un text per demanar de nou els permissos.
      */
-    override fun onRequestPermissionsResult(  //It doesn't need to be fixed, it's not an error, it works anyways.
+    override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
@@ -172,7 +170,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment?
-        mapFragment?.getMapAsync(callback)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
+        mapFragment.getMapAsync(callback)
     }
 }

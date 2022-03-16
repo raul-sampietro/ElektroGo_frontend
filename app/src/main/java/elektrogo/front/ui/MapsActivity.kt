@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import elektrogo.front.R
@@ -86,29 +87,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
         checkAndEnableLocation()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        if (isLocationPermissionGranted()) {
-          if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-                return
-            } else {
-              val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token)
-                currentLocationTask.addOnCompleteListener { task: Task<Location> ->
-                    val currentLoc = if (task.isSuccessful) {
-                        val currentLoc: Location = task.result
-                        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(currentLoc.latitude, currentLoc.longitude)))
-                        mMap.moveCamera(CameraUpdateFactory.zoomTo(12.0f))
-                    } else {
-                        val exception = task.exception
-                    }
-                }
-            }
-        } else {
-            val barcelona = LatLng(41.3879, 2.16992)
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
-
-        }
+              if (isLocationPermissionGranted()) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                      != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                      != PackageManager.PERMISSION_GRANTED) {
+                      return
+                  } else {
+                    val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token)
+                      currentLocationTask.addOnCompleteListener { task: Task<Location> ->
+                          val currentLoc = if (task.isSuccessful) {
+                              val currentLoc: Location = task.result
+                              mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(currentLoc.latitude, currentLoc.longitude)))
+                              mMap.moveCamera(CameraUpdateFactory.zoomTo(12.0f))
+                          } else {
+                              val exception = task.exception
+                          }
+                      }
+                  }
+              } else {
+                  val barcelona = LatLng(41.3879, 2.16992)
+                  mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
+                  mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
+                  mMap.addMarker(MarkerOptions().position(barcelona).title("Marker in Bcn"))
+              }
 
     }
 
@@ -164,6 +165,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
             REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
                 mMap.isMyLocationEnabled=true //It doesn't need to be fixed, it's not an error, it works anyways.
