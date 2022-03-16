@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_maps.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_dashboard.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_maps.xml" value="0.23550724637681159" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.333786231884058" />
       </map>
     </option>
