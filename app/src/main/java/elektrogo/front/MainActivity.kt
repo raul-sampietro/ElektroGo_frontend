@@ -1,18 +1,13 @@
 package elektrogo.front
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import elektrogo.front.databinding.ActivityMainBinding
-import elektrogo.front.ui.MapsActivity
 import elektrogo.front.ui.MapsFragment
 
 class MainActivity : AppCompatActivity() {
