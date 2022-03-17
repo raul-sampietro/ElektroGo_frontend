@@ -86,6 +86,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         checkAndEnableLocation()
+        val barcelona = LatLng(41.3879, 2.16992)
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
               if (isLocationPermissionGranted()) {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
