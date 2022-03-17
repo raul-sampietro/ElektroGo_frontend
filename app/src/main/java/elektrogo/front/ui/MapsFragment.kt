@@ -123,7 +123,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         }
         else {
             ActivityCompat.requestPermissions(mainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                MapsActivity.REQUEST_CODE_LOCATION
+                REQUEST_CODE_LOCATION
             )
         }
         if (ActivityCompat.shouldShowRequestPermissionRationale(mainActivity, Manifest.permission.ACCESS_COARSE_LOCATION)){
@@ -131,7 +131,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         }
         else {
             ActivityCompat.requestPermissions(mainActivity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                MapsActivity.REQUEST_CODE_LOCATION
+                REQUEST_CODE_LOCATION
             )
         }
 
@@ -148,7 +148,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         grantResults: IntArray
     ) {
         when(requestCode){
-            MapsActivity.REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            MapsFragment.REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
                 mMap.isMyLocationEnabled=true //It doesn't need to be fixed, it's not an error, it works anyways.
             }
             else {
