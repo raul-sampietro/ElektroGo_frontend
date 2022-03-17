@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val mapsFragment : MapsFragment = MapsFragment(this)
 
-        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, mapsFragment).commit()
+        //val mapsFragment : MapsFragment = MapsFragment(this)
+        //supportFragmentManager.beginTransaction().replace(R.id.frame_layout, mapsFragment).commit()
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.map2, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

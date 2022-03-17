@@ -24,9 +24,9 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
-        android:id="@+id/map2"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:label="Mapa"
+        android:id="@+id/mapsFragment2"
+        android:name="elektrogo.front.ui.MapsFragment"
+        android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
 
 </navigation>
