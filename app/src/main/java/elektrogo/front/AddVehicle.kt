@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
+import java.util.*
 
 class AddVehicle : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +19,18 @@ class AddVehicle : AppCompatActivity() {
         val licensePlate: EditText = findViewById(R.id.LicensePlate)
         val vehicleModel: EditText = findViewById(R.id.VehicleModel)
         val saveVehicleButton: Button = findViewById(R.id.SaveVehicleButton)
+
+        val year = Calendar.getInstance().get(Calendar.YEAR); //Obtenim l'any actual
+
+        var dropYearSpinner: Spinner = findViewById(R.id.FabricationYearInput) //Obtinc l'spinner
+
+        val any = (2000..year).toList().toTypedArray() //Passo el rang d'anys a una array
+
+        val FabricationYearAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, any)  //Defineixo l'estil del spinner
+
+        FabricationYearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)   //Defineixo l'estil del dropdown
+
+        dropYearSpinner.setAdapter(FabricationYearAdapter)  //modifico l'adapter de l'spinner
 
         saveVehicleButton.setOnClickListener {
             var isValid = true
