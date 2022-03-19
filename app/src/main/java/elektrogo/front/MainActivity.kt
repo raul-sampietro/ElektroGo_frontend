@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             R.id.mapa -> {
                 toolbar.title = "Mapa"
                 //linia que havia escrit la Marina
-                val mapsFragment : MapsFragment = MapsFragment(this)
+                val mapsFragment /*: MapsFragment*/ = MapsFragment(this)
                 openFragment(mapsFragment)
                 return@OnItemSelectedListener true
             }
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Inicialització de la barra superior
-    lateinit var toolbar:ActionBar
+    private lateinit var toolbar:ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
