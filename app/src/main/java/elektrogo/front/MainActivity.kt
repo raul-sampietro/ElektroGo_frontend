@@ -1,12 +1,17 @@
 package elektrogo.front
 
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.ui.MapsFragment
 
@@ -14,27 +19,51 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    //Configuració dels events clic
+    private val mOnNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.pooling -> {
+                toolbar.title = "Pooling"
+                return@OnItemSelectedListener true
+            }
+            R.id.mapa -> {
+                toolbar.title = "Mapa"
+                //linia que havia escrit la Marina
+                val mapsFragment : MapsFragment = MapsFragment(this)
+                openFragment(mapsFragment)
+                return@OnItemSelectedListener true
+            }
+            R.id.ruta -> {
+                toolbar.title = "Ruta"
+                return@OnItemSelectedListener true
+            }
+            R.id.perfil -> {
+                toolbar.title = "Perfil"
+                return@OnItemSelectedListener true
+            }
+        }
+        false
+    }
+
+    //Inicialització de la barra superior
+    lateinit var toolbar:ActionBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val mapsFragment : MapsFragment = MapsFragment(this)
-        //supportFragmentManager.beginTransaction().replace(R.id.frame_layout, mapsFragment).commit()
+        toolbar = supportActionBar!!
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
+        bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
+    }
 
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
 
+    private fun openFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_container, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 
 }

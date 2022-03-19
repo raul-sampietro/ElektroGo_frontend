@@ -12,6 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ElektroGo">
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -25,7 +25,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import elektrogo.front.MainActivity
 import elektrogo.front.R
-import elektrogo.front.databinding.FragmentHomeBinding
+//import elektrogo.front.databinding.FragmentHomeBinding
 import elektrogo.front.databinding.FragmentMapsBinding
 
 class MapsFragment(mainActivity: MainActivity) : Fragment() {
@@ -148,7 +148,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         grantResults: IntArray
     ) {
         when(requestCode){
-            MapsFragment.REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
                 mMap.isMyLocationEnabled=true //It doesn't need to be fixed, it's not an error, it works anyways.
             }
             else {
