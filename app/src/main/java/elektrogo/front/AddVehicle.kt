@@ -18,6 +18,10 @@ class AddVehicle : AppCompatActivity() {
 
         val licensePlate: EditText = findViewById(R.id.LicensePlate)
         val vehicleModel: EditText = findViewById(R.id.VehicleModel)
+        val brandVehicle: EditText = findViewById(R.id.BrandInput)
+        val drivingRange: EditText = findViewById(R.id.drivingRangeInput)
+        val fabricationYear: Spinner = findViewById(R.id.FabricationYearInput)
+
         val saveVehicleButton: Button = findViewById(R.id.SaveVehicleButton)
 
         val year = Calendar.getInstance().get(Calendar.YEAR); //Obtenim l'any actual
@@ -51,6 +55,16 @@ class AddVehicle : AppCompatActivity() {
 
             if (TextUtils.isEmpty(vehicleModel.getText())) {
                 vehicleModel.setError(resources.getString(R.string.ObligatoryField))
+                isValid = false
+            }
+
+            if(TextUtils.isEmpty(brandVehicle.getText())) {
+                brandVehicle.setError(resources.getString(R.string.ObligatoryField))
+                isValid = false
+            }
+
+            if(TextUtils.isEmpty(drivingRange.getText())) {
+                drivingRange.setError(resources.getString(R.string.ObligatoryField))
                 isValid = false
             }
 

@@ -7,29 +7,25 @@
     tools:context=".AddVehicle">
 
     <ScrollView
-        android:id="@+id/Scroll"
-        android:layout_width="410dp"
-        android:layout_height="736dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/licensePlateLabel"
                 android:layout_width="260dp"
-                android:layout_height="70dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="70dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="80dp"
                 android:text="@string/LicensePlateLabel"
-                android:textSize="20sp" />
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp"
+                android:visibility="visible" />
 
             <EditText
                 android:id="@+id/LicensePlate"
@@ -41,7 +37,31 @@
                 android:ems="10"
                 android:hint="@string/LicensePlateExample"
                 android:inputType="textPersonName"
-                android:maxLength="8" />
+                android:maxLength="8"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/BrandLabel"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/CarBrandLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/BrandInput"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="@string/CarBrandHint"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/VehicleModelLabel"
@@ -51,7 +71,9 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="80dp"
                 android:text="@string/VehicleModelLabel"
-                android:textSize="20sp" />
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp"
+                android:visibility="visible" />
 
             <EditText
                 android:id="@+id/VehicleModel"
@@ -63,48 +85,18 @@
                 android:ems="10"
                 android:hint="@string/VehicleModelExample"
                 android:inputType="textPersonName"
-                android:textColor="#000000" />
-
-            <TextView
-                android:id="@+id/BrandLabel"
-                android:layout_width="260dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="70dp"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/VehicleModel"
-                tools:layout_editor_absoluteY="392dp"
-                tools:text="@string/CarBrandLabel" />
-
-            <EditText
-                android:id="@+id/BrandInput"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="80dp"
-                android:ems="10"
-                android:hint="@string/CarBrandHint"
-                android:inputType="textPersonName"
                 android:textColor="#000000"
-                app:layout_constraintTop_toBottomOf="@id/BrandLabel" />
+                android:visibility="visible" />
 
             <TextView
-                android:id="@+id/drivingRangeLabel"
+                android:id="@+id/drivingRange"
                 android:layout_width="260dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="70dp"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/BrandInput"
-                tools:layout_editor_absoluteY="392dp"
-                tools:text="@string/DrivingRangeLabel" />
+                android:text="@string/DrivingRangeLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/drivingRangeInput"
@@ -117,27 +109,25 @@
                 android:hint="@string/DrivingRangeExample"
                 android:inputType="number"
                 android:textColor="#000000"
-                app:layout_constraintTop_toBottomOf="@id/drivingRangeLabel" />
+                android:visibility="visible" />
 
             <TextView
                 android:id="@+id/FabricationYearLabel"
-                android:layout_width="match_parent"
+                android:layout_width="260dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="70dp"
+                android:text="@string/FabricationYearLabel"
+                android:textColor="@android:color/secondary_text_light"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/BrandInput"
-                tools:layout_editor_absoluteY="392dp"
                 tools:text="@string/FabricationYearLabel" />
 
             <Spinner
                 android:id="@+id/FabricationYearInput"
                 android:layout_width="260dp"
                 android:layout_height="70dp"
-                android:layout_marginStart="70dp" />
+                android:layout_marginStart="70dp"
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
                 android:id="@+id/SaveVehicleButton"
