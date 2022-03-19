@@ -56,9 +56,12 @@ class MainActivity : AppCompatActivity() {
         toolbar = supportActionBar!!
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        //Fem que la funcionalitat que se selecciona per defecte en obrir l'app sigui el mapa
+        bottomNavigation.selectedItemId = R.id.mapa
     }
 
-
+    //Carrega el fragment passat per paràmetre al main_container
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, fragment)
