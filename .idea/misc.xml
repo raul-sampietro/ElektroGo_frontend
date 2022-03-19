@@ -5,10 +5,14 @@
       <map>
         <entry key="..\:/Users/joelc/ElektroGo_frontend/app/src/main/res/layout/activity_add_vehicle.xml" value="0.2" />
         <entry key="..\:/Users/joelc/ElektroGo_frontend/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
-        <entry key="..\:/Users/joelc/ElektroGo_frontend/app/src/main/res/layout/activity_main2.xml" value="0.11302083333333333" />
         <entry key="..\:/Users/joelc/ElektroGo_frontend/app/src/main/res/layout/fragment_dashboard.xml" value="0.4" />
         <entry key="..\:/Users/joelc/ElektroGo_frontend/app/src/main/res/layout/fragment_home.xml" value="0.20572916666666666" />
+        <entry key="..\:/Users/joelc/ElektroGo_frontend/app/src/main/res/layout/testing_server_connection.xml" value="0.1" />
         <entry key="..\:/Users/joelc/ElektroGo_frontend/app/src/main/res/menu/bottom_nav_menu.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/vcard/ElektroGo_frontend/app/src/main/res/layout/activity_add_vehicle.xml" value="0.22" />
+        <entry key="..\:/Users/vcard/ElektroGo_frontend/app/src/main/res/layout/activity_main.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/vcard/ElektroGo_frontend/app/src/main/res/layout/fragment_dashboard.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/vcard/ElektroGo_frontend/app/src/main/res/menu/bottom_nav_menu.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.333786231884058" />
       </map>
     </option>
