@@ -1,6 +1,7 @@
 package elektrogo.front.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -25,7 +26,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import elektrogo.front.MainActivity
 import elektrogo.front.R
-import elektrogo.front.databinding.FragmentHomeBinding
+//import elektrogo.front.databinding.FragmentHomeBinding
 import elektrogo.front.databinding.FragmentMapsBinding
 
 class MapsFragment(mainActivity: MainActivity) : Fragment() {
@@ -62,6 +63,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      * @pre el metode onCreateView() s'ha executat sense problemes
      * @post Es mostra el mapa amb l'opcio de geolocalitzacio. El mapa esta centrat primerament en la ubicacio actual aproximada del dispositiu si els permissos estan garantits.
      */
+    @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
 
         mMap = googleMap
@@ -103,6 +105,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      * @pre
      * @post Si els permissos no estan donats, els demana a l'usuari.
      */
+    @SuppressLint("MissingPermission")
     private fun checkAndEnableLocation(){
         if(!::mMap.isInitialized) return
         if(isLocationPermissionGranted()){
@@ -142,13 +145,14 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      * @pre
      * @post Si el codi correpont al que s'esperava, s'activa MyLocation al mapa, en cas contrari es mostra un text per demanar de nou els permissos.
      */
+    @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
         when(requestCode){
-            MapsFragment.REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
                 mMap.isMyLocationEnabled=true //It doesn't need to be fixed, it's not an error, it works anyways.
             }
             else {
