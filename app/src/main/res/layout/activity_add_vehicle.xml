@@ -130,6 +130,28 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
+                android:id="@+id/addImage"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="23dp"
+                android:text="@string/VehicleImageButton" />
+
+            <ImageView
+                android:id="@+id/vehicleImage"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/errorImage"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="0dp"
+                android:textSize="20sp" />
+
+            <Button
                 android:id="@+id/SaveVehicleButton"
                 android:layout_width="260dp"
                 android:layout_height="70dp"

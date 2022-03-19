@@ -25,5 +25,7 @@
     <string name="ObligatoryField">Aquest camp és obligatori</string>
     <string name="notEnoughCharactersLicensePlate">Has de introduir 7 o 8 caracters</string>
     <string name="invalidLicensePlate">El format de matrícula no és vàlid</string>
+    <string name="VehicleImageButton">Inserir imatge del vehicle</string>
+    <string name="ObligatoryFieldImage">Has de afegir una imatge del vehicle</string>
 
 </resources>
