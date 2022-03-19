@@ -2,4 +2,8 @@
     <string name="app_name">ElektroGo</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="Mapa">Mapa</string>
+    <string name="title_pooling">Pooling</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_route">Ruta</string>
+    <string name="title_map">Mapa</string>
 </resources>
