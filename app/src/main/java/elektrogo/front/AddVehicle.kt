@@ -26,6 +26,7 @@ class AddVehicle : AppCompatActivity() {
         val vehicleModel: EditText = findViewById(R.id.VehicleModel)
         val brandVehicle: EditText = findViewById(R.id.BrandInput)
         val drivingRange: EditText = findViewById(R.id.drivingRangeInput)
+        val seatsVehcile: EditText = findViewById(R.id.seatsVehicleInput)
         val fabricationYear: Spinner = findViewById(R.id.FabricationYearInput)
         var imageErrorMessage: TextView = findViewById(R.id.errorImage)
         val imageButton: Button = findViewById(R.id.addImage)
@@ -80,6 +81,11 @@ class AddVehicle : AppCompatActivity() {
 
             if(TextUtils.isEmpty(drivingRange.getText())) {
                 drivingRange.setError(resources.getString(R.string.ObligatoryField))
+                isValid = false
+            }
+
+            if(TextUtils.isEmpty(seatsVehcile.getText())) {
+                seatsVehcile.setError(resources.getString(R.string.ObligatoryField))
                 isValid = false
             }
 
