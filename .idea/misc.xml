@@ -3,16 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
-        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_maps.xml" value="0.11614583333333334" />
-        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_notifications.xml" value="0.11614583333333334" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_maps.xml" value="0.16304347826086957" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/menu/bottom_nav_menu.xml" value="0.15677083333333333" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1555" />
-        <entry key="..\:/Users/simon/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1555" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.333786231884058" />
       </map>
     </option>
