@@ -14,24 +14,17 @@ import io.ktor.http.*
 
 object FrontendController {
     //Add functions you need here :)
-
+    private val client = HttpClient(Android){   //Exemple de com fer una crida amb el nostre servidor!
+        engine {
+            connectTimeout = 60_000
+            socketTimeout = 60_000
+        }
+    }
 
     suspend fun doGetTest(): String {
-
-        val client = HttpClient(Android){   //Exemple de com fer una crida amb el nostre servidor!
-            engine {
-                connectTimeout = 60_000
-                socketTimeout = 60_000
-            }
-        }
-
         val httpResponse: HttpResponse = client.get("http://10.4.41.58:8080/")
         val stringBody: String = httpResponse.receive()
-        client.close()
         return stringBody
     }
 
-    fun test(): String{
-        return "I work :)"
-    }
 }
