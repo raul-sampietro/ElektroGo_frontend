@@ -6,4 +6,28 @@
     <string name="title_profile">Perfil</string>
     <string name="title_route">Ruta</string>
     <string name="title_map">Mapa</string>
+
+    <string name="LicensePlateLabel">Introdueix matricula</string>
+    <string name="LicensePlateExample">1234ABC</string>
+
+    <string name="CarBrandLabel">Introdueix la marca del vehícle</string>
+    <string name="CarBrandHint">Tesla</string>
+
+    <string name="VehicleModelLabel">Introdueix model del vehicle</string>
+    <string name="VehicleModelExample">X</string>
+
+    <string name="DrivingRangeLabel">Introdueix la autonomia del vehicle (km)</string>
+    <string name="DrivingRangeExample">100</string>
+
+    <string name="FabricationYearLabel">Any de fabricació</string>
+    <string name="FabricationYearInput">2020</string>
+
+    <string name="SaveVehicle">Afegir</string>
+    <string name="AddVehicle">Afegir vehicle</string>
+
+    <string name="ObligatoryField">Aquest camp és obligatori</string>
+    <string name="notEnoughCharactersLicensePlate">Has de introduir 7 o 8 caracters</string>
+    <string name="invalidLicensePlate">El format de matrícula no és vàlid</string>
+    <string name="VehicleImageButton">Inserir imatge del vehicle</string>
+    <string name="ObligatoryFieldImage">Has de afegir una imatge del vehicle</string>
 </resources>
