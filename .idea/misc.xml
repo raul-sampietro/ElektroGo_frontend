@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.333786231884058" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_vehicles_view.xml" value="0.20104166666666667" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.25" />
       </map>
     </option>
   </component>

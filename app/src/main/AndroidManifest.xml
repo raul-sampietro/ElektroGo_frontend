@@ -11,6 +11,9 @@
         android:theme="@style/Theme.ElektroGo">
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TestActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
