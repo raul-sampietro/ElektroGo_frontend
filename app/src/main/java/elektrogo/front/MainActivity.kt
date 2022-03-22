@@ -14,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.ui.MapsFragment
+import elektrogo.front.ui.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.perfil -> {
                 toolbar.title = "Perfil"
+                val perfilFragment = ProfileFragment()
+                openFragment(perfilFragment)
                 return@OnItemSelectedListener true
             }
         }
