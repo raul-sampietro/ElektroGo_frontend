@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item   android:title="@string/title_pooling"
+            android:id="@+id/pooling"
+            android:icon="@drawable/ic_cotxe"/>
+
+    <item   android:title="@string/title_map"
+            android:id="@+id/mapa"
+            android:icon="@drawable/ic_mapa"/>
+
+    <item   android:title="@string/title_route"
+            android:id="@+id/ruta"
+            android:icon="@drawable/ic_ruta"/>
+
+    <item   android:title="@string/title_profile"
+            android:id="@+id/perfil"
+            android:icon="@drawable/ic_perfil"/>
+</menu>
