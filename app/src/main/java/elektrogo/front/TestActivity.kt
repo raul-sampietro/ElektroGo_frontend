@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import elektrogo.front.ui.vehicleList.VehicleListFragment
 
 class TestActivity : AppCompatActivity() {
-    private val vehiclesViewFragment = VehiclesViewFragment()
+    private val vehiclesViewFragment = VehicleListFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

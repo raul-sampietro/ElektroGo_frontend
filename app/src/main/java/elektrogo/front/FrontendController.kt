@@ -27,4 +27,6 @@ object FrontendController {
         return stringBody
     }
 
+    suspend fun doGetVehicleList() {}
+
 }
