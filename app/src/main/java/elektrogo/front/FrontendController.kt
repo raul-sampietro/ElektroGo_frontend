@@ -43,7 +43,7 @@ object FrontendController {
     }
 
     suspend fun deleteVehicle(username: String, numberPlate: String) {
-        val response: HttpResponse = client.delete("${URL_VEHICLE}readVehicles") {
+        val response: HttpResponse = client.post("${URL_VEHICLE}deleteDriverVehicle") {
             parameter("nPVehicle", username)
             parameter("userDriver", numberPlate)
         }

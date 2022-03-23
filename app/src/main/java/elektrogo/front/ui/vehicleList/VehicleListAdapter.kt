@@ -10,8 +10,10 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import elektrogo.front.FrontendController
 import elektrogo.front.R
 import elektrogo.front.Vehicle
+import kotlinx.coroutines.runBlocking
 
 class VehicleListAdapter(private val context : Activity, private val vehicleList : ArrayList<Vehicle>)
     : ArrayAdapter<Vehicle>(context, R.layout.fragment_vehicle_list_item, vehicleList) {
@@ -47,6 +49,7 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
                     setPositiveButton("OK",
                         DialogInterface.OnClickListener { dialog, id ->
                             Toast.makeText(parent.context, "Yes", Toast.LENGTH_LONG).show()
+                            deleteVehicle(v.numberPlate, "Test")
                         })
                     setNegativeButton("NO",
                         DialogInterface.OnClickListener { dialog, id ->
@@ -60,5 +63,9 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         }
 
         return view
+    }
+
+    private fun deleteVehicle(numberPlate: String, username: String) = runBlocking() {
+        FrontendController.deleteVehicle(numberPlate, username)
     }
 }

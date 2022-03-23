@@ -19,7 +19,6 @@ class VehicleListFragment : Fragment() {
 
     private lateinit var viewModel: VehicleListViewModel
     private lateinit var vehicleList: ArrayList<Vehicle>
-    private lateinit var string: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +36,7 @@ class VehicleListFragment : Fragment() {
             val intent = Intent(container?.context, AddVehicle::class.java)
             container?.context?.startActivity(intent)
         }
+
         /*
         // Testing data
         val vehicle1 = Vehicle("Opel", "Corsa", "0049HNZ", 234, 2007, 5, null)
@@ -59,9 +59,10 @@ class VehicleListFragment : Fragment() {
         list.add(vehicle2)
         list.add(vehicle1)
         list.add(vehicle2)
+        listView.adapter = VehicleListAdapter(container?.context as Activity,list)
         */
 
-        //listView.adapter = VehicleListAdapter(container?.context as Activity, vehicleList)
+
         listView.adapter = VehicleListAdapter(container?.context as Activity, vehicleList)
 
         return view
