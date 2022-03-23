@@ -108,6 +108,9 @@ class AddVehicle : AppCompatActivity() {
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
                 lifecycleScope.launch{
                     FrontendController.sendVehicleInfo(vehicleInfo)
+                    FrontendController.sendVehiclePhoto(licensePlate.getText().toString(),
+                        bitmapVehicleImage!!
+                    )
                 }
                 finish() //Back to menu
             }
