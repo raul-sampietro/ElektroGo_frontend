@@ -9,6 +9,10 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.widget.*
+import androidx.lifecycle.lifecycleScope
+import com.google.gson.Gson
+import elektrogo.front.ui.VehicleModel
+import kotlinx.coroutines.launch
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
@@ -99,7 +103,12 @@ class AddVehicle : AppCompatActivity() {
             }
 
             if(isValid){
-                //crida a la base de dades (per fer)
+
+                var vehicleInfo = VehicleModel(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
+                    drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
+                lifecycleScope.launch{
+                    FrontendController.sendVehicleInfo(vehicleInfo)
+                }
                 finish() //Back to menu
             }
         }
@@ -123,6 +132,9 @@ class AddVehicle : AppCompatActivity() {
             }
         }
     }
+
+
+
     private fun checkLicensePlate(licensePlateToCheck: Editable): Boolean {
         var isValid = true
         for(i in licensePlateToCheck.indices){   //Check licensePlate has valid input

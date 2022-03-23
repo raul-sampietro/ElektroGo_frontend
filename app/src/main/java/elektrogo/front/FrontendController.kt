@@ -1,5 +1,6 @@
 package elektrogo.front
 import android.util.Log
+import elektrogo.front.ui.VehicleModel
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -19,12 +20,27 @@ object FrontendController {
             connectTimeout = 60_000
             socketTimeout = 60_000
         }
+        install(JsonFeature) {
+            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                prettyPrint = true
+                isLenient = true
+            })
+        }
+
     }
 
     suspend fun doGetTest(): String {
         val httpResponse: HttpResponse = client.get("http://10.4.41.58:8080/")
         val stringBody: String = httpResponse.receive()
         return stringBody
+    }
+
+    suspend fun sendVehicleInfo(vehicleInfo: VehicleModel) {
+        val httpResponse: HttpResponse = client.post("http://10.4.41.58:8080/vehicle/create?userNDriver=Test"){
+            contentType(ContentType.Application.Json)
+            body = vehicleInfo
+        }
+        val stringBody: String = httpResponse.receive()
     }
 
 }
