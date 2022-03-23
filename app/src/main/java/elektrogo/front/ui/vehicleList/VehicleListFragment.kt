@@ -8,13 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ListView
-import android.widget.Toast
-import elektrogo.front.AddVehicle
-import elektrogo.front.R
-import elektrogo.front.Vehicle
-import elektrogo.front.VehicleListAdapter
+import elektrogo.front.*
 
 class VehicleListFragment : Fragment() {
 
@@ -23,21 +18,26 @@ class VehicleListFragment : Fragment() {
     }
 
     private lateinit var viewModel: VehicleListViewModel
+    private lateinit var vehicleList: ArrayList<Vehicle>
+    private lateinit var string: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_vehicle_list, container, false)
         val listView: ListView = view.findViewById(R.id.list_view)
         val newVehicleButton: com.google.android.material.floatingactionbutton.FloatingActionButton = view.findViewById(R.id.fab)
+
+        vehicleList = viewModel.getVehicleList("Test")
 
         newVehicleButton.setOnClickListener {
             //Toast.makeText(container?.context, "Clicked", Toast.LENGTH_LONG).show()
             val intent = Intent(container?.context, AddVehicle::class.java)
             container?.context?.startActivity(intent)
         }
-
+        /*
         // Testing data
         val vehicle1 = Vehicle("Opel", "Corsa", "0049HNZ", 234, 2007, 5, null)
         val vehicle2 = Vehicle("Nissan", "X-Trail", "0050AAA", 300, 2001, 7, null)
@@ -59,8 +59,10 @@ class VehicleListFragment : Fragment() {
         list.add(vehicle2)
         list.add(vehicle1)
         list.add(vehicle2)
+        */
 
-        listView.adapter = VehicleListAdapter(container?.context as Activity, list)
+        //listView.adapter = VehicleListAdapter(container?.context as Activity, vehicleList)
+        listView.adapter = VehicleListAdapter(container?.context as Activity, vehicleList)
 
         return view
     }
@@ -68,8 +70,5 @@ class VehicleListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[VehicleListViewModel::class.java]
-
-
     }
-
 }

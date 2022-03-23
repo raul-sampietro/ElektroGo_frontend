@@ -7,12 +7,12 @@ import androidx.fragment.app.FragmentTransaction
 import elektrogo.front.ui.vehicleList.VehicleListFragment
 
 class TestActivity : AppCompatActivity() {
-    private val vehiclesViewFragment = VehicleListFragment()
+    private val vehicleListFragment = VehicleListFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        loadFragment(vehiclesViewFragment)
+        loadFragment(vehicleListFragment)
     }
 
     private fun loadFragment(fragment: Fragment) {
