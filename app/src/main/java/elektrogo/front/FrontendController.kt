@@ -60,7 +60,7 @@ object FrontendController {
             formData = formData {
                 append("image", image, Headers.build {
                     append(HttpHeaders.ContentType, "image/png")
-                    append(HttpHeaders.ContentDisposition, "filename=test2.png")
+                    append(HttpHeaders.ContentDisposition, "filename=ignore.png")
                 })
             }
         )

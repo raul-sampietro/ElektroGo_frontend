@@ -30,6 +30,7 @@
     <string name="invalidLicensePlate">El format de matrícula no és vàlid</string>
     <string name="VehicleImageButton">Inserir imatge del vehicle</string>
     <string name="ObligatoryFieldImage">Has de afegir una imatge del vehicle</string>
+    <string name="VehicleCreatedSuccessfully">El vehicle ha estat guardat</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="seatsVehicleLabel">Introdueix els seients del vehícle</string>

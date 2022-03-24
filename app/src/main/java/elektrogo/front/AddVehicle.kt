@@ -112,6 +112,7 @@ class AddVehicle : AppCompatActivity() {
                         bitmapVehicleImage!!
                     )
                 }
+                Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
                 finish() //Back to menu
             }
         }
