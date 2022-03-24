@@ -37,4 +37,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="seatsVehicleLabel">Introdueix els seients del vehícle</string>
     <string name="seatsVehicleExample">5</string>
+
+    <string name="VehicleSeats">Seients</string>
 </resources>

@@ -10,8 +10,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
-import com.google.gson.Gson
-import elektrogo.front.ui.VehicleModel
+import elektrogo.front.model.Vehicle
 import kotlinx.coroutines.launch
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -104,7 +103,7 @@ class AddVehicle : AppCompatActivity() {
 
             if(isValid){
 
-                var vehicleInfo = VehicleModel(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
+                var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
                 lifecycleScope.launch{
                     FrontendController.sendVehicleInfo(vehicleInfo)

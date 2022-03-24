@@ -1,12 +1,9 @@
 package elektrogo.front
 import android.graphics.Bitmap
-import android.util.Log
-import elektrogo.front.ui.VehicleModel
+import elektrogo.front.model.Vehicle
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
-import io.ktor.client.engine.cio.*
-import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
@@ -14,18 +11,21 @@ import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.http.ContentDisposition.Companion.File
-import io.ktor.http.ContentType.MultiPart.FormData
 import io.ktor.util.*
 import java.io.ByteArrayOutputStream
-import java.io.File
 
 object FrontendController {
+    private const val URL_BASE = "http://10.4.41.58:8080/"
+    private const val URL_VEHICLE = "${URL_BASE}vehicle/"
+
     //Add functions you need here :)
     private val client = HttpClient(Android){   //Exemple de com fer una crida amb el nostre servidor!
         engine {
             connectTimeout = 60_000
             socketTimeout = 60_000
+        }
+        install(Logging) {
+            level = LogLevel.ALL
         }
         install(JsonFeature) {
             serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
@@ -33,17 +33,17 @@ object FrontendController {
                 isLenient = true
             })
         }
-
     }
 
     suspend fun doGetTest(): String {
-        val httpResponse: HttpResponse = client.get("http://10.4.41.58:8080/")
+        val httpResponse: HttpResponse = client.get(URL_BASE)
         val stringBody: String = httpResponse.receive()
         return stringBody
     }
 
-    suspend fun sendVehicleInfo(vehicleInfo: VehicleModel) {
-        val httpResponse: HttpResponse = client.post("http://10.4.41.58:8080/vehicle/create?userNDriver=Test"){
+    suspend fun sendVehicleInfo(vehicleInfo: Vehicle) {
+        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create"){
+            parameter("userNDriver", "Test")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
@@ -54,9 +54,9 @@ object FrontendController {
         val stream = ByteArrayOutputStream()
         vehiclePic.compress(Bitmap.CompressFormat.PNG, 90, stream)
         val image = stream.toByteArray()
-
+        // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
-            url = "http://10.4.41.58:8080/vehicle/setImage?numberPlate=$licensePlate",
+            url = "${URL_VEHICLE}setImage?numberPlate=$licensePlate",
             formData = formData {
                 append("image", image, Headers.build {
                     append(HttpHeaders.ContentType, "image/png")
@@ -66,4 +66,17 @@ object FrontendController {
         )
     }
 
+    suspend fun getVehicleList(username: String): ArrayList<Vehicle> {
+        val vehicles: ArrayList<Vehicle> = client.get("${URL_VEHICLE}readVehicles") {
+            parameter("userName", username)
+        }
+        return vehicles
+    }
+
+    suspend fun deleteVehicle(username: String, numberPlate: String) {
+        val response: HttpResponse = client.post("${URL_VEHICLE}deleteDriverVehicle") {
+            parameter("nPVehicle", username)
+            parameter("userDriver", numberPlate)
+        }
+    }
 }
