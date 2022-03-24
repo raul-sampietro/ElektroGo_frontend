@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import elektrogo.front.FrontendController
+import elektrogo.front.controller.FrontendController
 import elektrogo.front.R
 import elektrogo.front.model.Vehicle
 import kotlinx.coroutines.runBlocking

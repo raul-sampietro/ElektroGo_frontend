@@ -1,4 +1,4 @@
-package elektrogo.front.ui
+package elektrogo.front.ui.profile
 
 import androidx.lifecycle.ViewModel
 

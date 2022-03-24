@@ -1,7 +1,7 @@
 package elektrogo.front.ui.vehicleList
 
 import androidx.lifecycle.ViewModel
-import elektrogo.front.FrontendController
+import elektrogo.front.controller.FrontendController
 import elektrogo.front.model.Vehicle
 import kotlinx.coroutines.runBlocking
 

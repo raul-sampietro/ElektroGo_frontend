@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ListView
 import elektrogo.front.*
 import elektrogo.front.model.Vehicle
+import elektrogo.front.ui.vehicleAdd.AddVehicle
 
 class VehicleListFragment : Fragment() {
 

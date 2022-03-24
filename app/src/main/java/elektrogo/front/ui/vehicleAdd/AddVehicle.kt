@@ -1,4 +1,4 @@
-package elektrogo.front
+package elektrogo.front.ui.vehicleAdd
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -10,6 +10,8 @@ import android.text.Editable
 import android.text.TextUtils
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
+import elektrogo.front.R
+import elektrogo.front.controller.FrontendController
 import elektrogo.front.model.Vehicle
 import kotlinx.coroutines.launch
 import java.io.FileNotFoundException

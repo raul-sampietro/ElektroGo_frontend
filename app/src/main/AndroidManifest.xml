@@ -26,10 +26,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".TestingServerConnection" />
-
-        <activity
-            android:name=".AddVehicle"
+            android:name=".ui.vehicleAdd.AddVehicle"
             android:label="@string/AddVehicle"
             android:exported="false" />
 

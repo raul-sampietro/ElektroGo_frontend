@@ -1,4 +1,4 @@
-package elektrogo.front
+package elektrogo.front.controller
 import android.graphics.Bitmap
 import elektrogo.front.model.Vehicle
 import io.ktor.client.*
