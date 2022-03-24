@@ -13,7 +13,7 @@ class TestingServerConnection : AppCompatActivity() {
 
         var text: TextView = findViewById(R.id.textView)
 
-        lifecycleScope.launch{ //No li agrada
+        lifecycleScope.launch{
             val string = getText()
             text.setText(string)
         }
