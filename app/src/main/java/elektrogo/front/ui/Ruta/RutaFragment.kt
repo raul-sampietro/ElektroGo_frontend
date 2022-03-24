@@ -77,6 +77,5 @@ class RutaFragment(mainActivity: MainActivity) : Fragment() {
                 Log.i("PlacesApiError", "An error occurred: $status")
             }
         })
-
     }
 }
