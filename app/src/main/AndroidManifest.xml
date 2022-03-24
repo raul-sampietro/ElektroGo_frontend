@@ -26,13 +26,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".TestingServerConnection"
-            
-          />
-      <activity
-            android:name=".AddVehicle"
+            android:name=".ui.vehicleAdd.AddVehicle"
             android:label="@string/AddVehicle"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -42,6 +39,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.vehicleList.VehicleListActivity"
+            android:exported="true">
+
+        </activity>
+
     </application>
 
 </manifest>

@@ -7,14 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
-import elektrogo.front.ui.MapsFragment
-import elektrogo.front.ui.ProfileFragment
+import elektrogo.front.ui.map.MapsFragment
+import elektrogo.front.ui.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package elektrogo.front
+package elektrogo.front.ui.vehicleAdd
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -9,6 +9,11 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextUtils
 import android.widget.*
+import androidx.lifecycle.lifecycleScope
+import elektrogo.front.R
+import elektrogo.front.controller.FrontendController
+import elektrogo.front.model.Vehicle
+import kotlinx.coroutines.launch
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
@@ -26,6 +31,7 @@ class AddVehicle : AppCompatActivity() {
         val vehicleModel: EditText = findViewById(R.id.VehicleModel)
         val brandVehicle: EditText = findViewById(R.id.BrandInput)
         val drivingRange: EditText = findViewById(R.id.drivingRangeInput)
+        val seatsVehcile: EditText = findViewById(R.id.seatsVehicleInput)
         val fabricationYear: Spinner = findViewById(R.id.FabricationYearInput)
         var imageErrorMessage: TextView = findViewById(R.id.errorImage)
         val imageButton: Button = findViewById(R.id.addImage)
@@ -83,6 +89,11 @@ class AddVehicle : AppCompatActivity() {
                 isValid = false
             }
 
+            if(TextUtils.isEmpty(seatsVehcile.getText())) {
+                seatsVehcile.setError(resources.getString(R.string.ObligatoryField))
+                isValid = false
+            }
+
             if(bitmapVehicleImage==null){
                 isValid = false
                 imageErrorMessage.setText(resources.getString(R.string.ObligatoryFieldImage))
@@ -93,11 +104,24 @@ class AddVehicle : AppCompatActivity() {
             }
 
             if(isValid){
-                //crida a la base de dades (per fer)
-                finish() //Back to menu
+
+                var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
+                    drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
+                lifecycleScope.launch{
+                    FrontendController.sendVehicleInfo(vehicleInfo)
+                    FrontendController.sendVehiclePhoto(licensePlate.getText().toString(),
+                        bitmapVehicleImage!!
+                    )
+                }
+                Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
+                // TODO tancar la activity
+                finishActivity(0) //Back to menu
             }
+            else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -117,6 +141,9 @@ class AddVehicle : AppCompatActivity() {
             }
         }
     }
+
+
+
     private fun checkLicensePlate(licensePlateToCheck: Editable): Boolean {
         var isValid = true
         for(i in licensePlateToCheck.indices){   //Check licensePlate has valid input

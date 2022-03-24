@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddVehicle">
+    tools:context=".ui.vehicleAdd.AddVehicle">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -110,6 +110,26 @@
                 android:inputType="number"
                 android:textColor="#000000"
                 android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/vehicleSeatsLabel"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/seatsVehicleLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/seatsVehicleInput"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="2dp"
+                android:ems="10"
+                android:hint="@string/seatsVehicleExample"
+                android:inputType="number" />
 
             <TextView
                 android:id="@+id/FabricationYearLabel"
