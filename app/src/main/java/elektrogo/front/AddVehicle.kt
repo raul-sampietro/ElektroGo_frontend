@@ -115,6 +115,7 @@ class AddVehicle : AppCompatActivity() {
                 Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
                 finish() //Back to menu
             }
+            else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_SHORT).show()
         }
     }
 
