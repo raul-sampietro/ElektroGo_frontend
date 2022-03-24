@@ -35,15 +35,8 @@ object FrontendController {
         }
     }
 
-    suspend fun doGetTest(): String {
-        val httpResponse: HttpResponse = client.get(URL_BASE)
-        val stringBody: String = httpResponse.receive()
-        return stringBody
-    }
-
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle) {
-        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create"){
-            parameter("userNDriver", "Test")
+        val httpResponse: HttpResponse = client.post("http://10.4.41.58:8080/vehicle/create?userNDriver=Test"){
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }

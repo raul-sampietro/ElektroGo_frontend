@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import elektrogo.front.ui.vehicleAdd.AddVehicle
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 
 class ProfileFragment : Fragment() {
 
@@ -33,7 +34,7 @@ class ProfileFragment : Fragment() {
 
         val AddVehicleButton = binding.AddVehicleButton
         AddVehicleButton.setOnClickListener{
-            val addVehicleIntent = Intent(activity, AddVehicle::class.java)
+            val addVehicleIntent = Intent(activity, VehicleListActivity::class.java)
             startActivity(addVehicleIntent)
 
         }

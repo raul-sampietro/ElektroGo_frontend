@@ -1,12 +1,12 @@
-package elektrogo.front
+package elektrogo.front.ui.vehicleList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import elektrogo.front.ui.vehicleList.VehicleListFragment
+import elektrogo.front.R
 
-class TestActivity : AppCompatActivity() {
+class VehicleListActivity : AppCompatActivity() {
     private val vehicleListFragment = VehicleListFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {

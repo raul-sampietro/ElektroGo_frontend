@@ -114,11 +114,14 @@ class AddVehicle : AppCompatActivity() {
                     )
                 }
                 Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
-                finish() //Back to menu
+                // TODO tancar la activity
+                finishActivity(0) //Back to menu
             }
             else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_SHORT).show()
         }
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
