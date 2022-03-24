@@ -28,7 +28,6 @@ class RutaFragment(mainActivity: MainActivity) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
