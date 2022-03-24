@@ -72,6 +72,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         val barcelona = LatLng(41.3879, 2.16992)
         mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
+
+        addChargingPointsToMap()
+
         if (isLocationPermissionGranted()) {
                 val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(
                     LocationRequest.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token)
@@ -91,6 +94,15 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(13.0f))
 
         }
+    }
+
+    private fun addChargingPointsToMap() {
+        val sydney = LatLng(-33.852, 151.211)
+        mMap.addMarker(
+            MarkerOptions()
+                .position(sydney)
+                .title("Marker in Sydney")
+        )
     }
 
     /**
