@@ -29,5 +29,10 @@ public class AddVehicleModelView : ViewModel() {
         return isValid
     }
 
+    fun sendVehicleInfo(vehicleInfo: Vehicle, bitmapVehiclePic: Bitmap)  = runBlocking{
+        FrontendController.sendVehicleInfo(vehicleInfo)
+        FrontendController.sendVehiclePhoto(vehicleInfo.numberPlate, bitmapVehiclePic)
+    }
+
 
 }
