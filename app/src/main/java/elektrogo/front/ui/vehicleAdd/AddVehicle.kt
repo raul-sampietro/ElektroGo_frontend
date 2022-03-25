@@ -1,5 +1,6 @@
 package elektrogo.front.ui.vehicleAdd
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -114,8 +115,7 @@ class AddVehicle : AppCompatActivity() {
                     )
                 }
                 Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
-                // TODO tancar la activity
-                finishActivity(0) //Back to menu
+                finishActivity(Activity.RESULT_OK) //Back to menu
             }
             else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_SHORT).show()
         }
