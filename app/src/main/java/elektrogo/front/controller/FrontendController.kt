@@ -36,7 +36,8 @@ object FrontendController {
     }
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle) {
-        val httpResponse: HttpResponse = client.post("http://10.4.41.58:8080/vehicle/create?userNDriver=Test"){
+        val httpResponse: HttpResponse = client.post("http://10.4.41.58:8080/vehicle/create"){
+            parameter("userNDriver", "Test")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }

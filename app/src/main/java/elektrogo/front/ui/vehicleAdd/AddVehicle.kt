@@ -23,6 +23,7 @@ class AddVehicle : AppCompatActivity() {
     private val selectPhoto = 1
     private var imageUri: Uri? = null
     private var bitmapVehicleImage: Bitmap? = null //Bitmap de la imatge del cotxe
+    private val addVehicleModelView = AddVehicleModelView()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +67,7 @@ class AddVehicle : AppCompatActivity() {
                 licensePlate.setError(resources.getString(R.string.ObligatoryField))
                 isValid = false
             } else {
-                isValid = checkLicensePlate(licensePlateString)
+                isValid = addVehicleModelView.checkLicensePlate(licensePlateString)
                 if(!isValid) licensePlate.setError(resources.getString(R.string.invalidLicensePlate))
             }
 
@@ -108,12 +109,9 @@ class AddVehicle : AppCompatActivity() {
 
                 var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
-                lifecycleScope.launch{
-                    FrontendController.sendVehicleInfo(vehicleInfo)
-                    FrontendController.sendVehiclePhoto(licensePlate.getText().toString(),
-                        bitmapVehicleImage!!
-                    )
-                }
+                addVehicleModelView.sendVehicleInfo(vehicleInfo)
+                addVehicleModelView.sendVehiclePhoto(licensePlate.getText().toString(), bitmapVehicleImage!!)
+
                 Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
                 finishActivity(Activity.RESULT_OK) //Back to menu
             }
@@ -144,25 +142,6 @@ class AddVehicle : AppCompatActivity() {
 
 
 
-    private fun checkLicensePlate(licensePlateToCheck: Editable): Boolean {
-        var isValid = true
-        for(i in licensePlateToCheck.indices){   //Check licensePlate has valid input
-            if (licensePlateToCheck.length == 7) { //Then it is a car
-                if (i < 4 && licensePlateToCheck[i] !in '0'..'9') {
-                    isValid = false
-                } else if (i >= 4 && (licensePlateToCheck[i] !in 'A'..'Z' && licensePlateToCheck[i] !in 'a'..'z')) {
-                    isValid = false
-                }
-            }
-            else { //Then it is a moped
-                if (i in 1..4 && licensePlateToCheck[i] !in '0'..'9') {
-                    isValid = false
-                } else if ((i >= 5 || i == 0) && (licensePlateToCheck[i] !in 'A'..'Z' && licensePlateToCheck[i] !in 'a'..'z')) {
-                    isValid = false
-                }
-            }
-        }
-        return isValid
-    }
+
 
 }
