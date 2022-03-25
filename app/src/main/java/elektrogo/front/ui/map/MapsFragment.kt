@@ -99,8 +99,8 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(13.0f))
 
         }
-        //TODO: Afegir la api key cada vegada que fem merge. Cadasu ha de posar la seva
-        if (!Places.isInitialized()) Places.initialize(this.requireContext(),"")
+        //TODO: Canviar la api key cada vegada que fem merge. Cadascu ha de posar la seva
+        if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
         getAutocompleteLocation()
     }
