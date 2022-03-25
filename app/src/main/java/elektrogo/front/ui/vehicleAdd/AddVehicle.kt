@@ -105,19 +105,17 @@ class AddVehicle : AppCompatActivity() {
 
                 var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
-                addVehicleModelView.sendVehicleInfo(vehicleInfo,bitmapVehicleImage!!)
-                /*
-                if (statusCode == 433) Toast.makeText(this, resources.getString(R.string.DriverVehicleAlreadyExists), Toast.LENGTH_LONG).show()
-                else if (statusCode == 439 || statusCode == 435) Toast.makeText(this, resources.getString(R.string.VehicleAlreadyExists), Toast.LENGTH_LONG).show()
+                var statusCode = addVehicleModelView.sendVehicleInfo(vehicleInfo,bitmapVehicleImage!!)
+
+                if (statusCode == 418) Toast.makeText(this, resources.getString(R.string.VehicleAlreadyExists), Toast.LENGTH_LONG).show()
                 else if (statusCode in 200..299){
-                    addVehicleModelView.sendVehiclePhoto(licensePlate.getText().toString(), bitmapVehicleImage!!)
                     Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
+                    finishActivity(Activity.RESULT_OK) //Back to menu
                 }
 
-                 */
 
-                Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
-                finishActivity(Activity.RESULT_OK) //Back to menu
+
+
             }
             else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_SHORT).show()
         }

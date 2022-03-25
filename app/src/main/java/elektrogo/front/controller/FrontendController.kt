@@ -1,9 +1,11 @@
 package elektrogo.front.controller
 import android.graphics.Bitmap
+import android.util.Log
 import elektrogo.front.model.Vehicle
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
+import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
@@ -19,7 +21,8 @@ object FrontendController {
     private const val URL_VEHICLE = "${URL_BASE}vehicle/"
 
     //Add functions you need here :)
-    private val client = HttpClient(Android){   //Exemple de com fer una crida amb el nostre servidor!
+    private val client = HttpClient(Android) {   //Exemple de com fer una crida amb el nostre servidor!
+        expectSuccess = false
         engine {
             connectTimeout = 60_000
             socketTimeout = 60_000
@@ -33,6 +36,7 @@ object FrontendController {
                 isLenient = true
             })
         }
+
     }
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
@@ -47,7 +51,7 @@ object FrontendController {
     @OptIn(InternalAPI::class)
     suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap){
         val stream = ByteArrayOutputStream()
-        vehiclePic.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        vehiclePic.compress(Bitmap.CompressFormat.PNG, 60, stream)
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
