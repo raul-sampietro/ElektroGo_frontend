@@ -35,16 +35,17 @@ object FrontendController {
         }
     }
 
-    suspend fun sendVehicleInfo(vehicleInfo: Vehicle) {
-        val httpResponse: HttpResponse = client.post("http://10.4.41.58:8080/vehicle/create"){
+    suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
+        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create"){
             parameter("userNDriver", "Test")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
+        return httpResponse.status.value
     }
 
     @OptIn(InternalAPI::class)
-    suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap) {
+    suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap){
         val stream = ByteArrayOutputStream()
         vehiclePic.compress(Bitmap.CompressFormat.PNG, 90, stream)
         val image = stream.toByteArray()

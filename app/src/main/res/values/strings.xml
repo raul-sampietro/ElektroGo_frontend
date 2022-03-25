@@ -39,4 +39,8 @@
     <string name="seatsVehicleExample">5</string>
 
     <string name="VehicleSeats">Seients</string>
+
+    <string name="DriverVehicleAlreadyExists">Ja has creat aquest vehícle</string>
+    <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
+
 </resources>

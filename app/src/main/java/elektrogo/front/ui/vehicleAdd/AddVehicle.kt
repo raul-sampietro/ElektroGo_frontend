@@ -23,7 +23,7 @@ class AddVehicle : AppCompatActivity() {
     private val selectPhoto = 1
     private var imageUri: Uri? = null
     private var bitmapVehicleImage: Bitmap? = null //Bitmap de la imatge del cotxe
-    private val addVehicleModelView = AddVehicleModelView()
+    private var addVehicleModelView = AddVehicleModelView()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,9 +109,12 @@ class AddVehicle : AppCompatActivity() {
 
                 var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
-                addVehicleModelView.sendVehicleInfo(vehicleInfo)
-                addVehicleModelView.sendVehiclePhoto(licensePlate.getText().toString(), bitmapVehicleImage!!)
-
+                lifecycleScope.launch{
+                    FrontendController.sendVehicleInfo(vehicleInfo)
+                    FrontendController.sendVehiclePhoto(licensePlate.getText().toString(),
+                        bitmapVehicleImage!!
+                    )
+                }
                 Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
                 finishActivity(Activity.RESULT_OK) //Back to menu
             }
@@ -139,9 +142,5 @@ class AddVehicle : AppCompatActivity() {
             }
         }
     }
-
-
-
-
 
 }

@@ -29,11 +29,5 @@ public class AddVehicleModelView : ViewModel() {
         return isValid
     }
 
-    fun sendVehicleInfo(vehicleInfo: Vehicle) = runBlocking {
-        FrontendController.sendVehicleInfo(vehicleInfo)
-    }
 
-    fun sendVehiclePhoto(vehicleLicensePlate: String, bitmapVehicleImage: Bitmap) = runBlocking {
-        FrontendController.sendVehiclePhoto(vehicleLicensePlate, bitmapVehicleImage)
-    }
 }
