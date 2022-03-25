@@ -57,7 +57,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
 
         //Fem que la funcionalitat que se selecciona per defecte en obrir l'app sigui el mapa
-        bottomNavigation.selectedItemId = R.id.mapa
+
+        bottomNavigation.selectedItemId = R.id.perfil
     }
 
     //Carrega el fragment passat per paràmetre al main_container
