@@ -107,7 +107,7 @@ class AddVehicle : AppCompatActivity() {
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
                 var statusCode = addVehicleModelView.sendVehicleInfo(vehicleInfo,bitmapVehicleImage!!)
 
-                if (statusCode == 418) Toast.makeText(this, resources.getString(R.string.VehicleAlreadyExists), Toast.LENGTH_LONG).show()
+                if (statusCode == 433) Toast.makeText(this, resources.getString(R.string.DriverVehicleAlreadyExists), Toast.LENGTH_LONG).show()
                 else if (statusCode in 200..299){
                     Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
                     finishActivity(Activity.RESULT_OK) //Back to menu

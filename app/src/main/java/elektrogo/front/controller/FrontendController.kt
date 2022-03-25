@@ -1,11 +1,11 @@
 package elektrogo.front.controller
 import android.graphics.Bitmap
 import android.util.Log
+import com.google.gson.Gson
 import elektrogo.front.model.Vehicle
+import elektrogo.front.model.httpRespostes
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
-import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
@@ -40,12 +40,15 @@ object FrontendController {
     }
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
-        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create"){
+        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create") {
             parameter("userNDriver", "Test")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
-        return httpResponse.status.value
+        val respostaJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+
+        Log.i("Resposta servidor", respostaJson.status.toString())
+        return respostaJson.status
     }
 
     @OptIn(InternalAPI::class)
