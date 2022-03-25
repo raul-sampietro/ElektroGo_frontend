@@ -46,8 +46,6 @@ object FrontendController {
             body = vehicleInfo
         }
         val respostaJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-
-        Log.i("Resposta servidor", respostaJson.status.toString())
         return respostaJson.status
     }
 
