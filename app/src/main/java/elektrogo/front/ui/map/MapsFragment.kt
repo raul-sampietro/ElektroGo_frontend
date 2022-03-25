@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -20,8 +22,14 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.MainActivity
 import elektrogo.front.R
 //import elektrogo.front.databinding.FragmentHomeBinding
@@ -55,6 +63,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      */
     private var cancellationTokenSource = CancellationTokenSource()
 
+    lateinit var placesClient: PlacesClient
+
+
     /**
      * @brief Metode executat un cop el mapa s'ha creat.
      * @param GoogleMap instancia de GoogleMap, adquirida gracies a la connexio amb l'API.
@@ -63,7 +74,6 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      */
     @SuppressLint("MissingPermission")
     private val callback = OnMapReadyCallback { googleMap ->
-
         mMap = googleMap
         checkAndEnableLocation()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -89,6 +99,10 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(13.0f))
 
         }
+        //TODO: Afegir la api key cada vegada que fem merge. Cadasu ha de posar la seva
+        if (!Places.isInitialized()) Places.initialize(this.requireContext(),"")
+        placesClient= Places.createClient(this.requireContext())
+        getAutocompleteLocation()
     }
 
     /**
@@ -161,6 +175,33 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     }
     //Maybe we should deal with the case where the users opens de app, gives permission but in middle of the executions goes to settings and deny permissions. At the moment it seems that
     // its dealed in the already existent methods.
+
+
+    fun getAutocompleteLocation () {
+        val autocompleteSupportFragment =
+            childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
+        autocompleteSupportFragment.setPlaceFields(
+            listOf(
+                Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.LAT_LNG
+            )
+        )
+        autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                val latLng = place.latLng
+                if (latLng != null) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+                    mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f))
+                    mMap.addMarker(MarkerOptions().position(latLng).title(place.name))
+                } else Toast.makeText(context, "hi ha hagut un error", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onError(status: Status) {
+                Log.i("PlacesApiError", "An error occurred: $status")
+            }
+        })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
