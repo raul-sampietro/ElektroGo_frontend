@@ -1,8 +1,8 @@
 package elektrogo.front.controller
 import android.graphics.Bitmap
 import elektrogo.front.model.Vehicle
+import elektrogo.front.model.ChargingStation
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
@@ -71,5 +71,9 @@ object FrontendController {
             parameter("nPVehicle", username)
             parameter("userDriver", numberPlate)
         }
+    }
+
+    suspend fun getChargingPoints(): ArrayList<ChargingStation> {
+        return client.get("~${URL_BASE}ChargingStations")
     }
 }

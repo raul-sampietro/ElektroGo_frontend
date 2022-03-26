@@ -1,8 +1,13 @@
 package elektrogo.front.ui.map
 
+//import elektrogo.front.databinding.FragmentHomeBinding
+
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +17,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -19,17 +25,26 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import elektrogo.front.MainActivity
 import elektrogo.front.R
-//import elektrogo.front.databinding.FragmentHomeBinding
+import elektrogo.front.controller.FrontendController
 import elektrogo.front.databinding.FragmentMapsBinding
+import elektrogo.front.model.ChargingStation
+import kotlinx.coroutines.runBlocking
+
 
 class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     private var mainActivity= mainActivity
+
+    /**
+     * @brief Instancia de la classe MapsFragmentViewModel.
+     */
+    private val mapsFragmentViewModel = MapsFragmentViewModel()
+
 
     /**
      * @brief Instancia de l'API GoogleMap.
@@ -94,12 +109,31 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         }
     }
 
+
+    /**
+     * @brief Metode que afegeix al mapa els marcadors corresponents a les estacions de carrega.
+     * @pre
+     * @return S'afegeixen al mapa els marcadors de tots els punts de carrega que hi ha a la base de dades.
+     */
     private fun addChargingPointsToMap() {
-        val sydney = LatLng(-33.852, 151.211)
+
+        /*val stations = mapsFragmentViewModel.getStations()
+
+        for (stat in stations) {
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(LatLng(stat.latitude, stat.longitude))
+                    .title("Number of chargers: ${stat.numberOfChargers}")
+                    .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
+            )
+        }*/
+
+        val mallorca = LatLng(39.962498, 3.213431)
         mMap.addMarker(
             MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney")
+                .position(mallorca)
+                .title("Marker in Mallorca")
+                .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
         )
     }
 
