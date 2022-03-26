@@ -117,7 +117,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      */
     private fun addChargingPointsToMap() {
 
-        /*val stations = mapsFragmentViewModel.getStations()
+        val stations = mapsFragmentViewModel.getStations()
+        Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
+
 
         for (stat in stations) {
             mMap.addMarker(
@@ -126,7 +128,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
                     .title("Number of chargers: ${stat.numberOfChargers}")
                     .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
             )
-        }*/
+        }
 
         val mallorca = LatLng(39.962498, 3.213431)
         mMap.addMarker(

@@ -74,6 +74,9 @@ object FrontendController {
     }
 
     suspend fun getChargingPoints(): ArrayList<ChargingStation> {
-        return client.get("~${URL_BASE}ChargingStations")
+        val stations: ArrayList<ChargingStation> = client.get("${URL_BASE}ChargingStations"){
+
+        }
+        return stations
     }
 }
