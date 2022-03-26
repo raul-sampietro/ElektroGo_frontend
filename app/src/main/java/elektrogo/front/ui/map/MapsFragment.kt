@@ -1,3 +1,9 @@
+/**
+ * @file MapsFragment.kt
+ * @author Marina Alapont
+ * @brief Aquest fragment implementa un mapa de google maps amb una configuració determinada i geolocalitzacio
+ */
+
 package elektrogo.front.ui.map
 
 import android.Manifest
