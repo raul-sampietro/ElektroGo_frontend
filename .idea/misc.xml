@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/activity_main.xml" value="0.11302083333333333" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_maps.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_notifications.xml" value="0.11614583333333334" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/layout/fragment_ruta.xml" value="0.264" />
+        <entry key="..\:/Users/Marina/AndroidStudioProjects/ElektroGo_frontend/app/src/main/res/menu/bottom_nav_menu.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.333786231884058" />
       </map>
     </option>

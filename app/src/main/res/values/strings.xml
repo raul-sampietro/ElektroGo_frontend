@@ -3,4 +3,13 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="generar_ruta">Generar ruta</string>
+    <string name="places_autocomplete_search_hint">Cerca localització</string>
+    <string name="origen">Origen:</string>
+    <string name="dest">Destí:</string>
+    <string name="autonomia_actual">Autonomia actual:</string>
+    <string name="km">km</string>
+    <string name="autonomia">Autonomia:</string>
+
 </resources>
