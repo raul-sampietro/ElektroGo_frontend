@@ -3,7 +3,7 @@ package elektrogo.front
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import elektrogo.front.databinding.ActivityMainBinding
-import elektrogo.front.ui.Ruta.RutaFragment
+import elektrogo.front.ui.Ruta.Ruta
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,9 +14,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val rutaFragment : RutaFragment = RutaFragment(this)
+        val ruta : Ruta = Ruta()
 
-        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, rutaFragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.frame_layout, ruta).commit()
 
     }
 }

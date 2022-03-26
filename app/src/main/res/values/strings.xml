@@ -8,5 +8,8 @@
     <string name="places_autocomplete_search_hint">Cerca localització</string>
     <string name="origen">Origen:</string>
     <string name="dest">Destí:</string>
+    <string name="autonomia_actual">Autonomia actual:</string>
+    <string name="km">km</string>
+    <string name="autonomia">Autonomia:</string>
 
 </resources>
