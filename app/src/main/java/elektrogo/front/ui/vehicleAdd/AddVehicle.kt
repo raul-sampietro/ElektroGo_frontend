@@ -1,28 +1,55 @@
+/**
+ * @file AddVehicle.kt
+ * @author Joel Cardona
+ * @brief Aquesta classe implementa la logica associada a la vista de afegir vehicle.
+ *
+ */
 package elektrogo.front.ui.vehicleAdd
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.Editable
 import android.text.TextUtils
 import android.widget.*
-import androidx.lifecycle.lifecycleScope
 import elektrogo.front.R
-import elektrogo.front.controller.FrontendController
 import elektrogo.front.model.Vehicle
-import kotlinx.coroutines.launch
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
 
+/**
+ * @brief La classe AddVehicle obte i comprova les dades obtingudes a la vista activity_add_vehicle.xml i fa les crides amb backend per guardar la informacio
+ */
 class AddVehicle : AppCompatActivity() {
+    /**
+     * @brief Nombre de fotografies que l'usuari ha d'afegir
+     */
     private val selectPhoto = 1
+
+    /**
+     * @brief La Uri de la imatge del vehicle
+     */
     private var imageUri: Uri? = null
+
+    /**
+     * @brief Bitmap on es guarda la imatge del vehicle que l'usuari afegeix
+     */
     private var bitmapVehicleImage: Bitmap? = null //Bitmap de la imatge del cotxe
 
+    /**
+     * @brief Instancia de la classe AddVehicleModelView
+     */
+    private val addVehicleModelView = AddVehicleModelView()
+
+    /**
+     * @brief Metode que es crida quan es crea un AddVehicle activity
+     * @param savedInstanceState rep informacio d'altres activitats
+     * @post Si l'usuari ha afegit les dades correctament es fa una crida a backend per processar la informacio.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_vehicle)
@@ -65,7 +92,7 @@ class AddVehicle : AppCompatActivity() {
                 licensePlate.setError(resources.getString(R.string.ObligatoryField))
                 isValid = false
             } else {
-                isValid = checkLicensePlate(licensePlateString)
+                isValid = addVehicleModelView.checkLicensePlate(licensePlateString)
                 if(!isValid) licensePlate.setError(resources.getString(R.string.invalidLicensePlate))
             }
 
@@ -107,22 +134,32 @@ class AddVehicle : AppCompatActivity() {
 
                 var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
-                lifecycleScope.launch{
-                    FrontendController.sendVehicleInfo(vehicleInfo)
-                    FrontendController.sendVehiclePhoto(licensePlate.getText().toString(),
-                        bitmapVehicleImage!!
-                    )
+                var statusCode = addVehicleModelView.sendVehicleInfo(vehicleInfo,bitmapVehicleImage!!)
+
+                if (statusCode == 433) Toast.makeText(this, resources.getString(R.string.DriverVehicleAlreadyExists), Toast.LENGTH_LONG).show()
+                else if (statusCode == 440) Toast.makeText(this, resources.getString(R.string.WrongVehicleInfo), Toast.LENGTH_LONG).show()
+                else if (statusCode in 500..599) Toast.makeText(this, resources.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                else if (statusCode in 200..299){
+                    Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
+                    finishActivity(Activity.RESULT_OK) //Back to menu
                 }
-                Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_SHORT).show()
-                // TODO tancar la activity
-                finishActivity(0) //Back to menu
+
+
+
+
             }
-            else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_SHORT).show()
+            else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_LONG).show()
         }
     }
 
 
-
+    /**
+     * @brief Obte la imatge que l'usuari afegeix del vehicle
+     * @param requestCode Codi de la peticio
+     * @param resultCode Codi del resultat
+     * @param data Intent  d'un altre activitat
+     * @post Quan l'usuari selecciona una imatge es guarda la informacio d'aquesta als atributs imatgeUri i bitmapVehicleImage
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         var imageErrorMessage: TextView = findViewById(R.id.errorImage)
@@ -144,25 +181,6 @@ class AddVehicle : AppCompatActivity() {
 
 
 
-    private fun checkLicensePlate(licensePlateToCheck: Editable): Boolean {
-        var isValid = true
-        for(i in licensePlateToCheck.indices){   //Check licensePlate has valid input
-            if (licensePlateToCheck.length == 7) { //Then it is a car
-                if (i < 4 && licensePlateToCheck[i] !in '0'..'9') {
-                    isValid = false
-                } else if (i >= 4 && (licensePlateToCheck[i] !in 'A'..'Z' && licensePlateToCheck[i] !in 'a'..'z')) {
-                    isValid = false
-                }
-            }
-            else { //Then it is a moped
-                if (i in 1..4 && licensePlateToCheck[i] !in '0'..'9') {
-                    isValid = false
-                } else if ((i >= 5 || i == 0) && (licensePlateToCheck[i] !in 'A'..'Z' && licensePlateToCheck[i] !in 'a'..'z')) {
-                    isValid = false
-                }
-            }
-        }
-        return isValid
-    }
+
 
 }

@@ -1,7 +1,10 @@
 package elektrogo.front.controller
 import android.graphics.Bitmap
+import android.util.Log
+import com.google.gson.Gson
 import elektrogo.front.model.Vehicle
 import elektrogo.front.model.ChargingStation
+import elektrogo.front.model.httpRespostes
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.features.json.*
@@ -19,7 +22,8 @@ object FrontendController {
     private const val URL_VEHICLE = "${URL_BASE}vehicle/"
 
     //Add functions you need here :)
-    private val client = HttpClient(Android){   //Exemple de com fer una crida amb el nostre servidor!
+    private val client = HttpClient(Android) {   //Exemple de com fer una crida amb el nostre servidor!
+        expectSuccess = false
         engine {
             connectTimeout = 60_000
             socketTimeout = 60_000
@@ -33,19 +37,23 @@ object FrontendController {
                 isLenient = true
             })
         }
+
     }
 
-    suspend fun sendVehicleInfo(vehicleInfo: Vehicle) {
-        val httpResponse: HttpResponse = client.post("http://10.4.41.58:8080/vehicle/create?userNDriver=Test"){
+    suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
+        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create") {
+            parameter("userNDriver", "Test")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
+        val respostaJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+        return respostaJson.status
     }
 
     @OptIn(InternalAPI::class)
-    suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap) {
+    suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap){
         val stream = ByteArrayOutputStream()
-        vehiclePic.compress(Bitmap.CompressFormat.PNG, 90, stream)
+        vehiclePic.compress(Bitmap.CompressFormat.PNG, 60, stream)
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(

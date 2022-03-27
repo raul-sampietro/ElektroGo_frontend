@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import elektrogo.front.*
 import elektrogo.front.model.Vehicle
 import elektrogo.front.ui.vehicleAdd.AddVehicle
@@ -21,6 +23,7 @@ class VehicleListFragment : Fragment() {
 
     private lateinit var viewModel: VehicleListViewModel
     private lateinit var vehicleList: ArrayList<Vehicle>
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,34 +39,8 @@ class VehicleListFragment : Fragment() {
         newVehicleButton.setOnClickListener {
             //Toast.makeText(container?.context, "Clicked", Toast.LENGTH_LONG).show()
             val intent = Intent(container?.context, AddVehicle::class.java)
-            container?.context?.startActivity(intent)
+            resultLauncher.launch(intent)
         }
-
-        /*
-        // Testing data
-        val vehicle1 = Vehicle("Opel", "Corsa", "0049HNZ", 234, 2007, 5, null)
-        val vehicle2 = Vehicle("Nissan", "X-Trail", "0050AAA", 300, 2001, 7, null)
-
-        val list = ArrayList<Vehicle>()
-        list.add(vehicle1)
-        list.add(vehicle2)
-        list.add(vehicle1)
-        list.add(vehicle2)
-        list.add(vehicle1)
-        list.add(vehicle2)
-        list.add(vehicle1)
-        list.add(vehicle2)
-        list.add(vehicle1)
-        list.add(vehicle2)
-        list.add(vehicle1)
-        list.add(vehicle2)
-        list.add(vehicle1)
-        list.add(vehicle2)
-        list.add(vehicle1)
-        list.add(vehicle2)
-        listView.adapter = VehicleListAdapter(container?.context as Activity,list)
-        */
-
 
         listView.adapter = VehicleListAdapter(container?.context as Activity, vehicleList)
 
@@ -73,5 +50,11 @@ class VehicleListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[VehicleListViewModel::class.java]
+        resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                //TODO refresh list
+            }
+        }
     }
 }

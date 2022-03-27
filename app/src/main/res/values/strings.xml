@@ -41,4 +41,10 @@
     <string name="seatsVehicleExample">5</string>
 
     <string name="VehicleSeats">Seients</string>
+
+    <string name="DriverVehicleAlreadyExists">Ja has creat aquest vehícle</string>
+    <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
+    <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
+    <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
+
 </resources>
