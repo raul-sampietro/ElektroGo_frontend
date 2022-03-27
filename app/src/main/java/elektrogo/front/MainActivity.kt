@@ -70,6 +70,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Carrega el fragment passat per paràmetre al main_container
+    /**
+     * @brief Metode per obrir un fragment.
+     * @param fragment Fragment que es vol obrir.
+     * @pre El fragment passat per paràmetre existeix.
+     * @post Es carrega el fragment i es mostra a sobre del menu.
+     */
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, fragment)
