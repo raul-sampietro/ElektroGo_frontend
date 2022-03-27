@@ -144,10 +144,8 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      */
     private fun addChargingPointsToMap() {
 
-
         val stations = mapsFragmentViewModel.getStations()
         Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
-
 
         for (stat in stations) {
             mMap.addMarker(

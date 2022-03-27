@@ -1,3 +1,9 @@
+/**
+ * @file MapsFragmentViewModel.kt
+ * @author Simón Helmuth Oliva Stark
+ * @brief Aquest és el ViewModel del fragment Maps Fragment.
+ */
+
 package elektrogo.front.ui.map
 import android.content.Context
 import android.graphics.Bitmap
@@ -11,6 +17,9 @@ import elektrogo.front.model.ChargingStation
 
 import kotlinx.coroutines.runBlocking
 
+/**
+ * @brief La classe MapsFragmentViewModel conté els mètodes del fragment MapsFragment que no estan exclusivament relacionats amb la GUI.
+ */
 class MapsFragmentViewModel : ViewModel() {
 
     /**
