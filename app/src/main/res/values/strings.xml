@@ -32,6 +32,8 @@
     <string name="ObligatoryFieldImage">Has de afegir una imatge del vehicle</string>
     <string name="VehicleCreatedSuccessfully">El vehicle ha estat guardat</string>
     <string name="VehicleNotCreated">Un o més camps són incorrectes</string>
+    <string name="AskLocation"> Accedeix a la configuració del teu dispositiu i accepta els permisos</string>
+    <string name="WhenLocationDenied">Per activar la localització, ves a la configuració del dispositiu i accepta els permisos</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -39,4 +41,10 @@
     <string name="seatsVehicleExample">5</string>
 
     <string name="VehicleSeats">Seients</string>
+
+    <string name="DriverVehicleAlreadyExists">Ja has creat aquest vehícle</string>
+    <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
+    <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
+    <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
+
 </resources>

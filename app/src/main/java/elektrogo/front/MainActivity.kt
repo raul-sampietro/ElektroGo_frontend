@@ -1,3 +1,9 @@
+/**
+ * @file MainActivity.kt
+ * @author Simón Helmuth Oliva
+ * @brief Aquesta activity conté el menú navegable de barra inferior que permet carregar imostrar els fragments de les principals funcionalitats d'ElektroGo.
+ */
+
 package elektrogo.front
 
 import android.os.Bundle
@@ -12,6 +18,9 @@ import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 
+/**
+ * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -61,7 +70,12 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.selectedItemId = R.id.perfil
     }
 
-    //Carrega el fragment passat per paràmetre al main_container
+    /**
+     * @brief Metode per obrir un fragment.
+     * @param fragment Fragment que es vol obrir.
+     * @pre El fragment passat per paràmetre existeix.
+     * @post Es carrega el fragment i es mostra al main container.
+     */
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.main_container, fragment)
