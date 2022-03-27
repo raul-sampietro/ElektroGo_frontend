@@ -81,7 +81,7 @@ object FrontendController {
     }
 
     suspend fun sendRouteInfo(latitudeOrigin: Double, longitudeOrigin: Double, latitudeDestination: Double, longitudeDestination: Double, drivingRange: Int): ArrayList<Double> {
-        val waypoints: ArrayList<Double> = client.get("${URL_BASE}calculate"){
+        val waypoints: ArrayList<Double> = client.get("${URL_BASE}route/calculate"){
             parameter("oriLat", latitudeOrigin)
             parameter("oriLon", longitudeOrigin)
             parameter("destLat", latitudeDestination)

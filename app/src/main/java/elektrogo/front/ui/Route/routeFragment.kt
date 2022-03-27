@@ -103,13 +103,13 @@ class routeFragment() : Fragment() {
         placesClient= Places.createClient(this.requireContext())
         val buttonRoute: Button = requireActivity().findViewById(R.id.buttonRoute)
         buttonRoute.setOnClickListener {
-            if (!isValid()){
-                Toast.makeText(context, resources.getString(R.string.errorOnFields),Toast.LENGTH_SHORT).show()
+           if (isValid()){
+               Toast.makeText(context, resources.getString(R.string.errorOnFields),Toast.LENGTH_SHORT).show()
             }
             else {
                val waypoints :ArrayList<Double> = rutaModelView.sendRouteInfo(latLngOrigin!!, latLngDestination!!, textAutonomia.text.toString().toInt())
                var w : Int = 0
-               var stringURI = "https://www.google.com/maps/dir/?api=1&origin=${latLngOrigin!!.latitude},${latLngOrigin!!.longitude}&destination=${latLngDestination!!.latitude},${latLngDestination!!.longitude}"
+               var stringURI : String = "https://www.google.com/maps/dir/?api=1&origin=${latLngOrigin!!.latitude},${latLngOrigin!!.longitude}&destination=${latLngDestination!!.latitude},${latLngDestination!!.longitude}"
                 while (w<waypoints.size-1){
                     if (w==0)  stringURI+="&waypoints="
                     else stringURI+="|"
@@ -119,6 +119,7 @@ class routeFragment() : Fragment() {
                 stringURI+="&travelmode=driving"
                 val mapIntent: Intent= Intent(Intent.ACTION_VIEW, Uri.parse(stringURI))
                 mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
             }
         }
         val crossCallbackOrigin = requireActivity().findViewById<View>(R.id.viewCrossCallbackOrigin)
