@@ -144,7 +144,7 @@ class routeFragment() : Fragment() {
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
             override fun onPlaceSelected(place: Place) {
                 originText.error = null
-                val latLngOrigin = place.latLng
+                latLngOrigin = place.latLng
                 if (latLngOrigin == null) Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_SHORT).show()
             }
             override fun onError(status: Status) {
@@ -156,7 +156,7 @@ class routeFragment() : Fragment() {
         autocompleteSupportFragment2.setOnPlaceSelectedListener(object : PlaceSelectionListener{
             override fun onPlaceSelected(place: Place) {
                 destinationText.error = null
-                val latLngDestination = place.latLng
+                latLngDestination = place.latLng
                 if (latLngDestination == null)  Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_LONG).show()
             }
             override fun onError(status: Status) {
