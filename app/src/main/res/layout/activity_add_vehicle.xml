@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.vehicleAdd.AddVehicle">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/licensePlateLabel"
+                android:layout_width="260dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="80dp"
+                android:text="@string/LicensePlateLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/LicensePlate"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="@string/LicensePlateExample"
+                android:inputType="textPersonName"
+                android:maxLength="8"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/BrandLabel"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/CarBrandLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/BrandInput"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="@string/CarBrandHint"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/VehicleModelLabel"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="80dp"
+                android:text="@string/VehicleModelLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/VehicleModel"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="@string/VehicleModelExample"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/drivingRange"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/DrivingRangeLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/drivingRangeInput"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="80dp"
+                android:ems="10"
+                android:hint="@string/DrivingRangeExample"
+                android:inputType="number"
+                android:textColor="#000000"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/vehicleSeatsLabel"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/seatsVehicleLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/seatsVehicleInput"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="2dp"
+                android:ems="10"
+                android:hint="@string/seatsVehicleExample"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/FabricationYearLabel"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/FabricationYearLabel"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="20sp"
+                tools:text="@string/FabricationYearLabel" />
+
+            <Spinner
+                android:id="@+id/FabricationYearInput"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/addImage"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="23dp"
+                android:text="@string/VehicleImageButton" />
+
+            <ImageView
+                android:id="@+id/vehicleImage"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/errorImage"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="0dp"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/SaveVehicleButton"
+                android:layout_width="260dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="127dp"
+                android:text="@string/SaveVehicle" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

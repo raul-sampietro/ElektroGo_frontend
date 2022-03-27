@@ -3,7 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="generar_ruta">Generar ruta</string>
     <string name="places_autocomplete_search_hint">Cerca localització</string>
     <string name="origen">Origen:</string>
@@ -14,5 +13,50 @@
     <string name="errorOnFields">Ompli tots els camps correctament per tal de poder generar una ruta</string>
     <string name="errorOnLocation">Hi ha hagut un error amb la localització, si us plau torni a intentar-ho</string>
     <string name="fieldRequired">Aquest camp és obligatori</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="Mapa">Mapa</string>
+    <string name="title_pooling">Pooling</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_route">Ruta</string>
+    <string name="title_map">Mapa</string>
+
+    <string name="LicensePlateLabel">Introdueix matricula</string>
+    <string name="LicensePlateExample">1234ABC</string>
+
+    <string name="CarBrandLabel">Introdueix la marca del vehícle</string>
+    <string name="CarBrandHint">Tesla</string>
+
+    <string name="VehicleModelLabel">Introdueix model del vehicle</string>
+    <string name="VehicleModelExample">X</string>
+
+    <string name="DrivingRangeLabel">Introdueix la autonomia del vehicle (km)</string>
+    <string name="DrivingRangeExample">100</string>
+
+    <string name="FabricationYearLabel">Any de fabricació</string>
+    <string name="FabricationYearInput">2020</string>
+
+    <string name="SaveVehicle">Afegir</string>
+    <string name="AddVehicle">Afegir vehicle</string>
+
+    <string name="ObligatoryField">Aquest camp és obligatori</string>
+    <string name="notEnoughCharactersLicensePlate">Has de introduir 7 o 8 caracters</string>
+    <string name="invalidLicensePlate">El format de matrícula no és vàlid</string>
+    <string name="VehicleImageButton">Inserir imatge del vehicle</string>
+    <string name="ObligatoryFieldImage">Has de afegir una imatge del vehicle</string>
+    <string name="VehicleCreatedSuccessfully">El vehicle ha estat guardat</string>
+    <string name="VehicleNotCreated">Un o més camps són incorrectes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="seatsVehicleLabel">Introdueix els seients del vehícle</string>
+    <string name="seatsVehicleExample">5</string>
+
+    <string name="VehicleSeats">Seients</string>
+
+    <string name="DriverVehicleAlreadyExists">Ja has creat aquest vehícle</string>
+    <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
+    <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
+    <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
 
 </resources>
