@@ -103,11 +103,12 @@ class routeFragment() : Fragment() {
         placesClient= Places.createClient(this.requireContext())
         val buttonRoute: Button = requireActivity().findViewById(R.id.buttonRoute)
         buttonRoute.setOnClickListener {
-           if (isValid()){
+           if (!isValid()){
                Toast.makeText(context, resources.getString(R.string.errorOnFields),Toast.LENGTH_SHORT).show()
             }
             else {
-               val waypoints :ArrayList<Double> = rutaModelView.sendRouteInfo(latLngOrigin!!, latLngDestination!!, textAutonomia.text.toString().toInt())
+               val waypoints : ArrayList<Double> = rutaModelView.sendRouteInfo(latLngOrigin!!, latLngDestination!!, textAutonomia.text.toString().toInt())
+               if (waypoints.size==1) Log.i("statusCodeXD", waypoints[0].toString())
                var w : Int = 0
                var stringURI : String = "https://www.google.com/maps/dir/?api=1&origin=${latLngOrigin!!.latitude},${latLngOrigin!!.longitude}&destination=${latLngDestination!!.latitude},${latLngDestination!!.longitude}"
                 while (w<waypoints.size-1){
@@ -120,6 +121,7 @@ class routeFragment() : Fragment() {
                 val mapIntent: Intent= Intent(Intent.ACTION_VIEW, Uri.parse(stringURI))
                 mapIntent.setPackage("com.google.android.apps.maps")
                 startActivity(mapIntent)
+
             }
         }
         val crossCallbackOrigin = requireActivity().findViewById<View>(R.id.viewCrossCallbackOrigin)
