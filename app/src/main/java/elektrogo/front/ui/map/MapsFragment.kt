@@ -34,8 +34,9 @@ import elektrogo.front.controller.FrontendController
 import elektrogo.front.databinding.FragmentMapsBinding
 import elektrogo.front.model.ChargingStation
 import kotlinx.coroutines.runBlocking
-
-
+/**
+ * @brief La clase MapsFragment representa el mapa de google maps amb una configuracio inicial i geolocalitzacio
+ */
 class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     /**
