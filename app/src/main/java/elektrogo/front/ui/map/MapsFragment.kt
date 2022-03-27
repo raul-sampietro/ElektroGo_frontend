@@ -35,12 +35,12 @@ import elektrogo.front.databinding.FragmentMapsBinding
 import elektrogo.front.model.ChargingStation
 import kotlinx.coroutines.runBlocking
 /**
- * @brief La clase MapsFragment representa el mapa de google maps amb una configuracio inicial i geolocalitzacio
+ * @brief La clase MapsFragment representa el mapa de google maps amb una configuracio inicial i geolocalitzacio.
  */
 class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     /**
-     * @brief Instancia de la activitat que crida el fragment.
+     * @brief Instancia de l'activitat que crida el fragment.
      */
     private var mainActivity= mainActivity
 
@@ -60,7 +60,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     private lateinit var binding: FragmentMapsBinding
 
     /**
-     * @brief Valor que esperem que retorni el requeriment de permissos.
+     * @brief Valor que esperem que retorni el requeriment de permisos.
      */
     companion object{
         const val REQUEST_CODE_LOCATION= 0
@@ -145,7 +145,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     }
 
     /**
-     * @brief Metode que comprova si els permissos de localitzacio estan acceptats.
+     * @brief Metode que comprova si els permisos de localitzacio estan acceptats.
      * @pre
      * @return Retorna un bolea segons si els permisos estan donats o no.
      */
@@ -153,9 +153,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED
 
     /**
-     * @brief Metode que comprova si els permissos necessaris estan donats i si no ho estan, els demana.
+     * @brief Metode que comprova si els permisos necessaris estan donats i si no ho estan, en fa la peticio.
      * @pre
-     * @post Si els permissos no estan donats, els demana a l'usuari.
+     * @post Si els permisos no estan donats, els demana a l'usuari.
      */
     @SuppressLint("MissingPermission")
     private fun checkAndEnableLocation(){
@@ -169,9 +169,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     }
 
     /**
-     * @brief Metode que demana a L'usuari que accepti els permissos necessaris.
+     * @brief Metode que demana a l'usuari que accepti els permisos necessaris.
      * @pre
-     * @post Si ja els ha demanat algun cop i estan denegats, mostra un missatge demanant que els accepti. Si no els ha demanat mai, els demana.
+     * @post Si ja els ha demanat algun cop i estan denegats, mostra un missatge dient a l'usuari que els accepti per tal de poder obtenir la localitzacio. Si no els ha demanat mai, els demana.
      */
     private fun requestPermissions(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION)){
@@ -194,9 +194,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     }
 
     /**
-     * @brief Metode que analitza el resultat de les peticions de permissos.
+     * @brief Metode que analitza el resultat de les peticions de permisos.
      * @pre
-     * @post Si el codi correpont al que s'esperava, s'activa MyLocation al mapa, en cas contrari es mostra un text per demanar de nou els permissos.
+     * @post Si el codi correpon al que s'esperava, s'activa MyLocation al mapa, en cas contrari es mostra un text per demanar de nou els permisos.
      */
     @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
