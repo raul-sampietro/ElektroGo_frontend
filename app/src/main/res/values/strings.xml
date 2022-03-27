@@ -32,6 +32,8 @@
     <string name="ObligatoryFieldImage">Has de afegir una imatge del vehicle</string>
     <string name="VehicleCreatedSuccessfully">El vehicle ha estat guardat</string>
     <string name="VehicleNotCreated">Un o més camps són incorrectes</string>
+    <string name="AskLocation"> Accedeix a la configuració del teu dispositiu i accepta els permissos</string>
+    <string name="WhenLocationDenied">Per activar la localització, ves a la configuració del dispositiu i accepta els permissos</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
