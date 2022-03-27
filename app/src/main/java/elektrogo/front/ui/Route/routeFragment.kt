@@ -4,8 +4,10 @@
  * @date 26/03/2022
  * @brief Implementacio d'un fragment per tal d'entrar dades per la creacio d'una ruta.
  */
-package elektrogo.front.ui.Ruta
+package elektrogo.front.ui.Route
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -30,12 +32,12 @@ import elektrogo.front.R
  * @brief La clase Rating representa la GUI de la pantalla pn l'usuari inserira les dades per demanar la generacio d'una ruta al sistema.
  */
 
-class Ruta() : Fragment() {
+class routeFragment() : Fragment() {
 
     /**
      * @brief Instancia de la classe Ruta.
      */
-    private val rutaModelView = RutaModelView()
+    private val rutaModelView = RouteModelView()
     /**
      * @brief Instancia d'un placesClient de l'api Places.
      */
@@ -105,7 +107,18 @@ class Ruta() : Fragment() {
                 Toast.makeText(context, resources.getString(R.string.errorOnFields),Toast.LENGTH_SHORT).show()
             }
             else {
-               // RutaModelView.sendRouteInfo(latLngOrigin, latLngDestination, textAutonomia.text.toString().toInt() )
+               val waypoints :ArrayList<Double> = rutaModelView.sendRouteInfo(latLngOrigin!!, latLngDestination!!, textAutonomia.text.toString().toInt())
+               var w : Int = 0
+               var stringURI = "https://www.google.com/maps/dir/?api=1&origin=${latLngOrigin!!.latitude},${latLngOrigin!!.longitude}&destination=${latLngDestination!!.latitude},${latLngDestination!!.longitude}"
+                while (w<waypoints.size-1){
+                    if (w==0)  stringURI+="&waypoints="
+                    else stringURI+="|"
+                    stringURI+="${waypoints[w]},${waypoints[w+1]}"
+                    w+=2
+                }
+                stringURI+="&travelmode=driving"
+                val mapIntent: Intent= Intent(Intent.ACTION_VIEW, Uri.parse(stringURI))
+                mapIntent.setPackage("com.google.android.apps.maps")
             }
         }
         val crossCallbackOrigin = requireActivity().findViewById<View>(R.id.viewCrossCallbackOrigin)
@@ -160,7 +173,7 @@ class Ruta() : Fragment() {
      */
 
     private fun isValid():Boolean {
-        var valid : Boolean = true;
+        var valid : Boolean = true
         if (TextUtils.isEmpty(textAutonomia.text)){
             valid = false
             textAutonomia.error = resources.getString(R.string.fieldRequired)
@@ -173,6 +186,6 @@ class Ruta() : Fragment() {
             valid=false
             destinationText.error=resources.getString(R.string.fieldRequired)
         }
-        return valid;
+        return valid
     }
 }
