@@ -11,5 +11,8 @@
     <string name="autonomia_actual">Autonomia actual:</string>
     <string name="km">km</string>
     <string name="autonomia">Autonomia:</string>
+    <string name="errorOnFields">Ompli tots els camps correctament per tal de poder generar una ruta</string>
+    <string name="errorOnLocation">Hi ha hagut un error amb la localització, si us plau torni a intentar-ho</string>
+    <string name="fieldRequired">Aquest camp és obligatori</string>
 
 </resources>

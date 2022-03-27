@@ -32,7 +32,6 @@ import elektrogo.front.R
 
 class Ruta() : Fragment() {
 
-
     /**
      * @brief Instancia de la classe Ruta.
      */
@@ -98,12 +97,12 @@ class Ruta() : Fragment() {
          originText = requireActivity().findViewById(R.id.errorViewOrigin)
          destinationText = requireActivity().findViewById(R.id.errorViewDestination)
 
-        if (!Places.isInitialized()) Places.initialize(this.requireContext(),"AIzaSyBbPEtPTJ0UUWGvgDviE0GtGzX2pSn7L5g")
+        if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
         val buttonRoute: Button = requireActivity().findViewById(R.id.buttonRoute)
         buttonRoute.setOnClickListener {
             if (!isValid()){
-                Toast.makeText(context, "Ompli tots els camps correctament per tal de poder generar una ruta",Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, resources.getString(R.string.errorOnFields),Toast.LENGTH_SHORT).show()
             }
             else {
                // RutaModelView.sendRouteInfo(latLngOrigin, latLngDestination, textAutonomia.text.toString().toInt() )
@@ -133,7 +132,7 @@ class Ruta() : Fragment() {
             override fun onPlaceSelected(place: Place) {
                 originText.error = null
                 val latLngOrigin = place.latLng
-                if (latLngOrigin == null) Toast.makeText(context, "Hi ha hagut un error amb la localització, si us plau torni a intentar-ho",Toast.LENGTH_SHORT).show()
+                if (latLngOrigin == null) Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_SHORT).show()
             }
             override fun onError(status: Status) {
                 Log.i("PlacesApiError", "An error occurred: $status")
@@ -145,7 +144,7 @@ class Ruta() : Fragment() {
             override fun onPlaceSelected(place: Place) {
                 destinationText.error = null
                 val latLngDestination = place.latLng
-                if (latLngDestination == null)  Toast.makeText(context, "Hi ha hagut un error amb la localització, si us plau torni a intentar-ho",Toast.LENGTH_LONG).show()
+                if (latLngDestination == null)  Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_LONG).show()
             }
             override fun onError(status: Status) {
                 Log.i("PlacesApiError", "An error occurred: $status")
@@ -164,15 +163,15 @@ class Ruta() : Fragment() {
         var valid : Boolean = true;
         if (TextUtils.isEmpty(textAutonomia.text)){
             valid = false
-            textAutonomia.error = "Aquest camp és obligatori"
+            textAutonomia.error = resources.getString(R.string.fieldRequired)
         }
         if (latLngOrigin==null) {
             valid = false
-            originText.error = "Aquest camp és obligatori"
+            originText.error = resources.getString(R.string.fieldRequired)
         }
         if (latLngDestination==null){
             valid=false
-            destinationText.error="Aquest camp és obligatori"
+            destinationText.error=resources.getString(R.string.fieldRequired)
         }
         return valid;
     }
