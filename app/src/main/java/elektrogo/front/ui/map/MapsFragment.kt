@@ -91,6 +91,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         val barcelona = LatLng(41.3879, 2.16992)
         mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
+
         addChargingPointsToMap()
 
         if (isLocationPermissionGranted()) {
@@ -122,6 +123,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      */
     private fun addChargingPointsToMap() {
 
+
         val stations = mapsFragmentViewModel.getStations()
         Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
 
@@ -134,14 +136,6 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
                     .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
             )
         }
-
-        val mallorca = LatLng(39.962498, 3.213431)
-        mMap.addMarker(
-            MarkerOptions()
-                .position(mallorca)
-                .title("Marker in Mallorca")
-                .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
-        )
     }
 
     /**
