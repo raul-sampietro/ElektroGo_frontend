@@ -69,12 +69,11 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.selectedItemId = R.id.mapa
     }
 
-    //Carrega el fragment passat per paràmetre al main_container
     /**
      * @brief Metode per obrir un fragment.
      * @param fragment Fragment que es vol obrir.
      * @pre El fragment passat per paràmetre existeix.
-     * @post Es carrega el fragment i es mostra a sobre del menu.
+     * @post Es carrega el fragment i es mostra al main container.
      */
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
