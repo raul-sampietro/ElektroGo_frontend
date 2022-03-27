@@ -3,6 +3,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import com.google.gson.Gson
 import elektrogo.front.model.Vehicle
+import elektrogo.front.model.ChargingStation
 import elektrogo.front.model.httpRespostes
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
@@ -78,5 +79,10 @@ object FrontendController {
             parameter("nPVehicle", username)
             parameter("userDriver", numberPlate)
         }
+    }
+
+    suspend fun getChargingPoints(): ArrayList<ChargingStation> {
+        val stations: ArrayList<ChargingStation> = client.get("${URL_BASE}ChargingStations")
+        return stations
     }
 }

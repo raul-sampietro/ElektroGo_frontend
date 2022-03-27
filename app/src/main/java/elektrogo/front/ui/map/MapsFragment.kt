@@ -6,9 +6,14 @@
 
 package elektrogo.front.ui.map
 
+//import elektrogo.front.databinding.FragmentHomeBinding
+
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +24,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -27,6 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.CancellationTokenSource
@@ -38,32 +45,47 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.MainActivity
 import elektrogo.front.R
-//import elektrogo.front.databinding.FragmentHomeBinding
+import elektrogo.front.controller.FrontendController
 import elektrogo.front.databinding.FragmentMapsBinding
-
+import elektrogo.front.model.ChargingStation
+import kotlinx.coroutines.runBlocking
+/**
+ * @brief La clase MapsFragment representa el mapa de google maps amb una configuracio inicial i geolocalitzacio.
+ */
 class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
+    /**
+     * @brief Instancia de l'activitat que crida el fragment.
+     */
     private var mainActivity= mainActivity
+
+    /**
+     * @brief Instancia de la classe MapsFragmentViewModel.
+     */
+    private val mapsFragmentViewModel = MapsFragmentViewModel()
 
     /**
      * @brief Instancia de l'API GoogleMap.
      */
     private lateinit var mMap: GoogleMap
+
     /**
      * @brief Vinculacio de la vista.
      */
-
     private lateinit var binding: FragmentMapsBinding
+
     /**
-     * @brief Valor que esperem que retorni el requeriment de permissos.
+     * @brief Valor que esperem que retorni el requeriment de permisos.
      */
     companion object{
         const val REQUEST_CODE_LOCATION= 0
     }
+
     /**
      * @brief Instancia del client de proveedor d'ubicacio de google service API.
      */
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     /**
      * @brief Token de cancelacio d'una tasca.
      */
@@ -86,6 +108,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         val barcelona = LatLng(41.3879, 2.16992)
         mMap.moveCamera(CameraUpdateFactory.newLatLng(barcelona))
         mMap.moveCamera(CameraUpdateFactory.zoomTo(7.0f))
+
+        addChargingPointsToMap()
+
         if (isLocationPermissionGranted()) {
                 val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(
                     LocationRequest.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token)
@@ -111,36 +136,61 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         getAutocompleteLocation()
     }
 
+
     /**
-     * @brief Metode que comprova si els permissos de localitzacio estan permesos.
+     * @brief Metode que afegeix al mapa els marcadors corresponents a les estacions de carrega.
+     * @pre
+     * @return S'afegeixen al mapa els marcadors de tots els punts de carrega que hi ha a la base de dades.
+     */
+    private fun addChargingPointsToMap() {
+
+
+        val stations = mapsFragmentViewModel.getStations()
+        Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
+
+
+        for (stat in stations) {
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(LatLng(stat.latitude, stat.longitude))
+                    .title("Number of chargers: ${stat.numberOfChargers}")
+                    .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
+            )
+        }
+    }
+
+    /**
+     * @brief Metode que comprova si els permisos de localitzacio estan acceptats.
      * @pre
      * @return Retorna un bolea segons si els permisos estan donats o no.
      */
     private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED
+
     /**
-     * @brief Metode que comprova si els permissos necessaris estan donats i si no ho estan, els demana.
+     * @brief Metode que comprova si els permisos necessaris estan donats i si no ho estan, en fa la peticio.
      * @pre
-     * @post Si els permissos no estan donats, els demana a l'usuari.
+     * @post Si els permisos no estan donats, els demana a l'usuari.
      */
     @SuppressLint("MissingPermission")
     private fun checkAndEnableLocation(){
         if(!::mMap.isInitialized) return
         if(isLocationPermissionGranted()){
-            mMap.isMyLocationEnabled=true //It doesn't need to be fixed, it's not an error, it works anyways.
+            mMap.isMyLocationEnabled=true
         }
         else {
             requestPermissions()
         }
     }
+
     /**
-     * @brief Metode que demana al usuari que accepti els permissos necessaris.
+     * @brief Metode que demana a l'usuari que accepti els permisos necessaris.
      * @pre
-     * @post Si ja els ha demanat algun cop i estan denegats, mostra un missatge demanant que els accepti. Si no els ha demanat mai, els demana.
+     * @post Si ja els ha demanat algun cop i estan denegats, mostra un missatge dient a l'usuari que els accepti per tal de poder obtenir la localitzacio. Si no els ha demanat mai, els demana.
      */
     private fun requestPermissions(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(mainActivity, Manifest.permission.ACCESS_FINE_LOCATION)){
-            Toast.makeText(activity, "Accede a ajustes de tu dispositivo y acepta los permisos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, resources.getString(R.string.AskLocation), Toast.LENGTH_SHORT).show()
         }
         else {
             ActivityCompat.requestPermissions(mainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -148,7 +198,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
             )
         }
         if (ActivityCompat.shouldShowRequestPermissionRationale(mainActivity, Manifest.permission.ACCESS_COARSE_LOCATION)){
-            Toast.makeText(activity, "Accede a ajustes de tu dispositivo y acepta los permisos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, resources.getString(R.string.AskLocation), Toast.LENGTH_SHORT).show()
         }
         else {
             ActivityCompat.requestPermissions(mainActivity, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
@@ -159,9 +209,9 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     }
 
     /**
-     * @brief Metode que analitza el resultat de les peticions de permissos.
+     * @brief Metode que analitza el resultat de les peticions de permisos.
      * @pre
-     * @post Si el codi correpont al que s'esperava, s'activa MyLocation al mapa, en cas contrari es mostra un text per demanar de nou els permissos.
+     * @post Si el codi correpon al que s'esperava, s'activa MyLocation al mapa, en cas contrari es mostra un text per demanar de nou els permisos.
      */
     @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
@@ -171,17 +221,16 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     ) {
         when(requestCode){
             REQUEST_CODE_LOCATION -> if (grantResults.isNotEmpty()&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                mMap.isMyLocationEnabled=true //It doesn't need to be fixed, it's not an error, it works anyways.
+                mMap.isMyLocationEnabled=true
             }
             else {
-                Toast.makeText(context,"Para activar la localizacion ve a ajustes y acepta los permisos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,resources.getString(R.string.WhenLocationDenied), Toast.LENGTH_SHORT).show()
             }
             else -> {}
         }
     }
     //Maybe we should deal with the case where the users opens de app, gives permission but in middle of the executions goes to settings and deny permissions. At the moment it seems that
     // its dealed in the already existent methods.
-
 
     fun getAutocompleteLocation () {
         val autocompleteSupportFragment =
@@ -217,6 +266,11 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
+    /**
+     * @brief Metode que s'executa un cop la vista ha estat creada.
+     * @pre
+     * @post obte un mapa de google maps, l'inicialitza automaticament.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
