@@ -66,8 +66,11 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
 
         //Fem que la funcionalitat que se selecciona per defecte en obrir l'app sigui el mapa
-
-        bottomNavigation.selectedItemId = R.id.perfil
+        //Si es ve de la vista de VehicleList, el fragment seleccionat és el perfil
+        if (intent.getStringExtra("origin").isNullOrBlank())
+            bottomNavigation.selectedItemId = R.id.mapa
+        else if (intent.getStringExtra("origin").equals("vehicleList"))
+            bottomNavigation.selectedItemId = R.id.perfil
     }
 
     /**
