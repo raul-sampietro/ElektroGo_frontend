@@ -89,11 +89,13 @@ object FrontendController {
             parameter("destLon", longitudeDestination)
             parameter("range", drivingRange)
         }
-        var waypoints = arrayListOf<Double>()
-        val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-        val statusCode = responseJson.status
-        if (statusCode !=200) waypoints = arrayListOf(statusCode.toDouble())
-        //else  waypoints = httpResponse.arrayList????
+        val waypoints: ArrayList<Double>
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            waypoints = arrayListOf(statusCode.toDouble())
+        }
+        else  waypoints = httpResponse.receive()
         return waypoints
     }
 }

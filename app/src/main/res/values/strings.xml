@@ -13,6 +13,7 @@
     <string name="errorOnFields">Ompli tots els camps correctament per tal de poder generar una ruta</string>
     <string name="errorOnLocation">Hi ha hagut un error amb la localització, si us plau torni a intentar-ho</string>
     <string name="fieldRequired">Aquest camp és obligatori</string>
+    <string name="errorOnRoute">Hi ha hagut un error, no hi ha cap ruta disponible</string>
 
     <string name="title_activity_maps">MapsActivity</string>
     <string name="Mapa">Mapa</string>

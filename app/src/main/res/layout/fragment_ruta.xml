@@ -4,6 +4,7 @@
     android:id = "@+id/ruta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8BCA86"
     tools:context=".ui.Route.routeFragment">
 
 
@@ -28,7 +29,6 @@
             android:layout_height="wrap_content" />
 
 
-
     </LinearLayout>
 
     <LinearLayout
@@ -38,9 +38,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="125dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="495dp"
+        android:layout_marginBottom="465dp"
         android:background="@color/design_default_color_on_primary"
         android:orientation="horizontal">
 
@@ -61,7 +60,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="116dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="116dp"
         android:text="@string/generar_ruta" />
 
@@ -73,7 +72,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="274dp"
         android:layout_marginBottom="12dp"
         android:text="@string/origen"
@@ -87,7 +86,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="110dp"
         android:layout_marginEnd="273dp"
         android:layout_marginBottom="12dp"
         android:text="@string/dest"
@@ -101,9 +100,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="185dp"
+        android:layout_marginTop="205dp"
         android:layout_marginEnd="261dp"
-        android:layout_marginBottom="12dp"
         android:text="@string/autonomia"
         android:textSize="20sp" />
 
@@ -115,9 +113,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="275dp"
-        android:layout_marginTop="185dp"
+        android:layout_marginTop="205dp"
         android:layout_marginEnd="47dp"
-        android:layout_marginBottom="12dp"
         android:text="@string/km"
         android:textSize="20sp" />
 
@@ -130,8 +127,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="310dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="1dp"
         android:layout_marginBottom="12dp"
         android:textSize="20sp" />
 
@@ -143,9 +140,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="310dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="7dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginTop="155dp"
+        android:layout_marginEnd="1dp"
         android:textSize="20sp" />
 
 
@@ -157,7 +153,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="134dp"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="195dp"
         android:layout_marginEnd="135dp"
         android:ems="10"
         android:inputType="number" />
@@ -169,7 +165,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end|center_vertical"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="150dp"
         android:layout_marginEnd="32dp"
         android:background="@android:color/transparent"
         android:clickable="true" />
@@ -186,5 +182,24 @@
         android:background="@android:color/transparent"
         android:clickable="true" />
 
+
+    <View
+        android:id="@+id/bottom_background"
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="310dp"
+        android:layout_height="417dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/beautiful_route" />
 </RelativeLayout>
 

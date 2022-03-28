@@ -108,19 +108,22 @@ class routeFragment() : Fragment() {
             }
             else {
                val waypoints : ArrayList<Double> = rutaModelView.sendRouteInfo(latLngOrigin!!, latLngDestination!!, textAutonomia.text.toString().toInt())
-               if (waypoints.size==1) Log.i("statusCodeXD", waypoints[0].toString())
-               var w : Int = 0
-               var stringURI : String = "https://www.google.com/maps/dir/?api=1&origin=${latLngOrigin!!.latitude},${latLngOrigin!!.longitude}&destination=${latLngDestination!!.latitude},${latLngDestination!!.longitude}"
-                while (w<waypoints.size-1){
-                    if (w==0)  stringURI+="&waypoints="
-                    else stringURI+="|"
-                    stringURI+="${waypoints[w]},${waypoints[w+1]}"
-                    w+=2
-                }
-                stringURI+="&travelmode=driving"
-                val mapIntent: Intent= Intent(Intent.ACTION_VIEW, Uri.parse(stringURI))
-                mapIntent.setPackage("com.google.android.apps.maps")
-                startActivity(mapIntent)
+               if (waypoints.size==1) Toast.makeText(context, resources.getString(R.string.errorOnRoute),Toast.LENGTH_LONG).show()
+               else {
+                   var w: Int = 0
+                   var stringURI: String =
+                       "https://www.google.com/maps/dir/?api=1&origin=${latLngOrigin!!.latitude},${latLngOrigin!!.longitude}&destination=${latLngDestination!!.latitude},${latLngDestination!!.longitude}"
+                   while (w < waypoints.size - 1) {
+                       if (w == 0) stringURI += "&waypoints="
+                       else stringURI += "|"
+                       stringURI += "${waypoints[w]},${waypoints[w + 1]}"
+                       w += 2
+                   }
+                   stringURI += "&travelmode=driving"
+                   val mapIntent: Intent = Intent(Intent.ACTION_VIEW, Uri.parse(stringURI))
+                   mapIntent.setPackage("com.google.android.apps.maps")
+                   startActivity(mapIntent)
+               }
 
             }
         }
