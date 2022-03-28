@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id = "@+id/ruta"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8BCA86"
+    tools:context=".ui.Route.routeFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="130dp"
+        android:background="@color/design_default_color_on_primary"
+        android:orientation="horizontal">
+
+
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="465dp"
+        android:background="@color/design_default_color_on_primary"
+        android:orientation="horizontal">
+
+
+        <fragment
+            android:id="@+id/autocomplete_fragment2"
+            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonRoute"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewKm"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="116dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="116dp"
+        android:text="@string/generar_ruta" />
+
+    <TextView
+        android:id="@+id/textViewOrigin"
+        android:layout_width="116dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="274dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/origen"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textViewDestination"
+        android:layout_width="116dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="273dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/dest"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textViewAutonomia"
+        android:layout_width="129dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="205dp"
+        android:layout_marginEnd="261dp"
+        android:text="@string/autonomia"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textViewKm"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="275dp"
+        android:layout_marginTop="205dp"
+        android:layout_marginEnd="47dp"
+        android:text="@string/km"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/errorViewOrigin"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="310dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="12dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/errorViewDestination"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="310dp"
+        android:layout_marginTop="155dp"
+        android:layout_marginEnd="1dp"
+        android:textSize="20sp" />
+
+
+    <EditText
+        android:id="@+id/editTextAutonomia"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="195dp"
+        android:layout_marginEnd="135dp"
+        android:ems="10"
+        android:inputType="number" />
+
+    <View
+        android:id="@+id/viewCrossCallbackDestination"
+        android:layout_width="35dp"
+        android:layout_height="33dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="32dp"
+        android:background="@android:color/transparent"
+        android:clickable="true" />
+
+    <View
+        android:id="@+id/viewCrossCallbackOrigin"
+        android:layout_width="35dp"
+        android:layout_height="33dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="32dp"
+        android:background="@android:color/transparent"
+        android:clickable="true" />
+
+
+    <View
+        android:id="@+id/bottom_background"
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="310dp"
+        android:layout_height="417dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/beautiful_route" />
+</RelativeLayout>
+
