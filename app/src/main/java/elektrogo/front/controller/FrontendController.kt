@@ -3,6 +3,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import com.google.gson.Gson
 import elektrogo.front.model.Vehicle
+import elektrogo.front.model.ChargingStation
 import elektrogo.front.model.httpRespostes
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -81,6 +82,7 @@ object FrontendController {
         }
     }
 
+
     suspend fun sendRouteInfo(latitudeOrigin: Double, longitudeOrigin: Double, latitudeDestination: Double, longitudeDestination: Double, drivingRange: Int): ArrayList<Double> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}route/calculate"){
             parameter("oriLat", latitudeOrigin)
@@ -97,5 +99,9 @@ object FrontendController {
         }
         else  waypoints = httpResponse.receive()
         return waypoints
+   }
+    suspend fun getChargingPoints(): ArrayList<ChargingStation> {
+        val stations: ArrayList<ChargingStation> = client.get("${URL_BASE}ChargingStations")
+        return stations
     }
 }
