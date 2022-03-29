@@ -42,19 +42,23 @@ object FrontendController {
     }
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
-        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create") {
+        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
             parameter("userNDriver", "Test")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
-        val respostaJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-        return respostaJson.status
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        }
+        else return httpResponse.status.value
     }
 
     @OptIn(InternalAPI::class)
     suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap){
         val stream = ByteArrayOutputStream()
-        vehiclePic.compress(Bitmap.CompressFormat.PNG, 60, stream)
+        vehiclePic.compress(Bitmap.CompressFormat.PNG, 20, stream)
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
