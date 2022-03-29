@@ -134,12 +134,13 @@ class AddVehicle : AppCompatActivity() {
 
                 var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
-                var statusCode = addVehicleModelView.sendVehicleInfo(vehicleInfo,bitmapVehicleImage!!)
+                var statusCode = addVehicleModelView.sendVehicleInfo(vehicleInfo)
 
                 if (statusCode == 433) Toast.makeText(this, resources.getString(R.string.DriverVehicleAlreadyExists), Toast.LENGTH_LONG).show()
                 else if (statusCode == 440) Toast.makeText(this, resources.getString(R.string.WrongVehicleInfo), Toast.LENGTH_LONG).show()
                 else if (statusCode in 500..599) Toast.makeText(this, resources.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
                 else if (statusCode in 200..299){
+                    addVehicleModelView.saveVehicleImage(licensePlate.text.toString(), bitmapVehicleImage!!)
                     Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
                     finishActivity(Activity.RESULT_OK) //Back to menu
                 }
