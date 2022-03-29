@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">ElektroGo</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="generar_ruta">Generar ruta</string>
+    <string name="places_autocomplete_search_hint">Cerca localització</string>
+    <string name="origen">Origen:</string>
+    <string name="dest">Destí:</string>
+    <string name="autonomia_actual">Autonomia actual:</string>
+    <string name="km">km</string>
+    <string name="autonomia">Autonomia:</string>
+    <string name="errorOnFields">Ompli tots els camps correctament per tal de poder generar una ruta</string>
+    <string name="errorOnLocation">Hi ha hagut un error amb la localització, si us plau torni a intentar-ho</string>
+    <string name="fieldRequired">Aquest camp és obligatori</string>
+    <string name="errorOnRoute">Hi ha hagut un error, no hi ha cap ruta disponible</string>
+
     <string name="title_activity_maps">MapsActivity</string>
     <string name="Mapa">Mapa</string>
     <string name="title_pooling">Pooling</string>
