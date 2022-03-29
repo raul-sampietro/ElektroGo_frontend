@@ -51,10 +51,12 @@ public class AddVehicleModelView : ViewModel() {
      * @pre vehicleInfo te tots els camps del vehicle complerts excepte la imatge i bitmapVehiclePic no es null
      * @return Retorna el statusCode de la primera crida rebuda d'executar la crida amb FrontendController.
      */
-    fun sendVehicleInfo(vehicleInfo: Vehicle, bitmapVehiclePic: Bitmap): Int  = runBlocking{
-        val statusCode  = FrontendController.sendVehicleInfo(vehicleInfo)
-        if(statusCode in 200..299) FrontendController.sendVehiclePhoto(vehicleInfo.numberPlate, bitmapVehiclePic) //Nomes es pot fer aquesta crida si l'anterior ha anat be
-        return@runBlocking statusCode
+    fun sendVehicleInfo(vehicleInfo: Vehicle): Int  = runBlocking{
+        return@runBlocking  FrontendController.sendVehicleInfo(vehicleInfo)
+    }
+
+    fun saveVehicleImage(numberPlate: String, vehicleBitmap: Bitmap) = runBlocking {
+        FrontendController.sendVehiclePhoto(numberPlate, vehicleBitmap)
     }
 
 
