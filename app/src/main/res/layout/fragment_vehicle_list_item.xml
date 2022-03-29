@@ -18,7 +18,7 @@
             android:layout_gravity="start|center"
             android:orientation="horizontal">
 
-            <!-- TODO Insertar foto aquí -->
+            <!-- TODO Insertar foto aquí >
             <RelativeLayout
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -35,7 +35,12 @@
                     android:textSize="14sp" />
 
             </RelativeLayout>
-            <!-- ####################### -->
+            < ####################### -->
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/outline_image_not_supported_24"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

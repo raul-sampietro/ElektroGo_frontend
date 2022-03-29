@@ -6,7 +6,9 @@ import elektrogo.front.model.Vehicle
 import elektrogo.front.model.ChargingStation
 import elektrogo.front.model.httpRespostes
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
+import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
@@ -15,7 +17,10 @@ import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.*
+import io.ktor.utils.io.*
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileWriter
 
 object FrontendController {
     private const val URL_BASE = "http://10.4.41.58:8080/"
@@ -72,6 +77,35 @@ object FrontendController {
             parameter("userName", username)
         }
         return vehicles
+    }
+
+    @OptIn(InternalAPI::class)
+    suspend fun getVehiclePhoto(licensePlate: String): File {
+        val writer = FileWriter("/data/app/elektrogo/vehicleImages/${licensePlate}.png")
+
+        client.get("${URL_VEHICLE}getImage").execute { response: HttpResponse ->
+            val bytes = response.receive<ByteReadChannel>()
+
+            val byteBufferSize = 1024 * 100
+            val byteBuffer = ByteArray(byteBufferSize)
+
+            do {
+                val currentRead = bytes.readAvailable(byteBuffer, 0, byteBufferSize)
+
+                if (currentRead > 0) {
+                    println("Write ${currentRead} bytes...")
+
+                    // write the data into the file
+                    writer.write(if (currentRead < byteBufferSize) {
+                        byteBuffer.slice(0 until currentRead)
+                    } else {
+                        byteBuffer
+                    })
+                }
+            } while (currentRead >= 0)
+
+            writer.close()
+        }
     }
 
     suspend fun deleteVehicle(username: String, numberPlate: String) {
