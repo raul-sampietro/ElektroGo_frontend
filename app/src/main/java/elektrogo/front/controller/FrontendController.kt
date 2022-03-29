@@ -100,8 +100,14 @@ object FrontendController {
         else  waypoints = httpResponse.receive()
         return waypoints
    }
-    suspend fun getChargingPoints(): ArrayList<ChargingStation> {
-        val stations: ArrayList<ChargingStation> = client.get("${URL_BASE}ChargingStations")
-        return stations
+    suspend fun getChargingPoints(): Pair<Int, ArrayList<ChargingStation>> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}ChargingStations")
+        val status: Int = httpResponse.status.value
+
+        val stations: ArrayList<ChargingStation>
+        if(status != 200) stations = ArrayList<ChargingStation>()
+        else stations = httpResponse.receive()
+        
+        return Pair(status, stations)
     }
 }
