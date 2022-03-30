@@ -26,8 +26,8 @@ object FrontendController {
     private val client = HttpClient(Android) {   //Exemple de com fer una crida amb el nostre servidor!
         expectSuccess = false
         engine {
-            connectTimeout = 60_000
-            socketTimeout = 60_000
+            connectTimeout = 10_000
+            socketTimeout = 10_000
         }
         install(Logging) {
             level = LogLevel.ALL
