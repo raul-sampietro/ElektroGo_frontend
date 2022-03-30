@@ -166,7 +166,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
             }
         }
         catch (e : Exception) {
-            Toast.makeText(activity, "No s'han pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
         }
     }
 
