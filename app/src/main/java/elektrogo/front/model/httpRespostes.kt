@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class httpRespostes(
-    val timestamp: String,
+    val timestamp: String?,
     val status: Int,
-    val error: String,
-    val path: String
+    val error: String?,
+    val path: String?
 )
