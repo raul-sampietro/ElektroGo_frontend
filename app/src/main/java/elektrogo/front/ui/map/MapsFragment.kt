@@ -144,16 +144,29 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      */
     private fun addChargingPointsToMap() {
 
-        val stations = mapsFragmentViewModel.getStations()
-        Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
+        try {
+            val statusAndStations = mapsFragmentViewModel.getStations()
+            val status = statusAndStations.first
 
-        for (stat in stations) {
-            mMap.addMarker(
-                MarkerOptions()
-                    .position(LatLng(stat.latitude, stat.longitude))
-                    .title("Number of chargers: ${stat.numberOfChargers}")
-                    .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
-            )
+            if (status != 200) { // NOT OK
+                Toast.makeText(activity, "No s'han pogut obtenir les estacions de càrrega. ERROR: $status", Toast.LENGTH_LONG).show()
+            }
+            else { // OK
+
+                val stations = statusAndStations.second
+                Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
+                for (stat in stations) {
+                    mMap.addMarker(
+                        MarkerOptions()
+                            .position(LatLng(stat.latitude, stat.longitude))
+                            .title("Number of chargers: ${stat.numberOfChargers}")
+                            .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
+                    )
+                }
+            }
+        }
+        catch (e : Exception) {
+            Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
         }
     }
 

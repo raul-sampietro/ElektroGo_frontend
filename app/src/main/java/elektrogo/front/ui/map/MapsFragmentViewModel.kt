@@ -27,7 +27,7 @@ class MapsFragmentViewModel : ViewModel() {
      * @pre
      * @return Retorna un ArrayList de les estacions de carrega que hi ha a la base de dades.
      */
-    fun getStations() : ArrayList<ChargingStation> /*sintaxi per fer return*/ = runBlocking {
+    fun getStations() : Pair<Int, ArrayList<ChargingStation>> /*sintaxi per fer return*/ = runBlocking {
         FrontendController.getChargingPoints()
     }
 
