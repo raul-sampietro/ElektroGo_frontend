@@ -67,6 +67,8 @@ class NewCarPoolingFragment() : Fragment() {
 
     private lateinit var restDescription : EditText
 
+    private lateinit var originName : String
+    private lateinit var destinationName : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -189,7 +191,7 @@ class NewCarPoolingFragment() : Fragment() {
                 //Serailitzem totes les variables obtingudes del usuari a un json
                 var newCarPoolingInfo = CarPooling(null, selectedDate.text.toString(), selectedHour.text.toString(), dropSeats.selectedItem.toString().toInt(),
                 1, restDescription.text.toString(), detailsDescription.text.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
-                originText.toString(), latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble(), destinationText.toString(), dropVehicles.selectedItem.toString())
+                originName, latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble(), destinationName, dropVehicles.selectedItem.toString())
 
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())
 
@@ -217,6 +219,7 @@ class NewCarPoolingFragment() : Fragment() {
             override fun onPlaceSelected(place: Place) {
                 originText.error = null
                 latLngOrigin = place.latLng
+                originName = place.name!!
                 if (latLngOrigin == null) Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_SHORT).show()
             }
             override fun onError(status: Status) {
@@ -229,6 +232,7 @@ class NewCarPoolingFragment() : Fragment() {
             override fun onPlaceSelected(place: Place) {
                 destinationText.error = null
                 latLngDestination = place.latLng
+                destinationName = place.name!!
                 if (latLngDestination == null)  Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_LONG).show()
             }
             override fun onError(status: Status) {
