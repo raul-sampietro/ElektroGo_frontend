@@ -20,6 +20,8 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.model.CarPooling
+import elektrogo.front.model.Vehicle
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
@@ -61,6 +63,10 @@ class NewCarPoolingFragment() : Fragment() {
 
     private lateinit var SeatsLabel : TextView
 
+    private lateinit var detailsDescription : EditText
+
+    private lateinit var restDescription : EditText
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,6 +89,8 @@ class NewCarPoolingFragment() : Fragment() {
         dropSeats = requireActivity().findViewById(R.id.SeatsOfferedSelector) //Obtinc l'spinner dels seients
         originText = requireActivity().findViewById(R.id.errorViewOrigin)
         destinationText = requireActivity().findViewById(R.id.errorViewDestination)
+        detailsDescription = requireActivity().findViewById(R.id.detailsInput)
+        restDescription = requireActivity().findViewById(R.id.restInput)
         //Inicialitzem les variables per tal d'evitar problemes amb les dates i hores
         var day: Int = 28
         var month: Int = 10
@@ -117,15 +125,14 @@ class NewCarPoolingFragment() : Fragment() {
             val tpd = TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { view, hour, minute ->
 
                 // Display Selected date in textbox
-                selectedHour.setText("$hour:$minute")
+                if (minute < 10) selectedHour.setText("$hour:0$minute")
+                else selectedHour.setText("$hour:$minute")
                 selectedHour.setError(null)
             }, minute, hour, true)
 
             tpd.show()
         }
-        //Passem la data i hora a variables
-        var dateSelected : LocalDate? = LocalDate.parse("$year-$month-$day")
-        var hourSelected : LocalTime? = LocalTime.parse("$hour:$minute")
+
 
         //Obtenim les dades dels vehicles del usuari logejat
         //TODO NO FER-HO HARDCODED!
@@ -179,6 +186,13 @@ class NewCarPoolingFragment() : Fragment() {
                 Toast.makeText(context, resources.getString(R.string.errorOnFields),Toast.LENGTH_SHORT).show()
             }
             else {
+                //Serailitzem totes les variables obtingudes del usuari a un json
+                var newCarPoolingInfo = CarPooling(null, selectedDate.text.toString(), selectedHour.text.toString(), dropSeats.selectedItem.toString().toInt(),
+                1, restDescription.text.toString(), detailsDescription.text.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                originText.toString(), latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble(), destinationText.toString(), dropVehicles.selectedItem.toString())
+
+                Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())
+
                 //Crida amb backend per crear el carpooling nou.
 
             }

@@ -19,6 +19,6 @@ data class CarPooling(
     var originString: String,
     var latitudeDestination: Double,
     var longitudeDestination: Double,
-    var destinationString: Double,
+    var destinationString: String,
     var vehicleNumberPlate: String,
 )
