@@ -18,6 +18,7 @@ import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.ui.Route.routeFragment
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
+import elektrogo.front.ui.chatList.ChatFragment
 
 /**
  * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
@@ -44,6 +45,12 @@ class MainActivity : AppCompatActivity() {
                 toolbar.title = "Ruta"
                 val routeFragment = routeFragment()
                 openFragment(routeFragment)
+                return@OnItemSelectedListener true
+            }
+            R.id.chat -> {
+                toolbar.title = "Chat"
+                val chatFragment = ChatFragment()
+                openFragment(chatFragment)
                 return@OnItemSelectedListener true
             }
             R.id.perfil -> {
