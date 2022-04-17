@@ -115,7 +115,7 @@ object FrontendController {
 
     suspend fun getChatList(username: String): ArrayList<Chat> {
         val chats: ArrayList<Chat> = client.get("${URL_BASE}chat/findByUser") {
-            parameter("userName", username)
+            parameter("user", username)
         }
         return chats
     }
