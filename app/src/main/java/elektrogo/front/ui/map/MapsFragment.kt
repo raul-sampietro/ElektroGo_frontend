@@ -24,6 +24,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -111,6 +112,17 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
         addChargingPointsToMap()
 
+        mMap.setOnMarkerClickListener { marker ->
+            Toast.makeText(activity, "${marker.title}", Toast.LENGTH_SHORT).show()
+
+
+
+
+
+
+            true
+        }
+
         if (isLocationPermissionGranted()) {
                 val currentLocationTask: Task<Location> = fusedLocationClient.getCurrentLocation(
                     LocationRequest.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token)
@@ -169,6 +181,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
             Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
         }
     }
+
 
     /**
      * @brief Metode que comprova si els permisos de localitzacio estan acceptats.
