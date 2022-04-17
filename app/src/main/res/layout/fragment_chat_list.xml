@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.chatList.ChatFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ui.chatList.ChatListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/list_view"
+        tools:listitem="@layout/fragment_chat_list_item"/>
 
 </FrameLayout>
