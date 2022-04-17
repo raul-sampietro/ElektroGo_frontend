@@ -2,10 +2,7 @@ package elektrogo.front.controller
 import android.graphics.Bitmap
 import android.util.Log
 import com.google.gson.Gson
-import elektrogo.front.model.Vehicle
-import elektrogo.front.model.ChargingStation
-import elektrogo.front.model.Chat
-import elektrogo.front.model.httpRespostes
+import elektrogo.front.model.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
