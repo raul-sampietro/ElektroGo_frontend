@@ -8,17 +8,18 @@ package elektrogo.front.ui.chatList
 
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import elektrogo.front.R
 import elektrogo.front.model.Chat
-import elektrogo.front.ui.vehicleList.VehicleListViewModel
+import elektrogo.front.ui.chatConversation.ChatConversation
 
 /**
  * @brief La clase Chat representa la GUI de la pantalla on l'usuari veura el sistema de xat entre usuaris.
@@ -51,6 +52,12 @@ class ChatListFragment() : Fragment() {
         listView.adapter = ChatListAdapter(container?.context as Activity, chatList)
 
         return view
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = Intent(activity, ChatConversation::class.java)
+        startActivity(intent)
+        return false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
