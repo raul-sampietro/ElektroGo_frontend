@@ -144,7 +144,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:layout_marginStart="10dp"
-                    android:hint="@string/ExampleDate"
                     android:textColor="#000000"
                     android:textColorHint="#78909C"
                     android:textSize="20sp" />

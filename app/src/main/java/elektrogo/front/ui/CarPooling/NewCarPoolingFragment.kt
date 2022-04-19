@@ -23,7 +23,9 @@ import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.Vehicle
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -94,11 +96,12 @@ class NewCarPoolingFragment() : Fragment() {
         detailsDescription = requireActivity().findViewById(R.id.detailsInput)
         restDescription = requireActivity().findViewById(R.id.restInput)
         //Inicialitzem les variables per tal d'evitar problemes amb les dates i hores
+        selectedDate.setHint(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString())
         var day: Int = 28
         var month: Int = 10
         var year: Int = 1920
-        var hour: Int = 11
-        var minute: Int = 11
+        var hour: Int = 12
+        var minute: Int = 15
 
         //Boto per la data
         buttonDate.setOnClickListener {
@@ -107,11 +110,14 @@ class NewCarPoolingFragment() : Fragment() {
             month = calendar.get(Calendar.MONTH)
             year = calendar.get(Calendar.YEAR)
 
-            val date : String = "$year-$month-$day"
             val dpd = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
                 // Display Selected date in textbox
-                selectedDate.setText("$dayOfMonth/$monthOfYear/$year")
+                val mes = monthOfYear+1
+                if(dayOfMonth < 10 && mes < 10) selectedDate.setText("0$dayOfMonth/0$mes/$year")
+                else if (dayOfMonth < 10 && mes >= 10) selectedDate.setText("0$dayOfMonth/$mes/$year")
+                else if (dayOfMonth >= 10 && mes < 10) selectedDate.setText("$dayOfMonth/0$mes/$year")
+                else selectedDate.setText("$dayOfMonth/$mes/$year")
                 selectedDate.setError(null)
             }, year, month, day)
 
@@ -127,7 +133,9 @@ class NewCarPoolingFragment() : Fragment() {
             val tpd = TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { view, hour, minute ->
 
                 // Display Selected date in textbox
-                if (minute < 10) selectedHour.setText("$hour:0$minute")
+                if (minute < 10 && hour < 10) selectedHour.setText("0$hour:0$minute")
+                else if (minute < 10 && hour >= 10) selectedHour.setText("$hour:0$minute")
+                else if (minute >= 10 && hour < 10) selectedHour.setText("0$hour:$minute")
                 else selectedHour.setText("$hour:$minute")
                 selectedHour.setError(null)
             }, minute, hour, true)
@@ -248,13 +256,38 @@ class NewCarPoolingFragment() : Fragment() {
         if (TextUtils.isEmpty(selectedDate.text)){
             valid = false
             selectedDate.error = resources.getString(R.string.fieldRequired)
-        } else selectedDate.setError(null)
+        } else {
+            if (LocalDate.parse(selectedDate.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) >= LocalDate.now()) {
+                selectedDate.setError(null)
+            }
+            else{
+                valid = false
+                selectedDate.error = resources.getString(R.string.DataIncorrecte)
+            }
+        }
 
         if (TextUtils.isEmpty(selectedHour.text)){
             valid = false
             selectedHour.error = resources.getString(R.string.fieldRequired)
-        } else selectedHour.setError(null)
+        } else {
+            if ((LocalTime.parse(selectedHour.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) >= LocalTime.now() &&  LocalDate.parse(selectedDate.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()) || LocalDate.parse(selectedDate.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) > LocalDate.now()) {
+                selectedHour.setError(null)
+            }
+            else if(LocalTime.parse(selectedHour.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(selectedDate.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
+                valid = false
+                selectedHour.error = resources.getString(R.string.HoraIncorrecte)
+            }
+        }
 
+        if (TextUtils.isEmpty(detailsDescription.text)){
+            valid = false
+            detailsDescription.error = resources.getString(R.string.fieldRequired)
+        } else detailsDescription.setError(null)
+
+        if (TextUtils.isEmpty(restDescription.text)){
+            valid = false
+            restDescription.error = resources.getString(R.string.fieldRequired)
+        } else restDescription.setError(null)
 
        if (dropVehicles.selectedItem==null){
            valid = false
