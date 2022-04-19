@@ -61,5 +61,9 @@
     <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
     <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
     <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
+    <string name="hora_d_inici">hora d\'inici</string>
+    <string name="dataFiltrar">Data</string>
+    <string name="buscarFiltrar">Buscar</string>
+    <string name="errorFieldsFiltrar">Ompli Origen i Desti per tal de poder cercar trajectes</string>
 
 </resources>
