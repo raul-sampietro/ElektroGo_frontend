@@ -94,6 +94,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     lateinit var placesClient: PlacesClient
 
+    private var showXinxetaMarcador = true
 
     /**
      * @brief Metode executat un cop el mapa s'ha creat.
@@ -115,12 +116,38 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         mMap.setOnMarkerClickListener { marker ->
             Toast.makeText(activity, "${marker.title}", Toast.LENGTH_SHORT).show()
 
+            var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView)
 
+            if (fragmentXinxeta != null) {
 
+                val transaction = childFragmentManager.beginTransaction()
 
-
-
+                if (!showXinxetaMarcador) {
+                    transaction.add(R.id.fragmentContainerView, fragmentXinxeta)
+                    showXinxetaMarcador = true
+                }
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
             true
+        }
+
+        mMap.setOnMapClickListener {
+            Toast.makeText(activity, "map clicked", Toast.LENGTH_SHORT).show()
+
+            var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView)
+
+            if (fragmentXinxeta != null) {
+
+                val transaction = childFragmentManager.beginTransaction()
+
+                if (showXinxetaMarcador) {
+                    transaction.remove(fragmentXinxeta)
+                    showXinxetaMarcador = false
+                }
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
         }
 
         if (isLocationPermissionGranted()) {
@@ -287,6 +314,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 

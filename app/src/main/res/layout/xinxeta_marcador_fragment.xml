@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F44336"
+        android:background="@drawable/ic_half_rounded_box"
         android:orientation="vertical">
 
         <TextView
@@ -25,7 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="74dp"
-            android:text="Number of chargers: XD" />
+            android:text="Number of chargers: XD"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
