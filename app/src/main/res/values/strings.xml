@@ -64,5 +64,6 @@
     <string name="hora_d_inici">hora d\'inici</string>
     <string name="dataFiltrar">Data</string>
     <string name="buscarFiltrar">Buscar</string>
+    <string name="errorFieldsFiltrar">Ompli Origen i Desti per tal de poder cercar trajectes</string>
 
 </resources>

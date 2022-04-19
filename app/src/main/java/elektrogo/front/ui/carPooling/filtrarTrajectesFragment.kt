@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class filtrarTrajectesFragment : Fragment() {
 
     private lateinit var placesClient: PlacesClient
     private lateinit var dataButton: Button
+    private lateinit var filtrarButton : Button
     private lateinit var timeFromButton: Button
     private lateinit var timeToButton: Button
     private lateinit var autocompleteSupportFragment: AutocompleteSupportFragment
@@ -38,9 +40,9 @@ class filtrarTrajectesFragment : Fragment() {
     private lateinit var destinationText : TextView
     private  var latLngOrigin : LatLng?=null
     private  var latLngDestination: LatLng?=null
-    private lateinit var fromTimeSelected: String
-    private lateinit var toTimeSelected: String
-    private lateinit var dateSelected: String
+    private  var fromTimeSelected: String?=null
+    private  var toTimeSelected: String?=null
+    private  var dateSelected: String?=null
 
     private lateinit var viewModel: FiltrarTrajectesViewModel
 
@@ -53,10 +55,12 @@ class filtrarTrajectesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dataButton = requireActivity().findViewById(R.id.dataButtonFiltrar)
+        filtrarButton = requireActivity().findViewById(R.id.Filtrar)
         timeFromButton=requireActivity().findViewById(R.id.timeFromButtonFiltrar)
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
         originText = requireActivity().findViewById(R.id.errorViewOriginFiltrar)
         destinationText = requireActivity().findViewById(R.id.errorViewDestinationFiltrar)
+
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
         autocompleteSupportFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragmentFiltrar) as AutocompleteSupportFragment
@@ -82,17 +86,38 @@ class filtrarTrajectesFragment : Fragment() {
         var hour: Int = 11
         var minute: Int = 11
 
+        filtrarButton.setOnClickListener {
+            if (validate()) viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+            else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
+
+        }
         dataButton.setOnClickListener {
             var calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
             month = calendar.get(Calendar.MONTH)
             year = calendar.get(Calendar.YEAR)
-
             val dpd = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
                 // Display Selected date in textbox
-                dataButton.text = "$dayOfMonth/$monthOfYear/$year"
-                dateSelected = "$dayOfMonth/$monthOfYear/$year"
+
+                var correctMonth = (monthOfYear+1)
+                if(dayOfMonth < 10 && correctMonth < 10){
+                    dataButton.text = "0$dayOfMonth/0$correctMonth/$year"
+                    dateSelected = "0$dayOfMonth/0$correctMonth/$year"
+                }
+                else if (dayOfMonth < 10 && correctMonth >= 10){
+                    dataButton.text = "0$dayOfMonth/$correctMonth/$year"
+                    dateSelected = "0$dayOfMonth/$correctMonth/$year"
+                }
+                else if (dayOfMonth >= 10 && correctMonth < 10){
+                    dataButton.text = "$dayOfMonth/0$correctMonth/$year"
+                    dateSelected = "$dayOfMonth/0$correctMonth/$year"
+                }
+                else {
+                    dataButton.text = "$dayOfMonth/$correctMonth/$year"
+                    dateSelected = "$dayOfMonth/$correctMonth/$year"
+                }
+
 
             }, year, month, day)
 
@@ -113,7 +138,7 @@ class filtrarTrajectesFragment : Fragment() {
 
                 }
                 else {
-                    timeFromButton.text = "$hour:0$minute"
+                    timeFromButton.text = "$hour:$minute"
                     fromTimeSelected = "$hour:$minute"
                 }
 
@@ -170,6 +195,19 @@ class filtrarTrajectesFragment : Fragment() {
             }
         })
 
+    }
+
+    private fun validate() :Boolean {
+        var valid : Boolean = true
+        if (latLngOrigin==null) {
+            valid = false
+            originText.error = resources.getString(R.string.fieldRequired)
+        }
+        if (latLngDestination==null){
+            valid=false
+            destinationText.error=resources.getString(R.string.fieldRequired)
+        }
+        return valid
     }
 
 
