@@ -21,6 +21,18 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
 }
 
+plugins {
+    id "org.sonarqube" version "3.3"
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "raul-sampietro_ElektroGo_frontend"
+        property "sonar.organization", "elektrogo"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
