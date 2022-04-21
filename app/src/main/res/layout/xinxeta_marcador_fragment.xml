@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Xinxeta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.map.XinxetaMarcador">
@@ -12,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/titleMarker"
+            android:id="@+id/titleStation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Charging Station"
@@ -21,7 +22,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/chargersMarker"
+            android:id="@+id/numChargers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="74dp"

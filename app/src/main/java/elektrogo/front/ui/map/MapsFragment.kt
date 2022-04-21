@@ -50,6 +50,7 @@ import elektrogo.front.controller.FrontendController
 import elektrogo.front.databinding.FragmentMapsBinding
 import elektrogo.front.model.ChargingStation
 import kotlinx.coroutines.runBlocking
+import elektrogo.front.ui.map.XinxetaMarcador
 /**
  * @brief La clase MapsFragment representa el mapa de google maps amb una configuracio inicial i geolocalitzacio.
  */
@@ -94,7 +95,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     lateinit var placesClient: PlacesClient
 
-    private var showXinxetaMarcador = true
+    private var showXinxetaMarcador = false
 
     /**
      * @brief Metode executat un cop el mapa s'ha creat.
@@ -116,14 +117,16 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         mMap.setOnMarkerClickListener { marker ->
             Toast.makeText(activity, "${marker.title}", Toast.LENGTH_SHORT).show()
 
-            var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView)
+            var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView) as XinxetaMarcador
 
             if (fragmentXinxeta != null) {
+
+                marker.title?.let { fragmentXinxeta.setNumChargers(it.toInt()) }
 
                 val transaction = childFragmentManager.beginTransaction()
 
                 if (!showXinxetaMarcador) {
-                    transaction.add(R.id.fragmentContainerView, fragmentXinxeta)
+                    transaction.replace(R.id.fragmentContainerView, fragmentXinxeta)
                     showXinxetaMarcador = true
                 }
                 transaction.addToBackStack(null)
@@ -133,21 +136,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         }
 
         mMap.setOnMapClickListener {
-            Toast.makeText(activity, "map clicked", Toast.LENGTH_SHORT).show()
-
-            var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView)
-
-            if (fragmentXinxeta != null) {
-
-                val transaction = childFragmentManager.beginTransaction()
-
-                if (showXinxetaMarcador) {
-                    transaction.remove(fragmentXinxeta)
-                    showXinxetaMarcador = false
-                }
-                transaction.addToBackStack(null)
-                transaction.commit()
-            }
+            if (showXinxetaMarcador) amagaInfoXinxeta()
         }
 
         if (isLocationPermissionGranted()) {
@@ -175,6 +164,17 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         getAutocompleteLocation()
     }
 
+    private fun amagaInfoXinxeta() {
+        var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        if (fragmentXinxeta != null) {
+            val transaction = childFragmentManager.beginTransaction()
+            transaction.remove(fragmentXinxeta)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        showXinxetaMarcador = false
+    }
+
 
     /**
      * @brief Metode que afegeix al mapa els marcadors corresponents a les estacions de carrega.
@@ -198,7 +198,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
                     mMap.addMarker(
                         MarkerOptions()
                             .position(LatLng(stat.latitude, stat.longitude))
-                            .title("Number of chargers: ${stat.numberOfChargers}")
+                            .title("${stat.numberOfChargers}")
                             .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
                     )
                 }
@@ -327,5 +327,6 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
         mapFragment.getMapAsync(callback)
+        amagaInfoXinxeta()
     }
 }

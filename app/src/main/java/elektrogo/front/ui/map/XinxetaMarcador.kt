@@ -1,11 +1,14 @@
 package elektrogo.front.ui.map
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import elektrogo.front.R
 
 class XinxetaMarcador : Fragment() {
@@ -26,9 +29,13 @@ class XinxetaMarcador : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(XinxetaMarcadorViewModel::class.java)
-
-
-
     }
 
+    @SuppressLint("SetTextI18n")
+    fun setNumChargers(n: Int) {
+        var nChargersView = view?.findViewById<TextView>(R.id.numChargers)
+        if (nChargersView != null) {
+            nChargersView.text = "Number of chargers: $n"
+        }
+    }
 }
