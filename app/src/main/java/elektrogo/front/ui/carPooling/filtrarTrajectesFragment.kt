@@ -21,6 +21,9 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 
 class filtrarTrajectesFragment : Fragment() {
@@ -30,7 +33,7 @@ class filtrarTrajectesFragment : Fragment() {
     }
 
     private lateinit var placesClient: PlacesClient
-    private lateinit var dataButton: Button
+    private lateinit var dateButton: Button
     private lateinit var filtrarButton : Button
     private lateinit var timeFromButton: Button
     private lateinit var timeToButton: Button
@@ -54,7 +57,7 @@ class filtrarTrajectesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        dataButton = requireActivity().findViewById(R.id.dataButtonFiltrar)
+        dateButton = requireActivity().findViewById(R.id.dataButtonFiltrar)
         filtrarButton = requireActivity().findViewById(R.id.Filtrar)
         timeFromButton=requireActivity().findViewById(R.id.timeFromButtonFiltrar)
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
@@ -91,7 +94,7 @@ class filtrarTrajectesFragment : Fragment() {
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
         }
-        dataButton.setOnClickListener {
+        dateButton.setOnClickListener {
             var calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
             month = calendar.get(Calendar.MONTH)
@@ -102,19 +105,19 @@ class filtrarTrajectesFragment : Fragment() {
 
                 var correctMonth = (monthOfYear+1)
                 if(dayOfMonth < 10 && correctMonth < 10){
-                    dataButton.text = "0$dayOfMonth/0$correctMonth/$year"
+                    dateButton.text = "0$dayOfMonth/0$correctMonth/$year"
                     dateSelected = "0$dayOfMonth/0$correctMonth/$year"
                 }
                 else if (dayOfMonth < 10 && correctMonth >= 10){
-                    dataButton.text = "0$dayOfMonth/$correctMonth/$year"
+                    dateButton.text = "0$dayOfMonth/$correctMonth/$year"
                     dateSelected = "0$dayOfMonth/$correctMonth/$year"
                 }
                 else if (dayOfMonth >= 10 && correctMonth < 10){
-                    dataButton.text = "$dayOfMonth/0$correctMonth/$year"
+                    dateButton.text = "$dayOfMonth/0$correctMonth/$year"
                     dateSelected = "$dayOfMonth/0$correctMonth/$year"
                 }
                 else {
-                    dataButton.text = "$dayOfMonth/$correctMonth/$year"
+                    dateButton.text = "$dayOfMonth/$correctMonth/$year"
                     dateSelected = "$dayOfMonth/$correctMonth/$year"
                 }
 
@@ -199,6 +202,21 @@ class filtrarTrajectesFragment : Fragment() {
 
     private fun validate() :Boolean {
         var valid : Boolean = true
+
+        if (dateButton.text != null && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
+            valid = false
+            Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
+        }
+
+        if ((LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
+            valid = false
+            Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
+        }
+        else if(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
+            valid = false
+            Toast.makeText(context, "L'hora d'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals",Toast.LENGTH_LONG).show()
+        }
+
         if (latLngOrigin==null) {
             valid = false
             originText.error = resources.getString(R.string.fieldRequired)

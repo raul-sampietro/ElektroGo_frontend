@@ -160,26 +160,12 @@
 
         </LinearLayout>
 
-        <RelativeLayout
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="10dp">
+            android:id="@+id/filterListView">
 
-            <View
-                android:id="@+id/bottom_backgroundFiltrar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="1dp"
-                android:background="@color/white" />
-
-            <ImageView
-                android:id="@+id/imageViewFiltrar"
-                android:layout_width="302dp"
-                android:layout_height="388dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/beautiful_route" />
-        </RelativeLayout>
+        </ListView>
     </LinearLayout>
 </RelativeLayout>
 
