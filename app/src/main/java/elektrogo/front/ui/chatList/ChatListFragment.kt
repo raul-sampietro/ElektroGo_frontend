@@ -47,6 +47,7 @@ class ChatListFragment() : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chat_list, container, false)
         val listView: ListView = view.findViewById(R.id.list_chat_view)
 
+        //TODO añadir current user
         chatList = viewModel.getChatList("Test2")
 
         listView.adapter = ChatListAdapter(container?.context as Activity, chatList)
