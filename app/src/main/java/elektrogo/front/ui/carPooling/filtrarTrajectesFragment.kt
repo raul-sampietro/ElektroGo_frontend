@@ -50,7 +50,7 @@ class filtrarTrajectesFragment : Fragment() {
     private  var fromTimeSelected: String?=null
     private  var toTimeSelected: String?=null
     private  var dateSelected: String?=null
-    private lateinit var filteredList: ArrayList<CarPooling>
+  //  private lateinit var filteredList: ArrayList<CarPooling>
 
 
     private lateinit var viewModel: FiltrarTrajectesViewModel
@@ -96,14 +96,14 @@ class filtrarTrajectesFragment : Fragment() {
 
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling(1, "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC" )
-                val Pooling2 : CarPooling = CarPooling(2, "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
+              //  val Pooling : CarPooling = CarPooling(1, "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC" )
+              //  val Pooling2 : CarPooling = CarPooling(2, "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
 
                 // filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                filteredList = ArrayList<CarPooling>()
-                filteredList.add(Pooling)
-                filteredList.add(Pooling2)
-                listView.adapter = ListAdapter(context as Activity, filteredList)
+            //    filteredList = ArrayList<CarPooling>()
+              //  filteredList.add(Pooling)
+              //  filteredList.add(Pooling2)
+               // listView.adapter = ListAdapter(context as Activity, filteredList)
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
@@ -184,7 +184,7 @@ class filtrarTrajectesFragment : Fragment() {
 
                 }
                 else {
-                    timeToButton.text = "$hour:0$minute"
+                    timeToButton.text = "$hour:$minute"
                     toTimeSelected = "$hour:$minute"
                 }
             }, minute, hour, true)

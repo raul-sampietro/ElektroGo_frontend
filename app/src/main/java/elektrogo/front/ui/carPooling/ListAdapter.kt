@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import elektrogo.front.R
 
-class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
+/*class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -34,4 +34,4 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
 
         return view
     }
-}
+}*/
