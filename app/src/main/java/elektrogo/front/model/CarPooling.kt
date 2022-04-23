@@ -10,7 +10,7 @@ data class CarPooling(
     var id: Long?,
     var startDate: String,
     var startTime: String,
-    var offeredSears: Int,
+    var offeredSeats: Int,
     var occupiedSeats: Int,
     var restrictions: String,
     var details: String,
