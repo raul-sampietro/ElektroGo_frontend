@@ -1,5 +1,6 @@
 package elektrogo.front.ui.carPooling
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.gms.common.api.Status
@@ -21,6 +23,8 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.model.Vehicle
+import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -46,6 +50,8 @@ class filtrarTrajectesFragment : Fragment() {
     private  var fromTimeSelected: String?=null
     private  var toTimeSelected: String?=null
     private  var dateSelected: String?=null
+    private lateinit var filteredList: ArrayList<CarPooling>
+
 
     private lateinit var viewModel: FiltrarTrajectesViewModel
 
@@ -53,7 +59,11 @@ class filtrarTrajectesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.filtrar_trajectes_fragment, container, false)
+        val view = inflater.inflate(R.layout.filtrar_trajectes_fragment, container, false)
+
+
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,6 +92,22 @@ class filtrarTrajectesFragment : Fragment() {
             latLngDestination=null
             autocompleteSupportFragment2.setText("")
         }
+        val listView: ListView = view.findViewById(R.id.filterListView)
+
+        filtrarButton.setOnClickListener {
+            if (validate()) {
+                val Pooling : CarPooling = CarPooling(1, "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC" )
+                val Pooling2 : CarPooling = CarPooling(2, "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
+
+                // filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                filteredList = ArrayList<CarPooling>()
+                filteredList.add(Pooling)
+                filteredList.add(Pooling2)
+                listView.adapter = ListAdapter(context as Activity, filteredList)
+            }
+            else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
+
+        }
 
         var day: Int = 28
         var month: Int = 10
@@ -89,11 +115,6 @@ class filtrarTrajectesFragment : Fragment() {
         var hour: Int = 11
         var minute: Int = 11
 
-        filtrarButton.setOnClickListener {
-            if (validate()) viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-            else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
-
-        }
         dateButton.setOnClickListener {
             var calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -203,16 +224,16 @@ class filtrarTrajectesFragment : Fragment() {
     private fun validate() :Boolean {
         var valid : Boolean = true
 
-        if (dateButton.text != null && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
+        if (dateButton.text != "Data" && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
             valid = false
             Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
         }
 
-        if ((LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
+        if (timeFromButton.text !="Des de" && timeToButton.text != "Fins a" &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
             valid = false
             Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
         }
-        else if(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
+        else if(timeFromButton.text!="Des de" && dateButton.text!="Data" && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
             valid = false
             Toast.makeText(context, "L'hora d'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals",Toast.LENGTH_LONG).show()
         }

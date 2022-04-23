@@ -42,12 +42,12 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/time2"
+                        android:id="@+id/dateFiltered"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center"
-                        android:text="?"
+                        android:text="23/04/2022"
                         android:textColor="@color/black"
                         android:textSize="18sp" />
 
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="60dp"
-                    android:text="aqui pot anar lo de la qualitat de l'aire" />
+                    android:text="qualitat de l'aire aqui?" />
 
             </LinearLayout>
 
