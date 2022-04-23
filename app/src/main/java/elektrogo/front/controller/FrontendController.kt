@@ -114,4 +114,8 @@ object FrontendController {
         
         return Pair(status, stations)
     }
+
+    fun getTrips(originLatitude: Double, originLongitude: Double, destinationLatitude: Double, destinationLongitude: Double, dateIni: String?, startTimeMin: String?, startTimeMax: String?): ArrayList<CarPooling> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}") //parlar amb en gerard
+    }
 }
