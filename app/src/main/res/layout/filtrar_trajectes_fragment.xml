@@ -163,7 +163,8 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/filterListView">
+            android:id="@+id/filterListView"
+            tools:listitem="@layout/filter_list_item">
 
         </ListView>
     </LinearLayout>
