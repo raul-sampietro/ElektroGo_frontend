@@ -10,10 +10,7 @@ package elektrogo.front.ui.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -24,8 +21,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModel
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -46,11 +41,8 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.MainActivity
 import elektrogo.front.R
-import elektrogo.front.controller.FrontendController
 import elektrogo.front.databinding.FragmentMapsBinding
-import elektrogo.front.model.ChargingStation
-import kotlinx.coroutines.runBlocking
-import elektrogo.front.ui.map.XinxetaMarcador
+
 /**
  * @brief La clase MapsFragment representa el mapa de google maps amb una configuracio inicial i geolocalitzacio.
  */
@@ -95,7 +87,15 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     lateinit var placesClient: PlacesClient
 
-    private var showXinxetaMarcador = false
+    /**
+     * @brief Boolea que indica que s'esta mostrant el fragment que conté informació sobre l'estacio de carrega clicada.
+     */
+    private var showingInfoXinxeta = false
+
+    /**
+     * @brief Fragment que mostra l'informació sobre l'estacio de carrega clicada.
+     */
+    private lateinit var fragmentXinxeta: XinxetaMarcador
 
     /**
      * @brief Metode executat un cop el mapa s'ha creat.
@@ -117,26 +117,26 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         mMap.setOnMarkerClickListener { marker ->
             Toast.makeText(activity, "${marker.title}", Toast.LENGTH_SHORT).show()
 
-            var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView) as XinxetaMarcador
+            //UPDATE FRAGMENT INFO
 
-            if (fragmentXinxeta != null) {
+            //crida a la funcio del fragment per canviar el nombre de carregadors de l'estacio
+            marker.title?.let { fragmentXinxeta.setNumChargers(it.toInt()) }
 
-                marker.title?.let { fragmentXinxeta.setNumChargers(it.toInt()) }
-
+            //Show fragment if it is hidden
+            if (!showingInfoXinxeta) {
                 val transaction = childFragmentManager.beginTransaction()
-
-                if (!showXinxetaMarcador) {
-                    transaction.replace(R.id.fragmentContainerView, fragmentXinxeta)
-                    showXinxetaMarcador = true
-                }
+                //transaction.replace(R.id.fragmentContainerView, fragmentXinxeta)
+                transaction.show(fragmentXinxeta)
                 transaction.addToBackStack(null)
                 transaction.commit()
+                showingInfoXinxeta = true
             }
+
             true
         }
 
         mMap.setOnMapClickListener {
-            if (showXinxetaMarcador) amagaInfoXinxeta()
+            if (showingInfoXinxeta) hideInfoXinxeta()
         }
 
         if (isLocationPermissionGranted()) {
@@ -164,15 +164,17 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         getAutocompleteLocation()
     }
 
-    private fun amagaInfoXinxeta() {
-        var fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView)
-        if (fragmentXinxeta != null) {
-            val transaction = childFragmentManager.beginTransaction()
-            transaction.remove(fragmentXinxeta)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
-        showXinxetaMarcador = false
+    /**
+     * @brief Metode que amaga el fragment que conte la informacio d'una estacio de carrega del mapa.
+     * @pre
+     * @post S'amaga el fragment amb la info d'una estacio de carrega del mapa.
+     */
+    private fun hideInfoXinxeta() {
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.hide(fragmentXinxeta)
+        transaction.addToBackStack(null)
+        transaction.commit()
+        showingInfoXinxeta = false
     }
 
 
@@ -314,7 +316,6 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
@@ -327,6 +328,8 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map2) as SupportMapFragment
         mapFragment.getMapAsync(callback)
-        amagaInfoXinxeta()
+
+        fragmentXinxeta = childFragmentManager.findFragmentById(R.id.fragmentContainerView) as XinxetaMarcador
+        hideInfoXinxeta()
     }
 }

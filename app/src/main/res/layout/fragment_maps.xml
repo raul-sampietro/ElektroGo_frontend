@@ -37,6 +37,9 @@
         android:name="elektrogo.front.ui.map.XinxetaMarcador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_alignBottom="@id/map2" />
 
 </RelativeLayout>
