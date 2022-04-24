@@ -42,6 +42,8 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.MainActivity
 import elektrogo.front.R
 import elektrogo.front.databinding.FragmentMapsBinding
+import elektrogo.front.model.AllChargingStations
+import java.lang.Exception
 
 /**
  * @brief La clase MapsFragment representa el mapa de google maps amb una configuracio inicial i geolocalitzacio.
@@ -88,12 +90,12 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     lateinit var placesClient: PlacesClient
 
     /**
-     * @brief Boolea que indica que s'esta mostrant el fragment que conté informació sobre l'estacio de carrega clicada.
+     * @brief Boolea que indica que s'esta mostrant el fragment que conté informacio sobre l'estacio de carrega clicada.
      */
     private var showingInfoXinxeta = false
 
     /**
-     * @brief Fragment que mostra l'informació sobre l'estacio de carrega clicada.
+     * @brief Fragment que mostra la informacio sobre l'estacio de carrega clicada.
      */
     private lateinit var fragmentXinxeta: XinxetaMarcador
 
@@ -115,22 +117,11 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         addChargingPointsToMap()
 
         mMap.setOnMarkerClickListener { marker ->
-            Toast.makeText(activity, "${marker.title}", Toast.LENGTH_SHORT).show()
-
-            //UPDATE FRAGMENT INFO
-
-            //crida a la funcio del fragment per canviar el nombre de carregadors de l'estacio
-            marker.title?.let { fragmentXinxeta.setNumChargers(it.toInt()) }
+            //Update fragment with info of clicked marker
+            updateInfoXinxeta(marker)
 
             //Show fragment if it is hidden
-            if (!showingInfoXinxeta) {
-                val transaction = childFragmentManager.beginTransaction()
-                //transaction.replace(R.id.fragmentContainerView, fragmentXinxeta)
-                transaction.show(fragmentXinxeta)
-                transaction.addToBackStack(null)
-                transaction.commit()
-                showingInfoXinxeta = true
-            }
+            if (!showingInfoXinxeta) showInfoXinxeta()
 
             true
         }
@@ -165,6 +156,33 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
     }
 
     /**
+     * @brief Metode que actualitza el fragment amb la info de l'estacio de carrega seleccionada.
+     * @param marker xinxeta del mapa que fa referencia a la ChargingStation la informacio de la qual es vol posar al fragment.
+     * @pre El marcador passat com a parametre existeix i el seu titol coincideix amb l'identificador d'una ChargingStation valida).
+     * @post S'actualitza el contingut del fragment amb la info de la ChargingStation corresponent a la xinxeta/marcador indicat.
+     */
+    private fun updateInfoXinxeta(marker: Marker) {
+        val estacio = marker.title?.let { AllChargingStations.getStation(it.toInt()) }
+
+        if (estacio != null) {
+            fragmentXinxeta.setNumChargers(estacio.numberOfChargers)
+        }
+    }
+
+    /**
+     * @brief Metode que mostra el fragment que conte la informacio d'una estacio de carrega del mapa.
+     * @pre
+     * @post Es mostra el fragment amb la info d'una estacio de carrega del mapa.
+     */
+    private fun showInfoXinxeta() {
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.show(fragmentXinxeta)
+        transaction.addToBackStack(null)
+        transaction.commit()
+        showingInfoXinxeta = true
+    }
+
+    /**
      * @brief Metode que amaga el fragment que conte la informacio d'una estacio de carrega del mapa.
      * @pre
      * @post S'amaga el fragment amb la info d'una estacio de carrega del mapa.
@@ -185,29 +203,25 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
      */
     private fun addChargingPointsToMap() {
 
-        try {
-            val statusAndStations = mapsFragmentViewModel.getStations()
-            val status = statusAndStations.first
+        val status = AllChargingStations.getLastStatus()
 
-            if (status != 200) { // NOT OK
-                Toast.makeText(activity, "No s'han pogut obtenir les estacions de càrrega. ERROR: $status", Toast.LENGTH_LONG).show()
-            }
-            else { // OK
-
-                val stations = statusAndStations.second
-                Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
-                for (stat in stations) {
-                    mMap.addMarker(
-                        MarkerOptions()
-                            .position(LatLng(stat.latitude, stat.longitude))
-                            .title("${stat.numberOfChargers}")
-                            .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
-                    )
-                }
-            }
+        if (status != 200) { // NOT OK
+            if (status == -1) Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
+            else Toast.makeText(activity, "No s'han pogut obtenir les estacions de càrrega. ERROR: $status", Toast.LENGTH_LONG).show()
         }
-        catch (e : Exception) {
-            Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
+        else { // OK
+
+            val stations = AllChargingStations.getAllStations()
+            Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
+
+            for ((id, stat) in stations) {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(stat.latitude, stat.longitude))
+                        .title("$id")
+                        .icon(activity?.let { mapsFragmentViewModel.bitmapFromVector(it.applicationContext, R.drawable.ic_marcador) })
+                )
+            }
         }
     }
 
