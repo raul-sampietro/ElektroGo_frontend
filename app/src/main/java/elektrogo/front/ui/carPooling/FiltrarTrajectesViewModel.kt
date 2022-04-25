@@ -3,7 +3,6 @@ package elektrogo.front.ui.carPooling
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.model.LatLng
 import elektrogo.front.controller.FrontendController
-import elektrogo.front.model.CarPooling
 import kotlinx.coroutines.runBlocking
 
 class FiltrarTrajectesViewModel : ViewModel() {
