@@ -23,6 +23,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.model.CarPooling
 import elektrogo.front.model.Vehicle
 import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
@@ -39,6 +40,7 @@ class filtrarTrajectesFragment : Fragment() {
     private lateinit var placesClient: PlacesClient
     private lateinit var dateButton: Button
     private lateinit var filtrarButton : Button
+    private lateinit var resetButton : Button
     private lateinit var timeFromButton: Button
     private lateinit var timeToButton: Button
     private lateinit var autocompleteSupportFragment: AutocompleteSupportFragment
@@ -65,6 +67,7 @@ class filtrarTrajectesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dateButton = requireActivity().findViewById(R.id.dataButtonFiltrar)
+        resetButton = requireActivity().findViewById(R.id.reset)
         filtrarButton = requireActivity().findViewById(R.id.Filtrar)
         timeFromButton=requireActivity().findViewById(R.id.timeFromButtonFiltrar)
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
@@ -89,14 +92,28 @@ class filtrarTrajectesFragment : Fragment() {
             latLngDestination=null
             autocompleteSupportFragment2.setText("")
         }
+
+        resetButton.setOnClickListener {
+            autocompleteSupportFragment.setText("")
+            autocompleteSupportFragment2.setText("")
+            latLngDestination= null
+            latLngOrigin= null
+            dateSelected = null
+            fromTimeSelected = null
+            toTimeSelected = null
+            dateButton.text = "Data"
+            timeToButton.text = "Fins a"
+            timeFromButton.text = "Des de"
+            autocompleteSupportFragment2.setText("")
+        }
         val listView: ListView = view.findViewById(R.id.filterListView)
 
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling(1, "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC" )
-                val Pooling2 : CarPooling = CarPooling(2, "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
+                val Pooling : CarPooling = CarPooling(1, "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC", "pepito" )
+                val Pooling2 : CarPooling = CarPooling(2, "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" ,"fulanito")
 
-                 filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+               //  filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
                  filteredList = ArrayList<CarPooling>()
                  filteredList.add(Pooling)
                  filteredList.add(Pooling2)

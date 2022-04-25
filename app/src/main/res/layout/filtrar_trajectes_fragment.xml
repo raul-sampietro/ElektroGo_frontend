@@ -20,14 +20,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
 
                 <LinearLayout
                     android:id="@+id/linearFiltrar1"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
                     android:background="@drawable/rounded_box"
@@ -64,13 +64,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:id="@+id/linearFiltrar2"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
                     android:background="@drawable/rounded_box"
@@ -107,14 +107,15 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/timeFromButtonFiltrar"
-                    android:layout_width="177dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
@@ -123,7 +124,7 @@
 
                 <Button
                     android:id="@+id/timeToButtonFiltrar"
-                    android:layout_width="177dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
@@ -134,24 +135,31 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/dataButtonFiltrar"
-                    android:layout_width="177dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
                     android:drawableRight="@drawable/calendar"
                     android:text="@string/dataFiltrar" />
 
                 <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reset"
+                    android:layout_marginStart="10dp"
+                    android:text="Reset" />
+                <Button
                     android:id="@+id/Filtrar"
-                    android:layout_width="177dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:backgroundTint="#2E7005"
                     android:text="@string/buscarFiltrar" />
 
@@ -161,9 +169,9 @@
         </LinearLayout>
 
         <ListView
+            android:id="@+id/filterListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/filterListView"
             tools:listitem="@layout/filter_list_item">
 
         </ListView>
