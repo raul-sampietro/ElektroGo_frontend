@@ -197,7 +197,8 @@ class NewCarPoolingFragment() : Fragment() {
             }
             else {
                 //Serailitzem totes les variables obtingudes del usuari a un json
-                var newCarPoolingInfo = CarPooling(null, selectedDate.text.toString(), selectedHour.text.toString(), dropSeats.selectedItem.toString().toInt(),
+                    //TODO: QUE EL USERNAME NO SIGUI HARDCODED. OBTENIR-HO DE LA SESSIO O AIXI
+                var newCarPoolingInfo = CarPooling(null, "Test",selectedDate.text.toString(), selectedHour.text.toString(), dropSeats.selectedItem.toString().toInt(),
                 1, restDescription.text.toString(), detailsDescription.text.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
                 originName, latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble(), destinationName, dropVehicles.selectedItem.toString())
 
