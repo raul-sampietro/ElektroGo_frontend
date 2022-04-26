@@ -61,5 +61,6 @@
     <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
     <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
     <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
+    <string name="btnValorar">Valora</string>
 
 </resources>
