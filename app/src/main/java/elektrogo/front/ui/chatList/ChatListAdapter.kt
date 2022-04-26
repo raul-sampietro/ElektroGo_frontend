@@ -27,9 +27,10 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
 
         view.setOnClickListener{
             val intent = Intent(context, ChatConversation::class.java).apply {
+                //TODO añadir current user
+                putExtra("userA", "Test2")
                 putExtra("userB", v)
             }
-            //TODO añadir current user
             context.startActivity(intent)
         }
         return view

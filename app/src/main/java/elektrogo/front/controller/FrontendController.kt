@@ -119,4 +119,12 @@ object FrontendController {
         }
         return chats
     }
+
+    suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
+        val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByConversation") {
+            parameter("userA", userA)
+            parameter("userB", userB)
+        }
+        return chats
+    }
 }
