@@ -5,7 +5,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import elektrogo.front.R
 
-class message_viewHolder(v: View) : RecyclerView.ViewHolder(v) {
+class MessageViewHolder(v: View) : RecyclerView.ViewHolder(v) {
     var message: TextView
     var sentAt: TextView
 

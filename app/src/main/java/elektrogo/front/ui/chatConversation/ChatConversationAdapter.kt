@@ -43,11 +43,11 @@ class ChatConversationAdapter     // Provide a suitable constructor (depends on 
         when (viewType) {
             SENT -> {
                 val v1: View = inflater.inflate(R.layout.sended_message, viewGroup, false)
-                viewHolder = message_viewHolder(v1)
+                viewHolder = MessageViewHolder(v1)
             }
             else -> {
                 val v2: View = inflater.inflate(R.layout.received_message, viewGroup, false)
-                viewHolder = message_viewHolder(v2)
+                viewHolder = MessageViewHolder(v2)
             }
         }
         return viewHolder
@@ -64,18 +64,18 @@ class ChatConversationAdapter     // Provide a suitable constructor (depends on 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
         when (viewHolder.itemViewType) {
             SENT -> {
-                val vh1 = viewHolder as message_viewHolder
+                val vh1 = viewHolder as MessageViewHolder
                 configureViewHolder(vh1, position)
             }
             else -> {
-                val vh2 = viewHolder as message_viewHolder
+                val vh2 = viewHolder as MessageViewHolder
                 configureViewHolder(vh2, position)
             }
         }
     }
 
 
-    private fun configureViewHolder(vh: message_viewHolder, position: Int) {
+    private fun configureViewHolder(vh: MessageViewHolder, position: Int) {
         val message = messages[position]
         vh.message.text = message.message
         vh.sentAt.text = message.sentAt

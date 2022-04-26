@@ -8,7 +8,7 @@ import kotlinx.coroutines.runBlocking
 class ChatListViewModel : ViewModel() {
     private lateinit var string: String
 
-    fun getChatList(username: String) : ArrayList<Chat> = runBlocking {
+    fun getChatList(username: String) : ArrayList<String> = runBlocking {
         FrontendController.getChatList(username)
     }
 }

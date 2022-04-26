@@ -113,8 +113,8 @@ object FrontendController {
         return Pair(status, stations)
     }
 
-    suspend fun getChatList(username: String): ArrayList<Chat> {
-        val chats: ArrayList<Chat> = client.get("${URL_BASE}chat/findByUser") {
+    suspend fun getChatList(username: String): ArrayList<String> {
+        val chats: ArrayList<String> = client.get("${URL_BASE}chat/findByUser") {
             parameter("user", username)
         }
         return chats

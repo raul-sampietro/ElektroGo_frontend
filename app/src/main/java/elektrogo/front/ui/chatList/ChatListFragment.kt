@@ -32,7 +32,7 @@ class ChatListFragment() : Fragment() {
     }
 
     private lateinit var viewModel: ChatListViewModel
-    private lateinit var chatList: ArrayList<Chat>
+    private lateinit var chatList: ArrayList<String>
 
     /**
      * @brief Metode que s'executa al crear el fragment.

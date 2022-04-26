@@ -12,8 +12,8 @@ import elektrogo.front.R
 import elektrogo.front.model.Chat
 import elektrogo.front.ui.chatConversation.ChatConversation
 
-class ChatListAdapter(private val context : Activity, private val chatList : ArrayList<Chat>)
-    : ArrayAdapter<Chat>(context, R.layout.fragment_vehicle_list_item, chatList) {
+class ChatListAdapter(private val context : Activity, private val chatList : ArrayList<String>)
+    : ArrayAdapter<String>(context, R.layout.fragment_vehicle_list_item, chatList) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -23,13 +23,11 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
         val user : TextView = view.findViewById(R.id.listUser)
 
         val v = chatList[position]
-        user.text = v.userB
+        user.text = v
 
         view.setOnClickListener{
             val intent = Intent(context, ChatConversation::class.java).apply {
-                putExtra("chat", v.userA)
-                putExtra("userB", v.userB)
-                putExtra("messages", v.messages)
+                putExtra("userB", v)
             }
             //TODO añadir current user
             context.startActivity(intent)
