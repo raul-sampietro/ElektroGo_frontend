@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import elektrogo.front.R
 
 class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
@@ -43,6 +45,22 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
     }
 
     private fun renderRating(rating: Double, view: View?) {
+     val star1 : ImageView = view!!.findViewById(R.id.estrella1)
+     val star2 : ImageView = view.findViewById(R.id.estrella2)
+     val star3 : ImageView = view.findViewById(R.id.estrella3)
+     val star4 : ImageView = view.findViewById(R.id.estrella4)
+     val star5 : ImageView = view.findViewById(R.id.estrella5)
+
+     star1.setImageResource(R.drawable.ic_starplena)
+     star2.setImageResource(R.drawable.ic_starplena)
+     star3.setImageResource(R.drawable.ic_starplena)
+     star4.setImageResource(R.drawable.ic_starplena)
+     star5.setImageResource(R.drawable.ic_starplena)
+
+
+
+
+
 
     }
 }
