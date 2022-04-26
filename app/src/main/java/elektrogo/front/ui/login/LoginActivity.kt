@@ -9,13 +9,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import elektrogo.front.MainActivity
 import elektrogo.front.R
 
-
-const val RC_SIGN_IN = 123
-
 class LoginActivity : AppCompatActivity() {
 
     private val loginFragment = LoginFragment()
-    private lateinit var mGoogleSignInClient: GoogleSignIn
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if (account != null) {
-            val intent = Intent(this, PostLoginActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -16,8 +17,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import elektrogo.front.R
 
-
 class LoginFragment : Fragment() {
+
+    private val RC_SIGN_IN = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +40,6 @@ class LoginFragment : Fragment() {
 
         // Build a GoogleSignInClient with the options specified by gso.
         val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
-
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
 
         // Set the dimensions of the sign-in button.
         val signInButton: SignInButton = view.findViewById(R.id.sign_in_button)
@@ -71,8 +69,16 @@ class LoginFragment : Fragment() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             // Signed in successfully, show authenticated UI.
-            val intent = Intent(activity, PostLoginActivity::class.java)
-            startActivity(intent)
+            if (account != null) {
+                //TODO if (account.id not exists on BD) {
+                val firstLoginFragment = FirstLoginFragment()
+                val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                transaction.replace(R.id.frame_container, firstLoginFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+                //TODO } else {Intent to MainActivity}
+            }
+
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
