@@ -61,7 +61,8 @@
     <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
     <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
     <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
-    <string name="dateLabel">Data</string>
+
+  <string name="dateLabel">Data</string>
     <string name="HourButton">Hora</string>
     <string name="HourExample">12:00</string>
     <string name="PublishButton">Publicar</string>
@@ -74,5 +75,9 @@
     <string name="RestTrip">Restriccions del trajecte:</string>
     <string name="DataIncorrecte">La data del trajecte és incorrecte</string>
     <string name="HoraIncorrecte">La hora del trajecte és incorrecte</string>
+    <string name="hora_d_inici">hora d\'inici</string>
+    <string name="dataFiltrar">Data</string>
+    <string name="buscarFiltrar">Buscar</string>
+    <string name="errorFieldsFiltrar">Ompli els camps de forma correcta per tal de poder cercar trajectes</string>
 
 </resources>
