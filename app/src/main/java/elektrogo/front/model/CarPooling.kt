@@ -7,7 +7,6 @@ import java.time.LocalDate
 
 @Serializable
 data class CarPooling(
-    var id: Long?,
     var username: String,
     var startDate: String,
     var startTime: String,
