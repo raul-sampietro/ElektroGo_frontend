@@ -24,9 +24,10 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         val startTime : TextView = view.findViewById(R.id.time)
         val date :TextView = view.findViewById(R.id.dateFiltered)
         val user : TextView = view.findViewById(R.id.username)
-
         val f = filteredList[position]
         val rating = viewModel.getRating(f.username)
+
+        renderRating (rating, view)
         var occupied : String = (f.offeredSeats - f.occupiedSeats).toString()
         occupied += "/"
         occupied += f.offeredSeats.toString()
@@ -39,5 +40,9 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
 
 
         return view
+    }
+
+    private fun renderRating(rating: Double, view: View?) {
+
     }
 }

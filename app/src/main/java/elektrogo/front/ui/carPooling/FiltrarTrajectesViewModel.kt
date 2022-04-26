@@ -10,7 +10,7 @@ class FiltrarTrajectesViewModel : ViewModel() {
         return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax)
     }
 
-    fun getRating(username: String): Int = runBlocking {
+    fun getRating(username: String): Double = runBlocking {
         return@runBlocking FrontendController.getRating(username)
     }
 }

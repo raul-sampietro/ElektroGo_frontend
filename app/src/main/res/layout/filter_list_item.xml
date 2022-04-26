@@ -132,13 +132,47 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:layout_width="150dp"
-                            android:layout_height="40dp"
+                            android:id="@+id/estrella1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
-                            android:src="@drawable/estrellasejemplo">
+                            android:src="">
 
                         </ImageView>
+                        <ImageView
+                            android:id="@+id/estrella2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:src="">
+                        </ImageView>
+                        <ImageView
+                            android:id="@+id/estrella3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:src="">
+                        </ImageView>
+                        <ImageView
+                            android:id="@+id/estrella4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:src="">
+                        </ImageView>
+                        <ImageView
+                            android:id="@+id/estrella5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:src="">
+                        </ImageView>
+
 
                     </LinearLayout>
 
