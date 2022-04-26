@@ -78,7 +78,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/getmessage"
+        android:layout_above="@id/message"
         android:id="@+id/recyclerviewofConversation"
         android:layout_below="@id/toolbarConversation"
         android:padding="5dp">
@@ -88,7 +88,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Type a message"
+        android:hint="Message"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="5dp"
         android:textSize="18sp"
@@ -97,14 +97,14 @@
         android:layout_marginEnd="55dp"
         android:textColor="@color/black"
         android:textColorHint="#A8A7A7"
-        android:id="@+id/getmessage"
+        android:id="@+id/message"
         tools:ignore="MissingConstraints" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:id="@+id/carviewofsendmessage"
-            android:layout_toEndOf="@id/getmessage"
+            android:layout_toEndOf="@id/message"
             android:layout_marginStart="-50dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="#FF4BBD23"
@@ -119,7 +119,7 @@
                 android:src="@drawable/ic_baseline_send_24"
                 android:backgroundTint="@android:color/transparent"
                 android:background="@android:color/transparent"
-                android:id="@+id/imageviewsendmessage"
+                android:id="@+id/sendMessage"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 app:tint="@color/white">
