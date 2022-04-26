@@ -61,5 +61,18 @@
     <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
     <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
     <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
+    <string name="dateLabel">Data</string>
+    <string name="HourButton">Hora</string>
+    <string name="HourExample">12:00</string>
+    <string name="PublishButton">Publicar</string>
+    <string name="ExampleDate">23/6/2022</string>
+    <string name="TrajectDetailsLabel">Detalls del trajecte:</string>
+    <string name="ExampleDetailsTraject">(Aquest camp és opcional)\nAnirem per la AP-7. No acostumo a conduir molt ràpid, etc.</string>
+    <string name="VehicleLabel">Vehícle:</string>
+    <string name="RestTextExample">(Aquest camp és opcional)\n·No es poden portar gossos\n·No es pot fumar en el vehícle\n·Etc.</string>
+    <string name="SeatsOffered">Seients disponibles:</string>
+    <string name="RestTrip">Restriccions del trajecte:</string>
+    <string name="DataIncorrecte">La data del trajecte és incorrecte</string>
+    <string name="HoraIncorrecte">La hora del trajecte és incorrecte</string>
 
 </resources>
