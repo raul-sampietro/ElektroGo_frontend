@@ -1,3 +1,9 @@
+/**
+ * @file ListAdapter.kt
+ * @author Marina Alapont
+ * @date 23/04/2022
+ * @brief Implementacio d'un adaptador per tal de mostrar la llista amb els resultats obtinguts de cercar trajectes.
+ */
 package elektrogo.front.ui.carPooling
 
 import android.app.Activity
@@ -10,11 +16,21 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
-
+/**
+ * @brief La clase ListAdapter s'encarrega de mostrar, per cada trajecte de filteredList, l'informacio resultant en una llista.
+ */
 class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
 
+    /**
+     * @brief Instancia de la classe FiltrarTrajectesViewModel.
+     */
     private lateinit var viewModel: FiltrarTrajectesViewModel
 
+    /**
+     * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.
+     * @pre
+     * @post Es mostra un llistat amb els trajectes dins de filteredList
+     */
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val inflater = LayoutInflater.from(context)
@@ -43,7 +59,11 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
 
         return view
     }
-
+    /**
+     * @brief Metode que s'encarrega de renderitzar les estrelles que te l'usuari segons la valoracio mitjana que rep.
+     * @pre
+     * @post Es mostren les estrelles segons la valoracio que l'usuari te.
+     */
     private fun renderRating(rating: Double, view: View?) {
      val star1 : ImageView = view!!.findViewById(R.id.estrella1)
      val star2 : ImageView = view.findViewById(R.id.estrella2)
