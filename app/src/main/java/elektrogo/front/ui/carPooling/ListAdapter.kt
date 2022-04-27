@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import elektrogo.front.R
+import elektrogo.front.model.CarPooling
 
 class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
 
@@ -27,9 +28,8 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         val date :TextView = view.findViewById(R.id.dateFiltered)
         val user : TextView = view.findViewById(R.id.username)
         val f = filteredList[position]
-        val rating = viewModel.getRating(f.username)
+    //    val rating = viewModel.getRating(f.username)
 
-        renderRating (rating, view)
         var occupied : String = (f.offeredSeats - f.occupiedSeats).toString()
         occupied += "/"
         occupied += f.offeredSeats.toString()
@@ -51,16 +51,93 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
      val star4 : ImageView = view.findViewById(R.id.estrella4)
      val star5 : ImageView = view.findViewById(R.id.estrella5)
 
-     star1.setImageResource(R.drawable.ic_starplena)
-     star2.setImageResource(R.drawable.ic_starplena)
-     star3.setImageResource(R.drawable.ic_starplena)
-     star4.setImageResource(R.drawable.ic_starplena)
-     star5.setImageResource(R.drawable.ic_starplena)
+     var decimalValue =    rating - rating.toInt()
+     var enterValue = rating.toInt()
 
+     when (enterValue) {
+         0-> {
+             if (decimalValue >= 0.25 && decimalValue < 0.75 ) {
+                 star1.setImageResource(R.drawable.ic_starmigplena)
+             }
+             else if (decimalValue >= 0.75 ){
+                 star1.setImageResource(R.drawable.ic_starplena)
+             }
+             else {
+                 star1.setImageResource(R.drawable.ic_starbuida)
+             }
+             star2.setImageResource(R.drawable.ic_starbuida)
+             star3.setImageResource(R.drawable.ic_starbuida)
+             star4.setImageResource(R.drawable.ic_starbuida)
+             star5.setImageResource(R.drawable.ic_starbuida)
+         }
+         1 -> {
+             star1.setImageResource(R.drawable.ic_starplena)
+             if (decimalValue >= 0.25 && decimalValue < 0.75 ) {
+                 star2.setImageResource(R.drawable.ic_starmigplena)
+             }
+             else if (decimalValue >= 0.75 ){
+                 star2.setImageResource(R.drawable.ic_starplena)
+             }
+             else {
+                 star2.setImageResource(R.drawable.ic_starbuida)
+             }
+             star3.setImageResource(R.drawable.ic_starbuida)
+             star4.setImageResource(R.drawable.ic_starbuida)
+             star5.setImageResource(R.drawable.ic_starbuida)
+         }
+         2 -> {
+             star1.setImageResource(R.drawable.ic_starplena)
+             star2.setImageResource(R.drawable.ic_starplena)
+             if (decimalValue >= 0.25 && decimalValue < 0.75 ) {
+                 star3.setImageResource(R.drawable.ic_starmigplena)
+             }
+             else if (decimalValue >= 0.75 ){
+                 star3.setImageResource(R.drawable.ic_starplena)
+             }
+             else {
+                 star3.setImageResource(R.drawable.ic_starbuida)
+             }
+             star4.setImageResource(R.drawable.ic_starbuida)
+             star5.setImageResource(R.drawable.ic_starbuida)
+         }
+         3 -> {
+             star1.setImageResource(R.drawable.ic_starplena)
+             star2.setImageResource(R.drawable.ic_starplena)
+             star3.setImageResource(R.drawable.ic_starplena)
+             if (decimalValue >= 0.25 && decimalValue < 0.75 ) {
+                 star4.setImageResource(R.drawable.ic_starmigplena)
+             }
+             else if (decimalValue >= 0.75 ){
+                 star4.setImageResource(R.drawable.ic_starplena)
+             }
+             else {
+                 star4.setImageResource(R.drawable.ic_starbuida)
+             }
+             star5.setImageResource(R.drawable.ic_starbuida)
+         }
+         4 -> {
+             star1.setImageResource(R.drawable.ic_starplena)
+             star2.setImageResource(R.drawable.ic_starplena)
+             star3.setImageResource(R.drawable.ic_starplena)
+             star4.setImageResource(R.drawable.ic_starplena)
 
-
-
-
-
+             if (decimalValue >= 0.25 && decimalValue < 0.75 ) {
+                 star5.setImageResource(R.drawable.ic_starmigplena)
+             }
+             else if (decimalValue >= 0.75 ){
+                 star5.setImageResource(R.drawable.ic_starplena)
+             }
+             else {
+                 star5.setImageResource(R.drawable.ic_starbuida)
+             }
+         }
+         5 -> {
+             star1.setImageResource(R.drawable.ic_starplena)
+             star2.setImageResource(R.drawable.ic_starplena)
+             star3.setImageResource(R.drawable.ic_starplena)
+             star4.setImageResource(R.drawable.ic_starplena)
+             star5.setImageResource(R.drawable.ic_starplena)
+         }
+     }
     }
 }

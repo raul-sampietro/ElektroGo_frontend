@@ -23,6 +23,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.model.CarPooling
 import elektrogo.front.model.Vehicle
 import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
@@ -109,8 +110,8 @@ class filtrarTrajectesFragment : Fragment() {
 
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling(1, "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC", "pepito" )
-                val Pooling2 : CarPooling = CarPooling(2, "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" ,"fulanito")
+                val Pooling : CarPooling = CarPooling("fulanito", "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC", )
+                val Pooling2 : CarPooling = CarPooling("fulanita", "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
 
                //  filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
                  filteredList = ArrayList<CarPooling>()
