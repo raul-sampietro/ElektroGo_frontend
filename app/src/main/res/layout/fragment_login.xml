@@ -5,9 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginFragment">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="70dp"
+            android:src="@drawable/logo2" />
+
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="80dp"/>
+
+    </LinearLayout>
 
 </FrameLayout>

@@ -62,4 +62,11 @@
     <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
     <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
 
+    <!-- FirstLoginFragment -->
+    <string name="firstLoginWelcome">Benvingut/da,</string>
+    <string name="firstLoginTo">a</string>
+    <string name="firstLoginSelectUsername">Siusplau, selecciona el teu nom d\'usuari</string>
+    <string name="firstLoginWarning">Atenció, tothom el prodrà veure</string>
+    <string name="firstLoginUsername">nom d\'usuari</string>
+
 </resources>

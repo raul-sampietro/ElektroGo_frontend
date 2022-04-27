@@ -18,12 +18,12 @@ class FirstLoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_first_login, container, false)
 
-        var text: TextView = view.findViewById(R.id.textBox)
+        val displayName: TextView = view.findViewById(R.id.displayName)
         val acct = GoogleSignIn.getLastSignedInAccount(requireActivity())
         if (acct != null) {
-            text.text = "Hello, ${acct.displayName}!\n${acct.givenName}\n${acct.familyName}\n${acct.email}\n${acct.id}\n${acct.photoUrl}"
+            displayName.text = acct.displayName
         }
-        else text.text = "nullaccount"
+        else displayName.text = "nullaccount"
 
         return view
     }

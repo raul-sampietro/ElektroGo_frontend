@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
 
         // Set the dimensions of the sign-in button.
         val signInButton: SignInButton = view.findViewById(R.id.sign_in_button)
-        signInButton.setSize(SignInButton.SIZE_STANDARD)
+        signInButton.setSize(SignInButton.SIZE_WIDE)
 
         signInButton.setOnClickListener {
             val signInIntent = mGoogleSignInClient.signInIntent
