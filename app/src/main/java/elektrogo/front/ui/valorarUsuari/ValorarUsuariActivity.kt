@@ -1,4 +1,4 @@
-package elektrogo.front.ui.vehicleList
+package elektrogo.front.ui.valorarUsuari
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,13 +8,13 @@ import androidx.fragment.app.FragmentTransaction
 import elektrogo.front.MainActivity
 import elektrogo.front.R
 
-class VehicleListActivity : AppCompatActivity() {
-    private val vehicleListFragment = VehicleListFragment()
+class ValorarUsuariActivity : AppCompatActivity() {
+    private val valorarUsuariFragment = ValorarUsuariFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-        loadFragment(vehicleListFragment)
+        loadFragment(valorarUsuariFragment)
     }
 
     //Listener del botó d'enrere de la barra d'Android
@@ -23,7 +23,7 @@ class VehicleListActivity : AppCompatActivity() {
             super.onBackPressed()
         } else {
             var intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("origin", "vehicleList")
+            intent.putExtra("origin", "valorarUsuari")
             startActivity(intent)
         }
     }

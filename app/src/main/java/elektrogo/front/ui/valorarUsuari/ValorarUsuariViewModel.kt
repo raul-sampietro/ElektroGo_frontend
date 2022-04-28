@@ -1,4 +1,4 @@
-package elektrogo.front.ui.ValorarUsuari
+package elektrogo.front.ui.valorarUsuari
 
 import androidx.lifecycle.ViewModel
 

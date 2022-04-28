@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import elektrogo.front.ui.vehicleAdd.AddVehicle
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.ui.valorarUsuari.ValorarUsuariActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 
 class ProfileFragment : Fragment() {
@@ -36,8 +36,14 @@ class ProfileFragment : Fragment() {
         AddVehicleButton.setOnClickListener{
             val addVehicleIntent = Intent(activity, VehicleListActivity::class.java)
             startActivity(addVehicleIntent)
-
         }
+
+        val valorarUsuariButton = binding.ValorarUsuariButton
+        valorarUsuariButton.setOnClickListener{
+            val valorarUsuariIntent = Intent(activity, ValorarUsuariActivity::class.java)
+            startActivity(valorarUsuariIntent)
+        }
+
         return root
     }
 
