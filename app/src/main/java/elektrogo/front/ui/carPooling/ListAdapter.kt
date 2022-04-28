@@ -7,15 +7,18 @@
 package elektrogo.front.ui.carPooling
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
+
+
 /**
  * @brief La clase ListAdapter s'encarrega de mostrar, per cada trajecte de filteredList, l'informacio resultant en una llista.
  */
@@ -24,7 +27,7 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private lateinit var viewModel: FiltrarTrajectesViewModel
+    private lateinit var viewModel: filterTripsViewModel
 
     /**
      * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.
@@ -55,7 +58,6 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         startTime.text = f.startTime
         date.text = f.startDate
         user.text = f.username
-
 
         return view
     }

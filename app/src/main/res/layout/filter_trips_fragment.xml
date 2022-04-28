@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/design_default_color_on_primary"
-    tools:context=".ui.carPooling.filtrarTrajectesFragment">
+    tools:context=".ui.carPooling.filterTripsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -172,6 +172,7 @@
             android:id="@+id/filterListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clickable="true"
             tools:listitem="@layout/filter_list_item">
 
         </ListView>

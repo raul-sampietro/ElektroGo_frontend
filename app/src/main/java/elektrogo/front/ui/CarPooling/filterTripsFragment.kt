@@ -6,21 +6,23 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.R.attr.country
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
@@ -30,16 +32,15 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
-import elektrogo.front.model.Vehicle
-import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
+
 /**
  * @brief La clase filtrarTrajectesFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
-class filtrarTrajectesFragment : Fragment() {
+class filterTripsFragment : Fragment() {
 
     /**
      * @brief Instancia del client de la api Places de google maps.
@@ -110,7 +111,7 @@ class filtrarTrajectesFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private lateinit var viewModel: FiltrarTrajectesViewModel
+    private lateinit var viewModel: filterTripsViewModel
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -122,7 +123,7 @@ class filtrarTrajectesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.filtrar_trajectes_fragment, container, false)
+        val view = inflater.inflate(R.layout.filter_trips_fragment, container, false)
         return view
     }
 
@@ -176,9 +177,25 @@ class filtrarTrajectesFragment : Fragment() {
         }
         val listView: ListView = view.findViewById(R.id.filterListView)
 
+
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling("fulanito", "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC", )
+                val Pooling : CarPooling = CarPooling(
+                    "fulanito",
+                    "23/06/2022",
+                    "9:00",
+                    6,
+                    4,
+                    "",
+                    "",
+                    10.56,
+                    1.54,
+                    "Sevilla",
+                    3.56,
+                    2.05,
+                    "Galicia",
+                    "1234ABC"
+                )
                 val Pooling2 : CarPooling = CarPooling("fulanita", "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
 
                //  filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
@@ -186,6 +203,7 @@ class filtrarTrajectesFragment : Fragment() {
                  filteredList.add(Pooling)
                  filteredList.add(Pooling2)
                  listView.adapter = ListAdapter(context as Activity, filteredList)
+
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 

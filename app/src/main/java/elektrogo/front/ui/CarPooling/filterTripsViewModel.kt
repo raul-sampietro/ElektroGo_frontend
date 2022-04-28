@@ -20,7 +20,7 @@ import kotlinx.coroutines.runBlocking
 /**
  * @brief La clase FiltrarTrajectesViewModel s'encarrega de la comunicació de la GUI amb el front controller.
  */
-class FiltrarTrajectesViewModel : ViewModel() {
+class filterTripsViewModel : ViewModel() {
 /*    fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?): ArrayList<CarPooling> = runBlocking{
         return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax)
     }
