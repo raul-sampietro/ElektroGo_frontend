@@ -68,5 +68,12 @@
     <string name="firstLoginSelectUsername">Siusplau, selecciona el teu nom d\'usuari</string>
     <string name="firstLoginWarning">Atenció, tothom el prodrà veure</string>
     <string name="firstLoginUsername">nom d\'usuari</string>
+    <string name="firstLoginSave">Guardar</string>
+
+    <string name="facebook_app_id">850446215915012</string>
+    <string name="fb_login_protocol_scheme">fb850446215915012</string>
+    <string name="facebook_client_token">d2fe733d766ef258b456bfcbbdb78de2</string>
+
+
 
 </resources>
