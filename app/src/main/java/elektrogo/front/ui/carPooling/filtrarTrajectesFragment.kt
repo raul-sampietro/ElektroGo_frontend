@@ -1,3 +1,9 @@
+/**
+ * @file filtrarTrajectesFragment.kt
+ * @author Marina Alapont
+ * @date 12/04/2022
+ * @brief Implementacio d'un fragment per tal de cercar trajectes.
+ */
 package elektrogo.front.ui.carPooling
 
 import android.app.Activity
@@ -23,39 +29,95 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.model.CarPooling
 import elektrogo.front.model.Vehicle
 import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
-
+/**
+ * @brief La clase filtrarTrajectesFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
+ */
 class filtrarTrajectesFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = filtrarTrajectesFragment()
-    }
-
+    /**
+     * @brief Instancia del client de la api Places de google maps.
+     */
     private lateinit var placesClient: PlacesClient
+    /**
+     * @brief Referencia al boto del layout que s'usa per seleccionar la data. S'inicialitza mes tard.
+     */
     private lateinit var dateButton: Button
+    /**
+     * @brief Referencia al boto del layout que s'usa per fer la cerca. S'inicialitza mes tard.
+     */
     private lateinit var filtrarButton : Button
+    /**
+     * @brief Referencia al boto del layout que s'usa per resetejar tots els camps. S'inicialitza mes tard.
+     */
     private lateinit var resetButton : Button
+    /**
+     * @brief Referencia al boto del layout que s'usa per seleccionar l'hora de partida minima. S'inicialitza mes tard.
+     */
     private lateinit var timeFromButton: Button
+    /**
+     * @brief Referencia al boto del layout que s'usa per seleccionar l'hora de partida maxima. S'inicialitza mes tard.
+     */
     private lateinit var timeToButton: Button
-    private lateinit var autocompleteSupportFragment: AutocompleteSupportFragment
-    private lateinit var autocompleteSupportFragment2: AutocompleteSupportFragment
+    /**
+     * @brief Instancia que s'inicialitzara més tard per l'AutocompleteSupportFragment del primer cercador, de l'api Places.
+     */
+    private lateinit var autocompleteSupportFragment : AutocompleteSupportFragment
+    /**
+     * @brief Instancia que s'inicialitzara més tard per l'AutocompleteSupportFragment del segon cercador, de l'api Places.
+     */
+    private lateinit var autocompleteSupportFragment2 : AutocompleteSupportFragment
+    /**
+     * @brief Intsancia que s'inicialitzara més tard per al TextView que mostrara errors per al primer cercador .
+     */
     private lateinit var originText : TextView
+    /**
+     * @brief Intsancia que s'inicialitzara més tard per al TextView que mostrara errors per al segon cercador .
+     */
     private lateinit var destinationText : TextView
-    private  var latLngOrigin : LatLng?=null
-    private  var latLngDestination: LatLng?=null
+    /**
+     * @brief Valor de la latitud i longitud de l'origen.
+     */
+    private var latLngOrigin : LatLng?= null
+
+    /**
+     * @brief Valor de la latitud del desti.
+     */
+    private var latLngDestination : LatLng?= null
+    /**
+     * @brief Variable que guardara el valor de l'hora minima de partida seleccionada.
+     */
     private  var fromTimeSelected: String?=null
+    /**
+     * @brief Variable que guardara el valor de l'hora maxima de partida seleccionada.
+     */
     private  var toTimeSelected: String?=null
+    /**
+     * @brief Variable que guardara el valor de la data de sortida seleccionada.
+     */
     private  var dateSelected: String?=null
+    /**
+     * @brief Llista que guardara els diferents trajectes obtinguts de la cerca.
+     */
     private lateinit var filteredList: ArrayList<CarPooling>
 
-
+    /**
+     * @brief Instancia de la classe FiltrarTrajectesViewModel.
+     */
     private lateinit var viewModel: FiltrarTrajectesViewModel
 
+    /**
+     * @brief Metode que s'executa al crear el fragment.
+     * @pre
+     * @post Es crea la vista per al fragment.
+     * @return Retorna el layout creat.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,6 +126,13 @@ class filtrarTrajectesFragment : Fragment() {
         return view
     }
 
+    /**
+     * @brief Metode que s'executa un cop la vista ha estat creada. Conté tot el funcionament dels cercadors, els errors i el display de resultats.
+     * @param view Vista que s'ha creat.
+     * @param savedInstanceState Estat de la instancia.
+     * @pre
+     * @post capta les escritures de l'usuari als cercadors i diferents botons de data i hora . Al premer el boto de filtrar crida la funcio que capta les respostes i despres les mostra amb l'ajuda d'un ListAdapter. Si no s'ha omplert els camps obligatoris mostra l'error corresponent.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dateButton = requireActivity().findViewById(R.id.dataButtonFiltrar)
         resetButton = requireActivity().findViewById(R.id.reset)
@@ -109,8 +178,8 @@ class filtrarTrajectesFragment : Fragment() {
 
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling(1, "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC", "pepito" )
-                val Pooling2 : CarPooling = CarPooling(2, "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" ,"fulanito")
+                val Pooling : CarPooling = CarPooling("fulanito", "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC", )
+                val Pooling2 : CarPooling = CarPooling("fulanita", "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
 
                //  filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
                  filteredList = ArrayList<CarPooling>()
@@ -205,7 +274,11 @@ class filtrarTrajectesFragment : Fragment() {
             tpd.show()
         }
     }
-
+    /**
+     * @brief Listener sobre els cercadors, fa els autocomplete de les localitzacions.
+     * @pre
+     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que està buscant. En clickar una localització es guarda les coordenades d'aquesta.
+     */
     private fun getAutocompleteLocation () {
         autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
@@ -233,6 +306,13 @@ class filtrarTrajectesFragment : Fragment() {
         })
 
     }
+
+    /**
+     * @brief Metode que comprova que tots les camps obligatoris han estat omplerts i que el que s'ha omplert es correcte.
+     * @pre
+     * @post Es dona valor a un boolea valid, que si es fals voldra dir que un camp obligatori no s'ha omplert.
+     * @return Retorna el boolea valid.
+     */
 
     private fun validate() :Boolean {
         var valid : Boolean = true

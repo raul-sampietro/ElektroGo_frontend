@@ -125,7 +125,7 @@
                             android:id="@+id/username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="15dp"
                             android:text="Xavier"
                             android:textColor="@color/black"
                             android:textSize="26sp"
@@ -135,42 +135,37 @@
                             android:id="@+id/estrella1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="5dp"
-                            android:src="">
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="15dp">
 
                         </ImageView>
                         <ImageView
                             android:id="@+id/estrella2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="5dp"
-                            android:src="">
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="15dp">
                         </ImageView>
                         <ImageView
                             android:id="@+id/estrella3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="5dp"
-                            android:src="">
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="15dp">
                         </ImageView>
                         <ImageView
                             android:id="@+id/estrella4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="5dp"
-                            android:src="">
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="15dp">
                         </ImageView>
                         <ImageView
                             android:id="@+id/estrella5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="5dp"
-                            android:src="">
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="15dp">
                         </ImageView>
 
 
