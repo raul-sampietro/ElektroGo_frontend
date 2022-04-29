@@ -7,18 +7,20 @@ import java.time.LocalDate
 
 @Serializable
 data class CarPooling(
-    var username: String,
+    var id: Long?,
     var startDate: String,
     var startTime: String,
     var offeredSeats: Int,
     var occupiedSeats: Int,
-    var restrictions: String,
-    var details: String,
+    var restrictions: String?,
+    var details: String?,
+    var vehicleNumberPlate: String,
+    var origin: String,
+    var destination: String,
+    var username: String,
+    var cancelDate: String,
     var latitudeOrigin: Double,
     var longitudeOrigin: Double,
-    var originString: String,
     var latitudeDestination: Double,
     var longitudeDestination: Double,
-    var destinationString: String,
-    var vehicleNumberPlate: String,
 )
