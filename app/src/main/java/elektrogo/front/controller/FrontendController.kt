@@ -1,6 +1,5 @@
 package elektrogo.front.controller
 import android.graphics.Bitmap
-import android.util.Log
 import com.google.gson.Gson
 import elektrogo.front.model.*
 import io.ktor.client.*
@@ -113,10 +112,31 @@ object FrontendController {
         return Pair(status, stations)
     }
 
-    suspend fun getChatList(username: String): ArrayList<Chat> {
-        val chats: ArrayList<Chat> = client.get("${URL_BASE}chat/findByUser") {
+    suspend fun getChatList(username: String): ArrayList<String> {
+        val chats: ArrayList<String> = client.get("${URL_BASE}chat/findByUser") {
             parameter("user", username)
         }
         return chats
+    }
+
+    suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
+        val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByConversation") {
+            parameter("userA", userA)
+            parameter("userB", userB)
+        }
+        return chats
+    }
+
+    suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}chat/sendMessage"){
+            parameter("sender", sender)
+            parameter("receiver", receiver)
+            parameter("message", message)
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            return responseJson.status
+        }
+        else return httpResponse.status.value
     }
 }

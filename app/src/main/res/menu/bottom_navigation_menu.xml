@@ -14,7 +14,7 @@
 
     <item   android:title="@string/chat"
         android:id="@+id/chat"
-        android:icon="@drawable/ic_chat"/>
+        android:icon="@drawable/ic_baseline_chat_24"/>
 
     <item   android:title="@string/title_profile"
             android:id="@+id/perfil"
