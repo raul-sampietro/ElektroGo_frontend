@@ -6,7 +6,6 @@
  */
 package elektrogo.front.ui.carPooling
 
-import android.R.attr.country
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -32,6 +31,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
+import elektrogo.front.ui.CarPooling.tripDetails
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -203,6 +203,24 @@ class filterTripsFragment : Fragment() {
                  filteredList.add(Pooling)
                  filteredList.add(Pooling2)
                  listView.adapter = ListAdapter(context as Activity, filteredList)
+                 listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+                     val i = Intent(context, tripDetails::class.java)
+                     i.putExtra("username", filteredList[position].username)
+                     i.putExtra("startDate", filteredList[position].startDate)
+                     i.putExtra("startTime", filteredList[position].startTime)
+                     i.putExtra("offeredSeats", filteredList[position].offeredSeats)
+                     i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
+                     i.putExtra("restrictions", filteredList[position].restrictions)
+                     i.putExtra("details", filteredList[position].details)
+                     i.putExtra("latitudeOrigin", filteredList[position].latitudeOrigin)
+                     i.putExtra("longitudeOrigin", filteredList[position].longitudeOrigin)
+                     i.putExtra("originString", filteredList[position].originString)
+                     i.putExtra("latitudeDestination", filteredList[position].latitudeDestination)
+                     i.putExtra("longitudeDestination", filteredList[position].longitudeDestination)
+                     i.putExtra("destinationString", filteredList[position].destinationString)
+                     i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+                    startActivity(i)
+                })
 
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()

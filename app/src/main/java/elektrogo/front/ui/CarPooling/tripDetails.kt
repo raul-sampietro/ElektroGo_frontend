@@ -1,16 +1,30 @@
-package elektrogo.front.ui.carPooling
+package elektrogo.front.ui.CarPooling
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import elektrogo.front.R
 
+
 class tripDetails : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.trip_details)
+        val username = intent.getStringExtra("username")
+        val startDate = intent.getStringExtra("startDate")
+        val startTime = intent.getStringExtra("startTime")
+        val offeredSeats = intent.getStringExtra("offeredSeats")
+        val occupiedSeats = intent.getStringExtra("occupiedSeats")
+        val restrictions = intent.getStringExtra("restrictions")
+        val details = intent.getStringExtra("details")
+        val latitudeOrigin = intent.getStringExtra("latitudeOrigin")
+        val longitudeOrigin = intent.getStringExtra("longitudeOrigin")
+        val originString = intent.getStringExtra("originString")
+        val latitudeDestination = intent.getStringExtra("latitudeDestination")
+        val longitudeDestination = intent.getStringExtra("longitudeDestination")
+        val destinationString = intent.getStringExtra("destinationString")
+        val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
 
+      //  val imageid = intent.getIntExtra("imageid", R.drawable.a)
 
+    }
 }
