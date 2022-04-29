@@ -13,4 +13,8 @@ class ChatConversationViewModel : ViewModel(){
     fun getConversation(userA: String, userB: String) : ArrayList<Message> = runBlocking {
         FrontendController.getConversation(userA, userB)
     }
+
+    fun sendMessage(sender: String, receiver: String, message: String) : Int  = runBlocking{
+        FrontendController.sendMessage(sender, receiver, message)
+    }
 }

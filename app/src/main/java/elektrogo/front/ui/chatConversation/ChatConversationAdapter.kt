@@ -9,39 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import elektrogo.front.R
 import elektrogo.front.model.Message
 
-/*
-class ChatConversationAdapter(private val dataSet: ArrayList<Message>) :
-    RecyclerView.Adapter<ChatConversationAdapter.ViewHolder>(), ListAdapter {
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
-        val userTextView: TextView
-        val timestampTextView: TextView
-
-        init {
-            // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.message)
-            userTextView = view.findViewById(R.id.userMessage)
-            timestampTextView = view.findViewById(R.id.timestamp)
-        }
-    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-        viewHolder.textView.text = "Message"
-        //viewHolder.textView.text = dataSet[position].message
-        viewHolder.userTextView.text = dataSet[position].sender
-        viewHolder.timestampTextView.text = dataSet[position].sentAt
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataSet.size
-}
-*/
-
 class ChatConversationAdapter internal constructor(context: Context?, data: ArrayList<Message>) :
     RecyclerView.Adapter<ChatConversationAdapter.ViewHolder>() {
     private val mData: ArrayList<Message>

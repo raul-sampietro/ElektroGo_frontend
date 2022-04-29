@@ -78,7 +78,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/message"
+        android:layout_above="@id/messageToSend"
         android:id="@+id/listConversation"
         android:layout_below="@id/toolbarConversation"
         android:padding="5dp">
@@ -97,14 +97,14 @@
         android:layout_marginEnd="55dp"
         android:textColor="@color/black"
         android:textColorHint="#A8A7A7"
-        android:id="@+id/message"
+        android:id="@+id/messageToSend"
         tools:ignore="MissingConstraints" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:id="@+id/carviewofsendmessage"
-            android:layout_toEndOf="@id/message"
+            android:layout_toEndOf="@id/messageToSend"
             android:layout_marginStart="-50dp"
             android:layout_marginBottom="5dp"
             android:backgroundTint="#FF4BBD23"

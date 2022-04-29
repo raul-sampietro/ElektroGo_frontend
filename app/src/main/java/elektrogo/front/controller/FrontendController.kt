@@ -1,6 +1,5 @@
 package elektrogo.front.controller
 import android.graphics.Bitmap
-import android.util.Log
 import com.google.gson.Gson
 import elektrogo.front.model.*
 import io.ktor.client.*
@@ -126,5 +125,18 @@ object FrontendController {
             parameter("userB", userB)
         }
         return chats
+    }
+
+    suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}chat/sendMessage"){
+            parameter("sender", sender)
+            parameter("receiver", receiver)
+            parameter("message", message)
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            return responseJson.status
+        }
+        else return httpResponse.status.value
     }
 }
