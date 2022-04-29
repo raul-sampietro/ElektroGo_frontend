@@ -211,10 +211,11 @@ class NewCarPoolingFragment() : Fragment() {
                 //Serailitzem totes les variables obtingudes del usuari a un json
                     //TODO: QUE EL USERNAME NO SIGUI HARDCODED. OBTENIR-HO DE LA SESSIO O AIXi
                 val hour = selectedHour.text.toString() + ":00"
-                var newCarPoolingInfo = CarPooling( "Test", dataJSON, hour, dropSeats.selectedItem.toString().toInt(),
-                1, restDescription.text.toString(), detailsDescription.text.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
-                originName, latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble(), destinationName, dropVehicles.selectedItem.toString())
-
+                var cancelDate: LocalDate = LocalDate.parse(dataJSON!!, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusDays(1)
+                var newCarPoolingInfo = CarPooling(null, dataJSON,hour, dropSeats.selectedItem.toString().toInt(),
+                    1, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
+                    "Test", cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                    latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble())
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())
 
                 val status = viewModel.saveCarpooling(newCarPoolingInfo)
