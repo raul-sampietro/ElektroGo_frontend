@@ -50,8 +50,8 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         occupied += "/"
         occupied += f.offeredSeats.toString()
         occupiedseats.text = occupied
-        origin.text = f.originString
-        destination.text = f.destinationString
+        origin.text = f.origin
+        destination.text = f.destination
         startTime.text = f.startTime
         date.text = f.startDate
         user.text = f.username
