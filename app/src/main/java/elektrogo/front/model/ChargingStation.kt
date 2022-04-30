@@ -10,10 +10,10 @@ data class ChargingStation(
     var tipusConnexio : String,
     var latitude : Double,
     var longitude : Double,
-    var descriptiva_designacio : String,
+    var descriptiva_deseignacio : String,
     var kw : Double,
     var AcDc : String,
     var ident : String,
     var numeroPlaces : String,
-    var tipusVehicle : String
+    var tipus_vehicle : String
 )

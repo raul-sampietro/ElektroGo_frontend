@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import elektrogo.front.R
 
 class XinxetaMarcador : Fragment() {
@@ -33,7 +32,7 @@ class XinxetaMarcador : Fragment() {
 
     @SuppressLint("SetTextI18n")
     fun setNumChargers(n: Int) {
-        var nChargersView = view?.findViewById<TextView>(R.id.numChargers)
+        var nChargersView = view?.findViewById<TextView>(R.id.descriptiva_deseignacio)
         if (nChargersView != null) {
             nChargersView.text = "Number of chargers: $n"
         }
