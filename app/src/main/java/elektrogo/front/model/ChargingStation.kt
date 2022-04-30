@@ -4,16 +4,16 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ChargingStation(
     var id : Int,
-    var promotorGestor : String,
-    var acces : String,
-    var tipusVelocitat : String,
-    var tipusConnexio : String,
+    var promotor_gestor : String?,
+    var acces : String?,
+    var tipus_velocitat : String?,
+    var tipus_connexio : String?,
     var latitude : Double,
     var longitude : Double,
-    var descriptiva_deseignacio : String,
-    var kw : Double,
-    var AcDc : String,
-    var ident : String,
-    var numeroPlaces : String,
-    var tipus_vehicle : String
+    var designacio_descriptiva : String?,
+    var kw : Double?,
+    var ac_dc : String?,
+    var ide_pdr : String?,
+    var numberOfChargers : String?,
+    var tipus_vehicle : String?
 )

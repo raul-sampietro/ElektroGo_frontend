@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/promotorGestor"
+            android:id="@+id/stationTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -25,7 +25,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/descriptiva_deseignacio"
+            android:id="@+id/descriptiva_designacio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -100,7 +100,7 @@
                 android:textSize="16sp" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/tipusVehicle"
                 android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="40dp"

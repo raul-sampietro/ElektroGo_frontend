@@ -39,6 +39,12 @@ object AllChargingStations {
             lastStatus = statusAndStations.first
 
             val stationsMap = hashMapOf<Int, ChargingStation>()
+
+            /*//prueba
+            var cs = ChargingStation(-1, null,null, null,null,41.464458, 2.196703, null, null, null,null, null, null)
+            stationsMap[cs.id] = cs
+            //prueba*/
+
             if (lastStatus == 200) {
                 val stationsArray = statusAndStations.second
                 for (stat in stationsArray) stationsMap[stat.id] = stat

@@ -165,7 +165,17 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         val estacio = marker.title?.let { AllChargingStations.getStation(it.toInt()) }
 
         if (estacio != null) {
-            fragmentXinxeta.setNumChargers(estacio.id)
+
+            if (estacio.promotor_gestor != null) fragmentXinxeta.setStationTitle(estacio.promotor_gestor!!)
+            else if (estacio.ide_pdr != null) fragmentXinxeta.setStationTitle(estacio.ide_pdr!!)
+            else fragmentXinxeta.setStationTitle("ID: ${estacio.id}")
+
+            fragmentXinxeta.setDescriptivaDesignacio(estacio.designacio_descriptiva)
+            fragmentXinxeta.setTipusConnexio(estacio.tipus_connexio)
+            fragmentXinxeta.setKW(estacio.kw)
+            fragmentXinxeta.setACDC(estacio.ac_dc)
+            fragmentXinxeta.setNumeroPlaces(estacio.numberOfChargers)
+            fragmentXinxeta.setTipusVehicle(estacio.tipus_vehicle)
         }
     }
 
@@ -208,6 +218,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         if (status != 200) { // NOT OK
             if (status == -1) Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
             else Toast.makeText(activity, "No s'han pogut obtenir les estacions de càrrega. ERROR: $status", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, "${AllChargingStations.getAllStations()}", Toast.LENGTH_LONG).show()
         }
         else { // OK
 
