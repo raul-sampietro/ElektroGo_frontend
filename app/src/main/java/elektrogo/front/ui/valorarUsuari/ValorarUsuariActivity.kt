@@ -23,7 +23,7 @@ class ValorarUsuariActivity : AppCompatActivity() {
             super.onBackPressed()
         } else {
             var intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("origin", "valorarUsuari")
+            intent.putExtra("origin", "vehicleList")
             startActivity(intent)
         }
     }
