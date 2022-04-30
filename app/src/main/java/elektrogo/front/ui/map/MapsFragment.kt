@@ -165,7 +165,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         val estacio = marker.title?.let { AllChargingStations.getStation(it.toInt()) }
 
         if (estacio != null) {
-            fragmentXinxeta.setNumChargers(estacio.numberOfChargers)
+            fragmentXinxeta.setNumChargers(estacio.id)
         }
     }
 
