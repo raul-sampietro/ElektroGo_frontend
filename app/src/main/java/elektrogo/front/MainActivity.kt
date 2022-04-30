@@ -17,6 +17,7 @@ import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
 import elektrogo.front.ui.Route.routeFragment
+import elektrogo.front.ui.carPooling.filtrarTrajectesFragment
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 
@@ -32,8 +33,9 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.pooling -> {
                 toolbar.title = "Pooling"
-                val newPoolingFragment = NewCarPoolingFragment() //Aixo shaura de canviar per veure els punts de car pooling i desde alla poder crear-ne
-                openFragment(newPoolingFragment)
+
+                val filtrarTrajectesFragment = filtrarTrajectesFragment()
+                openFragment(filtrarTrajectesFragment)
                 return@OnItemSelectedListener true
             }
             R.id.mapa -> {

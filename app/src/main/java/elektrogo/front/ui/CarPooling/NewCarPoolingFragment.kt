@@ -216,6 +216,12 @@ class NewCarPoolingFragment() : Fragment() {
                     1, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
                     "Test", cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
                     latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble())
+
+                var newCarPoolingInfo = CarPooling("test", selectedDate.text.toString(), selectedHour.text.toString(), dropSeats.selectedItem.toString().toInt(),
+                1, restDescription.text.toString(), detailsDescription.text.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                originName, latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble(), destinationName, dropVehicles.selectedItem.toString())
+
+
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())
 
                 val status = viewModel.saveCarpooling(newCarPoolingInfo)

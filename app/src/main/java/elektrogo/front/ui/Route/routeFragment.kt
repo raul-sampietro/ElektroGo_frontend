@@ -1,5 +1,5 @@
 /**
- * @file RutaFragment.java
+ * @file routeFragment.kt
  * @author Marina Alapont
  * @date 26/03/2022
  * @brief Implementacio d'un fragment per tal d'entrar dades per la creacio d'una ruta.
@@ -29,13 +29,13 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 
 /**
- * @brief La clase Rating representa la GUI de la pantalla pn l'usuari inserira les dades per demanar la generacio d'una ruta al sistema.
+ * @brief La clase Rating representa la GUI de la pantalla on l'usuari inserira les dades per demanar la generacio d'una ruta al sistema.
  */
 
 class routeFragment() : Fragment() {
 
     /**
-     * @brief Instancia de la classe Ruta.
+     * @brief Instancia de la classe rutaModelView.
      */
     private val rutaModelView = RouteModelView()
     /**

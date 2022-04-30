@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ChargingStation(
     var id : Int,
-    var latitude : Double, //són BigDecimal a backend, però no es podien serialitzar
+    var latitude : Double,
     var longitude : Double,
     var numberOfChargers : Int
 )
