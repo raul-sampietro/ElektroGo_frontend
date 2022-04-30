@@ -178,8 +178,8 @@ class filtrarTrajectesFragment : Fragment() {
 
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling("fulanito", "23/06/2022", "9:00", 6, 4, "", "", 10.56, 1.54, "Sevilla", 3.56,2.05, "Galicia", "1234ABC", )
-                val Pooling2 : CarPooling = CarPooling("fulanita", "23/04/2022", "17:30", 5, 2, "", "", 10.56, 1.54, "Mataro", 3.56,2.05, "Canet de Mar", "1234ABD" )
+                val Pooling : CarPooling = CarPooling(null, "23/06/2022", "9:00", 6, 4, "", "", "1234ABC", "Sevilla", "Galicia", "fulanito", "18/06/2022", 10.56, 1.54, 3.56,2.05)
+                val Pooling2 : CarPooling = CarPooling(null, "1/06/2022", "11:40", 5, 4, "", "", "1334ABC", "Mataró", "Canet de Mar", "Marina", "26/05/2022", 1.56, 10.54, 5.56,1.05)
 
                //  filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
                  filteredList = ArrayList<CarPooling>()
