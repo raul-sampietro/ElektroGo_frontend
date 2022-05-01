@@ -127,5 +127,13 @@ object FrontendController {
             return statusCode
         }
         else return httpResponse.status.value
+
+   fun getTrips(originLatitude: Double, originLongitude: Double, destinationLatitude: Double, destinationLongitude: Double, dateIni: String?, startTimeMin: String?, startTimeMax: String?): ArrayList<CarPooling> {
+      //  val httpResponse: HttpResponse = client.get("${URL_BASE}") //parlar amb en gerard
+    }
+
+    fun getRating (username: String): Int {
+        //crida al controller de user, parlar amb el Dani
     }
 }
+
