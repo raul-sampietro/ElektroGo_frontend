@@ -74,7 +74,6 @@ class tripDetails : AppCompatActivity() {
         else destination.text = destinationString
         destinationFull.text=destinationString
 
-
         val ratingPair = viewModel.getRating(username!!)
         if (ratingPair.first != 200) {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
