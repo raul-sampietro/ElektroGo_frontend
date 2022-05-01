@@ -33,6 +33,9 @@ class tripDetails : AppCompatActivity() {
         val detailsText : TextView = this.findViewById(R.id.detailsInfo)
         val origin: TextView = this.findViewById(R.id.originDetails)
         val destination: TextView = this.findViewById(R.id.destDetails)
+        val destinationFull : TextView = this.findViewById(R.id.destinationFull)
+        val originFull : TextView = this.findViewById(R.id.originFull)
+
 
         usernameText.text = username
         startDateText.text=startDate
@@ -53,7 +56,7 @@ class tripDetails : AppCompatActivity() {
             origin.text = originBrief
         }
         else origin.text = originString
-
+        originFull.text = originString
         var destinationBrief : String
         if (destinationString!!.length > 20){
             destinationBrief = destinationString.substring(0, 20)
@@ -61,6 +64,7 @@ class tripDetails : AppCompatActivity() {
             destination.text = destinationBrief
         }
         else destination.text = destinationString
+        destinationFull.text=destinationString
 
 
 
