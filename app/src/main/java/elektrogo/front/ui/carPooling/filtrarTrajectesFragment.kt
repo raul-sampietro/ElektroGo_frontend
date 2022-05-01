@@ -110,7 +110,7 @@ class filtrarTrajectesFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private lateinit var viewModel: FiltrarTrajectesViewModel
+    private  var viewModel: FiltrarTrajectesViewModel = FiltrarTrajectesViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -178,14 +178,15 @@ class filtrarTrajectesFragment : Fragment() {
 
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling(null, "23/06/2022", "9:00", 6, 4, "", "", "1234ABC", "Sevilla", "Galicia", "fulanito", "18/06/2022", 10.56, 1.54, 3.56,2.05)
-                val Pooling2 : CarPooling = CarPooling(null, "1/06/2022", "11:40", 5, 4, "", "", "1334ABC", "Mataró", "Canet de Mar", "Marina", "26/05/2022", 1.56, 10.54, 5.56,1.05)
 
-               //  filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                 filteredList = ArrayList<CarPooling>()
-                 filteredList.add(Pooling)
-                 filteredList.add(Pooling2)
-                 listView.adapter = ListAdapter(context as Activity, filteredList)
+               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                if (result.first != 200) {
+                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    filteredList = result.second
+                    listView.adapter = ListAdapter(context as Activity, filteredList)
+                }
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
@@ -209,19 +210,19 @@ class filtrarTrajectesFragment : Fragment() {
                 var correctMonth = (monthOfYear+1)
                 if(dayOfMonth < 10 && correctMonth < 10){
                     dateButton.text = "0$dayOfMonth/0$correctMonth/$year"
-                    dateSelected = "0$dayOfMonth/0$correctMonth/$year"
+                    dateSelected = "$year-0$correctMonth-0$dayOfMonth"
                 }
                 else if (dayOfMonth < 10 && correctMonth >= 10){
                     dateButton.text = "0$dayOfMonth/$correctMonth/$year"
-                    dateSelected = "0$dayOfMonth/$correctMonth/$year"
+                    dateSelected = "$year-$correctMonth-0$dayOfMonth"
                 }
                 else if (dayOfMonth >= 10 && correctMonth < 10){
                     dateButton.text = "$dayOfMonth/0$correctMonth/$year"
-                    dateSelected = "$dayOfMonth/0$correctMonth/$year"
+                    dateSelected = "$year-0$correctMonth-$dayOfMonth"
                 }
                 else {
                     dateButton.text = "$dayOfMonth/$correctMonth/$year"
-                    dateSelected = "$dayOfMonth/$correctMonth/$year"
+                    dateSelected = "$year-$correctMonth-$dayOfMonth"
                 }
 
 
@@ -240,12 +241,12 @@ class filtrarTrajectesFragment : Fragment() {
                 // Display Selected date in textbox
                 if (minute<10){
                     timeFromButton.text = "$hour:0$minute"
-                    fromTimeSelected = "$hour:0$minute"
+                    fromTimeSelected = "$hour:0$minute:00"
 
                 }
                 else {
                     timeFromButton.text = "$hour:$minute"
-                    fromTimeSelected = "$hour:$minute"
+                    fromTimeSelected = "$hour:$minute:00"
                 }
 
             }, minute, hour, true)
@@ -262,12 +263,12 @@ class filtrarTrajectesFragment : Fragment() {
 
                 if (minute<10){
                     timeToButton.text = "$hour:0$minute"
-                    toTimeSelected = "$hour:0$minute"
+                    toTimeSelected = "$hour:0$minute:00"
 
                 }
                 else {
                     timeToButton.text = "$hour:$minute"
-                    toTimeSelected = "$hour:$minute"
+                    toTimeSelected = "$hour:$minute:00"
                 }
             }, minute, hour, true)
 
