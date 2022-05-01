@@ -9,18 +9,20 @@ package elektrogo.front.ui.carPooling
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
@@ -30,6 +32,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
+import elektrogo.front.ui.CarPooling.tripDetails
 import elektrogo.front.model.Vehicle
 import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
 import elektrogo.front.ui.vehicleList.VehicleListAdapter
@@ -38,9 +41,9 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 /**
- * @brief La clase filtrarTrajectesFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
+ * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
-class filtrarTrajectesFragment : Fragment() {
+class filterTripsFragment : Fragment() {
 
     /**
      * @brief Instancia del client de la api Places de google maps.
@@ -111,7 +114,7 @@ class filtrarTrajectesFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private lateinit var viewModel: FiltrarTrajectesViewModel
+    private  var viewModel: filterTripsViewModel = filterTripsViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -123,7 +126,7 @@ class filtrarTrajectesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.filtrar_trajectes_fragment, container, false)
+        val view = inflater.inflate(R.layout.filter_trips_fragment, container, false)
         return view
     }
 
@@ -181,14 +184,30 @@ class filtrarTrajectesFragment : Fragment() {
 
         filtrarButton.setOnClickListener {
             if (validate()) {
-                val Pooling : CarPooling = CarPooling(null, "23/06/2022", "9:00", 6, 4, "", "", "1234ABC", "Sevilla", "Galicia", "fulanito", "18/06/2022", 10.56, 1.54, 3.56,2.05)
-                val Pooling2 : CarPooling = CarPooling(null, "1/06/2022", "11:40", 5, 4, "", "", "1334ABC", "Mataró", "Canet de Mar", "Marina", "26/05/2022", 1.56, 10.54, 5.56,1.05)
 
-               //  filteredList = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                 filteredList = ArrayList<CarPooling>()
-                 filteredList.add(Pooling)
-                 filteredList.add(Pooling2)
-                 listView.adapter = ListAdapter(context as Activity, filteredList)
+               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                if (result.first != 200) {
+                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    filteredList = result.second
+                    listView.adapter = ListAdapter(context as Activity, filteredList)
+
+                 listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+                     val i = Intent(context, tripDetails::class.java)
+                     i.putExtra("username", filteredList[position].username)
+                     i.putExtra("startDate", filteredList[position].startDate)
+                     i.putExtra("startTime", filteredList[position].startTime)
+                     i.putExtra("offeredSeats",filteredList[position].offeredSeats)
+                     i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
+                     i.putExtra("restrictions", filteredList[position].restrictions)
+                     i.putExtra("details", filteredList[position].details)
+                     i.putExtra("originString", filteredList[position].origin)
+                     i.putExtra("destinationString", filteredList[position].destination)
+                     i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+                    startActivity(i)
+                })
+                }
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
@@ -219,19 +238,19 @@ class filtrarTrajectesFragment : Fragment() {
                 var correctMonth = (monthOfYear+1)
                 if(dayOfMonth < 10 && correctMonth < 10){
                     dateButton.text = "0$dayOfMonth/0$correctMonth/$year"
-                    dateSelected = "0$dayOfMonth/0$correctMonth/$year"
+                    dateSelected = "$year-0$correctMonth-0$dayOfMonth"
                 }
                 else if (dayOfMonth < 10 && correctMonth >= 10){
                     dateButton.text = "0$dayOfMonth/$correctMonth/$year"
-                    dateSelected = "0$dayOfMonth/$correctMonth/$year"
+                    dateSelected = "$year-$correctMonth-0$dayOfMonth"
                 }
                 else if (dayOfMonth >= 10 && correctMonth < 10){
                     dateButton.text = "$dayOfMonth/0$correctMonth/$year"
-                    dateSelected = "$dayOfMonth/0$correctMonth/$year"
+                    dateSelected = "$year-0$correctMonth-$dayOfMonth"
                 }
                 else {
                     dateButton.text = "$dayOfMonth/$correctMonth/$year"
-                    dateSelected = "$dayOfMonth/$correctMonth/$year"
+                    dateSelected = "$year-$correctMonth-$dayOfMonth"
                 }
 
 
@@ -250,12 +269,11 @@ class filtrarTrajectesFragment : Fragment() {
                 // Display Selected date in textbox
                 if (minute<10){
                     timeFromButton.text = "$hour:0$minute"
-                    fromTimeSelected = "$hour:0$minute"
-
+                    fromTimeSelected = "$hour:0$minute:00"
                 }
                 else {
                     timeFromButton.text = "$hour:$minute"
-                    fromTimeSelected = "$hour:$minute"
+                    fromTimeSelected = "$hour:$minute:00"
                 }
 
             }, minute, hour, true)
@@ -272,12 +290,11 @@ class filtrarTrajectesFragment : Fragment() {
 
                 if (minute<10){
                     timeToButton.text = "$hour:0$minute"
-                    toTimeSelected = "$hour:0$minute"
-
+                    toTimeSelected = "$hour:0$minute:00"
                 }
                 else {
                     timeToButton.text = "$hour:$minute"
-                    toTimeSelected = "$hour:$minute"
+                    toTimeSelected = "$hour:$minute:00"
                 }
             }, minute, hour, true)
 

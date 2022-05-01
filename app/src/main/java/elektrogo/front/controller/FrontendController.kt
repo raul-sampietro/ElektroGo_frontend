@@ -44,7 +44,7 @@ object FrontendController {
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
         val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
-            parameter("userNDriver", "Test")
+            parameter("userNDriver", "Test2")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
@@ -127,12 +127,40 @@ object FrontendController {
             return statusCode
         } else return httpResponse.status.value
     }
-  /* fun getTrips(originLatitude: Double, originLongitude: Double, destinationLatitude: Double, destinationLongitude: Double, dateIni: String?, startTimeMin: String?, startTimeMax: String?): ArrayList<CarPooling> {
-      //  val httpResponse: HttpResponse = client.get("${URL_BASE}") //parlar amb en gerard
-    }
 
-    fun getRating (username: String): Int {
-        //crida al controller de user, parlar amb el Dani
-    }*/
+   suspend fun getTrips(originLatitude: Double, originLongitude: Double, destinationLatitude: Double, destinationLongitude: Double, dateIni: String?, startTimeMin: String?, startTimeMax: String?): Pair<Int, ArrayList<CarPooling>> {
+       val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel"){
+           parameter("LatO", originLatitude)
+           parameter("LongO", originLongitude)
+           parameter("LatD", destinationLatitude)
+           parameter("LongD", destinationLongitude)
+           parameter("sDate", dateIni)
+           parameter("sTimeMin", startTimeMin)
+           parameter("sTimeMax", startTimeMax)
+       }
+       val trips: ArrayList<CarPooling>
+       val status: Int = httpResponse.status.value
+       if (httpResponse.status.value != 200) {
+           trips = ArrayList<CarPooling>()
+       }
+       else trips = httpResponse.receive()
+       return Pair(status,trips)
+   }
+
+    suspend fun getRating (username: String): Pair<Int,Double> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}user/avgRate") {
+            contentType(ContentType.Application.Json)
+            parameter("userName", username)
+        }
+        var status : Int = httpResponse.status.value
+        var avgRating : Double
+        if (httpResponse.status.value != 200) {
+           /* val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            status = statusCode*/
+            avgRating  = -1.0
+        } else avgRating = httpResponse.receive()
+        return Pair(status,avgRating)
+    }
 }
 

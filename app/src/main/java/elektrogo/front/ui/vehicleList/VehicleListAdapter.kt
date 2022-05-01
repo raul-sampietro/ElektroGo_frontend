@@ -49,7 +49,7 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
                     setPositiveButton("OK",
                         DialogInterface.OnClickListener { dialog, id ->
                             Toast.makeText(parent.context, "Yes", Toast.LENGTH_LONG).show()
-                            deleteVehicle(v.numberPlate, "Test")
+                            deleteVehicle(v.numberPlate, "Test2")
                         })
                     setNegativeButton("NO",
                         DialogInterface.OnClickListener { dialog, id ->

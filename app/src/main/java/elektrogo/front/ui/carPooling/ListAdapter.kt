@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 /**
@@ -22,9 +22,9 @@ import elektrogo.front.model.CarPooling
 class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
 
     /**
-     * @brief Instancia de la classe FiltrarTrajectesViewModel.
+     * @brief Instancia de la classe filterTripsViewModel.
      */
-    private lateinit var viewModel: FiltrarTrajectesViewModel
+    private var viewModel: filterTripsViewModel  = filterTripsViewModel()
 
     /**
      * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.
@@ -44,18 +44,34 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         val date :TextView = view.findViewById(R.id.dateFiltered)
         val user : TextView = view.findViewById(R.id.username)
         val f = filteredList[position]
-    //    val rating = viewModel.getRating(f.username)
+        val ratingPair = viewModel.getRating(f.username)
+        if (ratingPair.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        } else renderRating(ratingPair.second, view)
 
         var occupied : String = (f.offeredSeats - f.occupiedSeats).toString()
         occupied += "/"
         occupied += f.offeredSeats.toString()
         occupiedseats.text = occupied
-        origin.text = f.origin
-        destination.text = f.destination
         startTime.text = f.startTime
         date.text = f.startDate
         user.text = f.username
 
+        var originBrief : String
+        if (f.origin.length > 24){
+            originBrief = f.origin.substring(0, 20)
+            originBrief += "..."
+            origin.text = originBrief
+        }
+        else origin.text = f.origin
+
+        var destinationBrief : String
+        if (f.destination.length > 24){
+            destinationBrief = f.destination.substring(0, 20)
+            destinationBrief += "..."
+            destination.text = destinationBrief
+        }
+        else destination.text = f.destination
 
         return view
     }
@@ -64,13 +80,14 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
      * @pre
      * @post Es mostren les estrelles segons la valoracio que l'usuari te.
      */
-    private fun renderRating(rating: Double, view: View?) {
+    private fun renderRating(ratingPassed: Double, view: View?) {
      val star1 : ImageView = view!!.findViewById(R.id.estrella1)
      val star2 : ImageView = view.findViewById(R.id.estrella2)
      val star3 : ImageView = view.findViewById(R.id.estrella3)
      val star4 : ImageView = view.findViewById(R.id.estrella4)
      val star5 : ImageView = view.findViewById(R.id.estrella5)
 
+     var rating = ratingPassed/2
      var decimalValue =    rating - rating.toInt()
      var enterValue = rating.toInt()
 
