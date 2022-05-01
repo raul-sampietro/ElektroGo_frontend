@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Baarcelonaaaaaaaaaaa"
+                    android:text="Baarcelona"
                     android:textColor="@color/black"
                     android:textSize="22sp" />
 
@@ -253,6 +253,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
         <RelativeLayout
@@ -297,7 +298,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_starplena">
 
                 </ImageView>
@@ -306,7 +307,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_starplena">
                 </ImageView>
                 <ImageView
@@ -314,7 +315,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_starplena">
                 </ImageView>
                 <ImageView
@@ -322,7 +323,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_starplena">
                 </ImageView>
                 <ImageView
@@ -330,7 +331,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:src="@drawable/ic_starplena">
                 </ImageView>
             </LinearLayout>
