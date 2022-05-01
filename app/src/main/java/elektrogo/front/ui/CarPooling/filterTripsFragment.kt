@@ -1,5 +1,5 @@
 /**
- * @file filtrarTrajectesFragment.kt
+ * @file filterTripsFragment.kt
  * @author Marina Alapont
  * @date 12/04/2022
  * @brief Implementacio d'un fragment per tal de cercar trajectes.
@@ -39,7 +39,7 @@ import java.time.format.DateTimeFormatter
 
 
 /**
- * @brief La clase filtrarTrajectesFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
+ * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
 class filterTripsFragment : Fragment() {
 
