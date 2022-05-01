@@ -9,17 +9,20 @@ package elektrogo.front.ui.carPooling
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
@@ -29,12 +32,16 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
+import elektrogo.front.ui.CarPooling.tripDetails
+import elektrogo.front.model.Vehicle
+import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
+import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 /**
- * @brief La clase filtrarTrajectesFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
+ * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
 class filterTripsFragment : Fragment() {
 
@@ -138,6 +145,7 @@ class filterTripsFragment : Fragment() {
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
         originText = requireActivity().findViewById(R.id.errorViewOriginFiltrar)
         destinationText = requireActivity().findViewById(R.id.errorViewDestinationFiltrar)
+        var createTripButton : Button = requireActivity().findViewById(R.id.createTrip)
 
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
@@ -171,6 +179,7 @@ class filterTripsFragment : Fragment() {
             timeFromButton.text = "Des de"
             autocompleteSupportFragment2.setText("")
         }
+
         val listView: ListView = view.findViewById(R.id.filterListView)
 
         filtrarButton.setOnClickListener {
@@ -183,12 +192,34 @@ class filterTripsFragment : Fragment() {
                 else {
                     filteredList = result.second
                     listView.adapter = ListAdapter(context as Activity, filteredList)
+
+                 listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+                     val i = Intent(context, tripDetails::class.java)
+                     i.putExtra("username", filteredList[position].username)
+                     i.putExtra("startDate", filteredList[position].startDate)
+                     i.putExtra("startTime", filteredList[position].startTime)
+                     i.putExtra("offeredSeats",filteredList[position].offeredSeats)
+                     i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
+                     i.putExtra("restrictions", filteredList[position].restrictions)
+                     i.putExtra("details", filteredList[position].details)
+                     i.putExtra("originString", filteredList[position].origin)
+                     i.putExtra("destinationString", filteredList[position].destination)
+                     i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+                    startActivity(i)
+                })
                 }
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
         }
 
+        createTripButton.setOnClickListener {
+            val fragmentNewCarPooling = NewCarPoolingFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.pooling, fragmentNewCarPooling, "findThisFragment")
+                .addToBackStack(null)
+                .commit();
+        }
         var day: Int = 28
         var month: Int = 10
         var year: Int = 1920
@@ -239,7 +270,6 @@ class filterTripsFragment : Fragment() {
                 if (minute<10){
                     timeFromButton.text = "$hour:0$minute"
                     fromTimeSelected = "$hour:0$minute:00"
-
                 }
                 else {
                     timeFromButton.text = "$hour:$minute"
@@ -261,7 +291,6 @@ class filterTripsFragment : Fragment() {
                 if (minute<10){
                     timeToButton.text = "$hour:0$minute"
                     toTimeSelected = "$hour:0$minute:00"
-
                 }
                 else {
                     timeToButton.text = "$hour:$minute"
