@@ -11,7 +11,6 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,8 +29,6 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
-import elektrogo.front.model.Vehicle
-import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -39,7 +36,7 @@ import java.time.format.DateTimeFormatter
 /**
  * @brief La clase filtrarTrajectesFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
-class filtrarTrajectesFragment : Fragment() {
+class filterTripsFragment : Fragment() {
 
     /**
      * @brief Instancia del client de la api Places de google maps.
@@ -110,7 +107,7 @@ class filtrarTrajectesFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private  var viewModel: FiltrarTrajectesViewModel = FiltrarTrajectesViewModel()
+    private  var viewModel: filterTripsViewModel = filterTripsViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -122,7 +119,7 @@ class filtrarTrajectesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.filtrar_trajectes_fragment, container, false)
+        val view = inflater.inflate(R.layout.filter_trips_fragment, container, false)
         return view
     }
 
