@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Baarcelonaaaaaaaaaaa"
+                    android:text="Baarcelona"
                     android:textColor="@color/black"
                     android:textSize="22sp" />
 
@@ -249,10 +249,11 @@
             android:textSize="22sp"
             android:textStyle="bold" />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
         <RelativeLayout
@@ -272,17 +273,20 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/usernameDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
                     android:layout_marginTop="15dp"
-                    android:text="Xavier"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeMaxTextSize="26sp"
+                    android:text="Marina Alapont"
                     android:textColor="@color/black"
                     android:textSize="26sp"
                     android:textStyle="bold" />
@@ -294,45 +298,39 @@
 
                 <ImageView
                     android:id="@+id/estrella1Details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
                     android:src="@drawable/ic_starplena">
 
                 </ImageView>
+
                 <ImageView
                     android:id="@+id/estrella2Details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_starplena">
-                </ImageView>
+                    android:src="@drawable/ic_starplena" />
+
                 <ImageView
                     android:id="@+id/estrella3Details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_starplena">
-                </ImageView>
+                    android:src="@drawable/ic_starplena" />
+
                 <ImageView
                     android:id="@+id/estrella4Details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_starplena">
-                </ImageView>
+                    android:src="@drawable/ic_starplena" />
+
                 <ImageView
                     android:id="@+id/estrella5Details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/ic_starplena">
-                </ImageView>
+                    android:src="@drawable/ic_starplena" />
             </LinearLayout>
 
         </LinearLayout>
