@@ -23,6 +23,8 @@ class tripDetails : AppCompatActivity() {
         val destinationString= intent.getStringExtra("destinationString")
         val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
 
+
+
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
         val startTimeText : TextView = this.findViewById(R.id.timeDetails)
@@ -43,6 +45,23 @@ class tripDetails : AppCompatActivity() {
         detailsText.text=details
         origin.text = originString
         destination.text=destinationString
+
+        var originBrief : String
+        if (originString!!.length > 20){
+            originBrief = originString.substring(0, 20)
+            originBrief += "..."
+            origin.text = originBrief
+        }
+        else origin.text = originString
+
+        var destinationBrief : String
+        if (destinationString!!.length > 20){
+            destinationBrief = destinationString.substring(0, 20)
+            destinationBrief += "..."
+            destination.text = destinationBrief
+        }
+        else destination.text = destinationString
+
 
 
         //  val imageid = intent.getIntExtra("imageid", R.drawable.a)
