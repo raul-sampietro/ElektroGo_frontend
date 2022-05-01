@@ -2,6 +2,7 @@ package elektrogo.front.controller
 import android.graphics.Bitmap
 import android.util.Log
 import com.google.gson.Gson
+import elektrogo.front.model.CarPooling
 import elektrogo.front.model.Vehicle
 import elektrogo.front.model.ChargingStation
 import elektrogo.front.model.httpRespostes
@@ -43,7 +44,7 @@ object FrontendController {
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
         val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
-            parameter("userNDriver", "Test")
+            parameter("userNDriver", "Test2")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
@@ -113,5 +114,18 @@ object FrontendController {
         else stations = httpResponse.receive()
         
         return Pair(status, stations)
+    }
+
+    suspend fun saveCarpooling(trip: CarPooling): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}car-pooling/create") {
+            contentType(ContentType.Application.Json)
+            body = trip
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        }
+        else return httpResponse.status.value
     }
 }
