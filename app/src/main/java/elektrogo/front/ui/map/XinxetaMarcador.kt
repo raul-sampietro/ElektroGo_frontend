@@ -46,19 +46,21 @@ class XinxetaMarcador : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun setTipusConnexio(c: String?) {
         var conView = view?.findViewById<TextView>(R.id.tipusConnexio)
         if (conView != null) {
-            if (c != null) conView.text = c
-            else conView.text = "--"
+            if (c != null) conView.text = "CON: $c"
+            else conView.text = "CON: --"
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun setKW(kW: Double?) {
         var kWView = view?.findViewById<TextView>(R.id.kw)
         if (kWView != null) {
-            if (kW != null) kWView.text = kW.toString()
-            else kWView.text = "--"
+            if ((kW != null) and (kW != 0.0)) kWView.text = "kW: $kW"
+            else kWView.text = "kW: --"
         }
     }
 
@@ -67,7 +69,7 @@ class XinxetaMarcador : Fragment() {
         var acdcView = view?.findViewById<TextView>(R.id.AcDc)
         if (acdcView != null) {
             if (acdc != null) acdcView.text = "AC/DC: $acdc"
-            else acdcView.text = "--"
+            else acdcView.text = "AC/DC: --"
         }
     }
 
@@ -84,11 +86,11 @@ class XinxetaMarcador : Fragment() {
         if (vehicleView != null) {
 
             if (s != null) {
-                if (s == "moto") {/*mostra moto_sola*/}
-                else if (s.length > 8) {/*mostra cotxe_moto*/}
-                else {/*mostrar cotxe*/}
+                if (s == "moto") vehicleView.setImageResource(R.drawable.ic_moto_sola)
+                else if (s.length > 8) vehicleView.setImageResource(R.drawable.ic_cotxe_moto)
+                else vehicleView.setImageResource(R.drawable.ic_cotxe_sol)
             }
-            else {/*mostrar interrogant o ovni*/}
+            else vehicleView.setImageResource(R.drawable.ic_ovni_interrogant)
         }
     }
 }

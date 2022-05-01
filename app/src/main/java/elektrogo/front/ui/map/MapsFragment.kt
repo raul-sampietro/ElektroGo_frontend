@@ -218,7 +218,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         if (status != 200) { // NOT OK
             if (status == -1) Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
             else Toast.makeText(activity, "No s'han pogut obtenir les estacions de càrrega. ERROR: $status", Toast.LENGTH_LONG).show()
-            Toast.makeText(activity, "${AllChargingStations.getAllStations()}", Toast.LENGTH_LONG).show()
+            //Toast.makeText(activity, "${AllChargingStations.getAllStations()}", Toast.LENGTH_LONG).show()
         }
         else { // OK
 

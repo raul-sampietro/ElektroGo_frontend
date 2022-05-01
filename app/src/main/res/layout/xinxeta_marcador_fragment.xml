@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:text="B:SM Serveis Municipals"
+            android:text="ID: --"
             android:textAlignment="textStart"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
-            android:text="B:SM 20 - Marques de Mulhacen"
-            android:textSize="16sp"
-            android:textAlignment="textStart" />
+            android:text="Default Description"
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tipusConnexio"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:text="MENNEKES.F+Schuko"
+            android:text="CON: --"
             android:textAlignment="textStart"
             android:textSize="16sp" />
 
@@ -57,7 +57,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="kW: 120"
+                android:text="kW: --"
                 android:textAlignment="textStart"
                 android:textSize="16sp" />
 
@@ -68,7 +68,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="AC/DC: AC-DC"
+                android:text="AC/DC: --"
                 android:textAlignment="textStart"
                 android:textSize="16sp" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:text="2+3"
+                android:text="--"
                 android:textAlignment="textStart"
                 android:textSize="16sp" />
 

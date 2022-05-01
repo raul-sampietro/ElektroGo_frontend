@@ -15,5 +15,6 @@ data class ChargingStation(
     var ac_dc : String?,
     var ide_pdr : String?,
     var numberOfChargers : String?,
-    var tipus_vehicle : String?
+    var tipus_vehicle : String?,
+    var fcs : String?
 )
