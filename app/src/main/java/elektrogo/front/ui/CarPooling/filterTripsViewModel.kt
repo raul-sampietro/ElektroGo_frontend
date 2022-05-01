@@ -1,5 +1,5 @@
 /**
- * @file FiltrarTrajectesViewModel.java
+ * @file filterTripsViewModel.java
  * @author Marina Alapont
  * @date 12/04/2022
  * @brief Implementacio d'un view model per tal de fer la comunicació entre el fragment i el front controller.
@@ -19,7 +19,7 @@ import elektrogo.front.model.CarPooling
 import kotlinx.coroutines.runBlocking
 
 /**
- * @brief La clase FiltrarTrajectesViewModel s'encarrega de la comunicació de la GUI amb el front controller.
+ * @brief La clase filterTripsViewModel s'encarrega de la comunicació de la GUI amb el front controller.
  */
 class filterTripsViewModel : ViewModel() {
 
