@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 /**
@@ -25,7 +24,7 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private var viewModel: FiltrarTrajectesViewModel  = FiltrarTrajectesViewModel()
+    private var viewModel: filterTripsViewModel  = filterTripsViewModel()
 
     /**
      * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.
