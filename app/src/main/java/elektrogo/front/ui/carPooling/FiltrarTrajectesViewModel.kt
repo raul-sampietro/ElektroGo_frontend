@@ -15,18 +15,20 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import elektrogo.front.controller.FrontendController
+import elektrogo.front.model.CarPooling
 import kotlinx.coroutines.runBlocking
 
 /**
  * @brief La clase FiltrarTrajectesViewModel s'encarrega de la comunicació de la GUI amb el front controller.
  */
 class FiltrarTrajectesViewModel : ViewModel() {
-/*    fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?): ArrayList<CarPooling> = runBlocking{
+
+   fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?): Pair <Int, ArrayList<CarPooling>> = runBlocking{
         return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax)
     }
 
-    fun getRating(username: String): Double = runBlocking {
+    fun getRating(username: String): Pair<Int, Double> = runBlocking {
         return@runBlocking FrontendController.getRating(username)
     }
-  */
+
 }
