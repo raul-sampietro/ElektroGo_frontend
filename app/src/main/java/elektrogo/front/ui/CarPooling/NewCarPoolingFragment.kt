@@ -102,7 +102,7 @@ class NewCarPoolingFragment() : Fragment() {
         var year: Int = 1920
         var hour: Int = 12
         var minute: Int = 15
-
+        var dataJSON: String = "2022-01-01"
         //Boto per la data
         buttonDate.setOnClickListener {
             var calendar = Calendar.getInstance()
@@ -114,10 +114,22 @@ class NewCarPoolingFragment() : Fragment() {
 
                 // Display Selected date in textbox
                 val mes = monthOfYear+1
-                if(dayOfMonth < 10 && mes < 10) selectedDate.setText("0$dayOfMonth/0$mes/$year")
-                else if (dayOfMonth < 10 && mes >= 10) selectedDate.setText("0$dayOfMonth/$mes/$year")
-                else if (dayOfMonth >= 10 && mes < 10) selectedDate.setText("$dayOfMonth/0$mes/$year")
-                else selectedDate.setText("$dayOfMonth/$mes/$year")
+                if(dayOfMonth < 10 && mes < 10){
+                    selectedDate.setText("0$dayOfMonth/0$mes/$year")
+                    dataJSON = "$year-0$mes-0$dayOfMonth"
+                }
+                else if (dayOfMonth < 10 && mes >= 10){
+                    selectedDate.setText("0$dayOfMonth/$mes/$year")
+                    dataJSON = "$year-0$mes-0$dayOfMonth"
+                }
+                else if (dayOfMonth >= 10 && mes < 10){
+                    selectedDate.setText("$dayOfMonth/0$mes/$year")
+                    dataJSON = "$year-0$mes-$dayOfMonth"
+                }
+                else{
+                    selectedDate.setText("$dayOfMonth/$mes/$year")
+                    dataJSON = "$year-$mes-$dayOfMonth"
+                }
                 selectedDate.setError(null)
             }, year, month, day)
 
@@ -197,13 +209,20 @@ class NewCarPoolingFragment() : Fragment() {
             }
             else {
                 //Serailitzem totes les variables obtingudes del usuari a un json
-                var newCarPoolingInfo = CarPooling("test", selectedDate.text.toString(), selectedHour.text.toString(), dropSeats.selectedItem.toString().toInt(),
-                1, restDescription.text.toString(), detailsDescription.text.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
-                originName, latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble(), destinationName, dropVehicles.selectedItem.toString())
+                    //TODO: QUE EL USERNAME NO SIGUI HARDCODED. OBTENIR-HO DE LA SESSIO O AIXi
+                val hour = selectedHour.text.toString() + ":00"
+                var cancelDate: LocalDate = LocalDate.parse(dataJSON!!, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusDays(1)
+                var newCarPoolingInfo = CarPooling(null, dataJSON,hour, dropSeats.selectedItem.toString().toInt(),
+                    1, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
+                    "Test", cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                    latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble())
 
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())
 
-                //Crida amb backend per crear el carpooling nou.
+                val status = viewModel.saveCarpooling(newCarPoolingInfo)
+                if (status == 200){
+                    Toast.makeText(context, resources.getString(R.string.savedCarpooling),Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(context, resources.getString(R.string.errorCarpooling),Toast.LENGTH_SHORT).show()
 
             }
         }
