@@ -23,31 +23,41 @@
                 android:id="@+id/star1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_starbuida" />
+                android:src="@drawable/ic_starbuida"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp" />
 
             <ImageView
                 android:id="@+id/star2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_starbuida" />
+                android:src="@drawable/ic_starbuida"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp" />
 
             <ImageView
                 android:id="@+id/star3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_starbuida" />
+                android:src="@drawable/ic_starbuida"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp" />
 
             <ImageView
                 android:id="@+id/star4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_starbuida" />
+                android:src="@drawable/ic_starbuida"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp" />
 
             <ImageView
                 android:id="@+id/star5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_starbuida" />
+                android:src="@drawable/ic_starbuida"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"/>
 
         </LinearLayout>
 
@@ -56,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btnValorar"
+            android:layout_marginTop="15dp"
             tools:ignore="TextContrastCheck" />
     </LinearLayout>
 
