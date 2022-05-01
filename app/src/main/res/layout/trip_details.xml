@@ -249,7 +249,7 @@
             android:textSize="22sp"
             android:textStyle="bold" />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
@@ -273,17 +273,20 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/usernameDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
                     android:layout_marginTop="15dp"
-                    android:text="Xavier"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeMaxTextSize="26sp"
+                    android:text="Marina Alapont"
                     android:textColor="@color/black"
                     android:textSize="26sp"
                     android:textStyle="bold" />
