@@ -22,7 +22,7 @@ import elektrogo.front.model.CarPooling
 class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
 
     /**
-     * @brief Instancia de la classe FiltrarTrajectesViewModel.
+     * @brief Instancia de la classe filterTripsViewModel.
      */
     private var viewModel: filterTripsViewModel  = filterTripsViewModel()
 
