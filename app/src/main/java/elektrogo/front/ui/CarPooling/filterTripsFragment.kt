@@ -31,9 +31,8 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
-
+import elektrogo.front.model.CarPooling
 import elektrogo.front.ui.CarPooling.tripDetails
-
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
