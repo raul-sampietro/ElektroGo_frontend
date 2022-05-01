@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
@@ -24,7 +25,7 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private lateinit var viewModel: FiltrarTrajectesViewModel
+    private var viewModel: FiltrarTrajectesViewModel  = FiltrarTrajectesViewModel()
 
     /**
      * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.
@@ -44,7 +45,10 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         val date :TextView = view.findViewById(R.id.dateFiltered)
         val user : TextView = view.findViewById(R.id.username)
         val f = filteredList[position]
-    //    val rating = viewModel.getRating(f.username)
+        val ratingPair = viewModel.getRating(f.username)
+        if (ratingPair.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        } else renderRating(ratingPair.second, view)
 
         var occupied : String = (f.offeredSeats - f.occupiedSeats).toString()
         occupied += "/"
