@@ -67,13 +67,14 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
      * @pre
      * @post Es mostren les estrelles segons la valoracio que l'usuari te.
      */
-    private fun renderRating(rating: Double, view: View?) {
+    private fun renderRating(ratingPassed: Double, view: View?) {
      val star1 : ImageView = view!!.findViewById(R.id.estrella1)
      val star2 : ImageView = view.findViewById(R.id.estrella2)
      val star3 : ImageView = view.findViewById(R.id.estrella3)
      val star4 : ImageView = view.findViewById(R.id.estrella4)
      val star5 : ImageView = view.findViewById(R.id.estrella5)
 
+     var rating = ratingPassed/2
      var decimalValue =    rating - rating.toInt()
      var enterValue = rating.toInt()
 

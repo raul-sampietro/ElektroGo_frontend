@@ -69,13 +69,13 @@ class tripDetails : AppCompatActivity() {
      * @pre
      * @post Es mostren les estrelles segons la valoracio que l'usuari te.
      */
-    private fun renderRating(rating: Double) {
+    private fun renderRating(ratingPassed: Double) {
         val star1 : ImageView = this.findViewById(R.id.estrella1Details)
         val star2 : ImageView = this.findViewById(R.id.estrella2Details)
         val star3 : ImageView = this.findViewById(R.id.estrella3Details)
         val star4 : ImageView = this.findViewById(R.id.estrella4Details)
         val star5 : ImageView = this.findViewById(R.id.estrella5Details)
-
+        var rating = ratingPassed/2
         var decimalValue =    rating - rating.toInt()
         var enterValue = rating.toInt()
 
