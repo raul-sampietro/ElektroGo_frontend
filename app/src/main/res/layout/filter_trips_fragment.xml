@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -138,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -167,6 +167,9 @@
 
 
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/filterListView"
@@ -175,7 +178,18 @@
             android:clickable="true"
             tools:listitem="@layout/filter_list_item">
 
-        </ListView>
+            </ListView>
+
+            <Button
+                android:id="@+id/createTrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:layout_centerInParent="true"
+                android:text="Crear Nou Trajecte" />
+        </RelativeLayout>
+
     </LinearLayout>
 </RelativeLayout>
 

@@ -1,5 +1,5 @@
 /**
- * @file filterTripsFragment.kt
+ * @file filtrarTrajectesFragment.kt
  * @author Marina Alapont
  * @date 12/04/2022
  * @brief Implementacio d'un fragment per tal de cercar trajectes.
@@ -33,10 +33,12 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 import elektrogo.front.ui.CarPooling.tripDetails
+import elektrogo.front.model.Vehicle
+import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
+import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-
 
 /**
  * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
@@ -143,6 +145,7 @@ class filterTripsFragment : Fragment() {
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
         originText = requireActivity().findViewById(R.id.errorViewOriginFiltrar)
         destinationText = requireActivity().findViewById(R.id.errorViewDestinationFiltrar)
+        var createTripButton : Button = requireActivity().findViewById(R.id.createTrip)
 
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
@@ -176,6 +179,7 @@ class filterTripsFragment : Fragment() {
             timeFromButton.text = "Des de"
             autocompleteSupportFragment2.setText("")
         }
+
         val listView: ListView = view.findViewById(R.id.filterListView)
 
         filtrarButton.setOnClickListener {
@@ -188,7 +192,7 @@ class filterTripsFragment : Fragment() {
                 else {
                     filteredList = result.second
                     listView.adapter = ListAdapter(context as Activity, filteredList)
-                
+
                  listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
                      val i = Intent(context, tripDetails::class.java)
                      i.putExtra("username", filteredList[position].username)
@@ -209,6 +213,13 @@ class filterTripsFragment : Fragment() {
 
         }
 
+        createTripButton.setOnClickListener {
+            val fragmentNewCarPooling = NewCarPoolingFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.pooling, fragmentNewCarPooling, "findThisFragment")
+                .addToBackStack(null)
+                .commit();
+        }
         var day: Int = 28
         var month: Int = 10
         var year: Int = 1920
