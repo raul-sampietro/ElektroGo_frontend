@@ -31,6 +31,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.Vehicle
+import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
 import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
@@ -141,6 +142,7 @@ class filtrarTrajectesFragment : Fragment() {
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
         originText = requireActivity().findViewById(R.id.errorViewOriginFiltrar)
         destinationText = requireActivity().findViewById(R.id.errorViewDestinationFiltrar)
+        var createTripButton : Button = requireActivity().findViewById(R.id.createTrip)
 
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
@@ -174,6 +176,7 @@ class filtrarTrajectesFragment : Fragment() {
             timeFromButton.text = "Des de"
             autocompleteSupportFragment2.setText("")
         }
+
         val listView: ListView = view.findViewById(R.id.filterListView)
 
         filtrarButton.setOnClickListener {
@@ -191,6 +194,13 @@ class filtrarTrajectesFragment : Fragment() {
 
         }
 
+        createTripButton.setOnClickListener {
+            val fragmentNewCarPooling = NewCarPoolingFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.pooling, fragmentNewCarPooling, "findThisFragment")
+                .addToBackStack(null)
+                .commit();
+        }
         var day: Int = 28
         var month: Int = 10
         var year: Int = 1920
