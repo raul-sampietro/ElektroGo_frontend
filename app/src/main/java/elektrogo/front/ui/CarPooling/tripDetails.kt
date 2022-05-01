@@ -34,6 +34,8 @@ class tripDetails : AppCompatActivity() {
         val destinationString= intent.getStringExtra("destinationString")
         val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
 
+
+
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
         val startTimeText : TextView = this.findViewById(R.id.timeDetails)
@@ -42,6 +44,9 @@ class tripDetails : AppCompatActivity() {
         val detailsText : TextView = this.findViewById(R.id.detailsInfo)
         val origin: TextView = this.findViewById(R.id.originDetails)
         val destination: TextView = this.findViewById(R.id.destDetails)
+        val destinationFull : TextView = this.findViewById(R.id.destinationFull)
+        val originFull : TextView = this.findViewById(R.id.originFull)
+
 
         usernameText.text = username
         startDateText.text=startDate
@@ -54,6 +59,23 @@ class tripDetails : AppCompatActivity() {
         detailsText.text=details
         origin.text = originString
         destination.text=destinationString
+
+        var originBrief : String
+        if (originString!!.length > 20){
+            originBrief = originString.substring(0, 20)
+            originBrief += "..."
+            origin.text = originBrief
+        }
+        else origin.text = originString
+        originFull.text = originString
+        var destinationBrief : String
+        if (destinationString!!.length > 20){
+            destinationBrief = destinationString.substring(0, 20)
+            destinationBrief += "..."
+            destination.text = destinationBrief
+        }
+        else destination.text = destinationString
+        destinationFull.text=destinationString
 
         val ratingPair = viewModel.getRating(username!!)
         if (ratingPair.first != 200) {

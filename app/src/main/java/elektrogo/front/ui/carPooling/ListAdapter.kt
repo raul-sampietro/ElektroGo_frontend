@@ -53,12 +53,25 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         occupied += "/"
         occupied += f.offeredSeats.toString()
         occupiedseats.text = occupied
-        origin.text = f.origin
-        destination.text = f.destination
         startTime.text = f.startTime
         date.text = f.startDate
         user.text = f.username
 
+        var originBrief : String
+        if (f.origin.length > 24){
+            originBrief = f.origin.substring(0, 20)
+            originBrief += "..."
+            origin.text = originBrief
+        }
+        else origin.text = f.origin
+
+        var destinationBrief : String
+        if (f.destination.length > 24){
+            destinationBrief = f.destination.substring(0, 20)
+            destinationBrief += "..."
+            destination.text = destinationBrief
+        }
+        else destination.text = f.destination
 
         return view
     }
