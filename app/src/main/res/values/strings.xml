@@ -39,6 +39,10 @@
 
     <string name="SaveVehicle">Afegir</string>
     <string name="AddVehicle">Afegir vehicle</string>
+    <string name="MyVehicles">Els meus vehicles</string>
+    <string name="Achievements">Trofeus</string>
+    <string name="UpcomingTravels">Propers viatges</string>
+
 
     <string name="ObligatoryField">Aquest camp és obligatori</string>
     <string name="notEnoughCharactersLicensePlate">Has de introduir 7 o 8 caracters</string>

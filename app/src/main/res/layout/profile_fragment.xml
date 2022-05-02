@@ -18,8 +18,8 @@
             <RelativeLayout
                 android:id="@+id/pooling"
                 android:layout_width="350dp"
-                android:layout_height="250dp"
-                android:background="@drawable/profile_rounded_box"
+                android:layout_height="200dp"
+                android:background="@drawable/profile_rounded_box_with_shadow"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:padding="20dp">
@@ -27,8 +27,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <RelativeLayout
                         android:layout_width="70dp"
@@ -62,8 +62,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
-                            android:textAlignment="center"
                             android:text="Valoration"
+                            android:textAlignment="center"
                             android:textColor="@color/dark_green"
                             android:textSize="20sp"
                             tools:ignore="RtlSymmetry" />
@@ -76,10 +76,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Propers Viatges"
+                android:text="@string/UpcomingTravels"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="20sp"
+                android:paddingTop="20dp"
                 android:paddingStart="15dp"
                 tools:ignore="RtlSymmetry">
             </TextView>
@@ -93,7 +94,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Premis"
+                android:text="@string/Achievements"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -112,7 +113,7 @@
                     android:id="@+id/AddVehicleButton"
                     android:layout_width="367dp"
                     android:layout_height="78dp"
-                    android:text="@string/AddVehicle"
+                    android:text="@string/MyVehicles"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
