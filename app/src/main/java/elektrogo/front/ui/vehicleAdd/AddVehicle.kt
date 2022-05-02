@@ -18,6 +18,7 @@ import android.widget.*
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Vehicle
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
@@ -143,12 +144,11 @@ class AddVehicle : AppCompatActivity() {
                 else if (statusCode in 200..299){
                     addVehicleModelView.saveVehicleImage(licensePlate.text.toString(), bitmapVehicleImage!!)
                     Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
-                    finishActivity(Activity.RESULT_OK) //Back to menu
+                    var intent = Intent(this, VehicleListActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                    //finishActivity(Activity.RESULT_OK) //Back to menu
                 }
-
-
-
-
             }
             else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_LONG).show()
         }
@@ -181,8 +181,16 @@ class AddVehicle : AppCompatActivity() {
         }
     }
 
-
-
+    //Listener del botó d'enrere de la barra d'Android
+    override fun onBackPressed() {
+        if (onBackPressedDispatcher.hasEnabledCallbacks()) {
+            super.onBackPressed()
+        } else {
+            var intent = Intent(this, VehicleListActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
 
 
 }

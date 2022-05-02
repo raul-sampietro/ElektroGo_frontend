@@ -34,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
             SessionController.setCurrentSession(GoogleSessionAdapter())
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

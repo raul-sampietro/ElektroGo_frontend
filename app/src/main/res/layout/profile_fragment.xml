@@ -104,6 +104,13 @@
             </TextView>
 
             <Button
+                android:id="@+id/profile_become_driver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Become driver" />
+
+            <Button
                 android:id="@+id/AddVehicleButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,6 +123,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/profile_logout_button" />
+
+            <Button
+                android:id="@+id/profile_delete_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Esborrar compte" />
 
         </LinearLayout>
     </ScrollView>

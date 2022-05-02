@@ -25,6 +25,7 @@ class VehicleListActivity : AppCompatActivity() {
             var intent = Intent(this, MainActivity::class.java)
             intent.putExtra("origin", "vehicleList")
             startActivity(intent)
+            finish()
         }
     }
 

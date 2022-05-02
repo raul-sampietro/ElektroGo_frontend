@@ -41,6 +41,7 @@ class VehicleListFragment : Fragment() {
             //Toast.makeText(container?.context, "Clicked", Toast.LENGTH_LONG).show()
             val intent = Intent(container?.context, AddVehicle::class.java)
             resultLauncher.launch(intent)
+            requireActivity().finish()
         }
 
         listView.adapter = VehicleListAdapter(container?.context as Activity, vehicleList)

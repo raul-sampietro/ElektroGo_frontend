@@ -43,6 +43,11 @@ class ProfileFragment : Fragment() {
         val username: TextView = view.findViewById(R.id.profile_username)
         username.text = SessionController.getUsername(requireActivity())
 
+        val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
+        buttonDriver.setOnClickListener {
+
+        }
+
         val buttonCars: Button = view.findViewById(R.id.AddVehicleButton)
         buttonCars.setOnClickListener {
             val intent = Intent(container?.context, VehicleListActivity::class.java)
@@ -65,6 +70,12 @@ class ProfileFragment : Fragment() {
                 })
 
         }
+
+        val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
+        deleteButton.setOnClickListener {
+
+        }
+
         return view
     }
 
