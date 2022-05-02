@@ -6,29 +6,133 @@
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/AddVehicleButton"
-            android:layout_width="367dp"
-            android:layout_height="78dp"
-            android:text="@string/AddVehicle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/ValorarUsuariButton"
-            android:layout_width="367dp"
-            android:layout_height="78dp"
-            android:text="@string/valorar_usuari"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/AddVehicleButton" />
+            <RelativeLayout
+                android:id="@+id/pooling"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
+                android:background="@drawable/profile_rounded_box_with_shadow"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:padding="20dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="70dp"
+                        android:layout_height="70dp">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/avatar" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/profile_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="10dp"
+                            android:text="Username"
+                            android:textAlignment="center"
+                            android:textColor="@color/dark_green"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="10dp"
+                            android:text="Valoration"
+                            android:textAlignment="center"
+                            android:textColor="@color/dark_green"
+                            android:textSize="20sp"
+                            tools:ignore="RtlSymmetry" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/UpcomingTravels"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:paddingTop="20dp"
+                android:paddingStart="15dp"
+                tools:ignore="RtlSymmetry">
+            </TextView>
+            <ListView
+                android:id="@+id/filterListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/filter_list_item">
+            </ListView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Achievements"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:paddingTop="10dp"
+                android:paddingStart="15dp"
+                tools:ignore="RtlSymmetry">
+            </TextView>
+
+            <Button
+                android:id="@+id/profile_become_driver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Become driver" />
+
+            <Button
+                android:id="@+id/AddVehicleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/MyVehicles" />
+
+            <Button
+                android:id="@+id/profile_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/profile_logout_button" />
+
+            <Button
+                android:id="@+id/profile_delete_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Esborrar compte" />
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </FrameLayout>

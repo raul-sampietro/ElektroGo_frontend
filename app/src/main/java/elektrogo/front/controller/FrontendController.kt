@@ -2,10 +2,8 @@ package elektrogo.front.controller
 import android.graphics.Bitmap
 import android.util.Log
 import com.google.gson.Gson
-import elektrogo.front.model.CarPooling
-import elektrogo.front.model.Vehicle
-import elektrogo.front.model.ChargingStation
-import elektrogo.front.model.httpRespostes
+import elektrogo.front.controller.session.SessionController
+import elektrogo.front.model.*
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
@@ -21,7 +19,9 @@ import java.io.ByteArrayOutputStream
 
 object FrontendController {
     private const val URL_BASE = "http://10.4.41.58:8080/"
+    //private const val URL_BASE = "http://10.6.11.69:8080/"
     private const val URL_VEHICLE = "${URL_BASE}vehicle/"
+    private const val URL_USER = "${URL_BASE}user/"
 
     //Add functions you need here :)
     private val client = HttpClient(Android) {   //Exemple de com fer una crida amb el nostre servidor!
@@ -42,9 +42,9 @@ object FrontendController {
 
     }
 
-    suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
+    suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
         val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
-            parameter("userNDriver", "Test2")
+            parameter("userNDriver", username)
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
@@ -87,7 +87,6 @@ object FrontendController {
         }
     }
 
-
     suspend fun sendRouteInfo(latitudeOrigin: Double, longitudeOrigin: Double, latitudeDestination: Double, longitudeDestination: Double, drivingRange: Int): ArrayList<Double> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}route/calculate"){
             parameter("oriLat", latitudeOrigin)
@@ -110,7 +109,7 @@ object FrontendController {
         val status: Int = httpResponse.status.value
 
         val stations: ArrayList<ChargingStation>
-        if(status != 200) stations = ArrayList<ChargingStation>()
+        if ( status != 200) stations = ArrayList<ChargingStation>()
         else stations = httpResponse.receive()
         
         return Pair(status, stations)
@@ -161,6 +160,30 @@ object FrontendController {
             avgRating  = -1.0
         } else avgRating = httpResponse.receive()
         return Pair(status,avgRating)
+    }
+
+    suspend fun getUserById(id: String, provider: String): User? {
+        val httpResponse: HttpResponse = client.get(URL_USER) {
+            parameter("id", id)
+            parameter("provider", provider)
+        }
+        if (httpResponse.status.value != 200) {
+            return null
+        }
+        return httpResponse.receive()
+    }
+
+    suspend fun addUser(user: User): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}users/create") {
+            contentType(ContentType.Application.Json)
+            body = user
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        }
+        else return httpResponse.status.value
     }
 }
 
