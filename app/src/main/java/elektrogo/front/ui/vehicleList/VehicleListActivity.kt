@@ -31,7 +31,7 @@ class VehicleListActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frame_container, fragment)
+        transaction.replace(R.id.frame_container, fragment, "VehicleListFragment")
         transaction.commit()
     }
 }
