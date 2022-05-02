@@ -1,7 +1,7 @@
 /**
  * @file MapsFragmentViewModel.kt
- * @author Simón Helmuth Oliva Stark
- * @brief Aquest és el ViewModel del fragment Maps Fragment.
+ * @author Simon Helmuth Oliva Stark
+ * @brief Aquest es el ViewModel del fragment Maps Fragment.
  */
 
 package elektrogo.front.ui.map
@@ -14,22 +14,12 @@ import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.model.ChargingStation
-
 import kotlinx.coroutines.runBlocking
 
 /**
  * @brief La classe MapsFragmentViewModel conté els mètodes del fragment MapsFragment que no estan exclusivament relacionats amb la GUI.
  */
 class MapsFragmentViewModel : ViewModel() {
-
-    /**
-     * @brief Metode que obte els punts de carrega de la base de backend.
-     * @pre
-     * @return Retorna un ArrayList de les estacions de carrega que hi ha a la base de dades.
-     */
-    fun getStations() : ArrayList<ChargingStation> /*sintaxi per fer return*/ = runBlocking {
-        FrontendController.getChargingPoints()
-    }
 
     /**
      * @brief Metode que transforma un recurs vectorial en un Bitmap, per poder mostrar-ho al mapa.

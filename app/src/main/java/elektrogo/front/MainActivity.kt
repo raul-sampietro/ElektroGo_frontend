@@ -15,6 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
+import elektrogo.front.ui.Route.routeFragment
+import elektrogo.front.ui.carPooling.filterTripsFragment
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 
@@ -30,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.pooling -> {
                 toolbar.title = "Pooling"
+
+                val filtrarTrajectesFragment = filterTripsFragment()
+                openFragment(filtrarTrajectesFragment)
                 return@OnItemSelectedListener true
             }
             R.id.mapa -> {
@@ -41,6 +46,8 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.ruta -> {
                 toolbar.title = "Ruta"
+                val routeFragment = routeFragment()
+                openFragment(routeFragment)
                 return@OnItemSelectedListener true
             }
             R.id.perfil -> {
