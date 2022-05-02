@@ -2,6 +2,7 @@ package elektrogo.front.controller
 import android.graphics.Bitmap
 import android.util.Log
 import com.google.gson.Gson
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.*
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -41,9 +42,9 @@ object FrontendController {
 
     }
 
-    suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
+    suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
         val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
-            parameter("userNDriver", "Test2")
+            parameter("userNDriver", username)
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }

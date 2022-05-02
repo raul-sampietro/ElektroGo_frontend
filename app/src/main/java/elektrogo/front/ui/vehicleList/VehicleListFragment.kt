@@ -12,6 +12,7 @@ import android.widget.ListView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import elektrogo.front.*
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Vehicle
 import elektrogo.front.ui.vehicleAdd.AddVehicle
 
@@ -34,7 +35,7 @@ class VehicleListFragment : Fragment() {
         val listView: ListView = view.findViewById(R.id.list_view)
         val newVehicleButton: com.google.android.material.floatingactionbutton.FloatingActionButton = view.findViewById(R.id.fab)
 
-        vehicleList = viewModel.getVehicleList("Test2")
+        vehicleList = viewModel.getVehicleList(SessionController.getUsername(requireContext()))
 
         newVehicleButton.setOnClickListener {
             //Toast.makeText(container?.context, "Clicked", Toast.LENGTH_LONG).show()
