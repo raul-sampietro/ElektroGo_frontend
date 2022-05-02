@@ -7,13 +7,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.squareup.picasso.Picasso
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.R
 import elektrogo.front.model.Vehicle
@@ -27,7 +25,6 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.fragment_vehicle_list_item, null)
 
-        // TODO imageView
         val numberPlate : TextView = view.findViewById(R.id.listNumberPlate)
         val brand : TextView = view.findViewById(R.id.listBrand)
         val model : TextView = view.findViewById(R.id.listModel)
@@ -35,7 +32,10 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         val seats : TextView = view.findViewById(R.id.listSeats)
 
         val v = vehicleList[position]
-        numberPlate.text = v.numberPlate
+        val imageViewPhoto : ImageView =view.findViewById(R.id.vehicleImage)
+        val nPlate = v.numberPlate
+        Picasso.get().load("http://10.4.41.58:8080/vehicle/getImage?numberPlate=$nPlate").into(imageViewPhoto)
+        numberPlate.text = nPlate
         brand.text = v.brand
         model.text = v.model
         fabricationYear.text = v.fabricationYear.toString()

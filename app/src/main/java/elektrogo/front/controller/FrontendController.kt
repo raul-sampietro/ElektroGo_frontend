@@ -47,7 +47,7 @@ object FrontendController {
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle): Int {
         val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create") {
-            parameter("userNDriver", "Test")
+            parameter("userNDriver", "Test4")
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
@@ -79,8 +79,8 @@ object FrontendController {
         return vehicles
     }
 
-    @OptIn(InternalAPI::class)
-    suspend fun getVehiclePhoto(licensePlate: String): File {
+//    @OptIn(InternalAPI::class)
+/*    suspend fun getVehiclePhoto(licensePlate: String): File {
         val writer = FileWriter("/data/app/elektrogo/vehicleImages/${licensePlate}.png")
 
         client.get("${URL_VEHICLE}getImage").execute { response: HttpResponse ->
@@ -107,7 +107,7 @@ object FrontendController {
             writer.close()
         }
     }
-
+*/
     suspend fun deleteVehicle(username: String, numberPlate: String) {
         val response: HttpResponse = client.post("${URL_VEHICLE}deleteDriverVehicle") {
             parameter("nPVehicle", username)

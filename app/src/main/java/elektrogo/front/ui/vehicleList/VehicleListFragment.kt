@@ -34,7 +34,7 @@ class VehicleListFragment : Fragment() {
         val listView: ListView = view.findViewById(R.id.list_view)
         val newVehicleButton: com.google.android.material.floatingactionbutton.FloatingActionButton = view.findViewById(R.id.fab)
 
-        vehicleList = viewModel.getVehicleList("Test")
+        vehicleList = viewModel.getVehicleList("Test4")
 
         newVehicleButton.setOnClickListener {
             //Toast.makeText(container?.context, "Clicked", Toast.LENGTH_LONG).show()

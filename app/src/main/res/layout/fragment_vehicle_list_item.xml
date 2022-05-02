@@ -18,29 +18,16 @@
             android:layout_gravity="start|center"
             android:orientation="horizontal">
 
-            <!-- TODO Insertar foto aquí >
-            <RelativeLayout
+
+            <ImageView
+                android:id="@+id/vehicleImage"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:background="#00ADAB">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="foto"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-            < ####################### -->
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/outline_image_not_supported_24"/>
+                android:scaleType="centerCrop"
+                android:background="@drawable/outline_image_not_supported_24"
+               />
 
             <LinearLayout
                 android:layout_width="wrap_content"
