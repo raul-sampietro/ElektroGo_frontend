@@ -185,5 +185,16 @@ object FrontendController {
         }
         else return httpResponse.status.value
     }
+
+    suspend fun getUserProfilePhoto(username: String): String {
+        val httpResponse: HttpResponse = client.get(URL_USER) {
+            parameter("username", username)
+        }
+        if (httpResponse.status.value != 200) {
+            return ""
+        }
+        val user : User = httpResponse.receive()
+        return user.imageUrl
+    }
 }
 

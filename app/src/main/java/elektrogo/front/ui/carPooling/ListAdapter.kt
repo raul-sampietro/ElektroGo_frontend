@@ -14,7 +14,9 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.squareup.picasso.Picasso
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 /**
  * @brief La clase ListAdapter s'encarrega de mostrar, per cada trajecte de filteredList, l'informacio resultant en una llista.
@@ -73,6 +75,10 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         }
         else destination.text = f.destination
 
+        val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
+        val imagePath = viewModel.getUsersProfilePhoto(f.username)
+        if (!imagePath.equals("null")  or !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
+        else imageViewProfile.setImageResource(R.drawable.avatar)
         return view
     }
     /**

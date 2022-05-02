@@ -6,7 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.ui.carPooling.filterTripsViewModel
 import elektrogo.front.ui.carPooling.tripDetailsViewModel
 import org.w3c.dom.Text
@@ -79,8 +81,11 @@ class tripDetails : AppCompatActivity() {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second)
 
+        val imageViewProfile : ImageView = this.findViewById(R.id.profile_imageDetails)
+        val imagePath = viewModel.getUsersProfilePhoto(username)
+        if (!imagePath.equals("null")  or !imagePath.equals("")) Picasso.get().load(imagePath).into(imageViewProfile)
+        else imageViewProfile.setImageResource(R.drawable.avatar)
 
-        //  val imageid = intent.getIntExtra("imageid", R.drawable.a)
 
     }
     /**

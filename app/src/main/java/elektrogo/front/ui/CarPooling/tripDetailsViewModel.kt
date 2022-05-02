@@ -19,4 +19,8 @@ class tripDetailsViewModel : ViewModel() {
         return@runBlocking FrontendController.getRating(username)
     }
 
+    fun getUsersProfilePhoto(username: String): String = runBlocking {
+        return@runBlocking FrontendController.getUserProfilePhoto(username)
+    }
+
 }
