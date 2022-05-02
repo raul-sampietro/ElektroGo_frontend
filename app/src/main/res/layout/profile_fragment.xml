@@ -48,6 +48,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/profile_username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="10dp"
@@ -71,7 +72,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </RelativeLayout>
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,22 +103,20 @@
                 tools:ignore="RtlSymmetry">
             </TextView>
 
+            <Button
+                android:id="@+id/AddVehicleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/MyVehicles" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="20dp">
+            <Button
+                android:id="@+id/profile_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/profile_logout_button" />
 
-                <Button
-                    android:id="@+id/AddVehicleButton"
-                    android:layout_width="367dp"
-                    android:layout_height="78dp"
-                    android:text="@string/MyVehicles"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
 
