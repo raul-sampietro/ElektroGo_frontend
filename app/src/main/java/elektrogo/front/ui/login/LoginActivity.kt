@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import elektrogo.front.MainActivity
 import elektrogo.front.R
+import elektrogo.front.controller.session.GoogleSessionAdapter
+import elektrogo.front.controller.session.SessionController
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if (account != null) {
+            SessionController.setCurrentSession(GoogleSessionAdapter())
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

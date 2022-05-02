@@ -64,7 +64,7 @@
     <string name="btnValorar">Valora</string>
     <string name="valorar_usuari">Valorar Usuari</string>
 
-  <string name="dateLabel">Data</string>
+    <string name="dateLabel">Data</string>
     <string name="HourButton">Hora</string>
     <string name="HourExample">12:00</string>
     <string name="PublishButton">Publicar</string>
@@ -91,7 +91,8 @@
     <string name="firstLoginWelcome">Benvingut/da,</string>
     <string name="firstLoginTo">a</string>
     <string name="firstLoginSelectUsername">Siusplau, selecciona el teu nom d\'usuari</string>
-    <string name="firstLoginWarning">Atenció, tothom el prodrà veure</string>
+    <string name="firstLoginWarning">Atenció: </string>
+    <string name="firstLoginWarning2">tothom el prodrà veure</string>
     <string name="firstLoginUsername">nom d\'usuari</string>
     <string name="firstLoginSave">Guardar</string>
 

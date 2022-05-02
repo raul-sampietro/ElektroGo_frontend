@@ -23,7 +23,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import elektrogo.front.MainActivity
 import elektrogo.front.R
+import elektrogo.front.controller.FrontendController
+import elektrogo.front.controller.session.GoogleSessionAdapter
+import elektrogo.front.controller.session.SessionController
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 
@@ -73,11 +78,11 @@ class LoginFragment : Fragment() {
             }
 
             override fun onCancel() {
-                // App code
+                Toast.makeText(activity, "Login canceled", Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(exception: FacebookException) {
-                // App code
+                Toast.makeText(activity, "Exception rose: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -106,13 +111,19 @@ class LoginFragment : Fragment() {
             val account = completedTask.getResult(ApiException::class.java)
             // Signed in successfully, show authenticated UI.
             if (account != null) {
-                //TODO if (account.id not exists on BD) {
-                val firstLoginFragment = FirstLoginFragment()
-                val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-                transaction.replace(R.id.frame_container, firstLoginFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
-                //TODO } else {Intent to MainActivity}
+                // primer login de l'usuari
+                if (!existsUser(account.id!!, "GOOGLE")) {
+                    val firstLoginFragment = FirstLoginFragment()
+                    val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                    transaction.replace(R.id.frame_container, firstLoginFragment)
+                    transaction.addToBackStack(null)
+                    transaction.commit()
+                // no es el primer login del user
+                } else {
+                    SessionController.setCurrentSession(GoogleSessionAdapter())
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
 
         } catch (e: ApiException) {
@@ -120,5 +131,9 @@ class LoginFragment : Fragment() {
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(ContentValues.TAG, "signInResult:failed code=" + e.statusCode)
         }
+    }
+
+    private fun existsUser(id: String, provider: String): Boolean = runBlocking {
+        FrontendController.getUserById(id, provider) != null
     }
 }
