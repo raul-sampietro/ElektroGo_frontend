@@ -123,8 +123,42 @@ object FrontendController {
             val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
             val statusCode = responseJson.status
             return statusCode
+        } else return httpResponse.status.value
+    }
+
+   suspend fun getTrips(originLatitude: Double, originLongitude: Double, destinationLatitude: Double, destinationLongitude: Double, dateIni: String?, startTimeMin: String?, startTimeMax: String?): Pair<Int, ArrayList<CarPooling>> {
+       val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel"){
+           parameter("LatO", originLatitude)
+           parameter("LongO", originLongitude)
+           parameter("LatD", destinationLatitude)
+           parameter("LongD", destinationLongitude)
+           parameter("sDate", dateIni)
+           parameter("sTimeMin", startTimeMin)
+           parameter("sTimeMax", startTimeMax)
+       }
+       val trips: ArrayList<CarPooling>
+       val status: Int = httpResponse.status.value
+       if (httpResponse.status.value != 200) {
+           trips = ArrayList<CarPooling>()
+       }
+       else trips = httpResponse.receive()
+       return Pair(status,trips)
+   }
+
+    suspend fun getRating (username: String): Pair<Int,Double> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}user/avgRate") {
+            contentType(ContentType.Application.Json)
+            parameter("userName", username)
         }
-        else return httpResponse.status.value
+        var status : Int = httpResponse.status.value
+        var avgRating : Double
+        if (httpResponse.status.value != 200) {
+           /* val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            status = statusCode*/
+            avgRating  = -1.0
+        } else avgRating = httpResponse.receive()
+        return Pair(status,avgRating)
     }
 
     suspend fun getUserById(id: String, provider: String): User? {
@@ -151,3 +185,4 @@ object FrontendController {
         else return httpResponse.status.value
     }
 }
+

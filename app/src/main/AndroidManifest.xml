@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="elektrogo.front">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -17,8 +17,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.ElektroGo">
+        android:theme="@style/Theme.ElektroGo"
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".ui.CarPooling.tripDetails"
+            android:exported="false" />
 
         <activity
             android:name=".ui.login.LoginActivity"
@@ -35,8 +38,8 @@
 
         <activity
             android:name=".ui.vehicleAdd.AddVehicle"
-            android:label="@string/AddVehicle"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/AddVehicle" />
 
         <activity
             android:name=".MainActivity"
@@ -44,7 +47,8 @@
 
         <activity
             android:name=".ui.vehicleList.VehicleListActivity"
-            android:exported="true" />
+            android:exported="true">
+        </activity>
 
         <activity
             android:name=".ui.valorarUsuari.ValorarUsuariActivity"
@@ -69,6 +73,7 @@
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
     </application>
 
 </manifest>
