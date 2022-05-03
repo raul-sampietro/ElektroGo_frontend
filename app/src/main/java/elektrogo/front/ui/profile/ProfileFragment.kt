@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
+import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.Session
@@ -46,10 +47,11 @@ class ProfileFragment : Fragment() {
         val username: TextView = view.findViewById(R.id.profile_username)
         username.text = SessionController.getUsername(requireActivity())
 
-        val ratingPair = viewModel.getRating(SessionController.getUsername(requireContext()))
-        if (ratingPair.first != 200) {
-            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-        } else renderRating(ratingPair.second, view)
+        val user = SessionController.getUsername(requireActivity());
+        val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
+        val imagePath = viewModel.getUsersProfilePhoto(user)
+        if (!imagePath.equals("null")  or !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
+        else imageViewProfile.setImageResource(R.drawable.avatar)
 
         val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
         buttonDriver.setOnClickListener {

@@ -8,5 +8,9 @@ class ProfileViewModel : ViewModel() {
     fun getRating(username: String): Pair<Int, Double> = runBlocking {
         return@runBlocking FrontendController.getRating(username)
     }
+
+    fun getUsersProfilePhoto(username: String): String = runBlocking {
+        return@runBlocking FrontendController.getUserProfilePhoto(username)
+    }
     // TODO: Implement the ViewModel
 }
