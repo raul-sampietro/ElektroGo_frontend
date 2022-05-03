@@ -41,7 +41,7 @@
     <string name="AddVehicle">Afegir vehicle</string>
     <string name="MyVehicles">Els meus vehicles</string>
     <string name="Achievements">Trofeus</string>
-    <string name="UpcomingTravels">Propers viatges</string>
+    <string name="PersonalInformation">Informació Personal</string>
 
 
     <string name="ObligatoryField">Aquest camp és obligatori</string>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -13,11 +14,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import elektrogo.front.MainActivity
 import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
-import elektrogo.front.controller.FrontendController.addDriver
 import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
@@ -47,6 +45,11 @@ class ProfileFragment : Fragment() {
 
         val username: TextView = view.findViewById(R.id.profile_username)
         username.text = SessionController.getUsername(requireActivity())
+
+        val ratingPair = viewModel.getRating(SessionController.getUsername(requireContext()))
+        if (ratingPair.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        } else renderRating(ratingPair.second, view)
 
         val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
         buttonDriver.setOnClickListener {
@@ -84,6 +87,94 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun renderRating(ratingPassed: Double, view: View?) {
+        val star1: ImageView = requireView().findViewById(R.id.estrella1)
+        val star2: ImageView = requireView().findViewById(R.id.estrella2)
+        val star3: ImageView = requireView().findViewById(R.id.estrella3)
+        val star4: ImageView = requireView().findViewById(R.id.estrella4)
+        val star5: ImageView = requireView().findViewById(R.id.estrella5)
+
+        var rating = ratingPassed / 2
+        var decimalValue = rating - rating.toInt()
+        var enterValue = rating.toInt()
+
+        when (enterValue) {
+            0 -> {
+                if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                    star1.setImageResource(R.drawable.ic_starmigplena)
+                } else if (decimalValue >= 0.75) {
+                    star1.setImageResource(R.drawable.ic_starplena)
+                } else {
+                    star1.setImageResource(R.drawable.ic_starbuida)
+                }
+                star2.setImageResource(R.drawable.ic_starbuida)
+                star3.setImageResource(R.drawable.ic_starbuida)
+                star4.setImageResource(R.drawable.ic_starbuida)
+                star5.setImageResource(R.drawable.ic_starbuida)
+            }
+            1 -> {
+                star1.setImageResource(R.drawable.ic_starplena)
+                if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                    star2.setImageResource(R.drawable.ic_starmigplena)
+                } else if (decimalValue >= 0.75) {
+                    star2.setImageResource(R.drawable.ic_starplena)
+                } else {
+                    star2.setImageResource(R.drawable.ic_starbuida)
+                }
+                star3.setImageResource(R.drawable.ic_starbuida)
+                star4.setImageResource(R.drawable.ic_starbuida)
+                star5.setImageResource(R.drawable.ic_starbuida)
+            }
+            2 -> {
+                star1.setImageResource(R.drawable.ic_starplena)
+                star2.setImageResource(R.drawable.ic_starplena)
+                if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                    star3.setImageResource(R.drawable.ic_starmigplena)
+                } else if (decimalValue >= 0.75) {
+                    star3.setImageResource(R.drawable.ic_starplena)
+                } else {
+                    star3.setImageResource(R.drawable.ic_starbuida)
+                }
+                star4.setImageResource(R.drawable.ic_starbuida)
+                star5.setImageResource(R.drawable.ic_starbuida)
+            }
+            3 -> {
+                star1.setImageResource(R.drawable.ic_starplena)
+                star2.setImageResource(R.drawable.ic_starplena)
+                star3.setImageResource(R.drawable.ic_starplena)
+                if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                    star4.setImageResource(R.drawable.ic_starmigplena)
+                } else if (decimalValue >= 0.75) {
+                    star4.setImageResource(R.drawable.ic_starplena)
+                } else {
+                    star4.setImageResource(R.drawable.ic_starbuida)
+                }
+                star5.setImageResource(R.drawable.ic_starbuida)
+            }
+            4 -> {
+                star1.setImageResource(R.drawable.ic_starplena)
+                star2.setImageResource(R.drawable.ic_starplena)
+                star3.setImageResource(R.drawable.ic_starplena)
+                star4.setImageResource(R.drawable.ic_starplena)
+
+                if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                    star5.setImageResource(R.drawable.ic_starmigplena)
+                } else if (decimalValue >= 0.75) {
+                    star5.setImageResource(R.drawable.ic_starplena)
+                } else {
+                    star5.setImageResource(R.drawable.ic_starbuida)
+                }
+            }
+            5 -> {
+                star1.setImageResource(R.drawable.ic_starplena)
+                star2.setImageResource(R.drawable.ic_starplena)
+                star3.setImageResource(R.drawable.ic_starplena)
+                star4.setImageResource(R.drawable.ic_starplena)
+                star5.setImageResource(R.drawable.ic_starplena)
+            }
+        }
     }
 
     private fun addDriver(driver: Driver): Int = runBlocking {
