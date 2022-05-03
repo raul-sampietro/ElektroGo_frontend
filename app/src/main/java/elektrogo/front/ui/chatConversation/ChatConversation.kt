@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
 
 
@@ -38,10 +39,12 @@ class ChatConversation : AppCompatActivity() {
         val userA = b?.getString("userA").toString()
         val userB = b?.getString("userB").toString()
 
+        val sessionController = SessionController
+        val currentUser = sessionController.getUsername(this)
         conversation = viewModel.getConversation(userA, userB)
         val recyclerView = findViewById<RecyclerView>(R.id.listConversation)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ChatConversationAdapter(this, conversation)
+        adapter = ChatConversationAdapter(this, conversation, currentUser)
         recyclerView.adapter = adapter
         val position = adapter.itemCount - 1
         recyclerView.smoothScrollToPosition(position)
