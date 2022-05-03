@@ -156,7 +156,7 @@ class NewCarPoolingFragment() : Fragment() {
 
         //Obtenim les dades dels vehicles del usuari logejat
         //TODO NO FER-HO HARDCODED!
-        val vehicles = viewModel.getVehicleList("Test"); //Obtenim els vehicles de l'usuari
+        val vehicles = viewModel.getVehicleList(SessionController.getUsername(requireContext())); //Obtenim els vehicles de l'usuari
 
         //Ens encarreguem dels select menu
         //Menu de les matricules del vehicle
@@ -220,6 +220,7 @@ class NewCarPoolingFragment() : Fragment() {
                 val status = viewModel.saveCarpooling(newCarPoolingInfo)
                 if (status == 200){
                     Toast.makeText(context, resources.getString(R.string.savedCarpooling),Toast.LENGTH_SHORT).show()
+                    fragmentManager?.popBackStack()
                 } else Toast.makeText(context, resources.getString(R.string.errorCarpooling),Toast.LENGTH_SHORT).show()
 
             }
