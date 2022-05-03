@@ -122,6 +122,14 @@ object FrontendController {
         return Pair(status, stations)
     }
 
+    suspend fun rateUser(rating: Rating): Int {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}users/rate") {
+            contentType(ContentType.Application.Json)
+            body = rating
+        }
+        return httpResponse.status.value
+    }
+
     suspend fun saveCarpooling(trip: CarPooling): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE}car-pooling/create") {
             contentType(ContentType.Application.Json)
