@@ -2,7 +2,7 @@ package elektrogo.front.ui.chatConversation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View.OnFocusChangeListener
+import android.os.CountDownTimer
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -46,6 +46,17 @@ class ChatConversation : AppCompatActivity() {
         val position = adapter.itemCount - 1
         recyclerView.smoothScrollToPosition(position)
 
+        object : CountDownTimer(120000, 4000) {
+            override fun onTick(p0: Long) {
+                conversation = viewModel.getConversation(userA, userB)
+                adapter.updateData(conversation)
+                recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+            }
+
+            override fun onFinish() {
+            }
+        }.start()
+
         val backButton : ImageButton = findViewById(R.id.backButtonConversation)
         backButton.setOnClickListener {
             finish()
@@ -73,8 +84,7 @@ class ChatConversation : AppCompatActivity() {
 
             conversation = viewModel.getConversation(userA, userB)
             adapter.updateData(conversation)
-            val position = adapter.itemCount - 1
-            recyclerView.smoothScrollToPosition(position)
+            recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
     }
 
