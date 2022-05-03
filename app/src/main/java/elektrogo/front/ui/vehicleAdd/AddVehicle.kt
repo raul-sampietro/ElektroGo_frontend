@@ -147,7 +147,6 @@ class AddVehicle : AppCompatActivity() {
                     var intent = Intent(this, VehicleListActivity::class.java)
                     startActivity(intent)
                     finish()
-                    //finishActivity(Activity.RESULT_OK) //Back to menu
                 }
             }
             else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_LONG).show()
