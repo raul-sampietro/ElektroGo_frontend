@@ -1,8 +1,7 @@
-package elektrogo.front.ui.CarPooling
+package elektrogo.front.ui.carPooling
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.TextUtils
@@ -22,9 +21,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
-import elektrogo.front.model.Vehicle
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*

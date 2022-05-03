@@ -4,20 +4,15 @@
  * @date 28/04/2022
  * @brief Implementacio d'una classe per tal de veure la informacio detallada d'un trajecte.
  */
-package elektrogo.front.ui.CarPooling
+package elektrogo.front.ui.carPooling
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
-import elektrogo.front.controller.session.SessionController
-import elektrogo.front.ui.carPooling.filterTripsViewModel
-import elektrogo.front.ui.carPooling.tripDetailsViewModel
-import org.w3c.dom.Text
 
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.

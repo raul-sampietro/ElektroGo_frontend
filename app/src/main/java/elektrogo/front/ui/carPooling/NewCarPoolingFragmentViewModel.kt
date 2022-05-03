@@ -1,4 +1,4 @@
-package elektrogo.front.ui.CarPooling
+package elektrogo.front.ui.carPooling
 
 import androidx.lifecycle.ViewModel
 import elektrogo.front.controller.FrontendController

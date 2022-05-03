@@ -6,13 +6,8 @@
  */
 package elektrogo.front.ui.carPooling
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import androidx.core.content.ContextCompat
+
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.maps.model.BitmapDescriptor
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.model.CarPooling
