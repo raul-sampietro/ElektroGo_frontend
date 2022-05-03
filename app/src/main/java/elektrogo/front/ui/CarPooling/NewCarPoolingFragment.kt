@@ -1,6 +1,7 @@
 /**
  * @file NewCarPoolingFragment.kt
  * @author Joel Cardona
+ * @date 03/05/2022
  * @brief Aquesta classe implementa la logica associada a la vista de publicar trajecte de la app
  */
 package elektrogo.front.ui.CarPooling
