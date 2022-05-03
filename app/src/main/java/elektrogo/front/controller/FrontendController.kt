@@ -96,6 +96,16 @@ object FrontendController {
         }
     }
 
+    /**
+     * @brief S'encarrega de fer les crides a FrontendController corresponents per tal d'enviar la informacio d'origen, desti i autonomia per la ruta i rebre els waypoints.
+     * @param latitudeDestination latitud  del lloc de desti.
+     * @param longitudeDestination longitud del lloc de desti.
+     * @param latitudeOrigin latitud del lloc d'origen.
+     * @param longitudeOrigin longitud del lloc d'origen.
+     * @param drivingRange autonomia del vehicle en aquell instant
+     * @pre tots les parametres son no nulls
+     * @return Retorna el statusCode dins d'una array en cas d'error o un array amb longituds i latituds que representen els waypoints en cas contrari.
+     */
     suspend fun sendRouteInfo(
         latitudeOrigin: Double,
         longitudeOrigin: Double,
@@ -160,6 +170,19 @@ object FrontendController {
         } else return httpResponse.status.value
     }
 
+
+    /**
+     * @brief Metode que es comunica amb FrontendController per tal d'obtenir tots les trajectes pels quals els valors coincideixen amb els parametres passats.
+     * @param originLatitude latitud del origen del trajecte desitjat.
+     * @param originLongitude longitud del origen del trajecte desitjat.
+     * @param destinationLatitude latitud del destí del trajecte desitjat.
+     * @param destinationLongitude longitud del destí del trajecte desitjat.
+     * @param dateIni data d'inici del trajecte
+     * @param startTimeMin hora en la que es vol que com a mínim comenci el trajecte.
+     * @param startTimeMax hora en la que es vol que com a macim comenci el trajecte.
+     * @post Es retorna un llistat de objectes CarPooling que representen els trajectes que coincideixen amb la cerca.
+     * @return Retorna un Pair < Int, Array<CarPooling>> on int es el status code i el array els trajectes resultants.
+     */
     suspend fun getTrips(
         originLatitude: Double,
         originLongitude: Double,
@@ -186,17 +209,20 @@ object FrontendController {
         return Pair(status, trips)
     }
 
+    /**
+     * @brief Metode que es comunica amb Backend per tal d'obtenir la valoracio mitjana d'un usuari.
+     * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
+     * @return Retorna un Pair<Int,Double> on el int es el code status i el double la valoracio mitjana de l'usuari.
+     */
+
     suspend fun getRating(username: String): Pair<Int, Double> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}user/avgRate") {
             contentType(ContentType.Application.Json)
             parameter("userName", username)
         }
-        var status: Int = httpResponse.status.value
-        var avgRating: Double
+        val status: Int = httpResponse.status.value
+        val avgRating: Double
         if (httpResponse.status.value != 200) {
-            /* val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-            val statusCode = responseJson.status
-            status = statusCode*/
             avgRating = -1.0
         } else avgRating = httpResponse.receive()
         return Pair(status, avgRating)
@@ -240,6 +266,11 @@ object FrontendController {
         else return httpResponse.status.value
     }
 
+    /**
+     * @brief Metode que es comunica amb BackEnd per tal d'obtenir el path o uri de la fotografia de perfil d'un usuari.
+     * @param username nom d'usuari del usuari per el que volem la imatge de perfil.
+     * @return Retorna un String que es el path de la imatge de perfil de l'usuari per el qual l'hem demanat, si no en te retorna el string buit.
+     */
     suspend fun getUserProfilePhoto(username: String): String {
         val httpResponse: HttpResponse = client.get(URL_USER) {
             parameter("username", username)

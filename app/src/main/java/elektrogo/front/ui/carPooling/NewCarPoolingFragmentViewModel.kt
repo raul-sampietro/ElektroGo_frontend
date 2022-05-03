@@ -4,7 +4,7 @@
  * @date 03/05/2022
  * @brief Implementacio de la classe NewCarPoolingFragmentViewModel que s'encarrega de fer les crides amb el FrontendController
  */
-package elektrogo.front.ui.CarPooling
+package elektrogo.front.ui.carPooling
 
 import androidx.lifecycle.ViewModel
 import elektrogo.front.controller.FrontendController

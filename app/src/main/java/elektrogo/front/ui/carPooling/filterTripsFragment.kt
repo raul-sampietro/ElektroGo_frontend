@@ -1,5 +1,5 @@
 /**
- * @file filtrarTrajectesFragment.kt
+ * @file filterTripsFragment.kt
  * @author Marina Alapont
  * @date 12/04/2022
  * @brief Implementacio d'un fragment per tal de cercar trajectes.
@@ -32,10 +32,6 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
-import elektrogo.front.ui.CarPooling.tripDetails
-import elektrogo.front.model.Vehicle
-import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
-import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -70,19 +66,19 @@ class filterTripsFragment : Fragment() {
      */
     private lateinit var timeToButton: Button
     /**
-     * @brief Instancia que s'inicialitzara més tard per l'AutocompleteSupportFragment del primer cercador, de l'api Places.
+     * @brief Instancia que s'inicialitzara mes tard per l'AutocompleteSupportFragment del primer cercador, de l'api Places.
      */
     private lateinit var autocompleteSupportFragment : AutocompleteSupportFragment
     /**
-     * @brief Instancia que s'inicialitzara més tard per l'AutocompleteSupportFragment del segon cercador, de l'api Places.
+     * @brief Instancia que s'inicialitzara mes tard per l'AutocompleteSupportFragment del segon cercador, de l'api Places.
      */
     private lateinit var autocompleteSupportFragment2 : AutocompleteSupportFragment
     /**
-     * @brief Intsancia que s'inicialitzara més tard per al TextView que mostrara errors per al primer cercador .
+     * @brief Intsancia que s'inicialitzara mes tard per al TextView que mostrara errors per al primer cercador .
      */
     private lateinit var originText : TextView
     /**
-     * @brief Intsancia que s'inicialitzara més tard per al TextView que mostrara errors per al segon cercador .
+     * @brief Intsancia que s'inicialitzara mes tard per al TextView que mostrara errors per al segon cercador .
      */
     private lateinit var destinationText : TextView
     /**
@@ -131,7 +127,7 @@ class filterTripsFragment : Fragment() {
     }
 
     /**
-     * @brief Metode que s'executa un cop la vista ha estat creada. Conté tot el funcionament dels cercadors, els errors i el display de resultats.
+     * @brief Metode que s'executa un cop la vista ha estat creada. Conte tot el funcionament dels cercadors, els errors i el display de resultats.
      * @param view Vista que s'ha creat.
      * @param savedInstanceState Estat de la instancia.
      * @pre
@@ -304,7 +300,7 @@ class filterTripsFragment : Fragment() {
     /**
      * @brief Listener sobre els cercadors, fa els autocomplete de les localitzacions.
      * @pre
-     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que està buscant. En clickar una localització es guarda les coordenades d'aquesta.
+     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que esta buscant. En clickar una localitzacio es guarda les coordenades d'aquesta.
      */
     private fun getAutocompleteLocation () {
         autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))

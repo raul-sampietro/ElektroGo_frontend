@@ -16,7 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
-import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 /**
  * @brief La clase ListAdapter s'encarrega de mostrar, per cada trajecte de filteredList, l'informacio resultant en una llista.

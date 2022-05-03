@@ -1,19 +1,22 @@
-package elektrogo.front.ui.CarPooling
+/**
+ * @file tripDetails.kt
+ * @author Marina Alapont
+ * @date 28/04/2022
+ * @brief Implementacio d'una classe per tal de veure la informacio detallada d'un trajecte.
+ */
+package elektrogo.front.ui.carPooling
 
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
-import elektrogo.front.controller.session.SessionController
-import elektrogo.front.ui.carPooling.filterTripsViewModel
-import elektrogo.front.ui.carPooling.tripDetailsViewModel
-import org.w3c.dom.Text
 
-
+/**
+ * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
+ */
 class tripDetails : AppCompatActivity() {
 
     /**
@@ -21,6 +24,12 @@ class tripDetails : AppCompatActivity() {
      */
     private var viewModel: tripDetailsViewModel = tripDetailsViewModel()
 
+    /**
+     * @brief Metode que s'executa un cop l'activity ha estat creada. S'encarrega de mostrar per pantalla l'informacio rebuda per parametres del trajecte a veure'n els detalls.
+     * @param savedInstanceState Estat de la instancia.
+     * @pre
+     * @post capta l'informacio pasada desde el fragment filterTripsFragment i la mostra per pantalla.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trip_details)
