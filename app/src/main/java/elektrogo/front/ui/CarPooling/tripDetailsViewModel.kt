@@ -2,7 +2,7 @@
  * @file tripDetailsViewModel.java
  * @author Marina Alapont
  * @date 1/05/2022
- * @brief Implementacio d'un view model per tal de fer la comunicació entre la activity i el front controller.
+ * @brief Implementacio d'un view model per tal de fer la comunicacio entre la activity i el front controller.
  */
 package elektrogo.front.ui.carPooling
 
@@ -11,7 +11,7 @@ import elektrogo.front.controller.FrontendController
 import kotlinx.coroutines.runBlocking
 
 /**
- * @brief La clase tripDetailsViewModel s'encarrega de la comunicació de la GUI amb el front controller.
+ * @brief La clase tripDetailsViewModel s'encarrega de la comunicacio de la GUI amb el front controller.
  */
 class tripDetailsViewModel : ViewModel() {
 
