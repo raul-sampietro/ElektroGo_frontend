@@ -53,7 +53,6 @@ class ChatConversation : AppCompatActivity() {
             override fun onTick(p0: Long) {
                 conversation = viewModel.getConversation(userA, userB)
                 adapter.updateData(conversation)
-                recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onFinish() {

@@ -43,7 +43,7 @@ class ChatConversationAdapter internal constructor(context: Context?, data: Arra
     // binds the data to the TextView in each row
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.text.text = mData[position].message
-        holder.timestampText.text = mData[position].sentAt
+        holder.timestampText.text = mData[position].sentAt?.substring(5, 16)
     }
 
     // total number of rows

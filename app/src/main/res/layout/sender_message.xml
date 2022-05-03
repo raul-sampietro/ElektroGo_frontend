@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/timestamp"
             android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:textSize="12sp"
             android:text="timestamp"
             android:textColor="#434343"
