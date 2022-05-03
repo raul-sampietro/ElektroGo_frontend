@@ -13,12 +13,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import elektrogo.front.MainActivity
 import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
-import elektrogo.front.controller.FrontendController.addDriver
-import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
 import elektrogo.front.model.Driver

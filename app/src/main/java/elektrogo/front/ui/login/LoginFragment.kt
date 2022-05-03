@@ -10,10 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.Profile
+import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
@@ -26,6 +23,7 @@ import com.google.android.gms.tasks.Task
 import elektrogo.front.MainActivity
 import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
+import elektrogo.front.controller.session.FacebookSessionAdapter
 import elektrogo.front.controller.session.GoogleSessionAdapter
 import elektrogo.front.controller.session.SessionController
 import kotlinx.coroutines.runBlocking
@@ -75,6 +73,22 @@ class LoginFragment : Fragment() {
         signInButtonFacebook.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
             override fun onSuccess(loginResult: LoginResult?) {
                 Toast.makeText(activity, loginResult!!.accessToken.userId, Toast.LENGTH_SHORT).show()
+                val token = AccessToken.getCurrentAccessToken()
+                if (token != null) {
+                    // primer login de l'usuari
+                    if (!existsUser(Profile.getCurrentProfile()!!.id!!, "FACEBOOK")) {
+                        val firstLoginFragment = FirstLoginFragment()
+                        val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+                        transaction.replace(R.id.frame_container, firstLoginFragment)
+                        transaction.addToBackStack(null)
+                        transaction.commit()
+                    // no es el primer login del user
+                    } else {
+                        SessionController.setCurrentSession(FacebookSessionAdapter())
+                        val intent = Intent(requireActivity(), MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
             }
 
             override fun onCancel() {
@@ -125,7 +139,6 @@ class LoginFragment : Fragment() {
                     startActivity(intent)
                 }
             }
-
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
