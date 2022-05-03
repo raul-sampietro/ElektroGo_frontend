@@ -177,10 +177,18 @@ class filterTripsFragment : Fragment() {
         }
 
         val listView: ListView = view.findViewById(R.id.filterListView)
-
+        //mostro uns trajectes default a la llista
+    /*    var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+        if (resultDefault.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        }
+        else {
+            filteredList = resultDefault.second
+            listView.adapter = ListAdapter(context as Activity, filteredList)
+        }*/
         filtrarButton.setOnClickListener {
             if (validate()) {
-
+                //mostro els trajectes resultants de la busqueda
                var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
                 if (result.first != 200) {
                     Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
@@ -188,26 +196,26 @@ class filterTripsFragment : Fragment() {
                 else {
                     filteredList = result.second
                     listView.adapter = ListAdapter(context as Activity, filteredList)
-
-                 listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
-                     val i = Intent(context, tripDetails::class.java)
-                     i.putExtra("username", filteredList[position].username)
-                     i.putExtra("startDate", filteredList[position].startDate)
-                     i.putExtra("startTime", filteredList[position].startTime)
-                     i.putExtra("offeredSeats",filteredList[position].offeredSeats)
-                     i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
-                     i.putExtra("restrictions", filteredList[position].restrictions)
-                     i.putExtra("details", filteredList[position].details)
-                     i.putExtra("originString", filteredList[position].origin)
-                     i.putExtra("destinationString", filteredList[position].destination)
-                     i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
-                    startActivity(i)
-                })
                 }
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
         }
+
+        listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+            val i = Intent(context, tripDetails::class.java)
+            i.putExtra("username", filteredList[position].username)
+            i.putExtra("startDate", filteredList[position].startDate)
+            i.putExtra("startTime", filteredList[position].startTime)
+            i.putExtra("offeredSeats",filteredList[position].offeredSeats)
+            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
+            i.putExtra("restrictions", filteredList[position].restrictions)
+            i.putExtra("details", filteredList[position].details)
+            i.putExtra("originString", filteredList[position].origin)
+            i.putExtra("destinationString", filteredList[position].destination)
+            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+            startActivity(i)
+        })
 
         createTripButton.setOnClickListener {
             val fragmentNewCarPooling = NewCarPoolingFragment()
