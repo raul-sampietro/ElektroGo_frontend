@@ -1,5 +1,5 @@
 /**
- * @file filtrarTrajectesFragment.kt
+ * @file filterTripsFragment.kt
  * @author Marina Alapont
  * @date 12/04/2022
  * @brief Implementacio d'un fragment per tal de cercar trajectes.
@@ -33,9 +33,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 import elektrogo.front.ui.CarPooling.tripDetails
-import elektrogo.front.model.Vehicle
 import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
-import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -131,7 +129,7 @@ class filterTripsFragment : Fragment() {
     }
 
     /**
-     * @brief Metode que s'executa un cop la vista ha estat creada. Conté tot el funcionament dels cercadors, els errors i el display de resultats.
+     * @brief Metode que s'executa un cop la vista ha estat creada. Conte tot el funcionament dels cercadors, els errors i el display de resultats.
      * @param view Vista que s'ha creat.
      * @param savedInstanceState Estat de la instancia.
      * @pre

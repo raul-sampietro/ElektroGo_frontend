@@ -15,10 +15,21 @@ import kotlinx.coroutines.runBlocking
  */
 class tripDetailsViewModel : ViewModel() {
 
+    /**
+     * @brief Metode que es comunica amb FrontendController per tal d'obtenir la valoracio mitjana d'un usuari.
+     * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
+     * @return Retorna un Pair<Int,Double> on el int es el code status i el double la valoracio mitjana de l'usuari.
+     */
+
     fun getRating(username: String): Pair<Int, Double> = runBlocking {
         return@runBlocking FrontendController.getRating(username)
     }
 
+    /**
+     * @brief Metode que es comunica amb FrontendController per tal d'obtenir el path o uri de la fotografia de perfil d'un usuari.
+     * @param username nom d'usuari del usuari per el que volem la imatge de perfil.
+     * @return Retorna un String que es el path de la imatge de perfil de l'usuari per el qual l'hem demanat.
+     */
     fun getUsersProfilePhoto(username: String): String = runBlocking {
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
