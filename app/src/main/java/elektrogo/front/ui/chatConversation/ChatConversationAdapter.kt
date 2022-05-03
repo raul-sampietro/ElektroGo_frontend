@@ -5,14 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import elektrogo.front.R
 import elektrogo.front.model.Message
+
 
 class ChatConversationAdapter internal constructor(context: Context?, data: ArrayList<Message>) :
     RecyclerView.Adapter<ChatConversationAdapter.ViewHolder>() {
     private val mData: ArrayList<Message>
     private val mInflater: LayoutInflater
+
+
+    fun updateData(messages: ArrayList<Message>) {
+        mData.clear()
+        mData.addAll(messages)
+        notifyDataSetChanged()
+    }
 
     // inflates the row layout from xml when needed
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

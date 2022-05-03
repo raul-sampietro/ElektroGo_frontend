@@ -2,7 +2,7 @@ package elektrogo.front.ui.chatConversation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
+import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -51,6 +51,11 @@ class ChatConversation : AppCompatActivity() {
             finish()
         }
 
+        val editText : EditText = findViewById(R.id.messageToSend)
+        editText.setOnClickListener {
+            recyclerView.smoothScrollToPosition(position)
+        }
+
         val sendButton : ImageButton = findViewById(R.id.sendMessage)
         sendButton.setOnClickListener {
             val text: EditText = findViewById(R.id.messageToSend)
@@ -58,13 +63,18 @@ class ChatConversation : AppCompatActivity() {
             if (message != "") viewModel.sendMessage(userA, userB, message)
             text.text.clear()
 
+            /*
             val view = this.currentFocus
             if (view != null) {
                 val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
             }
+             */
 
-            recreate()
+            conversation = viewModel.getConversation(userA, userB)
+            adapter.updateData(conversation)
+            val position = adapter.itemCount - 1
+            recyclerView.smoothScrollToPosition(position)
         }
     }
 
