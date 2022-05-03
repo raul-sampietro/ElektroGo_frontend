@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
+import org.w3c.dom.Text
 
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
@@ -88,7 +89,9 @@ class tripDetails : AppCompatActivity() {
         val ratingPair = viewModel.getRating(username!!)
         if (ratingPair.first != 200) {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-        } else renderRating(ratingPair.second)
+        } else renderRating(ratingPair.second!!.ratingValue)
+        val numValorations : TextView = this.findViewById(R.id.numberValorations)
+        numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
 
         val imageViewProfile : ImageView = this.findViewById(R.id.profile_imageDetails)
         val imagePath = viewModel.getUsersProfilePhoto(username)

@@ -48,7 +48,9 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         val ratingPair = viewModel.getRating(f.username)
         if (ratingPair.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-        } else renderRating(ratingPair.second, view)
+        } else renderRating(ratingPair.second!!.ratingValue, view)
+        val numValorations : TextView = view.findViewById(R.id.numberValorations)
+        numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
 
         var occupied : String = (f.offeredSeats - f.occupiedSeats).toString()
         occupied += "/"
