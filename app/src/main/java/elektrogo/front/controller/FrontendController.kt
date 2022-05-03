@@ -309,5 +309,15 @@ object FrontendController {
         }
         else return httpResponse.status.value
     }
+
+    suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
+            val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel")
+            val trips: ArrayList<CarPooling>
+            val status: Int = httpResponse.status.value
+            if (httpResponse.status.value != 200) {
+                trips = ArrayList<CarPooling>()
+            } else trips = httpResponse.receive()
+            return Pair(status, trips)
+    }
 }
 
