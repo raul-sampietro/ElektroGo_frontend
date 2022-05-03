@@ -159,8 +159,8 @@ class NewCarPoolingFragment() : Fragment() {
 
         //Obtenim les dades dels vehicles del usuari logejat
         //TODO NO FER-HO HARDCODED!
-        val vehicles = viewModel.getVehicleList(; //Obtenim els vehicles de l'usuari
-        SessionController.getUsername(requireContext()))
+        val vehicles = viewModel.getVehicleList(SessionController.getUsername(requireContext())); //Obtenim els vehicles de l'usuari
+
         //Ens encarreguem dels select menu
         //Menu de les matricules del vehicle
         var matricules : ArrayList<String> = arrayListOf()
