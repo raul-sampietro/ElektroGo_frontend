@@ -32,7 +32,7 @@ class ProfileFragment : Fragment() {
         fun newInstance() = ProfileFragment()
     }
 
-    private lateinit var viewModel: ProfileViewModel
+    private var viewModel: ProfileViewModel = ProfileViewModel()
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
@@ -52,6 +52,106 @@ class ProfileFragment : Fragment() {
         val imagePath = viewModel.getUsersProfilePhoto(user)
         if (!imagePath.equals("null")  or !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
+
+        val ratingPair = viewModel.getRating(user)
+        if (ratingPair.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        } else {
+            val star1: ImageView = view.findViewById(R.id.estrella1)
+            val star2: ImageView = view.findViewById(R.id.estrella2)
+            val star3: ImageView = view.findViewById(R.id.estrella3)
+            val star4: ImageView = view.findViewById(R.id.estrella4)
+            val star5: ImageView = view.findViewById(R.id.estrella5)
+
+            var rating = ratingPair.second / 2
+            var decimalValue = rating - rating.toInt()
+            var enterValue = rating.toInt()
+
+            when (enterValue) {
+                0 -> {
+                    if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                        star1.setImageResource(R.drawable.ic_starmigplena)
+                    } else if (decimalValue >= 0.75) {
+                        star1.setImageResource(R.drawable.ic_starplena)
+                    } else {
+                        star1.setImageResource(R.drawable.ic_starbuida)
+                    }
+                    star2.setImageResource(R.drawable.ic_starbuida)
+                    star3.setImageResource(R.drawable.ic_starbuida)
+                    star4.setImageResource(R.drawable.ic_starbuida)
+                    star5.setImageResource(R.drawable.ic_starbuida)
+                }
+                1 -> {
+                    star1.setImageResource(R.drawable.ic_starplena)
+                    if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                        star2.setImageResource(R.drawable.ic_starmigplena)
+                    } else if (decimalValue >= 0.75) {
+                        star2.setImageResource(R.drawable.ic_starplena)
+                    } else {
+                        star2.setImageResource(R.drawable.ic_starbuida)
+                    }
+                    star3.setImageResource(R.drawable.ic_starbuida)
+                    star4.setImageResource(R.drawable.ic_starbuida)
+                    star5.setImageResource(R.drawable.ic_starbuida)
+                }
+                2 -> {
+                    star1.setImageResource(R.drawable.ic_starplena)
+                    star2.setImageResource(R.drawable.ic_starplena)
+                    if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                        star3.setImageResource(R.drawable.ic_starmigplena)
+                    } else if (decimalValue >= 0.75) {
+                        star3.setImageResource(R.drawable.ic_starplena)
+                    } else {
+                        star3.setImageResource(R.drawable.ic_starbuida)
+                    }
+                    star4.setImageResource(R.drawable.ic_starbuida)
+                    star5.setImageResource(R.drawable.ic_starbuida)
+                }
+                3 -> {
+                    star1.setImageResource(R.drawable.ic_starplena)
+                    star2.setImageResource(R.drawable.ic_starplena)
+                    star3.setImageResource(R.drawable.ic_starplena)
+                    if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                        star4.setImageResource(R.drawable.ic_starmigplena)
+                    } else if (decimalValue >= 0.75) {
+                        star4.setImageResource(R.drawable.ic_starplena)
+                    } else {
+                        star4.setImageResource(R.drawable.ic_starbuida)
+                    }
+                    star5.setImageResource(R.drawable.ic_starbuida)
+                }
+                4 -> {
+                    star1.setImageResource(R.drawable.ic_starplena)
+                    star2.setImageResource(R.drawable.ic_starplena)
+                    star3.setImageResource(R.drawable.ic_starplena)
+                    star4.setImageResource(R.drawable.ic_starplena)
+
+                    if (decimalValue >= 0.25 && decimalValue < 0.75) {
+                        star5.setImageResource(R.drawable.ic_starmigplena)
+                    } else if (decimalValue >= 0.75) {
+                        star5.setImageResource(R.drawable.ic_starplena)
+                    } else {
+                        star5.setImageResource(R.drawable.ic_starbuida)
+                    }
+                }
+                5 -> {
+                    star1.setImageResource(R.drawable.ic_starplena)
+                    star2.setImageResource(R.drawable.ic_starplena)
+                    star3.setImageResource(R.drawable.ic_starplena)
+                    star4.setImageResource(R.drawable.ic_starplena)
+                    star5.setImageResource(R.drawable.ic_starplena)
+                }
+            }
+        }
+
+        val userCompleteName: TextView = view.findViewById(R.id.completeName)
+        userCompleteName.text = SessionController.getName(requireActivity());
+
+        val userMail: TextView = view.findViewById(R.id.email)
+        userMail.text = SessionController.getEmail(requireActivity());
+
+        val provider: TextView = view.findViewById(R.id.login)
+        provider.text = SessionController.getProvider(requireActivity());
 
         val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
         buttonDriver.setOnClickListener {
@@ -91,93 +191,6 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    private fun renderRating(ratingPassed: Double, view: View?) {
-        val star1: ImageView = requireView().findViewById(R.id.estrella1)
-        val star2: ImageView = requireView().findViewById(R.id.estrella2)
-        val star3: ImageView = requireView().findViewById(R.id.estrella3)
-        val star4: ImageView = requireView().findViewById(R.id.estrella4)
-        val star5: ImageView = requireView().findViewById(R.id.estrella5)
-
-        var rating = ratingPassed / 2
-        var decimalValue = rating - rating.toInt()
-        var enterValue = rating.toInt()
-
-        when (enterValue) {
-            0 -> {
-                if (decimalValue >= 0.25 && decimalValue < 0.75) {
-                    star1.setImageResource(R.drawable.ic_starmigplena)
-                } else if (decimalValue >= 0.75) {
-                    star1.setImageResource(R.drawable.ic_starplena)
-                } else {
-                    star1.setImageResource(R.drawable.ic_starbuida)
-                }
-                star2.setImageResource(R.drawable.ic_starbuida)
-                star3.setImageResource(R.drawable.ic_starbuida)
-                star4.setImageResource(R.drawable.ic_starbuida)
-                star5.setImageResource(R.drawable.ic_starbuida)
-            }
-            1 -> {
-                star1.setImageResource(R.drawable.ic_starplena)
-                if (decimalValue >= 0.25 && decimalValue < 0.75) {
-                    star2.setImageResource(R.drawable.ic_starmigplena)
-                } else if (decimalValue >= 0.75) {
-                    star2.setImageResource(R.drawable.ic_starplena)
-                } else {
-                    star2.setImageResource(R.drawable.ic_starbuida)
-                }
-                star3.setImageResource(R.drawable.ic_starbuida)
-                star4.setImageResource(R.drawable.ic_starbuida)
-                star5.setImageResource(R.drawable.ic_starbuida)
-            }
-            2 -> {
-                star1.setImageResource(R.drawable.ic_starplena)
-                star2.setImageResource(R.drawable.ic_starplena)
-                if (decimalValue >= 0.25 && decimalValue < 0.75) {
-                    star3.setImageResource(R.drawable.ic_starmigplena)
-                } else if (decimalValue >= 0.75) {
-                    star3.setImageResource(R.drawable.ic_starplena)
-                } else {
-                    star3.setImageResource(R.drawable.ic_starbuida)
-                }
-                star4.setImageResource(R.drawable.ic_starbuida)
-                star5.setImageResource(R.drawable.ic_starbuida)
-            }
-            3 -> {
-                star1.setImageResource(R.drawable.ic_starplena)
-                star2.setImageResource(R.drawable.ic_starplena)
-                star3.setImageResource(R.drawable.ic_starplena)
-                if (decimalValue >= 0.25 && decimalValue < 0.75) {
-                    star4.setImageResource(R.drawable.ic_starmigplena)
-                } else if (decimalValue >= 0.75) {
-                    star4.setImageResource(R.drawable.ic_starplena)
-                } else {
-                    star4.setImageResource(R.drawable.ic_starbuida)
-                }
-                star5.setImageResource(R.drawable.ic_starbuida)
-            }
-            4 -> {
-                star1.setImageResource(R.drawable.ic_starplena)
-                star2.setImageResource(R.drawable.ic_starplena)
-                star3.setImageResource(R.drawable.ic_starplena)
-                star4.setImageResource(R.drawable.ic_starplena)
-
-                if (decimalValue >= 0.25 && decimalValue < 0.75) {
-                    star5.setImageResource(R.drawable.ic_starmigplena)
-                } else if (decimalValue >= 0.75) {
-                    star5.setImageResource(R.drawable.ic_starplena)
-                } else {
-                    star5.setImageResource(R.drawable.ic_starbuida)
-                }
-            }
-            5 -> {
-                star1.setImageResource(R.drawable.ic_starplena)
-                star2.setImageResource(R.drawable.ic_starplena)
-                star3.setImageResource(R.drawable.ic_starplena)
-                star4.setImageResource(R.drawable.ic_starplena)
-                star5.setImageResource(R.drawable.ic_starplena)
-            }
-        }
-    }
 
     private fun addDriver(driver: Driver): Int = runBlocking {
         FrontendController.addDriver(driver)

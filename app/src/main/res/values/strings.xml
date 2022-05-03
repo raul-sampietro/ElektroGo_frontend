@@ -39,9 +39,15 @@
 
     <string name="SaveVehicle">Afegir</string>
     <string name="AddVehicle">Afegir vehicle</string>
+
     <string name="MyVehicles">Els meus vehicles</string>
+    <string name="BecomeDriver">Registrar carnet de conduir</string>
     <string name="Achievements">Trofeus</string>
     <string name="PersonalInformation">Informació Personal</string>
+    <string name="Username">Nom Usuari</string>
+    <string name="CompleteName">Nom</string>
+    <string name="email">Email</string>
+    <string name="Login">Login amb</string>
 
 
     <string name="ObligatoryField">Aquest camp és obligatori</string>
