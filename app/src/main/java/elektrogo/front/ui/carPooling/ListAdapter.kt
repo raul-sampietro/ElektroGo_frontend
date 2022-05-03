@@ -76,7 +76,7 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
 
         val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
         val imagePath = viewModel.getUsersProfilePhoto(f.username)
-        if (!imagePath.equals("null")  or !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
+        if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
         return view
     }
