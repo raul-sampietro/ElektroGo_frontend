@@ -26,13 +26,12 @@
                 android:background="#00ADAB"
                 android:layout_gravity="center">
 
-                <TextView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="foto"
-                    android:textSize="14sp" />
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FF000000"/>
 
             </RelativeLayout>
             <!-- ####################### -->
