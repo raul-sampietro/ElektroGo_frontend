@@ -19,28 +19,30 @@ import java.io.ByteArrayOutputStream
 
 object FrontendController {
     private const val URL_BASE = "http://10.4.41.58:8080/"
+
     //private const val URL_BASE = "http://10.6.11.69:8080/"
     private const val URL_VEHICLE = "${URL_BASE}vehicle/"
     private const val URL_USER = "${URL_BASE}user/"
 
     //Add functions you need here :)
-    private val client = HttpClient(Android) {   //Exemple de com fer una crida amb el nostre servidor!
-        expectSuccess = false
-        engine {
-            connectTimeout = 10_000
-            socketTimeout = 10_000
-        }
-        install(Logging) {
-            level = LogLevel.ALL
-        }
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
-                prettyPrint = true
-                isLenient = true
-            })
-        }
+    private val client =
+        HttpClient(Android) {   //Exemple de com fer una crida amb el nostre servidor!
+            expectSuccess = false
+            engine {
+                connectTimeout = 10_000
+                socketTimeout = 10_000
+            }
+            install(Logging) {
+                level = LogLevel.ALL
+            }
+            install(JsonFeature) {
+                serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+                    prettyPrint = true
+                    isLenient = true
+                })
+            }
 
-    }
+        }
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
         val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
@@ -52,12 +54,11 @@ object FrontendController {
             val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
             val statusCode = responseJson.status
             return statusCode
-        }
-        else return httpResponse.status.value
+        } else return httpResponse.status.value
     }
 
     @OptIn(InternalAPI::class)
-    suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap){
+    suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap) {
         val stream = ByteArrayOutputStream()
         vehiclePic.compress(Bitmap.CompressFormat.PNG, 20, stream)
         val image = stream.toByteArray()
@@ -87,8 +88,14 @@ object FrontendController {
         }
     }
 
-    suspend fun sendRouteInfo(latitudeOrigin: Double, longitudeOrigin: Double, latitudeDestination: Double, longitudeDestination: Double, drivingRange: Int): ArrayList<Double> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}route/calculate"){
+    suspend fun sendRouteInfo(
+        latitudeOrigin: Double,
+        longitudeOrigin: Double,
+        latitudeDestination: Double,
+        longitudeDestination: Double,
+        drivingRange: Int
+    ): ArrayList<Double> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}route/calculate") {
             parameter("oriLat", latitudeOrigin)
             parameter("oriLon", longitudeOrigin)
             parameter("destLat", latitudeDestination)
@@ -100,18 +107,18 @@ object FrontendController {
             val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
             val statusCode = responseJson.status
             waypoints = arrayListOf(statusCode.toDouble())
-        }
-        else  waypoints = httpResponse.receive()
+        } else waypoints = httpResponse.receive()
         return waypoints
-   }
+    }
+
     suspend fun getChargingPoints(): Pair<Int, ArrayList<ChargingStation>> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}ChargingStations")
         val status: Int = httpResponse.status.value
 
         val stations: ArrayList<ChargingStation>
-        if ( status != 200) stations = ArrayList<ChargingStation>()
+        if (status != 200) stations = ArrayList<ChargingStation>()
         else stations = httpResponse.receive()
-        
+
         return Pair(status, stations)
     }
 
@@ -127,40 +134,48 @@ object FrontendController {
         } else return httpResponse.status.value
     }
 
-   suspend fun getTrips(originLatitude: Double, originLongitude: Double, destinationLatitude: Double, destinationLongitude: Double, dateIni: String?, startTimeMin: String?, startTimeMax: String?): Pair<Int, ArrayList<CarPooling>> {
-       val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel"){
-           parameter("LatO", originLatitude)
-           parameter("LongO", originLongitude)
-           parameter("LatD", destinationLatitude)
-           parameter("LongD", destinationLongitude)
-           parameter("sDate", dateIni)
-           parameter("sTimeMin", startTimeMin)
-           parameter("sTimeMax", startTimeMax)
-       }
-       val trips: ArrayList<CarPooling>
-       val status: Int = httpResponse.status.value
-       if (httpResponse.status.value != 200) {
-           trips = ArrayList<CarPooling>()
-       }
-       else trips = httpResponse.receive()
-       return Pair(status,trips)
-   }
+    suspend fun getTrips(
+        originLatitude: Double,
+        originLongitude: Double,
+        destinationLatitude: Double,
+        destinationLongitude: Double,
+        dateIni: String?,
+        startTimeMin: String?,
+        startTimeMax: String?
+    ): Pair<Int, ArrayList<CarPooling>> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel") {
+            parameter("LatO", originLatitude)
+            parameter("LongO", originLongitude)
+            parameter("LatD", destinationLatitude)
+            parameter("LongD", destinationLongitude)
+            parameter("sDate", dateIni)
+            parameter("sTimeMin", startTimeMin)
+            parameter("sTimeMax", startTimeMax)
+        }
+        val trips: ArrayList<CarPooling>
+        val status: Int = httpResponse.status.value
+        if (httpResponse.status.value != 200) {
+            trips = ArrayList<CarPooling>()
+        } else trips = httpResponse.receive()
+        return Pair(status, trips)
+    }
 
-    suspend fun getRating (username: String): Pair<Int,Double> {
+    suspend fun getRating(username: String): Pair<Int, Double> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}user/avgRate") {
             contentType(ContentType.Application.Json)
             parameter("userName", username)
         }
-        var status : Int = httpResponse.status.value
-        var avgRating : Double
+        var status: Int = httpResponse.status.value
+        var avgRating: Double
         if (httpResponse.status.value != 200) {
-           /* val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            /* val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
             val statusCode = responseJson.status
             status = statusCode*/
-            avgRating  = -1.0
+            avgRating = -1.0
         } else avgRating = httpResponse.receive()
-        return Pair(status,avgRating)
+        return Pair(status, avgRating)
     }
+
 
     suspend fun getUserById(id: String, provider: String): User? {
         val httpResponse: HttpResponse = client.get(URL_USER) {
@@ -185,7 +200,7 @@ object FrontendController {
         }
         else return httpResponse.status.value
     }
-    
+
     suspend fun addDriver(driver: Driver): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE}drivers/create") {
             contentType(ContentType.Application.Json)
@@ -208,6 +223,34 @@ object FrontendController {
         }
         val user : User = httpResponse.receive()
         return user.imageUrl
+    }
+
+    suspend fun getChatList(username: String): ArrayList<String> {
+        val chats: ArrayList<String> = client.get("${URL_BASE}chat/findByUser") {
+            parameter("user", username)
+        }
+        return chats
+    }
+
+    suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
+        val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByConversation") {
+            parameter("userA", userA)
+            parameter("userB", userB)
+        }
+        return chats
+    }
+
+    suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}chat/sendMessage"){
+            parameter("sender", sender)
+            parameter("receiver", receiver)
+            parameter("message", message)
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            return responseJson.status
+        }
+        else return httpResponse.status.value
     }
 }
 

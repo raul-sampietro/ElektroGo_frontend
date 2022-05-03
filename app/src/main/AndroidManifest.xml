@@ -20,6 +20,10 @@
         android:theme="@style/Theme.ElektroGo"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name=".ui.chatConversation.ChatConversation"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.CarPooling.tripDetails"
             android:exported="false" />
 

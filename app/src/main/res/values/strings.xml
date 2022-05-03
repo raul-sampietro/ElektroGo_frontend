@@ -105,5 +105,7 @@
     <string name="facebook_client_token">d2fe733d766ef258b456bfcbbdb78de2</string>
     <string name="profile_logout_button">Tancar Sessió</string>
 
+    <string name="chat">Chat</string>
+    <string name="message">Message</string>
 
 </resources>
