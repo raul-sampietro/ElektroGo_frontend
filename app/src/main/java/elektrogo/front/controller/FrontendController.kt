@@ -1,3 +1,8 @@
+/**
+ * @file FrontendController.kt
+ * @author Simon Oliva, Raül Sampietro, Marina Alapont, Joel Cardona, Adria Abad
+ * @brief Aquesta classe es un controlador singleton que serveix per comunicar Frontend amb Backend mitjançant crides HTTP.
+ */
 package elektrogo.front.controller
 import android.graphics.Bitmap
 import android.util.Log
@@ -17,6 +22,9 @@ import io.ktor.http.*
 import io.ktor.util.*
 import java.io.ByteArrayOutputStream
 
+/**
+ * @brief L'objecte FrontendController es un singleton que conte totes les funcions que fan crides HTTP a Backend.
+ */
 object FrontendController {
     private const val URL_BASE = "http://10.4.41.58:8080/"
 
@@ -111,6 +119,11 @@ object FrontendController {
         return waypoints
     }
 
+    /**
+     * @brief Metode que obte totes les ChargingStations emmagatzemades as la BD de Backend.
+     * @pre
+     * @post Si s'ha pogut connectar amb el servidor, totes les ChargingStations de la BD s'han afegit a l'arrayList stations, i es retornen juntament amb l'status de la crida HTTP.
+     */
     suspend fun getChargingPoints(): Pair<Int, ArrayList<ChargingStation>> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}ChargingStations")
         val status: Int = httpResponse.status.value
@@ -122,8 +135,13 @@ object FrontendController {
         return Pair(status, stations)
     }
 
+    /**
+     * @brief Metode que envia un Rating d'un usuari a Backend per enregistrar-lo a la BD.
+     * @pre
+     * @post Si s'ha pogut connectar amb el servidor, retorna l'status de la crida HTTP.
+     */
     suspend fun rateUser(rating: Rating): Int {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}users/rate") {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}users/rate") { //confirmar que ha de ser post
             contentType(ContentType.Application.Json)
             body = rating
         }
