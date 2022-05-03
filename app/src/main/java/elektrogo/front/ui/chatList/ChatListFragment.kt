@@ -18,6 +18,7 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Chat
 import elektrogo.front.ui.chatConversation.ChatConversation
 
@@ -47,8 +48,9 @@ class ChatListFragment() : Fragment() {
         val view = inflater.inflate(R.layout.fragment_chat_list, container, false)
         val listView: ListView = view.findViewById(R.id.list_chat_view)
 
-        //TODO añadir current user
-        chatList = viewModel.getChatList("Test2")
+        val sessionController = SessionController
+        val username : String = sessionController.getUsername(view.context)
+        chatList = viewModel.getChatList(username)
 
         listView.adapter = ChatListAdapter(container?.context as Activity, chatList)
 
