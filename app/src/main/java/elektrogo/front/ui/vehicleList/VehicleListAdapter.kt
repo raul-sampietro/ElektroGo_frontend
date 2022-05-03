@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import com.squareup.picasso.Picasso
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Vehicle
 import kotlinx.coroutines.runBlocking
 
@@ -52,7 +53,9 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
                     setPositiveButton("SI",
                         DialogInterface.OnClickListener { dialog, id ->
                             Toast.makeText(parent.context, "Yes", Toast.LENGTH_LONG).show()
-                            deleteVehicle(v.numberPlate, "Test2")
+                            deleteVehicle(v.numberPlate, SessionController.getUsername(parent.context))
+                            val intent = Intent(parent.context, VehicleListActivity::class.java)
+                            parent.context.startActivity(intent)
                         })
                     setNegativeButton("NO",
                         DialogInterface.OnClickListener { dialog, id ->

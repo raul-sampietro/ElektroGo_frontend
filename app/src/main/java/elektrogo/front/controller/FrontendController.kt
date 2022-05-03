@@ -185,6 +185,19 @@ object FrontendController {
         }
         else return httpResponse.status.value
     }
+    
+    suspend fun addDriver(driver: Driver): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}drivers/create") {
+            contentType(ContentType.Application.Json)
+            body = driver
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        }
+        else return httpResponse.status.value
+    }
 
     suspend fun getUserProfilePhoto(username: String): String {
         val httpResponse: HttpResponse = client.get(URL_USER) {

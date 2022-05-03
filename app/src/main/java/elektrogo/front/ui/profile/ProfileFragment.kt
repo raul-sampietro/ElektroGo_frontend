@@ -16,10 +16,15 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import elektrogo.front.MainActivity
 import elektrogo.front.R
+import elektrogo.front.controller.FrontendController
+import elektrogo.front.controller.FrontendController.addDriver
+import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
+import kotlinx.coroutines.runBlocking
 
 
 class ProfileFragment : Fragment() {
@@ -45,7 +50,9 @@ class ProfileFragment : Fragment() {
 
         val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
         buttonDriver.setOnClickListener {
-
+            val new = Driver(SessionController.getUsername(requireContext()))
+            val httpStatus: Int = addDriver(new)
+            Toast.makeText(requireContext(), httpStatus.toString(), Toast.LENGTH_SHORT).show()
         }
 
         val buttonCars: Button = view.findViewById(R.id.AddVehicleButton)
@@ -79,8 +86,8 @@ class ProfileFragment : Fragment() {
         return view
     }
 
-    private fun signOut() {
-        Toast.makeText(requireActivity(), "Sign out", Toast.LENGTH_SHORT).show()
+    private fun addDriver(driver: Driver): Int = runBlocking {
+        FrontendController.addDriver(driver)
     }
 
     override fun onDestroyView() {
