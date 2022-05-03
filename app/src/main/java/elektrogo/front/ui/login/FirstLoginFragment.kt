@@ -60,26 +60,26 @@ class FirstLoginFragment : Fragment() {
         }
         //login facebook
         else if (accessToken != null && !accessToken.isExpired) {
-            val profile = Profile.getCurrentProfile()
-            displayName.text = profile!!.name
+            lateinit var user: User
+            val request = GraphRequest.newMeRequest(
+                accessToken
+            ) { obj, response ->
+                user = User(
+                    "",
+                    "",
+                    obj!!.optString("id"),
+                    "FACEBOOK",
+                    obj.optString("name"),
+                    obj.optString("first_name"),
+                    obj.optString("last_name"),
+                    "https://graph.facebook.com/${obj.optString("id")}/picture?type=large"
+                )
+            }
+            request.executeAndWait()
+            displayName.text = user.name
             setButton.setOnClickListener {
-                lateinit var new: User
-                val request = GraphRequest.newMeRequest(
-                    accessToken
-                ) { obj, response ->
-                    new = User(
-                        usernameField.editText!!.text.toString(),
-                        obj!!.optString("email"),
-                        obj.optString("id"),
-                        "FACEBOOK",
-                        obj.optString("name"),
-                        obj.optString("first_name"),
-                        obj.optString("last_name"),
-                        "https://graph.facebook.com/${obj.optString("id")}/picture?type=large"
-                    )
-                }
-                request.executeAsync()
-                addUser(new)
+                user.username = usernameField.editText!!.text.toString()
+                addUser(user)
                 SessionController.setCurrentSession(FacebookSessionAdapter())
                 val intent = Intent(requireActivity(), MainActivity::class.java)
                 startActivity(intent)

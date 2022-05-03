@@ -76,7 +76,7 @@ class LoginFragment : Fragment() {
                 val token = AccessToken.getCurrentAccessToken()
                 if (token != null) {
                     // primer login de l'usuari
-                    if (!existsUser(Profile.getCurrentProfile()!!.id!!, "FACEBOOK")) {
+                    if (true/* !existsUser(Profile.getCurrentProfile()!!.id!!, "FACEBOOK")*/) {
                         val firstLoginFragment = FirstLoginFragment()
                         val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
                         transaction.replace(R.id.frame_container, firstLoginFragment)
