@@ -141,7 +141,7 @@ class filterTripsFragment : Fragment() {
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
         originText = requireActivity().findViewById(R.id.errorViewOriginFiltrar)
         destinationText = requireActivity().findViewById(R.id.errorViewDestinationFiltrar)
-        var createTripButton : Button = requireActivity().findViewById(R.id.createTrip)
+        var createTripButton : com.google.android.material.floatingactionbutton.FloatingActionButton = requireActivity().findViewById(R.id.createTrip)
 
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
