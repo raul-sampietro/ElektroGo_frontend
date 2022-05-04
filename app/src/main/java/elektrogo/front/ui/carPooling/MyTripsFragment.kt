@@ -1,4 +1,4 @@
-package elektrogo.front.ui.CarPooling
+package elektrogo.front.ui.carPooling
 
 
 import android.app.Activity
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
-import android.widget.CalendarView.OnDateChangeListener
 import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -50,8 +49,8 @@ class MyTripsFragment : Fragment() {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
-            //filteredList = result.second
-            //listView.adapter = ListAdapter(context as Activity, filteredList)
+            filteredList = TripsOnDate(result.second, date)
+            listView.adapter = ListAdapter(context as Activity, filteredList)
         }
         calendar.setOnDateChangeListener { Calview, year, month, dayOfMonth ->
             if (result.first == 200) {

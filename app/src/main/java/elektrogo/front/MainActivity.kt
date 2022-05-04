@@ -15,7 +15,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
-import elektrogo.front.ui.CarPooling.MyTripsFragment
 import elektrogo.front.ui.Route.routeFragment
 import elektrogo.front.ui.carPooling.filterTripsFragment
 import elektrogo.front.ui.map.MapsFragment
@@ -53,13 +52,9 @@ class MainActivity : AppCompatActivity() {
                 return@OnItemSelectedListener true
             }
             R.id.chat -> {
-                //CANVIALO DANI XDXD
-                //CANVIALO DANI XDXD
-                //CANVIALO DANI XDXD
                 toolbar.title = "Chat"
                 val chatFragment = ChatListFragment()
-                val myTripsFragment = MyTripsFragment()
-                openFragment(myTripsFragment)
+                openFragment(chatFragment)
                 return@OnItemSelectedListener true
             }
             R.id.perfil -> {
