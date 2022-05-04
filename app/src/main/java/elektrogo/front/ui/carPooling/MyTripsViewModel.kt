@@ -11,5 +11,9 @@ class MyTripsViewModel : ViewModel() {
     fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?): Pair <Int, ArrayList<CarPooling>> = runBlocking{
         return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax)
     }
+
+    fun askForAllTrips(): Pair <Int, ArrayList<CarPooling>> = runBlocking{
+        return@runBlocking FrontendController.getAllTrips()
+    }
     // TODO: Implement the ViewModel
 }

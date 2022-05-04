@@ -27,7 +27,7 @@ class MyTripsFragment : Fragment() {
     private lateinit var filteredList: ArrayList<CarPooling>
     private lateinit var calendar : CalendarView
 
-    //private var viewModel: MyTripsViewModel = MyTripsViewModel()
+    private var viewModel: MyTripsViewModel = MyTripsViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,15 +48,15 @@ class MyTripsFragment : Fragment() {
             Toast.makeText(context, "$year $month $dayOfMonth", Toast.LENGTH_LONG).show()
         }
 
-        /*
-        var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+
+        var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForAllTrips()
         if (result.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
             filteredList = result.second
             listView.adapter = ListAdapter(context as Activity, filteredList)
-        }*/
+        }
     }
 
 
