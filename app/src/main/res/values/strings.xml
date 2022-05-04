@@ -107,5 +107,6 @@
 
     <string name="chat">Chat</string>
     <string name="message">Message</string>
+    <string name="resetFilters">Reset</string>
 
 </resources>
