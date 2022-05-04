@@ -136,10 +136,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_marginTop="5dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <Button
@@ -154,11 +154,15 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/reset"
                     android:layout_marginStart="10dp"
-                    android:text="Reset" />
+                    android:text="@string/resetFilters" />
                 <Button
                     android:id="@+id/Filtrar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="6sp"
+                    android:autoSizeMaxTextSize="14sp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#2E7005"
