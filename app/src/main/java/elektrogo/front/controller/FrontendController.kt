@@ -221,6 +221,18 @@ object FrontendController {
         return Pair(status, trips)
     }
 
+    suspend fun getTripsByUsername(username: String?): Pair<Int, ArrayList<CarPooling>> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}userTrip/TripByUser") {
+            parameter("username", username)
+        }
+        val trips: ArrayList<CarPooling>
+        val status: Int = httpResponse.status.value
+        if (httpResponse.status.value != 200) {
+            trips = ArrayList<CarPooling>()
+        } else trips = httpResponse.receive()
+        return Pair(status, trips)
+    }
+
 
     /**
      * @brief Metode que es comunica amb Backend per tal d'obtenir la valoracio mitjana d'un usuari.
