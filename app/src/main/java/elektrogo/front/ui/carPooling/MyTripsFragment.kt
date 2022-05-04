@@ -50,15 +50,14 @@ class MyTripsFragment : Fragment() {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
-            filteredList = result.second
-            listView.adapter = ListAdapter(context as Activity, filteredList)
+            //filteredList = result.second
+            //listView.adapter = ListAdapter(context as Activity, filteredList)
         }
         calendar.setOnDateChangeListener { Calview, year, month, dayOfMonth ->
             if (result.first == 200) {
                 date = LocalDate.of(year, Month.of(month), dayOfMonth)
                 filteredList = TripsOnDate(result.second, date)
                 listView.adapter = ListAdapter(context as Activity, filteredList)
-                Toast.makeText(context, "$year $month $dayOfMonth", Toast.LENGTH_LONG).show()
             }
         }
 
