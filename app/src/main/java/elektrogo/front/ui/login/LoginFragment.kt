@@ -66,6 +66,7 @@ class LoginFragment : Fragment() {
 
         // Facebook login
         val signInButtonFacebook: LoginButton = view.findViewById(R.id.login_button)
+        signInButtonFacebook.visibility = View.GONE
         signInButtonFacebook.setReadPermissions(listOf("public_profile", "email"));
         signInButtonFacebook.setFragment(this)
         callbackManager = CallbackManager.Factory.create();
