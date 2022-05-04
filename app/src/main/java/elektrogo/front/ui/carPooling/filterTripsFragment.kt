@@ -162,30 +162,17 @@ class filterTripsFragment : Fragment() {
             autocompleteSupportFragment2.setText("")
         }
 
-        resetButton.setOnClickListener {
-            autocompleteSupportFragment.setText("")
-            autocompleteSupportFragment2.setText("")
-            latLngDestination= null
-            latLngOrigin= null
-            dateSelected = null
-            fromTimeSelected = null
-            toTimeSelected = null
-            dateButton.text = "Data"
-            timeToButton.text = "Fins a"
-            timeFromButton.text = "Des de"
-            autocompleteSupportFragment2.setText("")
-        }
 
         val listView: ListView = view.findViewById(R.id.filterListView)
         //mostro uns trajectes default a la llista
-    /*    var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+        var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
         if (resultDefault.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
             filteredList = resultDefault.second
             listView.adapter = ListAdapter(context as Activity, filteredList)
-        }*/
+        }
         filtrarButton.setOnClickListener {
             if (validate()) {
                 //mostro els trajectes resultants de la busqueda
@@ -200,6 +187,28 @@ class filterTripsFragment : Fragment() {
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
+        }
+        resetButton.setOnClickListener {
+            autocompleteSupportFragment.setText("")
+            autocompleteSupportFragment2.setText("")
+            latLngDestination= null
+            latLngOrigin= null
+            dateSelected = null
+            fromTimeSelected = null
+            toTimeSelected = null
+            dateButton.text = "Data"
+            timeToButton.text = "Fins a"
+            timeFromButton.text = "Des de"
+            autocompleteSupportFragment2.setText("")
+            //mostro uns trajectes default a la llista
+            var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+            if (resultDefault.first != 200) {
+                Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            }
+            else {
+                filteredList = resultDefault.second
+                listView.adapter = ListAdapter(context as Activity, filteredList)
+            }
         }
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
