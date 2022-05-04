@@ -27,7 +27,7 @@ class MyTripsFragment : Fragment() {
     private lateinit var filteredList: ArrayList<CarPooling>
     private lateinit var calendar : CalendarView
 
-    private var viewModel: MyTripsViewModel = MyTripsViewModel()
+    //private var viewModel: MyTripsViewModel = MyTripsViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
