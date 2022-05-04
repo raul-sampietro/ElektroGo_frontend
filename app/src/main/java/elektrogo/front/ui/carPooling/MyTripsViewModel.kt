@@ -5,6 +5,7 @@ import com.google.android.gms.maps.model.LatLng
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.model.CarPooling
 import kotlinx.coroutines.runBlocking
+import java.time.LocalDate
 
 class MyTripsViewModel : ViewModel() {
 
@@ -12,8 +13,8 @@ class MyTripsViewModel : ViewModel() {
         return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax)
     }
 
-    fun askForAllTrips(): Pair <Int, ArrayList<CarPooling>> = runBlocking{
+    fun askForTripsForUser(username : String?): Pair <Int, ArrayList<CarPooling>> = runBlocking{
+        // TODO: Change function call when implemented in backend
         return@runBlocking FrontendController.getAllTrips()
     }
-    // TODO: Implement the ViewModel
 }
