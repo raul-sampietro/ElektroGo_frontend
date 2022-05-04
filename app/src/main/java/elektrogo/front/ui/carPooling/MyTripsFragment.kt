@@ -2,10 +2,12 @@ package elektrogo.front.ui.carPooling
 
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.CalendarView
 import android.widget.ListView
 import android.widget.Toast
@@ -58,6 +60,21 @@ class MyTripsFragment : Fragment() {
                 filteredList = TripsOnDate(result.second, date)
                 listView.adapter = ListAdapter(context as Activity, filteredList)
             }
+        }
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val i = Intent(context, tripDetails::class.java)
+            i.putExtra("username", filteredList[position].username)
+            i.putExtra("startDate", filteredList[position].startDate)
+            i.putExtra("startTime", filteredList[position].startTime)
+            i.putExtra("offeredSeats", filteredList[position].offeredSeats)
+            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
+            i.putExtra("restrictions", filteredList[position].restrictions)
+            i.putExtra("details", filteredList[position].details)
+            i.putExtra("originString", filteredList[position].origin)
+            i.putExtra("destinationString", filteredList[position].destination)
+            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+            startActivity(i)
         }
 
     }
