@@ -8,6 +8,7 @@ package elektrogo.front.ui.carPooling
 
 import androidx.lifecycle.ViewModel
 import elektrogo.front.controller.FrontendController
+import elektrogo.front.model.RatingAvg
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -18,10 +19,10 @@ class tripDetailsViewModel : ViewModel() {
     /**
      * @brief Metode que es comunica amb FrontendController per tal d'obtenir la valoracio mitjana d'un usuari.
      * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
-     * @return Retorna un Pair<Int,Double> on el int es el code status i el double la valoracio mitjana de l'usuari.
+     * @return Retorna un Pair<Int,Double> on el int es el code status i RatingAvg la valoracio mitjana de l'usuari i el nombre de valoracions que ha rebut.
      */
 
-    fun getRating(username: String): Pair<Int, Double> = runBlocking {
+    fun getRating(username: String): Pair<Int, RatingAvg?> = runBlocking {
         return@runBlocking FrontendController.getRating(username)
     }
 
