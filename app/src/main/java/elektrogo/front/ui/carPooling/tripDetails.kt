@@ -6,14 +6,17 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
-import org.w3c.dom.Text
+import elektrogo.front.controller.session.SessionController
+import java.text.SimpleDateFormat
 
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
@@ -36,7 +39,7 @@ class tripDetails : AppCompatActivity() {
         setContentView(R.layout.trip_details)
         val username = intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
-        val startTime = intent.getStringExtra("startTime")
+        var startTime = intent.getStringExtra("startTime")
         val offeredSeats = intent.getIntExtra("offeredSeats", 1)
         val occupiedSeats = intent.getIntExtra("occupiedSeats", 1)
         val restrictions = intent.getStringExtra("restrictions")
@@ -58,8 +61,14 @@ class tripDetails : AppCompatActivity() {
 
 
         usernameText.text = username
-        startDateText.text=startDate
-        startTimeText.text=startTime
+        var dateTmp = startDate
+        val input = SimpleDateFormat("yyyy-MM-dd")
+        val output = SimpleDateFormat("dd/MM/yyyy")
+        val oneWayTripDate = input.parse(dateTmp) // parse input
+        dateTmp = output.format(oneWayTripDate)
+        startDateText.text = dateTmp // format output
+
+        startTimeText.text= startTime!!.substring(0, startTime!!.length-3)
         var occupied : String = (offeredSeats - occupiedSeats).toString()
         occupied += "/"
         occupied += offeredSeats.toString()
@@ -98,6 +107,18 @@ class tripDetails : AppCompatActivity() {
         if (!imagePath.equals("null")  or !imagePath.equals("")) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
 
+        val shareButton : ImageButton = this.findViewById(R.id.shareButton)
+        shareButton.setOnClickListener {
+            val  myIntent : Intent = Intent(Intent.ACTION_SEND)
+            myIntent.setType("text/plain")
+            var shareBody :String = ""
+            if (SessionController.getUsername(this) == username ){
+                shareBody = getString(R.string.shareOwnTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
+            }
+            else shareBody = getString(R.string.shareTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
+            myIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+            startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
+        }
 
     }
     /**
