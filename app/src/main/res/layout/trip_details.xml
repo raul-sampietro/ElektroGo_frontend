@@ -20,15 +20,21 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/shareButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/share"
-            android:background=""
+            android:scaleType="fitCenter"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="right"
+            android:layout_marginEnd="11dp"
+            android:adjustViewBounds="true"
+            android:background="#004BBD23"
+             />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
