@@ -115,9 +115,9 @@ class tripDetails : AppCompatActivity() {
             if (SessionController.getUsername(this) == username ){
                 shareBody = getString(R.string.shareOwnTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
             }
-            else shareBody=""
+            else shareBody = getString(R.string.shareTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
             myIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-            startActivity(Intent.createChooser(myIntent, "Share using"))
+            startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
         }
 
     }

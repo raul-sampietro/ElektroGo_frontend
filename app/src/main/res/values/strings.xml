@@ -105,7 +105,9 @@
     <string name="facebook_client_token">d2fe733d766ef258b456bfcbbdb78de2</string>
     <string name="profile_logout_button">Tancar Sessió</string>
 
-    <string name="shareOwnTrip">He creat un nou trajecte a ElektroGo per el dia %1$s a les %2$s amb origen %3$s i destí %4$s. Només queden %5$s seients lliures! \n\nUneix-te a mi a través de l\'aplicació: https://marccastellsdostal.wixsite.com/elektrogo</string>
+    <string name="shareOwnTrip">He creat un nou trajecte a ElektroGo per al dia %1$s a les %2$s amb origen %3$s i destinació %4$s. Només queden %5$s seients lliures! \n\nUneix-te a mi a través de l\'aplicació: https://marccastellsdostal.wixsite.com/elektrogo</string>
+    <string name="shareTrip">He trobat aquest trajecte a l\'app d\'ElektroGo per al dia %1$s a les %2$s amb origen %3$s i destinació %4$s. Només queden %5$s seients lliures! \n\nUneix-te  a través de l\'aplicació: https://marccastellsdostal.wixsite.com/elektrogo</string>
+    <string name="share">Compartir a</string>
     <string name="chat">Chat</string>
     <string name="message">Message</string>
 
