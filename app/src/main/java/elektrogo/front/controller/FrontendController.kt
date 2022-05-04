@@ -209,21 +209,34 @@ object FrontendController {
         return Pair(status, trips)
     }
 
+    suspend fun getAllTrips(): Pair<Int, ArrayList<CarPooling>> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}car-poolings") {
+
+        }
+        val trips: ArrayList<CarPooling>
+        val status: Int = httpResponse.status.value
+        if (httpResponse.status.value != 200) {
+            trips = ArrayList<CarPooling>()
+        } else trips = httpResponse.receive()
+        return Pair(status, trips)
+    }
+
+
     /**
      * @brief Metode que es comunica amb Backend per tal d'obtenir la valoracio mitjana d'un usuari.
      * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
-     * @return Retorna un Pair<Int,Double> on el int es el code status i el double la valoracio mitjana de l'usuari.
+     * @return Retorna un Pair<Int,RatingAvg> on el int es el code status i RatingAvg un objecte amb valor del rating i numero de persones que han valorat.
      */
 
-    suspend fun getRating(username: String): Pair<Int, Double> {
+    suspend fun getRating(username: String): Pair<Int, RatingAvg?> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}user/avgRate") {
             contentType(ContentType.Application.Json)
             parameter("userName", username)
         }
         val status: Int = httpResponse.status.value
-        val avgRating: Double
+        val avgRating: RatingAvg?
         if (httpResponse.status.value != 200) {
-            avgRating = -1.0
+             avgRating = RatingAvg(-1.0,-1)
         } else avgRating = httpResponse.receive()
         return Pair(status, avgRating)
     }

@@ -54,10 +54,10 @@
 
                 <View
                     android:id="@+id/viewCrossCallbackOriginFiltrar"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_toStartOf="@+id/errorViewOriginFiltrar"
                     android:background="@android:color/transparent"
                     android:clickable="true" />
@@ -97,10 +97,10 @@
 
                 <View
                     android:id="@+id/viewCrossCallbackDestinationFiltrar"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
                     android:layout_toStartOf="@+id/errorViewDestinationFiltrar"
                     android:background="@android:color/transparent"
                     android:clickable="true" />
