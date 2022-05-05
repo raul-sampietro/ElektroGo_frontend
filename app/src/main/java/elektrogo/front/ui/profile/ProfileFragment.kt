@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
         val user = SessionController.getUsername(requireActivity());
         val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
         val imagePath = viewModel.getUsersProfilePhoto(user)
-        if (!imagePath.equals("null")  or !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
+        if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
 
         val ratingPair = viewModel.getRating(user)
@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
             val star4: ImageView = view.findViewById(R.id.estrella4)
             val star5: ImageView = view.findViewById(R.id.estrella5)
 
-            var rating = ratingPair.second / 2
+            var rating = ratingPair.second!!.ratingValue/2
             var decimalValue = rating - rating.toInt()
             var enterValue = rating.toInt()
 

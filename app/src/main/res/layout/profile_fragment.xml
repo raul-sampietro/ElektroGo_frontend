@@ -40,7 +40,6 @@
                             android:id="@+id/profile_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/avatar"
                             app:civ_border_color="#FF000000"
                             app:civ_border_width="2dp" />
 
@@ -55,7 +54,6 @@
                             android:id="@+id/profile_username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
                             android:textAlignment="center"
                             android:textColor="@color/dark_green"
                             android:text="@string/Username"
@@ -75,6 +73,7 @@
                             </ImageView>
 
                             <ImageView
+                                android:layout_marginStart="5dp"
                                 android:id="@+id/estrella2"
                                 android:layout_width="27dp"
                                 android:layout_height="27dp"
@@ -82,6 +81,7 @@
                             </ImageView>
 
                             <ImageView
+                                android:layout_marginStart="5dp"
                                 android:id="@+id/estrella3"
                                 android:layout_width="27dp"
                                 android:layout_height="27dp"
@@ -89,6 +89,7 @@
                             </ImageView>
 
                             <ImageView
+                                android:layout_marginStart="5dp"
                                 android:id="@+id/estrella4"
                                 android:layout_width="27dp"
                                 android:layout_height="27dp"
@@ -96,6 +97,7 @@
                             </ImageView>
 
                             <ImageView
+                                android:layout_marginStart="5dp"
                                 android:id="@+id/estrella5"
                                 android:layout_width="27dp"
                                 android:layout_height="27dp"
