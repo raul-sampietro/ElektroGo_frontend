@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.CarPooling.tripDetails">
+    tools:context=".ui.carPooling.TripDetails">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,10 +19,22 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
+        <ImageButton
+            android:id="@+id/shareButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/share"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="right"
+            android:layout_marginEnd="11dp"
+            android:adjustViewBounds="true"
+            android:background="#004BBD23"
+             />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
@@ -330,6 +342,15 @@
                     android:layout_height="27dp"
                     android:layout_marginStart="5dp"
                     android:src="@drawable/ic_starplena" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberValorations"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="10dp"
+                    android:text="(0)"
+                    android:textSize="16sp"/>
             </LinearLayout>
 
         </LinearLayout>

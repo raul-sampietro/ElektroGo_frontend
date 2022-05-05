@@ -2,7 +2,7 @@ package elektrogo.front.ui.chatConversation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View.OnFocusChangeListener
+import android.os.CountDownTimer
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
 
 
@@ -38,13 +39,25 @@ class ChatConversation : AppCompatActivity() {
         val userA = b?.getString("userA").toString()
         val userB = b?.getString("userB").toString()
 
+        val sessionController = SessionController
+        val currentUser = sessionController.getUsername(this)
         conversation = viewModel.getConversation(userA, userB)
         val recyclerView = findViewById<RecyclerView>(R.id.listConversation)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ChatConversationAdapter(this, conversation)
+        adapter = ChatConversationAdapter(this, conversation, currentUser)
         recyclerView.adapter = adapter
         val position = adapter.itemCount - 1
         recyclerView.smoothScrollToPosition(position)
+
+        object : CountDownTimer(120000, 4000) {
+            override fun onTick(p0: Long) {
+                conversation = viewModel.getConversation(userA, userB)
+                adapter.updateData(conversation)
+            }
+
+            override fun onFinish() {
+            }
+        }.start()
 
         val backButton : ImageButton = findViewById(R.id.backButtonConversation)
         backButton.setOnClickListener {
@@ -73,8 +86,7 @@ class ChatConversation : AppCompatActivity() {
 
             conversation = viewModel.getConversation(userA, userB)
             adapter.updateData(conversation)
-            val position = adapter.itemCount - 1
-            recyclerView.smoothScrollToPosition(position)
+            recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
     }
 
