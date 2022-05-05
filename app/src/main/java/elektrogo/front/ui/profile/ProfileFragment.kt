@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
-import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
 import elektrogo.front.model.Driver
@@ -186,6 +185,21 @@ class ProfileFragment : Fragment() {
         val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
         deleteButton.setOnClickListener {
 
+        }
+
+        val guestprofileButton: Button = view.findViewById(R.id.other_profile)
+        guestprofileButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("username", "samragu")
+
+            val transaction = childFragmentManager.beginTransaction()
+
+            val fragmentGuest = GuestProfileFragment()
+
+            fragmentGuest.arguments = bundle
+            transaction.replace(R.id.profile, fragmentGuest)
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
         return view
