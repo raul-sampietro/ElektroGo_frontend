@@ -13,17 +13,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
-import org.w3c.dom.Text
 
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
  */
-class tripDetails : AppCompatActivity() {
+class TripDetails : AppCompatActivity() {
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
      */
-    private var viewModel: tripDetailsViewModel = tripDetailsViewModel()
+    private var viewModel: TripDetailsViewModel = TripDetailsViewModel()
 
     /**
      * @brief Metode que s'executa un cop l'activity ha estat creada. S'encarrega de mostrar per pantalla l'informacio rebuda per parametres del trajecte a veure'n els detalls.
