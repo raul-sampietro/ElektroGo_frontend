@@ -6,6 +6,7 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +15,11 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
+import java.text.SimpleDateFormat
+
 /**
  * @brief La clase ListAdapter s'encarrega de mostrar, per cada trajecte de filteredList, l'informacio resultant en una llista.
  */
@@ -24,13 +28,14 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
     /**
      * @brief Instancia de la classe filterTripsViewModel.
      */
-    private var viewModel: filterTripsViewModel  = filterTripsViewModel()
+    private var viewModel: FilterTripsViewModel  = FilterTripsViewModel()
 
     /**
      * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.
      * @pre
      * @post Es mostra un llistat amb els trajectes dins de filteredList
      */
+    @SuppressLint("SimpleDateFormat")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val inflater = LayoutInflater.from(context)
@@ -43,18 +48,26 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         val startTime : TextView = view.findViewById(R.id.time)
         val date :TextView = view.findViewById(R.id.dateFiltered)
         val user : TextView = view.findViewById(R.id.username)
+
         val f = filteredList[position]
         val ratingPair = viewModel.getRating(f.username)
         if (ratingPair.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-        } else renderRating(ratingPair.second, view)
+        } else renderRating(ratingPair.second!!.ratingValue, view)
+        val numValorations : TextView = view.findViewById(R.id.numberValorations)
+        numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
 
         var occupied : String = (f.offeredSeats - f.occupiedSeats).toString()
         occupied += "/"
         occupied += f.offeredSeats.toString()
         occupiedseats.text = occupied
-        startTime.text = f.startTime
-        date.text = f.startDate
+        startTime.text = f.startTime.substring(0, f.startTime.length-3)
+
+        val dateTmp = f.startDate
+        val input = SimpleDateFormat("yyyy-MM-dd")
+        val output = SimpleDateFormat("dd/MM/yyyy")
+        val oneWayTripDate = input.parse(dateTmp) // parse input
+        date.text = output.format(oneWayTripDate) // format output
         user.text = f.username
 
         var originBrief : String
@@ -73,6 +86,10 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         }
         else destination.text = f.destination
 
+        val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
+        val imagePath = viewModel.getUsersProfilePhoto(f.username)
+        if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
+        else imageViewProfile.setImageResource(R.drawable.avatar)
         return view
     }
     /**

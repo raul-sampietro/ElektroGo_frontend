@@ -1,8 +1,13 @@
-package elektrogo.front.ui.CarPooling
+/**
+ * @file NewCarPoolingFragment.kt
+ * @author Joel Cardona
+ * @date 03/05/2022
+ * @brief Aquesta classe implementa la logica associada a la vista de publicar trajecte de la app
+ */
+package elektrogo.front.ui.carPooling
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.TextUtils
@@ -20,58 +25,109 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
-import elektrogo.front.model.Vehicle
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-
+/**
+ * @brief La classe NewCarPoolingFragment obte i comprova les dades dels trajectes a publicar i realitza la comunicacio amb backend.
+ */
 class NewCarPoolingFragment() : Fragment() {
-
+    /**
+     * @brief Instancia de la classe NewCarPoolingFragmentViewModel que conte les crides a fer amb backend.
+     */
     private lateinit var viewModel: NewCarPoolingFragmentViewModel
-
+    /**
+     * @brief PlacesClient de google, es fa servir per el autocomplete
+     */
     private lateinit var placesClient: PlacesClient
 
+    /**
+     * @brief Atribut on es guarden les coordenades del origen indicat per el usuari
+     */
     private var latLngOrigin : LatLng?= null
-
+    /**
+     * @brief Atribut on es guarden les coordenades del desti indicat per el usuari
+     */
     private var latLngDestination : LatLng?= null
-
+    /**
+     * @brief Instancia que s'inicialitzara mes tard per l'AutocompleteSupportFragment del primer cercador, de l'api Places.
+     */
     private lateinit var autocompleteSupportFragment : AutocompleteSupportFragment
-
+    /**
+     * @brief Instancia que s'inicialitzara mes tard per l'AutocompleteSupportFragment del segon cercador, de l'api Places.
+     */
     private lateinit var autocompleteSupportFragment2 : AutocompleteSupportFragment
-
+    /**
+     * @brief Instancia que s'inicialitzara mes tard per al TextView que mostrara errors per al primer cercador .
+     */
     private lateinit var originText : TextView
-
+    /**
+     * @brief Instancia que s'inicialitzara mes tard per al TextView que mostrara errors per al segon cercador .
+     */
     private lateinit var destinationText : TextView
-
+    /**
+     * @brief Instancia on s'inicialitzara mes tard per al boto de publicar
+     */
     private lateinit var buttonPublish: Button
-
+    /**
+     * @brief Instancia on s'inicialitzara mes tard per al boto del calendari
+     */
     private lateinit var buttonDate: Button
-
+    /**
+     * @brief Instancia on s'inicialitzara mes tard per al boto la hora
+     */
     private lateinit var buttonHour: Button
-
+    /**
+     * @brief TextView on es mostrara la data seleccionada per al usuari. Al principi es mostra una data d'exemple.
+     */
     private lateinit var selectedDate: TextView
-
+    /**
+     * @brief TextView on es mostra la hora seleccionada per al usuari. Al principi es mostra una hora d'exemple.
+     */
     private lateinit var selectedHour: TextView
-
+    /**
+     * @brief Desplegable on surten les matricules dels vehicles de l'usuari
+     */
     private lateinit var dropVehicles: Spinner
-
+    /**
+     * @brief Label amb el vehicle a escollir.
+     */
     private lateinit var vehicleLabel : TextView
-
+    /**
+     * @brief Desplegable on es mostren els seients disponibles segons el vehicle escollit.
+     */
     private lateinit var dropSeats: Spinner
-
+    /**
+     * @brief TextView amb el el label de seients
+     */
     private lateinit var SeatsLabel : TextView
-
+    /**
+     * @brief EditText on l'usuari escriu els detalls del trajecte a publicar
+     */
     private lateinit var detailsDescription : EditText
-
+    /**
+     * @brief EditText on l'usuari escriu les restriccions del trajecte a publicar
+     */
     private lateinit var restDescription : EditText
-
+    /**
+     * @brief String que emmagatzema l'origin en format string
+     */
     private lateinit var originName : String
+    /**
+     * @brief String que emmagatzema el desti en format string
+     */
     private lateinit var destinationName : String
 
+    /**
+     * @brief Metode que s'executa al crear el fragment.
+     * @pre
+     * @post Es crea la vista per al fragment.
+     * @return Retorna el layout creat.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,6 +135,13 @@ class NewCarPoolingFragment() : Fragment() {
         return inflater.inflate(R.layout.fragment_new_car_pooling, container, false)
     }
 
+    /**
+     * @brief Metode que s'executa un cop la vista ha estat creada. Conte tot el funcionament dels cercadors i els errors.
+     * @param view Vista que s'ha creat.
+     * @param savedInstanceState Estat de la instancia.
+     * @pre
+     * @post Obte tota la informacio que l'usuari ha omplert sobre el trajecte en questio. Al premer el botó de publicar trajecte, crida la funcio on es redirigira a l'usuari en cas de ser valida. Si no s'ha omplert cap camp mostra l'error corresponent.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //Inicialitzacio de les variables relacionades amb la interficie
         viewModel = NewCarPoolingFragmentViewModel()
@@ -157,8 +220,7 @@ class NewCarPoolingFragment() : Fragment() {
 
 
         //Obtenim les dades dels vehicles del usuari logejat
-        //TODO NO FER-HO HARDCODED!
-        val vehicles = viewModel.getVehicleList("Test"); //Obtenim els vehicles de l'usuari
+        val vehicles = viewModel.getVehicleList(SessionController.getUsername(requireContext())) //Obtenim els vehicles de l'usuari
 
         //Ens encarreguem dels select menu
         //Menu de les matricules del vehicle
@@ -214,7 +276,7 @@ class NewCarPoolingFragment() : Fragment() {
                 var cancelDate: LocalDate = LocalDate.parse(dataJSON!!, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusDays(1)
                 var newCarPoolingInfo = CarPooling(null, dataJSON,hour, dropSeats.selectedItem.toString().toInt(),
                     1, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
-                    "Test", cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                    SessionController.getUsername(requireContext()), cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
                     latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble())
 
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())
@@ -222,6 +284,7 @@ class NewCarPoolingFragment() : Fragment() {
                 val status = viewModel.saveCarpooling(newCarPoolingInfo)
                 if (status == 200){
                     Toast.makeText(context, resources.getString(R.string.savedCarpooling),Toast.LENGTH_SHORT).show()
+                    fragmentManager?.popBackStack()
                 } else Toast.makeText(context, resources.getString(R.string.errorCarpooling),Toast.LENGTH_SHORT).show()
 
             }
@@ -239,6 +302,11 @@ class NewCarPoolingFragment() : Fragment() {
         getAutocompleteLocation()
     }
 
+    /**
+     * @brief Listener sobre els cercadors, fa els autocomplete de les localitzacions.
+     * @pre
+     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que esta buscant. En clickar una localitzacio es guarda les coordenades d'aquesta.
+     */
     private fun getAutocompleteLocation () {
         autocompleteSupportFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
         autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
@@ -269,6 +337,12 @@ class NewCarPoolingFragment() : Fragment() {
 
     }
 
+    /**
+     * @brief Metode que comprova que tots les camps de text obligatoris han estat omplerts.
+     * @pre
+     * @post Es dona valor a un boolea valid, que si es fals voldra dir que un camp obligatori no s'ha omplert.
+     * @return Retorna el boolea valid.
+     */
     private fun isValid():Boolean {
         var valid : Boolean = true
 

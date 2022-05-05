@@ -1,5 +1,5 @@
 /**
- * @file filtrarTrajectesFragment.kt
+ * @file filterTripsFragment.kt
  * @author Marina Alapont
  * @date 12/04/2022
  * @brief Implementacio d'un fragment per tal de cercar trajectes.
@@ -32,10 +32,6 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
-import elektrogo.front.ui.CarPooling.tripDetails
-import elektrogo.front.model.Vehicle
-import elektrogo.front.ui.CarPooling.NewCarPoolingFragment
-import elektrogo.front.ui.vehicleList.VehicleListAdapter
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -43,7 +39,7 @@ import java.time.format.DateTimeFormatter
 /**
  * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
-class filterTripsFragment : Fragment() {
+class FilterTripsFragment : Fragment() {
 
     /**
      * @brief Instancia del client de la api Places de google maps.
@@ -70,19 +66,19 @@ class filterTripsFragment : Fragment() {
      */
     private lateinit var timeToButton: Button
     /**
-     * @brief Instancia que s'inicialitzara més tard per l'AutocompleteSupportFragment del primer cercador, de l'api Places.
+     * @brief Instancia que s'inicialitzara mes tard per l'AutocompleteSupportFragment del primer cercador, de l'api Places.
      */
     private lateinit var autocompleteSupportFragment : AutocompleteSupportFragment
     /**
-     * @brief Instancia que s'inicialitzara més tard per l'AutocompleteSupportFragment del segon cercador, de l'api Places.
+     * @brief Instancia que s'inicialitzara mes tard per l'AutocompleteSupportFragment del segon cercador, de l'api Places.
      */
     private lateinit var autocompleteSupportFragment2 : AutocompleteSupportFragment
     /**
-     * @brief Intsancia que s'inicialitzara més tard per al TextView que mostrara errors per al primer cercador .
+     * @brief Intsancia que s'inicialitzara mes tard per al TextView que mostrara errors per al primer cercador .
      */
     private lateinit var originText : TextView
     /**
-     * @brief Intsancia que s'inicialitzara més tard per al TextView que mostrara errors per al segon cercador .
+     * @brief Intsancia que s'inicialitzara mes tard per al TextView que mostrara errors per al segon cercador .
      */
     private lateinit var destinationText : TextView
     /**
@@ -114,7 +110,7 @@ class filterTripsFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private  var viewModel: filterTripsViewModel = filterTripsViewModel()
+    private  var viewModel: FilterTripsViewModel = FilterTripsViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -131,7 +127,7 @@ class filterTripsFragment : Fragment() {
     }
 
     /**
-     * @brief Metode que s'executa un cop la vista ha estat creada. Conté tot el funcionament dels cercadors, els errors i el display de resultats.
+     * @brief Metode que s'executa un cop la vista ha estat creada. Conte tot el funcionament dels cercadors, els errors i el display de resultats.
      * @param view Vista que s'ha creat.
      * @param savedInstanceState Estat de la instancia.
      * @pre
@@ -145,7 +141,7 @@ class filterTripsFragment : Fragment() {
         timeToButton=requireActivity().findViewById(R.id.timeToButtonFiltrar)
         originText = requireActivity().findViewById(R.id.errorViewOriginFiltrar)
         destinationText = requireActivity().findViewById(R.id.errorViewDestinationFiltrar)
-        var createTripButton : Button = requireActivity().findViewById(R.id.createTrip)
+        var createTripButton : com.google.android.material.floatingactionbutton.FloatingActionButton = requireActivity().findViewById(R.id.createTrip)
 
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
@@ -166,6 +162,32 @@ class filterTripsFragment : Fragment() {
             autocompleteSupportFragment2.setText("")
         }
 
+
+        val listView: ListView = view.findViewById(R.id.filterListView)
+        //mostro uns trajectes default a la llista
+        var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+        if (resultDefault.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        }
+        else {
+            filteredList = resultDefault.second
+            listView.adapter = ListAdapter(context as Activity, filteredList)
+        }
+        filtrarButton.setOnClickListener {
+            if (validate()) {
+                //mostro els trajectes resultants de la busqueda
+               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                if (result.first != 200) {
+                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    filteredList = result.second
+                    listView.adapter = ListAdapter(context as Activity, filteredList)
+                }
+            }
+            else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
+
+        }
         resetButton.setOnClickListener {
             autocompleteSupportFragment.setText("")
             autocompleteSupportFragment2.setText("")
@@ -178,40 +200,31 @@ class filterTripsFragment : Fragment() {
             timeToButton.text = "Fins a"
             timeFromButton.text = "Des de"
             autocompleteSupportFragment2.setText("")
-        }
-
-        val listView: ListView = view.findViewById(R.id.filterListView)
-
-        filtrarButton.setOnClickListener {
-            if (validate()) {
-
-               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                if (result.first != 200) {
-                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-                }
-                else {
-                    filteredList = result.second
-                    listView.adapter = ListAdapter(context as Activity, filteredList)
-
-                 listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
-                     val i = Intent(context, tripDetails::class.java)
-                     i.putExtra("username", filteredList[position].username)
-                     i.putExtra("startDate", filteredList[position].startDate)
-                     i.putExtra("startTime", filteredList[position].startTime)
-                     i.putExtra("offeredSeats",filteredList[position].offeredSeats)
-                     i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
-                     i.putExtra("restrictions", filteredList[position].restrictions)
-                     i.putExtra("details", filteredList[position].details)
-                     i.putExtra("originString", filteredList[position].origin)
-                     i.putExtra("destinationString", filteredList[position].destination)
-                     i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
-                    startActivity(i)
-                })
-                }
+            //mostro uns trajectes default a la llista
+            var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+            if (resultDefault.first != 200) {
+                Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
             }
-            else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
-
+            else {
+                filteredList = resultDefault.second
+                listView.adapter = ListAdapter(context as Activity, filteredList)
+            }
         }
+
+        listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+            val i = Intent(context, TripDetails::class.java)
+            i.putExtra("username", filteredList[position].username)
+            i.putExtra("startDate", filteredList[position].startDate)
+            i.putExtra("startTime", filteredList[position].startTime)
+            i.putExtra("offeredSeats",filteredList[position].offeredSeats)
+            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
+            i.putExtra("restrictions", filteredList[position].restrictions)
+            i.putExtra("details", filteredList[position].details)
+            i.putExtra("originString", filteredList[position].origin)
+            i.putExtra("destinationString", filteredList[position].destination)
+            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+            startActivity(i)
+        })
 
         createTripButton.setOnClickListener {
             val fragmentNewCarPooling = NewCarPoolingFragment()
@@ -304,7 +317,7 @@ class filterTripsFragment : Fragment() {
     /**
      * @brief Listener sobre els cercadors, fa els autocomplete de les localitzacions.
      * @pre
-     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que està buscant. En clickar una localització es guarda les coordenades d'aquesta.
+     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que esta buscant. En clickar una localitzacio es guarda les coordenades d'aquesta.
      */
     private fun getAutocompleteLocation () {
         autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))

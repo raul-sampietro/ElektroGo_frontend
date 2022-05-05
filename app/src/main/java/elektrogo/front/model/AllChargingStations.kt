@@ -1,7 +1,7 @@
 /**
  * @file AllChargingStations.kt
  * @author Simon Helmuth Oliva Stark
- * @brief Aquesta es un objecte singleton que conte totes les estacions de carrega presents a la base de dades de backend.
+ * @brief Aquest es un objecte singleton que conte totes les estacions de carrega presents a la base de dades de backend.
  */
 
 package elektrogo.front.model

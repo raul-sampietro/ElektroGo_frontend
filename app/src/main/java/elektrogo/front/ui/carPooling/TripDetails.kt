@@ -1,30 +1,45 @@
-package elektrogo.front.ui.CarPooling
+/**
+ * @file tripDetails.kt
+ * @author Marina Alapont
+ * @date 28/04/2022
+ * @brief Implementacio d'una classe per tal de veure la informacio detallada d'un trajecte.
+ */
+package elektrogo.front.ui.carPooling
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
 import elektrogo.front.R
-import elektrogo.front.ui.carPooling.filterTripsViewModel
-import elektrogo.front.ui.carPooling.tripDetailsViewModel
-import org.w3c.dom.Text
+import elektrogo.front.controller.session.SessionController
+import java.text.SimpleDateFormat
 
-
-class tripDetails : AppCompatActivity() {
+/**
+ * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
+ */
+class TripDetails : AppCompatActivity() {
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
      */
-    private var viewModel: tripDetailsViewModel = tripDetailsViewModel()
+    private var viewModel: TripDetailsViewModel = TripDetailsViewModel()
 
+    /**
+     * @brief Metode que s'executa un cop l'activity ha estat creada. S'encarrega de mostrar per pantalla l'informacio rebuda per parametres del trajecte a veure'n els detalls.
+     * @param savedInstanceState Estat de la instancia.
+     * @pre
+     * @post capta l'informacio pasada desde el fragment filterTripsFragment i la mostra per pantalla.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trip_details)
         val username = intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
-        val startTime = intent.getStringExtra("startTime")
+        var startTime = intent.getStringExtra("startTime")
         val offeredSeats = intent.getIntExtra("offeredSeats", 1)
         val occupiedSeats = intent.getIntExtra("occupiedSeats", 1)
         val restrictions = intent.getStringExtra("restrictions")
@@ -46,8 +61,14 @@ class tripDetails : AppCompatActivity() {
 
 
         usernameText.text = username
-        startDateText.text=startDate
-        startTimeText.text=startTime
+        var dateTmp = startDate
+        val input = SimpleDateFormat("yyyy-MM-dd")
+        val output = SimpleDateFormat("dd/MM/yyyy")
+        val oneWayTripDate = input.parse(dateTmp) // parse input
+        dateTmp = output.format(oneWayTripDate)
+        startDateText.text = dateTmp // format output
+
+        startTimeText.text= startTime!!.substring(0, startTime!!.length-3)
         var occupied : String = (offeredSeats - occupiedSeats).toString()
         occupied += "/"
         occupied += offeredSeats.toString()
@@ -77,10 +98,27 @@ class tripDetails : AppCompatActivity() {
         val ratingPair = viewModel.getRating(username!!)
         if (ratingPair.first != 200) {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-        } else renderRating(ratingPair.second)
+        } else renderRating(ratingPair.second!!.ratingValue)
+        val numValorations : TextView = this.findViewById(R.id.numberValorations)
+        numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
 
+        val imageViewProfile : ImageView = this.findViewById(R.id.profile_imageDetails)
+        val imagePath = viewModel.getUsersProfilePhoto(username)
+        if (!imagePath.equals("null")  or !imagePath.equals("")) Picasso.get().load(imagePath).into(imageViewProfile)
+        else imageViewProfile.setImageResource(R.drawable.avatar)
 
-        //  val imageid = intent.getIntExtra("imageid", R.drawable.a)
+        val shareButton : ImageButton = this.findViewById(R.id.shareButton)
+        shareButton.setOnClickListener {
+            val  myIntent : Intent = Intent(Intent.ACTION_SEND)
+            myIntent.setType("text/plain")
+            var shareBody :String = ""
+            if (SessionController.getUsername(this) == username ){
+                shareBody = getString(R.string.shareOwnTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
+            }
+            else shareBody = getString(R.string.shareTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
+            myIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+            startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
+        }
 
     }
     /**
