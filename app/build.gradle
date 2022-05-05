@@ -78,4 +78,7 @@ dependencies {
 
     //Circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Custom calendar
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 }

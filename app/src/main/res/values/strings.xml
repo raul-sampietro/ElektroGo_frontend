@@ -119,4 +119,7 @@
     <string name="message">Message</string>
     <string name="resetFilters">Reset</string>
 
+    <string name="month">Mes</string>
+
+
 </resources>

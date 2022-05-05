@@ -6,19 +6,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/design_default_color_on_primary"
-    tools:context=".ui.carPooling.filterTripsFragment">
+    tools:context=".ui.carPooling.MyTripsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="match_parent"
-            android:layout_height="318dp"
-            android:background="@drawable/rounded_layout"
-            android:measureAllChildren="false" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button" />
+
+            <TextView
+                android:id="@+id/text_moth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/month" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Button" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_layout">
+
+            <com.github.sundeepk.compactcalendarview.CompactCalendarView
+                android:id="@+id/compactcalendar_view"
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/rounded_layout"
+                app:compactCalendarBackgroundColor="#95C59A"
+                app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+                app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
+                app:compactCalendarMultiEventIndicatorColor="#fff"
+                app:compactCalendarTargetHeight="250dp"
+                app:compactCalendarTextColor="#000000"
+                app:compactCalendarTextSize="12sp" />
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

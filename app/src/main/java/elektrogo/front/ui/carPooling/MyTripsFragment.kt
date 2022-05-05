@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
-import elektrogo.front.ui.carPooling.ListAdapter
+import elektrogo.front.ui.carPooling.ListAdapterTrips
 import java.time.LocalDate
 import java.time.Month
 import java.util.*
@@ -52,18 +52,18 @@ class MyTripsFragment : Fragment() {
         }
         else {
             filteredList = TripsOnDate(result.second, date)
-            listView.adapter = ListAdapter(context as Activity, filteredList)
+            listView.adapter = ListAdapterTrips(context as Activity, filteredList)
         }
         calendar.setOnDateChangeListener { Calview, year, month, dayOfMonth ->
             if (result.first == 200) {
                 date = LocalDate.of(year, Month.of(month), dayOfMonth)
                 filteredList = TripsOnDate(result.second, date)
-                listView.adapter = ListAdapter(context as Activity, filteredList)
+                listView.adapter = ListAdapterTrips(context as Activity, filteredList)
             }
         }
 
         listView.setOnItemClickListener { parent, view, position, id ->
-            val i = Intent(context, tripDetails::class.java)
+            val i = Intent(context, TripDetails::class.java)
             i.putExtra("username", filteredList[position].username)
             i.putExtra("startDate", filteredList[position].startDate)
             i.putExtra("startTime", filteredList[position].startTime)
