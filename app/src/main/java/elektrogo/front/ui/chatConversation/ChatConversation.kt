@@ -84,14 +84,6 @@ class ChatConversation : AppCompatActivity() {
             if (message != "") viewModel.sendMessage(userA, userB, message)
             text.text.clear()
 
-            /*
-            val view = this.currentFocus
-            if (view != null) {
-                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view.windowToken, 0)
-            }
-             */
-
             conversation = viewModel.getConversation(userA, userB)
             adapter.updateData(conversation)
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
