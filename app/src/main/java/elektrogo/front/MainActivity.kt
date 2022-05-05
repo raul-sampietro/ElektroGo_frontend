@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.ui.Route.routeFragment
-import elektrogo.front.ui.carPooling.filterTripsFragment
+import elektrogo.front.ui.carPooling.FilterTripsFragment
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             R.id.pooling -> {
                 toolbar.title = "Pooling"
 
-                val filtrarTrajectesFragment = filterTripsFragment()
+                val filtrarTrajectesFragment = FilterTripsFragment()
                 openFragment(filtrarTrajectesFragment)
                 return@OnItemSelectedListener true
             }

@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
@@ -36,6 +38,11 @@ class ChatConversation : AppCompatActivity() {
                 nameUserB.text = b.getString("userB")
             }
         }
+
+        val imageViewProfile : ImageView = findViewById(R.id.userImage)
+        val imagePath = viewModel.getUsersProfilePhoto(nameUserB?.text as String)
+        if (imagePath != "null") Picasso.get().load(imagePath).into(imageViewProfile)
+
         val userA = b?.getString("userA").toString()
         val userB = b?.getString("userB").toString()
 
@@ -49,7 +56,8 @@ class ChatConversation : AppCompatActivity() {
         val position = adapter.itemCount - 1
         recyclerView.smoothScrollToPosition(position)
 
-        object : CountDownTimer(120000, 4000) {
+        // TODO -> arreglar CountDownTimer para que no se acabe
+        object : CountDownTimer(180000, 1500) {
             override fun onTick(p0: Long) {
                 conversation = viewModel.getConversation(userA, userB)
                 adapter.updateData(conversation)
@@ -75,14 +83,6 @@ class ChatConversation : AppCompatActivity() {
             val message : String = text.text.toString()
             if (message != "") viewModel.sendMessage(userA, userB, message)
             text.text.clear()
-
-            /*
-            val view = this.currentFocus
-            if (view != null) {
-                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(view.windowToken, 0)
-            }
-             */
 
             conversation = viewModel.getConversation(userA, userB)
             adapter.updateData(conversation)

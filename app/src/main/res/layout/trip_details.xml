@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.carPooling.tripDetails">
+    tools:context=".ui.carPooling.TripDetails">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +45,15 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/dateDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="23/06/2022"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="22sp" />
+                <TextView
                     android:id="@+id/timeDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -54,46 +63,15 @@
                     android:textColor="@color/black"
                     android:textSize="22sp" />
 
-                <TextView
-                    android:id="@+id/dateDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:text="23/06/2022"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
-
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/path" />
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/originDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Baarcelona"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/destDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Madrid"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -166,6 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
             android:text="Anirem per autopista que per nacional hi ha masses bicis"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -177,7 +156,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="#95C59A" />
-ç
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -194,6 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:layout_marginEnd="10dp"
             android:text="No es pot menjar al cotxe ni es pot entrar gossos"
             android:textColor="@color/black"
             android:textSize="20sp" />

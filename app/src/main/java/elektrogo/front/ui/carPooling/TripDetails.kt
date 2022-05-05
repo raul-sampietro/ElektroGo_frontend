@@ -21,12 +21,12 @@ import java.text.SimpleDateFormat
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
  */
-class tripDetails : AppCompatActivity() {
+class TripDetails : AppCompatActivity() {
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
      */
-    private var viewModel: tripDetailsViewModel = tripDetailsViewModel()
+    private var viewModel: TripDetailsViewModel = TripDetailsViewModel()
 
     /**
      * @brief Metode que s'executa un cop l'activity ha estat creada. S'encarrega de mostrar per pantalla l'informacio rebuda per parametres del trajecte a veure'n els detalls.
@@ -54,8 +54,6 @@ class tripDetails : AppCompatActivity() {
         val seatsText : TextView = this.findViewById(R.id.occupiedseats)
         val restrictionText : TextView = this.findViewById(R.id.restrictionsInfo)
         val detailsText : TextView = this.findViewById(R.id.detailsInfo)
-        val origin: TextView = this.findViewById(R.id.originDetails)
-        val destination: TextView = this.findViewById(R.id.destDetails)
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
 
@@ -75,24 +73,8 @@ class tripDetails : AppCompatActivity() {
         seatsText.text = occupied
         restrictionText.text = restrictions
         detailsText.text=details
-        origin.text = originString
-        destination.text=destinationString
 
-        var originBrief : String
-        if (originString!!.length > 20){
-            originBrief = originString.substring(0, 20)
-            originBrief += "..."
-            origin.text = originBrief
-        }
-        else origin.text = originString
         originFull.text = originString
-        var destinationBrief : String
-        if (destinationString!!.length > 20){
-            destinationBrief = destinationString.substring(0, 20)
-            destinationBrief += "..."
-            destination.text = destinationBrief
-        }
-        else destination.text = destinationString
         destinationFull.text=destinationString
 
         val ratingPair = viewModel.getRating(username!!)

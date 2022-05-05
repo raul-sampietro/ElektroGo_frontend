@@ -39,7 +39,7 @@ import java.time.format.DateTimeFormatter
 /**
  * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
-class filterTripsFragment : Fragment() {
+class FilterTripsFragment : Fragment() {
 
     /**
      * @brief Instancia del client de la api Places de google maps.
@@ -110,7 +110,7 @@ class filterTripsFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private  var viewModel: filterTripsViewModel = filterTripsViewModel()
+    private  var viewModel: FilterTripsViewModel = FilterTripsViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -162,6 +162,32 @@ class filterTripsFragment : Fragment() {
             autocompleteSupportFragment2.setText("")
         }
 
+
+        val listView: ListView = view.findViewById(R.id.filterListView)
+        //mostro uns trajectes default a la llista
+        var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+        if (resultDefault.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        }
+        else {
+            filteredList = resultDefault.second
+            listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+        }
+        filtrarButton.setOnClickListener {
+            if (validate()) {
+                //mostro els trajectes resultants de la busqueda
+               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                if (result.first != 200) {
+                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                }
+                else {
+                    filteredList = result.second
+                    listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+                }
+            }
+            else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
+
+        }
         resetButton.setOnClickListener {
             autocompleteSupportFragment.setText("")
             autocompleteSupportFragment2.setText("")
@@ -174,36 +200,19 @@ class filterTripsFragment : Fragment() {
             timeToButton.text = "Fins a"
             timeFromButton.text = "Des de"
             autocompleteSupportFragment2.setText("")
-        }
-
-        val listView: ListView = view.findViewById(R.id.filterListView)
-        //mostro uns trajectes default a la llista
-    /*    var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
-        if (resultDefault.first != 200) {
-            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-        }
-        else {
-            filteredList = resultDefault.second
-            listView.adapter = ListAdapter(context as Activity, filteredList)
-        }*/
-        filtrarButton.setOnClickListener {
-            if (validate()) {
-                //mostro els trajectes resultants de la busqueda
-               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                if (result.first != 200) {
-                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-                }
-                else {
-                    filteredList = result.second
-                    listView.adapter = ListAdapter(context as Activity, filteredList)
-                }
+            //mostro uns trajectes default a la llista
+            var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+            if (resultDefault.first != 200) {
+                Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
             }
-            else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
-
+            else {
+                filteredList = resultDefault.second
+                listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+            }
         }
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
-            val i = Intent(context, tripDetails::class.java)
+            val i = Intent(context, TripDetails::class.java)
             i.putExtra("username", filteredList[position].username)
             i.putExtra("startDate", filteredList[position].startDate)
             i.putExtra("startTime", filteredList[position].startTime)

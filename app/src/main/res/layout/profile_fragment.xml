@@ -31,14 +31,17 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp">
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp">
 
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/avatar" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/profile_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:civ_border_color="#FF000000"
+                            app:civ_border_width="2dp" />
 
                     </RelativeLayout>
 
@@ -51,23 +54,57 @@
                             android:id="@+id/profile_username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:text="Username"
                             android:textAlignment="center"
                             android:textColor="@color/dark_green"
+                            android:text="@string/Username"
                             android:textSize="30sp"
                             android:textStyle="bold"
                             tools:ignore="RtlSymmetry" />
-
-                        <TextView
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="10dp"
-                            android:text="Valoration"
-                            android:textAlignment="center"
-                            android:textColor="@color/dark_green"
-                            android:textSize="20sp"
-                            tools:ignore="RtlSymmetry" />
+                            android:layout_gravity="center">
+
+                            <ImageView
+                                android:id="@+id/estrella1"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:src="@drawable/ic_starplena">
+                            </ImageView>
+
+                            <ImageView
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/estrella2"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:src="@drawable/ic_starplena">
+                            </ImageView>
+
+                            <ImageView
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/estrella3"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:src="@drawable/ic_starplena">
+                            </ImageView>
+
+                            <ImageView
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/estrella4"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:src="@drawable/ic_starplena">
+                            </ImageView>
+
+                            <ImageView
+                                android:layout_marginStart="5dp"
+                                android:id="@+id/estrella5"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:src="@drawable/ic_starplena">
+                            </ImageView>
+
+                        </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -76,7 +113,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/UpcomingTravels"
+                android:text="@string/PersonalInformation"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="20sp"
@@ -84,12 +121,105 @@
                 android:paddingStart="15dp"
                 tools:ignore="RtlSymmetry">
             </TextView>
-            <ListView
-                android:id="@+id/filterListView"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/filter_list_item">
-            </ListView>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/CompleteName"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:paddingStart="25dp"
+                        tools:ignore="RtlSymmetry">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/completeName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/CompleteName"
+                        android:textSize="15sp"
+                        android:paddingStart="5dp"
+                        tools:ignore="RtlSymmetry">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:paddingStart="25dp"
+                        tools:ignore="RtlSymmetry">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email"
+                        android:textSize="15sp"
+                        android:paddingStart="5dp"
+                        tools:ignore="RtlSymmetry">
+
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Login"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        android:paddingStart="25dp"
+                        tools:ignore="RtlSymmetry">
+
+                    </TextView>
+
+                    <TextView
+                        android:id="@+id/login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Login"
+                        android:textSize="15sp"
+                        android:paddingStart="5dp"
+                        tools:ignore="RtlSymmetry">
+
+                    </TextView>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,30 +229,39 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:paddingTop="10dp"
+                android:paddingBottom="30dp"
                 android:paddingStart="15dp"
                 tools:ignore="RtlSymmetry">
             </TextView>
 
             <Button
                 android:id="@+id/profile_become_driver"
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Become driver" />
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/carnet_conduir_small"
+                android:paddingStart="20sp"
+                android:text="@string/BecomeDriver"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/AddVehicleButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/MyVehicles" />
+                android:layout_height="52dp"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/cotxe_small"
+                android:text="@string/MyVehicles"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/profile_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/profile_logout_button" />
+                android:paddingStart="35sp"
+                android:drawableLeft="@drawable/logout_small"
+                android:background="@android:color/transparent"
+                android:text="@string/profile_logout_button"
+                android:textColor="@color/black"/>
 
             <Button
                 android:id="@+id/profile_MyTrips"

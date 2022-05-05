@@ -29,17 +29,17 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
 
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.fragment_chat_list_item, null)
+        val viewModel = ChatListItemViewModel()
         val sessionController = SessionController
-        // TODO imageView
-        val imageViewProfile : ImageView = view.findViewById(R.id.userImage)
-        val imagePath = sessionController.getImageUrl(context)
-        if (!imagePath.equals("null")  or !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
-        else imageViewProfile.setImageResource(R.drawable.avatar)
 
         val user : TextView = view.findViewById(R.id.listUser)
-
         val v = chatList[position]
         user.text = v
+
+        val imageViewProfile : ImageView = view.findViewById(R.id.userImage)
+        val imagePath = viewModel.getUsersProfilePhoto(user.text as String)
+        if (imagePath != "null") Picasso.get().load(imagePath).into(imageViewProfile)
+
 
         view.setOnClickListener{
             val intent = Intent(context, ChatConversation::class.java).apply {

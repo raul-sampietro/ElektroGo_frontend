@@ -8,6 +8,7 @@ class ChatListViewModel : ViewModel() {
     private lateinit var string: String
 
     fun getChatList(username: String) : ArrayList<String> = runBlocking {
-        FrontendController.getChatList(username)
+        return@runBlocking FrontendController.getChatList(username)
     }
+
 }
