@@ -39,7 +39,7 @@ import java.time.format.DateTimeFormatter
 /**
  * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
  */
-class filterTripsFragment : Fragment() {
+class FilterTripsFragment : Fragment() {
 
     /**
      * @brief Instancia del client de la api Places de google maps.
@@ -110,7 +110,7 @@ class filterTripsFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private  var viewModel: filterTripsViewModel = filterTripsViewModel()
+    private  var viewModel: FilterTripsViewModel = FilterTripsViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -212,7 +212,7 @@ class filterTripsFragment : Fragment() {
         }
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
-            val i = Intent(context, tripDetails::class.java)
+            val i = Intent(context, TripDetails::class.java)
             i.putExtra("username", filteredList[position].username)
             i.putExtra("startDate", filteredList[position].startDate)
             i.putExtra("startTime", filteredList[position].startTime)

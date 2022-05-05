@@ -28,7 +28,7 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
     /**
      * @brief Instancia de la classe filterTripsViewModel.
      */
-    private var viewModel: filterTripsViewModel  = filterTripsViewModel()
+    private var viewModel: FilterTripsViewModel  = FilterTripsViewModel()
 
     /**
      * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.

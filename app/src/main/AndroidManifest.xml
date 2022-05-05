@@ -24,7 +24,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".ui.carPooling.tripDetails"
+            android:name=".ui.carPooling.TripDetails"
             android:exported="false" />
 
         <activity

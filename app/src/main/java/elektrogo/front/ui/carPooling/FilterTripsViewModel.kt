@@ -17,7 +17,7 @@ import kotlinx.coroutines.runBlocking
 /**
  * @brief La clase filterTripsViewModel s'encarrega de la comunicacio de la GUI amb el front controller.
  */
-class filterTripsViewModel : ViewModel() {
+class FilterTripsViewModel : ViewModel() {
     /**
      * @brief Metode que es comunica amb FrontendController per tal d'obtenir tots les trajectes pels quals els valors coincideixen amb els parametres passats.
      * @param latLngOrigin latitud i longitud del origen del trajecte desitjat.
