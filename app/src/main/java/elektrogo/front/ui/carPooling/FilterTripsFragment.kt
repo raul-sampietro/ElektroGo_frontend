@@ -171,7 +171,7 @@ class FilterTripsFragment : Fragment() {
         }
         else {
             filteredList = resultDefault.second
-            listView.adapter = ListAdapter(context as Activity, filteredList)
+            listView.adapter = ListAdapterTrips(context as Activity, filteredList)
         }
         filtrarButton.setOnClickListener {
             if (validate()) {
@@ -182,7 +182,7 @@ class FilterTripsFragment : Fragment() {
                 }
                 else {
                     filteredList = result.second
-                    listView.adapter = ListAdapter(context as Activity, filteredList)
+                    listView.adapter = ListAdapterTrips(context as Activity, filteredList)
                 }
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
@@ -207,7 +207,7 @@ class FilterTripsFragment : Fragment() {
             }
             else {
                 filteredList = resultDefault.second
-                listView.adapter = ListAdapter(context as Activity, filteredList)
+                listView.adapter = ListAdapterTrips(context as Activity, filteredList)
             }
         }
 

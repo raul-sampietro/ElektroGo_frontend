@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat
 /**
  * @brief La clase ListAdapter s'encarrega de mostrar, per cada trajecte de filteredList, l'informacio resultant en una llista.
  */
-class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
+class ListAdapterTrips (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
@@ -71,16 +71,16 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         user.text = f.username
 
         var originBrief : String
-        if (f.origin.length > 24){
-            originBrief = f.origin.substring(0, 20)
+        if (f.origin.length > 32){
+            originBrief = f.origin.substring(0, 32)
             originBrief += "..."
             origin.text = originBrief
         }
         else origin.text = f.origin
 
         var destinationBrief : String
-        if (f.destination.length > 24){
-            destinationBrief = f.destination.substring(0, 20)
+        if (f.destination.length > 32){
+            destinationBrief = f.destination.substring(0, 32)
             destinationBrief += "..."
             destination.text = destinationBrief
         }
