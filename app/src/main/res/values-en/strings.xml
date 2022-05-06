@@ -119,6 +119,12 @@
     <string name="message">Message</string>
     <string name="resetFilters">Reset</string>
     <string name="textProva">This is a test text</string>
+    <string name="select_Language">Seleccione el idioma:</string>
+    <string name="catala">Català</string>
+    <string name="english">English</string>
+    <string name="espanol">Español</string>
+    <string name="preferences">Preferences</string>
+
 
 
 </resources>
