@@ -37,6 +37,8 @@ class TripDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trip_details)
+        setSupportActionBar(findViewById(R.id.toolbar_main))
+
         val username = intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
         var startTime = intent.getStringExtra("startTime")

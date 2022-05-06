@@ -10,10 +10,13 @@ import elektrogo.front.R
 
 class VehicleListActivity : AppCompatActivity() {
     private val vehicleListFragment = VehicleListFragment()
+    lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vehicle_list)
+        toolbar2  = findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar2)
         loadFragment(vehicleListFragment)
     }
 
@@ -34,4 +37,5 @@ class VehicleListActivity : AppCompatActivity() {
         transaction.replace(R.id.frame_container, fragment, "VehicleListFragment")
         transaction.commit()
     }
+
 }
