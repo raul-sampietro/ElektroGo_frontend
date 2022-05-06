@@ -7,6 +7,7 @@
 package elektrogo.front
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -34,6 +35,7 @@ import elektrogo.front.ui.carPooling.FilterTripsFragment
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
+import elektrogo.front.ui.preferences.PreferencesActivity
 
 /**
  * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
@@ -120,7 +122,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_item_one -> Toast.makeText(this, "he clicat el item", Toast.LENGTH_LONG).show()
+            R.id.nav_item_one -> {
+                var i : Intent = Intent(this, PreferencesActivity::class.java)
+                startActivity(i)
+            }
+
         }
         drawer.closeDrawer(GravityCompat.START)
         return true

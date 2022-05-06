@@ -185,8 +185,7 @@ class ProfileFragment : Fragment() {
 
         val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
         deleteButton.setOnClickListener {
-            val i = Intent(context, Languages::class.java)
-            startActivity(i)
+
         }
 
         return view
