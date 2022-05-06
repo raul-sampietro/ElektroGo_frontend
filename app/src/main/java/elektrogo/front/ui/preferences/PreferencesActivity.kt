@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import elektrogo.front.R
+import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
 
 class PreferencesActivity : AppCompatActivity() {
@@ -14,16 +15,13 @@ class PreferencesActivity : AppCompatActivity() {
 
     lateinit var preference: Preference
 
-    lateinit var context: Context
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferences)
 
         radiobuttonGroup = findViewById(R.id.radiobuttongroup)
 
-        context = this
-        preference = Preference(context)
+        preference = Preference(this)
 
         //Agafem la configuracio al inici
         if (preference.getLoginCount().equals("ca")){
@@ -61,5 +59,10 @@ class PreferencesActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+    override fun attachBaseContext(newBase: Context?) {
+        preference = Preference(newBase!!)
+        val lang = preference.getLoginCount()
+        super.attachBaseContext(lang?.let { MyContextWrapper.wrap(newBase, it) })
     }
 }

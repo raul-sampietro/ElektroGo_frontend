@@ -125,7 +125,7 @@
     <string name="navigation_drawer_open">Abrir</string>
     <string name="navigation_drawer_close">Cerrar</string>
 
-    <string name="select_Language">Select the language:</string>
+    <string name="select_Language">Seleccione el idioma:</string>
     <string name="catala">Català</string>
     <string name="english">English</string>
     <string name="espanol">Español</string>
