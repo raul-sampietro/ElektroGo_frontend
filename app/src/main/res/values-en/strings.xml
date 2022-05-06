@@ -124,5 +124,8 @@
     <string name="anglesMenu">English</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+    <string name="detailsLabel">Trip details</string>
+    <string name="llistaVehicles">Vehicles list</string>
+
 
 </resources>
