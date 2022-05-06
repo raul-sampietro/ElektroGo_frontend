@@ -52,12 +52,12 @@ class MyTripsFragment : Fragment() {
         initialize()
 
         val listView: ListView = view.findViewById(R.id.filterListView)
-        var date : LocalDate = LocalDate.now()
+        val date : LocalDate = LocalDate.now()
         month = date.monthValue
         year = date.year
         val defaultZoneId: ZoneId = ZoneId.systemDefault()
         calendar.setUseThreeLetterAbbreviation(true)
-        calendar.shouldDrawIndicatorsBelowSelectedDays(true);
+        calendar.shouldDrawIndicatorsBelowSelectedDays(true)
         calendar.setCurrentDate(Date.from(date.atStartOfDay(defaultZoneId).toInstant()))
         val username = SessionController.getUsername(context as Activity)
         setActualMonthText()
@@ -82,41 +82,20 @@ class MyTripsFragment : Fragment() {
         }
 
 
-        var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsForUser(username)
+        val result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsForUser(username)
         if (result.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
-            //addEvents(result.second)
-
-
-
-            for (cP: CarPooling in result.second) {
-                val localDate : LocalDateTime = LocalDateTime.parse(cP.startDate + " " + cP.startTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-                println("$localDate")
-                println("JOEEELELLELELELELEL")
-                val zoneId = ZoneId.systemDefault()
-                println(localDate.atZone(zoneId).toEpochSecond())
-                val ev2 : Event = Event(Color.RED, localDate.atZone(zoneId).toEpochSecond().toLong(), "putitohahahahaha")
-                calendar.addEvent(ev2)
-                val list = calendar.getEvents(localDate.atZone(zoneId).toEpochSecond())
-                println(list.size)
-            }
-            val ev1 = Event(Color.BLACK,1652014521L )
-            calendar.addEvent(ev1)
-
-
-
-
+            addEvents(result.second)
             filteredList = TripsOnDate(result.second, date)
             listView.adapter = ListAdapterTrips(context as Activity, filteredList)
         }
 
         calendar.setListener(object : CompactCalendarViewListener {
             override fun onDayClick(dateClicked: Date) {
-                val input = Date()
-                val date = dateClicked.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-                filteredList = TripsOnDate(result.second, date)
+                val localDate = dateClicked.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                filteredList = TripsOnDate(result.second, localDate)
                 listView.adapter = ListAdapterTrips(context as Activity, filteredList)
 
             }
@@ -126,7 +105,7 @@ class MyTripsFragment : Fragment() {
             }
         })
 
-        listView.setOnItemClickListener { parent, view, position, id ->
+        listView.setOnItemClickListener { parent, Listview, position, id ->
             val i = Intent(context, TripDetails::class.java)
             i.putExtra("username", filteredList[position].username)
             i.putExtra("startDate", filteredList[position].startDate)
@@ -146,17 +125,13 @@ class MyTripsFragment : Fragment() {
     private fun addEvents(filteredList: ArrayList<CarPooling>) {
         for (cP: CarPooling in filteredList) {
             val localDate : LocalDateTime = LocalDateTime.parse(cP.startDate + " " + cP.startTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-            println("$localDate")
-            println("JOEEELELLELELELELEL")
             val zoneId = ZoneId.systemDefault()
             println(localDate.atZone(zoneId).toEpochSecond())
-            val ev2 : Event = Event(Color.RED, localDate.atZone(zoneId).toEpochSecond().toLong())
+            val ev2 = Event(Color.RED, localDate.atZone(zoneId).toEpochSecond()*1000)
             calendar.addEvent(ev2)
             val list = calendar.getEvents(localDate.atZone(zoneId).toEpochSecond())
             println(list.size)
         }
-        val ev1 = Event(Color.BLACK, 1433704251000L)
-        calendar.addEvent(ev1)
 
     }
 
@@ -175,7 +150,7 @@ class MyTripsFragment : Fragment() {
             11 -> actualMonth.setText(getString(R.string.Nov))
             12 -> actualMonth.setText(getString(R.string.Dec))
         }
-        var s = actualMonth.text
+        val s = actualMonth.text
         actualMonth.setText("$s $year")
     }
 
@@ -187,7 +162,7 @@ class MyTripsFragment : Fragment() {
     }
 
     private fun TripsOnDate(trips: ArrayList<CarPooling>, date: LocalDate?): ArrayList<CarPooling> {
-        var tripsOnDate : ArrayList<CarPooling> = ArrayList<CarPooling>()
+        val tripsOnDate : ArrayList<CarPooling> = ArrayList<CarPooling>()
         for (cP: CarPooling in trips) {
             val dateString = date.toString()
             if (cP.startDate.equals(date.toString())) tripsOnDate.add(cP)
