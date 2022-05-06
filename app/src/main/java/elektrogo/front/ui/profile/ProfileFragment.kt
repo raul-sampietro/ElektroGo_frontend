@@ -17,9 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
-import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.languages.Languages
 import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
@@ -185,7 +185,8 @@ class ProfileFragment : Fragment() {
 
         val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
         deleteButton.setOnClickListener {
-
+            val i = Intent(context, Languages::class.java)
+            startActivity(i)
         }
 
         return view

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ElektroGo</string>
     <string name="title_home">Home</string>
@@ -117,6 +118,7 @@
     <string name="chat">Chat</string>
     <string name="message">Message</string>
     <string name="resetFilters">Reset</string>
-    <string name="textProva">Això és un text de prova</string>
+    <string name="textProva">Esto es un texto de prueba</string>
+
 
 </resources>
