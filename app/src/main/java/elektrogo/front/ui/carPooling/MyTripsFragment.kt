@@ -3,6 +3,7 @@ package elektrogo.front.ui.carPooling
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +15,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
 import com.github.sundeepk.compactcalendarview.CompactCalendarView.CompactCalendarViewListener
+import com.github.sundeepk.compactcalendarview.domain.Event
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MyTripsFragment : Fragment() {
@@ -52,6 +56,8 @@ class MyTripsFragment : Fragment() {
         month = date.monthValue
         year = date.year
         val defaultZoneId: ZoneId = ZoneId.systemDefault()
+        calendar.setUseThreeLetterAbbreviation(true)
+        calendar.shouldDrawIndicatorsBelowSelectedDays(true);
         calendar.setCurrentDate(Date.from(date.atStartOfDay(defaultZoneId).toInstant()))
         val username = SessionController.getUsername(context as Activity)
         setActualMonthText()
@@ -81,17 +87,44 @@ class MyTripsFragment : Fragment() {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
+            //addEvents(result.second)
+
+
+
+            for (cP: CarPooling in result.second) {
+                val localDate : LocalDateTime = LocalDateTime.parse(cP.startDate + " " + cP.startTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                println("$localDate")
+                println("JOEEELELLELELELELEL")
+                val zoneId = ZoneId.systemDefault()
+                println(localDate.atZone(zoneId).toEpochSecond())
+                val ev2 : Event = Event(Color.RED, localDate.atZone(zoneId).toEpochSecond().toLong(), "putitohahahahaha")
+                calendar.addEvent(ev2)
+                val list = calendar.getEvents(localDate.atZone(zoneId).toEpochSecond())
+                println(list.size)
+            }
+            val ev1 = Event(Color.BLACK,1652014521L )
+            calendar.addEvent(ev1)
+
+
+
+
             filteredList = TripsOnDate(result.second, date)
             listView.adapter = ListAdapterTrips(context as Activity, filteredList)
         }
-        /*
-        calendar.setOnDateChangeListener { Calview, year, month, dayOfMonth ->
-            if (result.first == 200) {
-                date = LocalDate.of(year, Month.of(month), dayOfMonth)
+
+        calendar.setListener(object : CompactCalendarViewListener {
+            override fun onDayClick(dateClicked: Date) {
+                val input = Date()
+                val date = dateClicked.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
                 filteredList = TripsOnDate(result.second, date)
                 listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+
             }
-        }*/
+
+            override fun onMonthScroll(firstDayOfNewMonth: Date) {
+
+            }
+        })
 
         listView.setOnItemClickListener { parent, view, position, id ->
             val i = Intent(context, TripDetails::class.java)
@@ -107,6 +140,23 @@ class MyTripsFragment : Fragment() {
             i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
             startActivity(i)
         }
+
+    }
+
+    private fun addEvents(filteredList: ArrayList<CarPooling>) {
+        for (cP: CarPooling in filteredList) {
+            val localDate : LocalDateTime = LocalDateTime.parse(cP.startDate + " " + cP.startTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            println("$localDate")
+            println("JOEEELELLELELELELEL")
+            val zoneId = ZoneId.systemDefault()
+            println(localDate.atZone(zoneId).toEpochSecond())
+            val ev2 : Event = Event(Color.RED, localDate.atZone(zoneId).toEpochSecond().toLong())
+            calendar.addEvent(ev2)
+            val list = calendar.getEvents(localDate.atZone(zoneId).toEpochSecond())
+            println(list.size)
+        }
+        val ev1 = Event(Color.BLACK, 1433704251000L)
+        calendar.addEvent(ev1)
 
     }
 
