@@ -20,6 +20,10 @@
         android:theme="@style/Theme.ElektroGo"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.preferences.PreferencesActivity"
+            android:exported="false"
+            android:label="@string/preferences" />
+        <activity
             android:name=".languages.Languages"
             android:exported="false" />
         <activity
@@ -51,10 +55,10 @@
             android:exported="true" />
         <activity
             android:name=".ui.vehicleList.VehicleListActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ui.valorarUsuari.ValorarUsuariActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

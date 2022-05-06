@@ -7,8 +7,6 @@ val PREFERENCE_NAME = "SharedPreferenceExample"
 val PREFERENCE_LANGUAGE = "Language"
 
 class Preference(context : Context){
-
-
     val preference = context.getSharedPreferences(PREFERENCE_NAME,Context.MODE_PRIVATE)
 
     fun getLoginCount() : String? {
