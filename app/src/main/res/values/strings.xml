@@ -123,6 +123,8 @@
     <string name="anglesMenu">Anglès</string>
     <string name="navigation_drawer_open">Obrir</string>
     <string name="navigation_drawer_close">Tancar</string>
+    <string name="detailsLabel">Detalls del trajecte</string>
+    <string name="llistaVehicles">Llista de vehicles</string>
 
 
     <string name="select_Language">Seleccioni l\'idioma:</string>

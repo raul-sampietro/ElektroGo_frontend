@@ -129,6 +129,8 @@
     <string name="english">English</string>
     <string name="espanol">Español</string>
     <string name="preferences">Preferències</string>
+    <string name="detailsLabel">Detalls del trajecte</string>
+    <string name="llistaVehicles">Llista de vehicles</string>
 
 
 </resources>

@@ -47,38 +47,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var context: Context
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
+    lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
 
 
     //Configuració dels events clic
     private val mOnNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
         when (item.itemId) {
             R.id.pooling -> {
-               // toolbar.title = "Pooling"
+                toolbar2.title = "Pooling"
                 val filtrarTrajectesFragment = FilterTripsFragment()
                 openFragment(filtrarTrajectesFragment)
                 return@OnItemSelectedListener true
             }
             R.id.mapa -> {
-              //  toolbar.title = "Mapa"
+                toolbar2.title = "Mapa"
                 //linia que havia escrit la Marina
                 val mapsFragment /*: MapsFragment*/ = MapsFragment(this)
                 openFragment(mapsFragment)
                 return@OnItemSelectedListener true
             }
             R.id.ruta -> {
-             //   toolbar.title = "Ruta"
+                toolbar2.title = "Ruta"
                 val routeFragment = routeFragment()
                 openFragment(routeFragment)
                 return@OnItemSelectedListener true
             }
             R.id.chat -> {
-               // toolbar.title = "Chat"
+                toolbar2.title = "Chat"
                 val chatFragment = ChatListFragment()
                 openFragment(chatFragment)
                 return@OnItemSelectedListener true
             }
             R.id.perfil -> {
-              //  toolbar.title = "Perfil"
+                toolbar2.title = "Perfil"
                 val perfilFragment = ProfileFragment()
                 openFragment(perfilFragment)
                 return@OnItemSelectedListener true
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var toolbar2 : androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
+        toolbar2  = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar2)
         drawer = findViewById(R.id.main)
         toggle = ActionBarDrawerToggle(this, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
