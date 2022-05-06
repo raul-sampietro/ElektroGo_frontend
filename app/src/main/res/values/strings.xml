@@ -121,5 +121,20 @@
 
     <string name="month">Mes</string>
 
+    <string name="Jan">Gener</string>
+    <string name="Feb">Febrer</string>
+    <string name="Mar">Març</string>
+    <string name="Apr">Abril</string>
+    <string name="May">Maig</string>
+    <string name="Jun">Juny</string>
+    <string name="Jul">Juliol</string>
+    <string name="Aug">Agost</string>
+    <string name="Sept">Setembre</string>
+    <string name="Oct">Octubre</string>
+    <string name="Nov">Novembre</string>
+    <string name="Dec">Decembre</string>
+
+
+
 
 </resources>
