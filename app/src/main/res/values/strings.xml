@@ -121,5 +121,8 @@
     <string name="catalaMenu">Català</string>
     <string name="castellaMenu">Castellà</string>
     <string name="anglesMenu">Anglès</string>
+    <string name="navigation_drawer_open">Obrir</string>
+    <string name="navigation_drawer_close">Tancar</string>
+
 
 </resources>

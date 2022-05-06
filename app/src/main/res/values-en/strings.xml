@@ -122,5 +122,7 @@
     <string name="catalaMenu">Catalan</string>
     <string name="castellaMenu">Spanish</string>
     <string name="anglesMenu">English</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 
 </resources>
