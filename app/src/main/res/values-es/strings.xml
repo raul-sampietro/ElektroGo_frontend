@@ -119,6 +119,8 @@
     <string name="message">Message</string>
     <string name="resetFilters">Reset</string>
     <string name="textProva">Esto es un texto de prueba</string>
-
+    <string name="catalaMenu">Catalan</string>
+    <string name="castellaMenu">Español</string>
+    <string name="anglesMenu">Inglés</string>
 
 </resources>

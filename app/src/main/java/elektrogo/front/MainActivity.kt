@@ -6,7 +6,11 @@
 
 package elektrogo.front
 
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 
@@ -15,6 +19,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import elektrogo.front.databinding.ActivityMainBinding
+import elektrogo.front.languages.MyContextWrapper
+import elektrogo.front.languages.Preference
 import elektrogo.front.ui.Route.routeFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
 import elektrogo.front.ui.map.MapsFragment
@@ -27,6 +33,8 @@ import elektrogo.front.ui.chatList.ChatListFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    lateinit var Preference: Preference
+    lateinit var context: Context
 
     //Configuració dels events clic
     private val mOnNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
@@ -71,6 +79,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toolbar:ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        context = this
+        Preference = Preference(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -100,4 +110,42 @@ class MainActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        var inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menubar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.catalan -> {
+                Preference.setLoginCount("ca")
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+            R.id.spanish -> {
+                Preference.setLoginCount("es")
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+            R.id.english -> {
+                Preference.setLoginCount("en")
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+        }
+        return true
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        Preference = Preference(newBase!!)
+        val lang = Preference.getLoginCount()
+        super.attachBaseContext(lang?.let { MyContextWrapper.wrap(newBase, it) })
+    }
 }
