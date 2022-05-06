@@ -21,6 +21,7 @@ import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
 import elektrogo.front.model.Driver
+import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking
@@ -163,6 +164,12 @@ class ProfileFragment : Fragment() {
         val buttonCars: Button = view.findViewById(R.id.AddVehicleButton)
         buttonCars.setOnClickListener {
             val intent = Intent(container?.context, VehicleListActivity::class.java)
+            startActivity(intent)
+        }
+
+        val buttonTrips: Button = view.findViewById(R.id.profile_MyTrips)
+        buttonTrips.setOnClickListener {
+            val intent = Intent(container?.context, TripsActivity::class.java)
             startActivity(intent)
         }
 
