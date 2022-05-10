@@ -88,8 +88,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         false
     }
 
-    //Inicialització de la barra superior
-    private lateinit var toolbar:ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         context = this
@@ -109,7 +107,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView : NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-        toolbar = supportActionBar!!
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
 
