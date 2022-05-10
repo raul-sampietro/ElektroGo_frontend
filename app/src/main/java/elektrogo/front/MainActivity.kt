@@ -10,12 +10,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +27,7 @@ import com.google.android.material.navigation.NavigationView
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
-import elektrogo.front.ui.Route.routeFragment
+import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
@@ -68,7 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.ruta -> {
                 toolbar2.title = "Ruta"
-                val routeFragment = routeFragment()
+                val routeFragment = RouteFragment()
                 openFragment(routeFragment)
                 return@OnItemSelectedListener true
             }

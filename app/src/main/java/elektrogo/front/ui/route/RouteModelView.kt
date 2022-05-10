@@ -1,4 +1,4 @@
-package elektrogo.front.ui.Route
+package elektrogo.front.ui.route
 
 import com.google.android.gms.maps.model.LatLng
 import elektrogo.front.controller.FrontendController
