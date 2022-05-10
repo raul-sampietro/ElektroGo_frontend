@@ -38,19 +38,18 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:id="@+id/cardViewUserConversation"
-                android:layout_toRightOf="@+id/backButtonConversation"
+                android:layout_toEndOf="@+id/backButtonConversation"
                 android:layout_centerVertical="true"
                 app:cardCornerRadius="35dp">
 
 
                 <!-- android:src="@drawable/defaultprofile" -->
                 <ImageView
+                    android:src="@drawable/avatar"
+                    android:id="@+id/userImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_toEndOf="@id/backButtonConversation"
-                    android:id="@+id/imageViewUserConversation"
-                    android:scaleType="centerCrop">
-                </ImageView>
+                    app:civ_border_color="#FF000000"/>
 
             </androidx.cardview.widget.CardView>
 

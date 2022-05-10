@@ -6,6 +6,7 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,21 +18,24 @@ import android.widget.Toast
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
+import java.text.SimpleDateFormat
+
 /**
  * @brief La clase ListAdapter s'encarrega de mostrar, per cada trajecte de filteredList, l'informacio resultant en una llista.
  */
-class ListAdapter (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
+class ListAdapterTrips (private val context : Activity, private val filteredList : ArrayList<CarPooling>) : ArrayAdapter<CarPooling>(context, R.layout.filter_list_item, filteredList){
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
      */
-    private var viewModel: filterTripsViewModel  = filterTripsViewModel()
+    private var viewModel: FilterTripsViewModel  = FilterTripsViewModel()
 
     /**
      * @brief Metode que mostra en pantalla, en una llista, la diferent informacio que te un trajecte, per cada trajecta obtingut de la cerca.
      * @pre
      * @post Es mostra un llistat amb els trajectes dins de filteredList
      */
+    @SuppressLint("SimpleDateFormat")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val inflater = LayoutInflater.from(context)
@@ -44,6 +48,7 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         val startTime : TextView = view.findViewById(R.id.time)
         val date :TextView = view.findViewById(R.id.dateFiltered)
         val user : TextView = view.findViewById(R.id.username)
+
         val f = filteredList[position]
         val ratingPair = viewModel.getRating(f.username)
         if (ratingPair.first != 200) {
@@ -56,21 +61,26 @@ class ListAdapter (private val context : Activity, private val filteredList : Ar
         occupied += "/"
         occupied += f.offeredSeats.toString()
         occupiedseats.text = occupied
-        startTime.text = f.startTime
-        date.text = f.startDate
+        startTime.text = f.startTime.substring(0, f.startTime.length-3)
+
+        val dateTmp = f.startDate
+        val input = SimpleDateFormat("yyyy-MM-dd")
+        val output = SimpleDateFormat("dd/MM/yyyy")
+        val oneWayTripDate = input.parse(dateTmp) // parse input
+        date.text = output.format(oneWayTripDate) // format output
         user.text = f.username
 
         var originBrief : String
-        if (f.origin.length > 24){
-            originBrief = f.origin.substring(0, 20)
+        if (f.origin.length > 32){
+            originBrief = f.origin.substring(0, 32)
             originBrief += "..."
             origin.text = originBrief
         }
         else origin.text = f.origin
 
         var destinationBrief : String
-        if (f.destination.length > 24){
-            destinationBrief = f.destination.substring(0, 20)
+        if (f.destination.length > 32){
+            destinationBrief = f.destination.substring(0, 32)
             destinationBrief += "..."
             destination.text = destinationBrief
         }

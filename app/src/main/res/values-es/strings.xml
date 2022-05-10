@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ElektroGo</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="generar_ruta">Generar ruta</string>
+    <string name="places_autocomplete_search_hint">Buscar localización</string>
+    <string name="origen">Origen:</string>
+    <string name="dest">Destino:</string>
+    <string name="autonomia_actual">Autonomía actual:</string>
+    <string name="km">km</string>
+    <string name="autonomia">Autonomía:</string>
+    <string name="errorOnFields">Rellene todos los campos correctamente para poder generar una ruta</string>
+    <string name="errorOnLocation">Ha habido un error con la localización, por favor, vuelva a intentarlo</string>
+    <string name="fieldRequired">Este campo es obligatiorio</string>
+    <string name="errorOnRoute">Ha habido un error, no hay ninguna ruta disponible</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="Mapa">Mapa</string>
+    <string name="title_pooling">Pooling</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_route">Ruta</string>
+    <string name="title_map">Mapa</string>
+
+    <string name="LicensePlateLabel">Introduce la matricula</string>
+    <string name="LicensePlateExample">1234ABC</string>
+
+    <string name="CarBrandLabel">Introduce la marca del vehículo</string>
+    <string name="CarBrandHint">Tesla</string>
+
+    <string name="VehicleModelLabel">Introduce el modelo del vehículo</string>
+    <string name="VehicleModelExample">X</string>
+
+    <string name="DrivingRangeLabel">Introduce la autonomía del vehículo (km)</string>
+    <string name="DrivingRangeExample">100</string>
+
+    <string name="FabricationYearLabel">Año de fabricación</string>
+    <string name="FabricationYearInput">2020</string>
+
+    <string name="SaveVehicle">Añadir</string>
+    <string name="AddVehicle">Añadir vehículo</string>
+
+    <string name="MyVehicles">Mis vehículos</string>
+    <string name="BecomeDriver">Registrar carnet de conducir</string>
+    <string name="Achievements">Trofeos</string>
+    <string name="PersonalInformation">Información Personal</string>
+    <string name="Username">Nombre de usuario</string>
+    <string name="CompleteName">Nombre</string>
+    <string name="email">Email</string>
+    <string name="Login">Login con</string>
+
+
+    <string name="ObligatoryField">Este campo es obligatorio</string>
+    <string name="notEnoughCharactersLicensePlate">Debes introducir 7 o 8 caracteres</string>
+    <string name="invalidLicensePlate">El formato de matrícula no es válido</string>
+    <string name="VehicleImageButton">Inserir imagen del vehículo</string>
+    <string name="ObligatoryFieldImage">Debes añadir una imagen del vehículo</string>
+    <string name="VehicleCreatedSuccessfully">El vehúculo se ha guardado</string>
+    <string name="VehicleNotCreated">Uno o más campos son incorrectos</string>
+    <string name="AskLocation"> Accede a la configuración de tu dispositivo y acepta los permisos</string>
+    <string name="WhenLocationDenied">Para activar la localización, ve a la configuración del dispositivo y acepta los permisos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="seatsVehicleLabel">Introduce el numero de asientos del vehículo</string>
+    <string name="seatsVehicleExample">5</string>
+
+    <string name="VehicleSeats">Asientos</string>
+
+    <string name="DriverVehicleAlreadyExists">Ya has creado este vehículo</string>
+    <string name="VehicleAlreadyExists">Este vehículo ya existe</string>
+    <string name="WrongVehicleInfo">Ya existe un vehículo con la misma matricula pero información diferente</string>
+    <string name="ServerError">Ha habido un error con el servidor, intentalo más tarde</string>
+    <string name="btnValorar">Valora</string>
+    <string name="valorar_usuari">Valorar Usuario</string>
+
+    <string name="dateLabel">Fecha</string>
+    <string name="HourButton">Hora</string>
+    <string name="HourExample">12:00</string>
+    <string name="PublishButton">Publicar</string>
+    <string name="ExampleDate">23/6/2022</string>
+    <string name="TrajectDetailsLabel">Detalles del trayecto:</string>
+    <string name="ExampleDetailsTraject">Iremos por la AP-7. No suelo conduir muy rápido, etc.</string>
+    <string name="VehicleLabel">Vehículo:</string>
+    <string name="RestTextExample">·No se pueden llevar perros\n·No se puede fumar en el vehículo\n·Etc.</string>
+    <string name="SeatsOffered">Asientos disponibles:</string>
+    <string name="RestTrip">Restriciones del trayecto:</string>
+    <string name="DataIncorrecte">La fecha del trayecto es incorrecta</string>
+    <string name="HoraIncorrecte">La hora del trayecto es incorrecta</string>
+
+    <string name="savedCarpooling">El trayecto se ha publicado</string>
+    <string name="errorCarpooling">Ha havido un error con el serivors. Intentalo más tarde.</string>
+
+    <string name="hora_d_inici">hora de inicio</string>
+    <string name="dataFiltrar">Fecha</string>
+    <string name="buscarFiltrar">Buscar</string>
+    <string name="errorFieldsFiltrar">Rellene todos los campos correctamente para poder buscar trayectos</string>
+
+
+    <!-- FirstLoginFragment -->
+    <string name="firstLoginWelcome">Bienvenido,</string>
+    <string name="firstLoginTo">a</string>
+    <string name="firstLoginSelectUsername">Por favor, seleciona tu nombre de usuario</string>
+    <string name="firstLoginWarning">Atención: </string>
+    <string name="firstLoginWarning2">todo el mundo lo podra ver</string>
+    <string name="firstLoginUsername">nombre de usuario</string>
+    <string name="firstLoginSave">Guardar</string>
+
+    <string name="facebook_app_id">850446215915012</string>
+    <string name="fb_login_protocol_scheme">fb850446215915012</string>
+    <string name="facebook_client_token">d2fe733d766ef258b456bfcbbdb78de2</string>
+    <string name="profile_logout_button">Tancar Sessió</string>
+
+    <string name="shareOwnTrip">He creado un nuevo trayecto en ElektroGo para el día %1$s a las %2$s con origen %3$s y destinación %4$s. Solo quedan %5$s asientos libres! \n\nÚnete a mi a traves de la aplicación: https://marccastellsdostal.wixsite.com/elektrogo</string>
+    <string name="shareTrip">He encontrado un trayecto en la app de ElektroGo para el día %1$s a las %2$s con origen %3$s y destinación %4$s. Solo quedan %5$s asientos libres! \n\nÚnete a traves de la aplicación: https://marccastellsdostal.wixsite.com/elektrogo</string>
+    <string name="share">Compartir con</string>
+    <string name="chat">Chat</string>
+    <string name="message">Message</string>
+    <string name="resetFilters">Reset</string>
+    <string name="textProva">Esto es un texto de prueba</string>
+    <string name="catalaMenu">Catalan</string>
+    <string name="castellaMenu">Español</string>
+    <string name="anglesMenu">Inglés</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="detailsLabel">Detalles del trayecto</string>
+    <string name="llistaVehicles">Lista de vehículos</string>
+
+    <string name="select_Language">Seleccione el idioma:</string>
+    <string name="catala">Català</string>
+    <string name="english">English</string>
+    <string name="espanol">Español</string>
+    <string name="preferences">Preferencias</string>
+
+
+
+</resources>

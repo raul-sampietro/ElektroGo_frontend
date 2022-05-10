@@ -20,6 +20,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.AddressComponent
+import com.google.android.libraries.places.api.model.AddressComponents
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -27,10 +29,12 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
+import io.ktor.http.*
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @brief La classe NewCarPoolingFragment obte i comprova les dades dels trajectes a publicar i realitza la comunicacio amb backend.
@@ -309,12 +313,43 @@ class NewCarPoolingFragment() : Fragment() {
      */
     private fun getAutocompleteLocation () {
         autocompleteSupportFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
-        autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS_COMPONENTS, Place.Field.LAT_LNG))
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
+                var addressList : List<AddressComponent> = place.addressComponents.asList()
+                var addressNumber : String? = null
+                var addressFirst : String = ""
+                var addressSecond : String = ""
+                var hasFirst : Boolean = false
+                var i : AddressComponent
+                for (i in addressList) {
+                    if (i.types[0].equals("street_number")) {
+                        addressNumber = i.name
+                    }
+                    else if (i.types[0].equals("route") or i.types[0].equals("neighborhood")) {
+                        addressFirst = i.name
+                        hasFirst=true
+                    }
+                    else if (i.types[0].equals("locality")){
+                        if(hasFirst) addressSecond = i.name
+                        else addressFirst = i.name
+                    }
+                    else if (i.types[0].equals("administrative_area_level_2")) {
+                        if(!hasFirst) addressSecond = i.name
+                    }
+                }
+
                 originText.error = null
                 latLngOrigin = place.latLng
-                originName = place.name!!
+                originName = addressFirst
+                if (addressFirst != addressSecond){
+                    if(addressNumber != null) {
+                        originName += " "
+                        originName += addressNumber
+                    }
+                    originName += ", "
+                    originName += addressSecond
+                }
                 if (latLngOrigin == null) Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_SHORT).show()
             }
             override fun onError(status: Status) {
@@ -322,12 +357,45 @@ class NewCarPoolingFragment() : Fragment() {
             }
         })
         autocompleteSupportFragment2 = childFragmentManager.findFragmentById(R.id.autocomplete_fragment2) as AutocompleteSupportFragment
-        autocompleteSupportFragment2.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        autocompleteSupportFragment2.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS_COMPONENTS, Place.Field.LAT_LNG))
         autocompleteSupportFragment2.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
+                var addressList : List<AddressComponent> = place.addressComponents.asList()
+
+                var addressNumber : String? = null
+                var addressFirst : String = ""
+                var addressSecond : String = ""
+                var hasFirst : Boolean = false
+                var i : AddressComponent
+                for (i in addressList) {
+                    if (i.types[0].equals("street_number")) {
+                        addressNumber = i.name
+                    }
+                    else if (i.types[0].equals("route") or i.types[0].equals("neighborhood")) {
+                        addressFirst = i.name
+                        hasFirst=true
+                    }
+                    else if (i.types[0].equals("locality")){
+                        if(hasFirst) addressSecond = i.name
+                        else addressFirst = i.name
+                    }
+                    else if (i.types[0].equals("administrative_area_level_2")) {
+                        if(!hasFirst) addressSecond = i.name
+                    }
+                }
+
+
                 destinationText.error = null
                 latLngDestination = place.latLng
-                destinationName = place.name!!
+                destinationName = addressFirst
+                if (addressFirst != addressSecond){
+                    if(addressNumber != null) {
+                        destinationName += " "
+                        destinationName += addressNumber
+                    }
+                    destinationName += ", "
+                    destinationName += addressSecond
+                }
                 if (latLngDestination == null)  Toast.makeText(context, resources.getString(R.string.errorOnLocation),Toast.LENGTH_LONG).show()
             }
             override fun onError(status: Status) {

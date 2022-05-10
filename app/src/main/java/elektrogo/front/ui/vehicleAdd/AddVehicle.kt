@@ -55,6 +55,8 @@ class AddVehicle : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_vehicle)
+        setSupportActionBar(findViewById(R.id.toolbar_main))
+
 
         val licensePlate: EditText = findViewById(R.id.LicensePlate)
         val vehicleModel: EditText = findViewById(R.id.VehicleModel)
