@@ -132,7 +132,7 @@
     <string name="english">English</string>
     <string name="espanol">Español</string>
     <string name="preferences">Preferencias</string>
-
+    <string name="buttonCancelTrip">Cancelar trayecto</string>
 
 
 </resources>

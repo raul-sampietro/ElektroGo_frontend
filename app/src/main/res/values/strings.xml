@@ -148,8 +148,7 @@
     <string name="Oct">Octubre</string>
     <string name="Nov">Novembre</string>
     <string name="Dec">Decembre</string>
-
-
+    <string name="buttonCancelTrip">Cancel·lar trajecte</string>
 
 
 </resources>

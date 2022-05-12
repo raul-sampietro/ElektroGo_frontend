@@ -133,7 +133,7 @@
     <string name="english">English</string>
     <string name="espanol">Español</string>
     <string name="preferences">Preferences</string>
-
+    <string name="buttonCancelTrip">Cancel trip</string>
 
 
 </resources>

@@ -131,6 +131,7 @@
     <string name="preferences">Preferències</string>
     <string name="detailsLabel">Detalls del trajecte</string>
     <string name="llistaVehicles">Llista de vehicles</string>
+    <string name="buttonCancelTrip">Cancel·lar trajecte</string>
 
 
 </resources>
