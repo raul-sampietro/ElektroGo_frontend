@@ -289,7 +289,7 @@ class FilterTripsFragment : Fragment() {
                     fromTimeSelected = "$hour:$minute:00"
                 }
 
-            }, minute, hour, true)
+            }, hour, minute,  true)
 
             tpd.show()
         }
@@ -309,7 +309,7 @@ class FilterTripsFragment : Fragment() {
                     timeToButton.text = "$hour:$minute"
                     toTimeSelected = "$hour:$minute:00"
                 }
-            }, minute, hour, true)
+            }, hour, minute, true)
 
             tpd.show()
         }
