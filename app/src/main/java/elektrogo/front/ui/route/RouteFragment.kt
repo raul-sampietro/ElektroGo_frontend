@@ -4,7 +4,7 @@
  * @date 26/03/2022
  * @brief Implementacio d'un fragment per tal d'entrar dades per la creacio d'una ruta.
  */
-package elektrogo.front.ui.Route
+package elektrogo.front.ui.route
 
 import android.content.Intent
 import android.net.Uri
@@ -32,7 +32,7 @@ import elektrogo.front.R
  * @brief La clase Rating representa la GUI de la pantalla on l'usuari inserira les dades per demanar la generacio d'una ruta al sistema.
  */
 
-class routeFragment() : Fragment() {
+class RouteFragment() : Fragment() {
 
     /**
      * @brief Instancia de la classe rutaModelView.

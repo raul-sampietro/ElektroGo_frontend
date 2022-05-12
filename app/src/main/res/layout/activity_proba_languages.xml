@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".languages.Languages">
+
+    <Button
+        android:id="@+id/english"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="english"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+    <Button
+        android:id="@+id/catalan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="catalan"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="393dp" />
+
+    <Button
+        android:id="@+id/spanish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="spanish"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="522dp" />
+
+    <TextView
+        android:id="@+id/textprova"
+        android:layout_width="220dp"
+        android:layout_height="31dp"
+        android:text="@string/textProva"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="665dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

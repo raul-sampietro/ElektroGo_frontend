@@ -16,7 +16,9 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.*
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Vehicle
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.util.*
@@ -53,6 +55,8 @@ class AddVehicle : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_vehicle)
+        setSupportActionBar(findViewById(R.id.toolbar_main))
+
 
         val licensePlate: EditText = findViewById(R.id.LicensePlate)
         val vehicleModel: EditText = findViewById(R.id.VehicleModel)
@@ -134,7 +138,7 @@ class AddVehicle : AppCompatActivity() {
 
                 var vehicleInfo = Vehicle(brandVehicle.getText().toString(), vehicleModel.getText().toString(), licensePlate.getText().toString(),
                     drivingRange.getText().toString().toInt(), dropYearSpinner.selectedItem.toString().toInt(), seatsVehcile.getText().toString().toInt(), null)
-                var statusCode = addVehicleModelView.sendVehicleInfo(vehicleInfo)
+                var statusCode = addVehicleModelView.sendVehicleInfo(vehicleInfo, SessionController.getUsername(this))
 
                 if (statusCode == 433) Toast.makeText(this, resources.getString(R.string.DriverVehicleAlreadyExists), Toast.LENGTH_LONG).show()
                 else if (statusCode == 440) Toast.makeText(this, resources.getString(R.string.WrongVehicleInfo), Toast.LENGTH_LONG).show()
@@ -142,12 +146,10 @@ class AddVehicle : AppCompatActivity() {
                 else if (statusCode in 200..299){
                     addVehicleModelView.saveVehicleImage(licensePlate.text.toString(), bitmapVehicleImage!!)
                     Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
-                    finishActivity(Activity.RESULT_OK) //Back to menu
+                    var intent = Intent(this, VehicleListActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
-
-
-
-
             }
             else Toast.makeText(this, resources.getString(R.string.VehicleNotCreated), Toast.LENGTH_LONG).show()
         }
@@ -180,8 +182,16 @@ class AddVehicle : AppCompatActivity() {
         }
     }
 
-
-
+    //Listener del botó d'enrere de la barra d'Android
+    override fun onBackPressed() {
+        if (onBackPressedDispatcher.hasEnabledCallbacks()) {
+            super.onBackPressed()
+        } else {
+            var intent = Intent(this, VehicleListActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
 
 
 }
