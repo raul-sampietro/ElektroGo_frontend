@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.carPooling.TripDetails">
 
     <include
@@ -16,8 +17,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_marginTop="55dp">
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -353,4 +353,4 @@
     </LinearLayout>
 
 </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
