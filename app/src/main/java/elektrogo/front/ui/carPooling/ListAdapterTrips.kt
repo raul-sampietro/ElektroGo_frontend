@@ -52,7 +52,7 @@ class ListAdapterTrips (private val context : Activity, private val filteredList
         val f = filteredList[position]
         val ratingPair = viewModel.getRating(f.username)
         if (ratingPair.first != 200) {
-            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue, view)
         val numValorations : TextView = view.findViewById(R.id.numberValorations)
         numValorations.text = "(${ratingPair.second!!.numberOfRatings})"

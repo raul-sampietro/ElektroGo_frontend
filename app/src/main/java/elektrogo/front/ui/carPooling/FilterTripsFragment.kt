@@ -146,9 +146,9 @@ class FilterTripsFragment : Fragment() {
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
         autocompleteSupportFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragmentFiltrar) as AutocompleteSupportFragment
-        autocompleteSupportFragment.setHint("Origen")
+        autocompleteSupportFragment.setHint(getString(R.string.OrigenString))
         autocompleteSupportFragment2 = childFragmentManager.findFragmentById(R.id.autocomplete_fragmentFiltrar2) as AutocompleteSupportFragment
-        autocompleteSupportFragment2.setHint("Desti")
+        autocompleteSupportFragment2.setHint(getString(R.string.DestiString))
         getAutocompleteLocation()
 
         val crossCallbackOrigin = requireActivity().findViewById<View>(R.id.viewCrossCallbackOriginFiltrar)
@@ -176,14 +176,20 @@ class FilterTripsFragment : Fragment() {
         filtrarButton.setOnClickListener {
             if (validate()) {
                 //mostro els trajectes resultants de la busqueda
-               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                if (result.first != 200) {
-                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-                }
-                else {
-                    filteredList = result.second
-                    listView.adapter = ListAdapterTrips(context as Activity, filteredList)
-                }
+               try{
+                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                   if (result.first != 200) {
+                       Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                   }
+                   else {
+                       filteredList = result.second
+                       listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+                   }
+               }
+               catch (e: Exception){
+                   Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+               }
+
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
@@ -196,9 +202,9 @@ class FilterTripsFragment : Fragment() {
             dateSelected = null
             fromTimeSelected = null
             toTimeSelected = null
-            dateButton.text = "Data"
-            timeToButton.text = "Fins a"
-            timeFromButton.text = "Des de"
+            dateButton.text = getString(R.string.DataFilter)
+            timeToButton.text = getString(R.string.FinsFilter)
+            timeFromButton.text = getString(R.string.DesdeFilter)
             autocompleteSupportFragment2.setText("")
             //mostro uns trajectes default a la llista
             var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
