@@ -26,11 +26,10 @@ import java.io.ByteArrayOutputStream
  * @brief L'objecte FrontendController es un singleton que conte totes les funcions que fan crides HTTP a Backend.
  */
 object FrontendController {
-    private const val URL_BASE = "http://10.4.41.58:8080/"
-
-    //private const val URL_BASE = "http://10.6.11.69:8080/"
-    private const val URL_VEHICLE = "${URL_BASE}vehicle/"
-    private const val URL_USER = "${URL_BASE}user/"
+    //private const val URL_BASE_WB = "http://10.4.41.58:8080/"
+    //private const val URL_BASE = "http://10.4.41.58:8080"
+    private const val URL_BASE_WB = "http://192.168.1.83:8080/"
+    private const val URL_BASE = "http://192.168.1.83:8080"
 
     //Add functions you need here :)
     private val client =
@@ -51,6 +50,39 @@ object FrontendController {
             }
 
         }
+
+    //++++++++++++++++++++++
+    // REVIEWED PATHS
+    //++++++++++++++++++++++
+
+    private const val URL_CHARGING_STATIONS = "${URL_BASE}/charging-stations"
+
+    // #################################################
+    // #  CHARGING STATIONS                            #
+    // #################################################
+
+    /**
+     * @brief Metode que obte totes les ChargingStations emmagatzemades as la BD de Backend.
+     * @pre
+     * @post Si s'ha pogut connectar amb el servidor, totes les ChargingStations de la BD s'han afegit a l'arrayList stations, i es retornen juntament amb l'status de la crida HTTP.
+     */
+    suspend fun getChargingPoints(): Pair<Int, ArrayList<ChargingStation>> {
+        val httpResponse: HttpResponse = client.get(URL_CHARGING_STATIONS)
+        val status: Int = httpResponse.status.value
+
+        val stations: ArrayList<ChargingStation>
+        if (status != 200) stations = ArrayList<ChargingStation>()
+        else stations = httpResponse.receive()
+
+        return Pair(status, stations)
+    }
+
+    //++++++++++++++++++++++
+    // TO REVIEW
+    //++++++++++++++++++++++
+
+    private const val URL_VEHICLE = "${URL_BASE_WB}vehicle/"
+    private const val URL_USER = "${URL_BASE_WB}user/"
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
         val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
@@ -113,7 +145,7 @@ object FrontendController {
         longitudeDestination: Double,
         drivingRange: Int
     ): ArrayList<Double> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}route/calculate") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}route/calculate") {
             parameter("oriLat", latitudeOrigin)
             parameter("oriLon", longitudeOrigin)
             parameter("destLat", latitudeDestination)
@@ -130,28 +162,12 @@ object FrontendController {
     }
 
     /**
-     * @brief Metode que obte totes les ChargingStations emmagatzemades as la BD de Backend.
-     * @pre
-     * @post Si s'ha pogut connectar amb el servidor, totes les ChargingStations de la BD s'han afegit a l'arrayList stations, i es retornen juntament amb l'status de la crida HTTP.
-     */
-    suspend fun getChargingPoints(): Pair<Int, ArrayList<ChargingStation>> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}ChargingStations")
-        val status: Int = httpResponse.status.value
-
-        val stations: ArrayList<ChargingStation>
-        if (status != 200) stations = ArrayList<ChargingStation>()
-        else stations = httpResponse.receive()
-
-        return Pair(status, stations)
-    }
-
-    /**
      * @brief Metode que envia un Rating d'un usuari a Backend per enregistrar-lo a la BD.
      * @pre
      * @post Si s'ha pogut connectar amb el servidor, retorna l'status de la crida HTTP.
      */
     suspend fun rateUser(rating: Rating): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}users/rate") { //confirmar que ha de ser post
+        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}users/rate") { //confirmar que ha de ser post
             contentType(ContentType.Application.Json)
             body = rating
         }
@@ -159,7 +175,7 @@ object FrontendController {
     }
 
     suspend fun saveCarpooling(trip: CarPooling): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}car-pooling/create") {
+        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}car-pooling/create") {
             contentType(ContentType.Application.Json)
             body = trip
         }
@@ -192,7 +208,7 @@ object FrontendController {
         startTimeMin: String?,
         startTimeMax: String?
     ): Pair<Int, ArrayList<CarPooling>> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}car-pooling/sel") {
             parameter("LatO", originLatitude)
             parameter("LongO", originLongitude)
             parameter("LatD", destinationLatitude)
@@ -210,7 +226,7 @@ object FrontendController {
     }
 
     suspend fun getAllTrips(): Pair<Int, ArrayList<CarPooling>> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}car-poolings") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}car-poolings") {
 
         }
         val trips: ArrayList<CarPooling>
@@ -222,7 +238,7 @@ object FrontendController {
     }
 
     suspend fun getTripsByUsername(username: String?): Pair<Int, ArrayList<CarPooling>> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}userTrip/TripByUser") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}userTrip/TripByUser") {
             parameter("username", username)
         }
         val trips: ArrayList<CarPooling>
@@ -241,7 +257,7 @@ object FrontendController {
      */
 
     suspend fun getRating(username: String): Pair<Int, RatingAvg?> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}user/avgRate") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}user/avgRate") {
             contentType(ContentType.Application.Json)
             parameter("userName", username)
         }
@@ -266,7 +282,7 @@ object FrontendController {
     }
 
     suspend fun addUser(user: User): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}users/create") {
+        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}users/create") {
             contentType(ContentType.Application.Json)
             body = user
         }
@@ -279,7 +295,7 @@ object FrontendController {
     }
 
     suspend fun addDriver(driver: Driver): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}drivers/create") {
+        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}drivers/create") {
             contentType(ContentType.Application.Json)
             body = driver
         }
@@ -308,14 +324,14 @@ object FrontendController {
     }
 
     suspend fun getChatList(username: String): ArrayList<String> {
-        val chats: ArrayList<String> = client.get("${URL_BASE}chat/findByUser") {
+        val chats: ArrayList<String> = client.get("${URL_BASE_WB}chat/findByUser") {
             parameter("user", username)
         }
         return chats
     }
 
     suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByConversation") {
+        val chats: ArrayList<Message> = client.get("${URL_BASE_WB}chat/findByConversation") {
             parameter("userA", userA)
             parameter("userB", userB)
         }
@@ -323,7 +339,7 @@ object FrontendController {
     }
 
     suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}chat/sendMessage"){
+        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}chat/sendMessage"){
             parameter("sender", sender)
             parameter("receiver", receiver)
             parameter("message", message)
@@ -336,7 +352,7 @@ object FrontendController {
     }
 
     suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
-            val httpResponse: HttpResponse = client.get("${URL_BASE}car-poolings/order")
+            val httpResponse: HttpResponse = client.get("${URL_BASE_WB}car-poolings/order")
             val trips: ArrayList<CarPooling>
             val status: Int = httpResponse.status.value
             if (httpResponse.status.value != 200) {
