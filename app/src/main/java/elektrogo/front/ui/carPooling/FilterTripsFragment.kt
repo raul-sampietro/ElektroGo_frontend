@@ -369,16 +369,16 @@ class FilterTripsFragment : Fragment() {
     private fun validate() :Boolean {
         var valid : Boolean = true
 
-        if (dateButton.text != "Data" && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
+        if (dateButton.text != getString(R.string.DataFilter) && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
             valid = false
             Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
         }
 
-        if (timeFromButton.text !="Des de" && timeToButton.text != "Fins a" &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
+        if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
             valid = false
             Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
         }
-        else if(timeFromButton.text!="Des de" && dateButton.text!="Data" && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
+        else if(timeFromButton.text!= getString(R.string.DesdeFilter) && dateButton.text!= getString(R.string.DataFilter) && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
             valid = false
             Toast.makeText(context, "L'hora d'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals",Toast.LENGTH_LONG).show()
         }
