@@ -6,15 +6,18 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.view.ViewManager
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import java.text.SimpleDateFormat
+
 
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
@@ -91,7 +94,7 @@ class TripDetails : AppCompatActivity() {
         val shareButton : ImageButton = this.findViewById(R.id.shareButton)
         shareButton.setOnClickListener {
             val  myIntent : Intent = Intent(Intent.ACTION_SEND)
-            myIntent.setType("text/plain")
+            myIntent.type = "text/plain"
             var shareBody :String = ""
             if (SessionController.getUsername(this) == username ){
                 shareBody = getString(R.string.shareOwnTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
@@ -102,13 +105,33 @@ class TripDetails : AppCompatActivity() {
         }
 
         val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
-        if (SessionController.getUsername(this) != username) {
-            btnCancel.isClickable=false
-            btnCancel.visibility= View.INVISIBLE
-        }
+        if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
-                Toast.makeText(this, "Trajecte cancel·lat", Toast.LENGTH_LONG).show()
+
+                val alertDialog: AlertDialog? = this.let {
+                    val builder = AlertDialog.Builder(it)
+                    builder.apply {
+
+                        setTitle("Confirmació")
+
+                        setMessage("Segur que vols cancel·lar aquest trajecte?")
+
+                        setPositiveButton("SÍ",
+                            DialogInterface.OnClickListener { dialog, id ->
+
+
+
+                                finish()
+                                Toast.makeText(context, "Trajecte cancel·lat", Toast.LENGTH_LONG).show()
+                            })
+                        setNegativeButton("NO",
+                            DialogInterface.OnClickListener { dialog, id -> })
+                    }
+                    // Crea el dialeg
+                    builder.create()
+                }
+                alertDialog!!.show()
             }
         }
 
