@@ -8,10 +8,8 @@ package elektrogo.front.ui.carPooling
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
@@ -59,7 +57,6 @@ class TripDetails : AppCompatActivity() {
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
 
-
         usernameText.text = username
         var dateTmp = startDate
         val input = SimpleDateFormat("yyyy-MM-dd")
@@ -102,6 +99,17 @@ class TripDetails : AppCompatActivity() {
             else shareBody = getString(R.string.shareTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
             myIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
+        }
+
+        val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
+        if (SessionController.getUsername(this) != username) {
+            btnCancel.isClickable=false
+            btnCancel.visibility= View.INVISIBLE
+        }
+        else {
+            btnCancel.setOnClickListener {
+                Toast.makeText(this, "Trajecte cancel·lat", Toast.LENGTH_LONG).show()
+            }
         }
 
     }
