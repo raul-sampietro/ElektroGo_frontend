@@ -133,7 +133,12 @@
     <string name="english">English</string>
     <string name="espanol">Español</string>
     <string name="preferences">Preferences</string>
-
+    <string name="ToolbarMapa">Map</string>
+    <string name="ToolbarRuta">Route</string>
+    <string name="ToolbarChat">Chat</string>
+    <string name="ToolbarPerfil">Profile</string>
+    <string name="CrearTrajecte">Create new trip</string>
+    <string name="MyTrips">My trips</string>
 
 
 </resources>

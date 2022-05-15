@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.widget.*
+import androidx.appcompat.widget.Toolbar
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Vehicle
@@ -47,6 +48,8 @@ class AddVehicle : AppCompatActivity() {
      */
     private val addVehicleModelView = AddVehicleModelView()
 
+    private lateinit var toolbar2 : Toolbar
+
     /**
      * @brief Metode que es crida quan es crea un AddVehicle activity
      * @param savedInstanceState rep informacio d'altres activitats
@@ -55,7 +58,9 @@ class AddVehicle : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_vehicle)
-        setSupportActionBar(findViewById(R.id.toolbar_main))
+        toolbar2  = findViewById(R.id.toolbar_main)
+        toolbar2.title= getString(R.string.AddVehicle)
+        setSupportActionBar(toolbar2)
 
 
         val licensePlate: EditText = findViewById(R.id.LicensePlate)

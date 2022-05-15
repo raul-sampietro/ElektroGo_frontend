@@ -30,10 +30,16 @@ class TripsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trips)
          fragToLoad = intent.getStringExtra("fragment").toString()
-        if (fragToLoad == "NewCarPoolingFragment") loadFragment(NewCarPoolingFragment())
+        if (fragToLoad == "NewCarPoolingFragment") {
+            toolbar2  = findViewById(R.id.toolbar_main)
+            toolbar2.title= getString(R.string.CrearTrajecte)
+            setSupportActionBar(toolbar2)
+            loadFragment(NewCarPoolingFragment())
+        }
         else {
             loadFragment(MyTripsFragment())
             toolbar2  = findViewById(R.id.toolbar_main)
+            toolbar2.title = getString(R.string.MyTrips)
             setSupportActionBar(toolbar2)
             drawer = findViewById(R.id.tripsAct)
             toggle = ActionBarDrawerToggle(this, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -67,11 +73,13 @@ class TripsActivity : AppCompatActivity() {
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        toggle.onConfigurationChanged(newConfig)
+        if (fragToLoad != "NewCarPoolingFragment") toggle.onConfigurationChanged(newConfig)
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menubar, menu)
+        if (fragToLoad != "NewCarPoolingFragment") {
+            var inflater: MenuInflater = menuInflater
+            inflater.inflate(R.menu.menubar, menu)
+        }
         return true
     }
 
