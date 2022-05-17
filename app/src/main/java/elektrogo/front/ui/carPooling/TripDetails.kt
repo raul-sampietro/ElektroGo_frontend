@@ -13,9 +13,11 @@ import android.view.ViewManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
+import elektrogo.front.ui.CarPooling.CancelTripDialog
 import java.text.SimpleDateFormat
 
 
@@ -109,9 +111,15 @@ class TripDetails : AppCompatActivity() {
         else {
             btnCancel.setOnClickListener {
 
-                val alertDialog: AlertDialog? = this.let {
+                /*val alertDialog: AlertDialog? = this.let {
                     val builder = AlertDialog.Builder(it)
                     builder.apply {
+
+                        val inflater = layoutInflater
+
+                        // Inflate and set the layout for the dialog
+                        // Pass null as the parent view because its going in the dialog layout
+                        setView(inflater.inflate(R.layout.valorar_usuari_fragment, null))
 
                         setTitle("Confirmació")
 
@@ -131,7 +139,10 @@ class TripDetails : AppCompatActivity() {
                     // Crea el dialeg
                     builder.create()
                 }
-                alertDialog!!.show()
+                alertDialog!!.show()*/
+
+                val confirmDialog = CancelTripDialog()
+                confirmDialog.show(XDXDXDXDFragmentManager, "confirmDialog") ??? probar si funciona asi
             }
         }
 
