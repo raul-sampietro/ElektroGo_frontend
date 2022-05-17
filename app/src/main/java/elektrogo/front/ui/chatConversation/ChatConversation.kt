@@ -2,7 +2,6 @@ package elektrogo.front.ui.chatConversation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -22,8 +21,16 @@ class ChatConversation : AppCompatActivity() {
     private lateinit var viewModel: ChatConversationViewModel
     private lateinit var conversation: ArrayList<Message>
     private lateinit var adapter: ChatConversationAdapter
+    private lateinit var thread: Thread
+    private lateinit var recyclerView: RecyclerView
 
     //userA is the current user
+
+    private fun changeData(newConversation: ArrayList<Message>) {
+        conversation = newConversation
+        adapter.updateData(conversation)
+        recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+    }
 
     @SuppressLint("WrongViewCast", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,26 +56,30 @@ class ChatConversation : AppCompatActivity() {
         val sessionController = SessionController
         val currentUser = sessionController.getUsername(this)
         conversation = viewModel.getConversation(userA, userB)
-        val recyclerView = findViewById<RecyclerView>(R.id.listConversation)
+        recyclerView = findViewById<RecyclerView>(R.id.listConversation)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ChatConversationAdapter(this, conversation, currentUser)
         recyclerView.adapter = adapter
         val position = adapter.itemCount - 1
         recyclerView.smoothScrollToPosition(position)
 
-        // TODO -> arreglar CountDownTimer para que no se acabe
-        object : CountDownTimer(180000, 1500) {
-            override fun onTick(p0: Long) {
-                conversation = viewModel.getConversation(userA, userB)
-                adapter.updateData(conversation)
-            }
 
-            override fun onFinish() {
+        thread = Thread {
+            while(true) {
+                Thread.sleep(2000)
+                val conversationIncoming = viewModel.getConversation(userA, userB)
+                if (conversationIncoming.size > conversation.size) {
+                    runOnUiThread {
+                        changeData(conversationIncoming)
+                    }
+                }
             }
-        }.start()
+        }
+        thread.start()
 
         val backButton : ImageButton = findViewById(R.id.backButtonConversation)
         backButton.setOnClickListener {
+            if (thread.isAlive) thread.interrupt()
             finish()
         }
 
@@ -88,6 +99,11 @@ class ChatConversation : AppCompatActivity() {
             adapter.updateData(conversation)
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
+    }
+    override fun onBackPressed() {
+        // First check if the thread isAlive(). To avoid NullPointerException
+        if (thread.isAlive) thread.interrupt()
+        super.onBackPressed()
     }
 
 }

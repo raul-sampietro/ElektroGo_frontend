@@ -1,6 +1,5 @@
 package elektrogo.front
 
-import android.app.NotificationChannel
 import android.app.Service
 import android.content.Intent
 import android.os.*
@@ -24,20 +23,11 @@ class ChatService : Service() {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
-                Thread.sleep(3000)
                 with(NotificationManagerCompat.from(context)) {
                     // notificationId is a unique int for each notification that you must define
                     notify(notificationId, builder.build())
                     notificationId += 1
                 }
-
-                Thread.sleep(7000)
-                with(NotificationManagerCompat.from(context)) {
-                    // notificationId is a unique int for each notification that you must define
-                    notify(notificationId, builder.build())
-                    notificationId += 1
-                }
-
 
             } catch (e: InterruptedException) {
                 // Restore interrupt status.
@@ -77,10 +67,13 @@ class ChatService : Service() {
             .setContentText(textContent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
+        //check if there are new messages coming from backend and send a "message" to display notification
+        /*
         with(NotificationManagerCompat.from(context)) {
             // notificationId is a unique int for each notification that you must define
             notify(1, builder.build())
         }
+        */
 
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
