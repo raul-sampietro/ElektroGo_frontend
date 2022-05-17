@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
@@ -28,6 +29,8 @@ class TripDetails : AppCompatActivity() {
      */
     private var viewModel: TripDetailsViewModel = TripDetailsViewModel()
 
+    private lateinit var toolbar2 : Toolbar
+
     /**
      * @brief Metode que s'executa un cop l'activity ha estat creada. S'encarrega de mostrar per pantalla l'informacio rebuda per parametres del trajecte a veure'n els detalls.
      * @param savedInstanceState Estat de la instancia.
@@ -37,7 +40,9 @@ class TripDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trip_details)
-        setSupportActionBar(findViewById(R.id.toolbar_main))
+        toolbar2  = findViewById(R.id.toolbar_main)
+        toolbar2.title= getString(R.string.detailsLabel)
+        setSupportActionBar(toolbar2)
 
         val username = intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")

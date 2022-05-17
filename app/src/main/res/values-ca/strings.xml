@@ -131,6 +131,12 @@
     <string name="preferences">Preferències</string>
     <string name="detailsLabel">Detalls del trajecte</string>
     <string name="llistaVehicles">Llista de vehicles</string>
+    <string name="ToolbarMapa">Mapa</string>
+    <string name="ToolbarRuta">Ruta</string>
+    <string name="ToolbarChat">Xat</string>
+    <string name="ToolbarPerfil">Perfil</string>
+    <string name="CrearTrajecte">Crear trajecte</string>
+    <string name="MyTrips">Els meus trajectes</string>
     <string name="DataFilter">Data</string>
     <string name="FinsFilter">Fins a</string>
     <string name="DesdeFilter">Des de</string>

@@ -148,6 +148,12 @@
     <string name="Oct">Octubre</string>
     <string name="Nov">Novembre</string>
     <string name="Dec">Decembre</string>
+    <string name="ToolbarMapa">Mapa</string>
+    <string name="ToolbarRuta">Ruta</string>
+    <string name="ToolbarChat">Chat</string>
+    <string name="ToolbarPerfil">Perfil</string>
+    <string name="CrearTrajecte">Crear Trajecte</string>
+    <string name="MyTrips">Els meus trajectes</string>
     <string name="DataFilter">Data</string>
     <string name="FinsFilter">Fins a</string>
     <string name="DesdeFilter">Des de</string>

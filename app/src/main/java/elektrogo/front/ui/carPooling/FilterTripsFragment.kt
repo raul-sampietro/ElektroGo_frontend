@@ -239,11 +239,9 @@ class FilterTripsFragment : Fragment() {
         })
 
         createTripButton.setOnClickListener {
-            val fragmentNewCarPooling = NewCarPoolingFragment()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.pooling, fragmentNewCarPooling, "findThisFragment")
-                .addToBackStack(null)
-                .commit();
+            val intent = Intent(context, TripsActivity::class.java)
+            intent.putExtra("fragment", "NewCarPoolingFragment")
+            startActivity(intent)
         }
         var day: Int = 28
         var month: Int = 10
@@ -301,7 +299,7 @@ class FilterTripsFragment : Fragment() {
                     fromTimeSelected = "$hour:$minute:00"
                 }
 
-            }, minute, hour, true)
+            }, hour, minute,  true)
 
             tpd.show()
         }
@@ -321,7 +319,7 @@ class FilterTripsFragment : Fragment() {
                     timeToButton.text = "$hour:$minute"
                     toTimeSelected = "$hour:$minute:00"
                 }
-            }, minute, hour, true)
+            }, hour, minute, true)
 
             tpd.show()
         }
