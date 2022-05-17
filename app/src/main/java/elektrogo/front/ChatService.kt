@@ -6,6 +6,11 @@ import android.os.*
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.ViewModelProvider
+import elektrogo.front.controller.ChatController
+import elektrogo.front.controller.FrontendController
+import elektrogo.front.controller.session.SessionController
+import elektrogo.front.ui.chatConversation.ChatConversationViewModel
 
 
 class ChatService : Service() {
@@ -15,6 +20,15 @@ class ChatService : Service() {
     private var notificationId = 1
     private lateinit var builder: NotificationCompat.Builder
     private var context = this
+    private lateinit var activeChats: ArrayList<String>
+    private lateinit var prevConversation: ArrayList<elektrogo.front.model.Message>
+    private lateinit var conversation: ArrayList<elektrogo.front.model.Message>
+    private lateinit var currentUser: String
+    private var firstIteration: Int = 0
+
+    private suspend fun getActiveChats() {
+        activeChats = FrontendController.getChatList(SessionController.getUsername(this))
+    }
 
     // Handler that receives messages from the thread
     private inner class ServiceHandler(looper: Looper) : Handler(looper) {
@@ -52,6 +66,8 @@ class ChatService : Service() {
             serviceLooper = looper
             serviceHandler = ServiceHandler(looper)
         }
+        currentUser = SessionController.getUsername(this)
+        prevConversation = arrayListOf()
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -75,15 +91,45 @@ class ChatService : Service() {
         }
         */
 
-        // For each start request, send a message to start a job and deliver the
-        // start ID so we know which request we're stopping when we finish the job
-        serviceHandler?.obtainMessage()?.also { msg ->
-            msg.arg1 = startId
-            serviceHandler?.sendMessage(msg)
-        }
+        while (true) {
+            /* METODO PRIMITIVO
+            activeChats = ChatController.getChatList(currentUser)
+            for (userB in activeChats) {
+                conversation = ChatController.getConversation(currentUser, userB)
+                if (firstIteration == 0) {
+                    prevConversation = conversation
+                    firstIteration = 1
+                }
+                if (conversation.size > prevConversation.size) {
+                    var index: Int = prevConversation.size
+                    val limit: Int = conversation.size
+                    prevConversation = conversation
+                    while (index + 1 < limit ) {
+                        val message: elektrogo.front.model.Message = conversation[index+1]
+                        //name of the user who sent the message
+                        builder.setContentTitle(message.sender)
+                        //content of the message
+                        builder.setContentText(message.message)
+                        //photo of the user who sent the message
+                        //builder.setLargeIcon()
 
-        // If we get killed, after returning from here, restart
-        return START_STICKY
+                        // For each start request, send a message to start a job and deliver the
+                        // start ID so we know which request we're stopping when we finish the job
+                        serviceHandler?.obtainMessage()?.also { msg ->
+                            msg.arg1 = startId
+                            serviceHandler?.sendMessage(msg)
+                        }
+                        ++index
+                    }
+                }
+            }
+             */
+
+             // Implementar nuevo metodo con FrontendController.getReceivedMessages(currentUser)
+             Thread.sleep(4000)
+            // If we get killed, after returning from here, restart
+            return START_STICKY
+        }
     }
 
     override fun onBind(intent: Intent): IBinder? {

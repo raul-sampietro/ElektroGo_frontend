@@ -335,6 +335,13 @@ object FrontendController {
         else return httpResponse.status.value
     }
 
+    suspend fun getReceivedMessages(user: String): ArrayList<Message> {
+        val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByReceived") {
+            parameter("user", user)
+        }
+        return chats
+    }
+
     suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
             val httpResponse: HttpResponse = client.get("${URL_BASE}car-poolings/order")
             val trips: ArrayList<CarPooling>
