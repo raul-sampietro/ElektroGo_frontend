@@ -8,6 +8,7 @@ package elektrogo.front.ui.carPooling
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -44,7 +45,7 @@ class TripDetails : AppCompatActivity() {
         toolbar2.title= getString(R.string.detailsLabel)
         setSupportActionBar(toolbar2)
 
-        val username = intent.getStringExtra("username")
+        val username= intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
         var startTime = intent.getStringExtra("startTime")
         val offeredSeats = intent.getIntExtra("offeredSeats", 1)
@@ -84,17 +85,21 @@ class TripDetails : AppCompatActivity() {
         originFull.text = originString
         destinationFull.text=destinationString
 
-        val ratingPair = viewModel.getRating(username!!)
+        val imageViewProfile : ImageView = findViewById(R.id.profile_image2)
+        var imagePath : String = viewModel.getUsersProfilePhoto(username!!)
+        Log.i("imagePath", imagePath)
+        if (imagePath.equals("null") || imagePath.equals("")) {
+            imageViewProfile.setImageResource(R.drawable.avatar)
+        }
+        else Picasso.get().load(imagePath).into(imageViewProfile)
+
+        val ratingPair = viewModel.getRating(username)
         if (ratingPair.first != 200) {
             Toast.makeText(this, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue)
         val numValorations : TextView = this.findViewById(R.id.numberValorations)
         numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
 
-        val imageViewProfile : ImageView = this.findViewById(R.id.profile_imageDetails)
-        val imagePath = viewModel.getUsersProfilePhoto(username)
-        if (!imagePath.equals("null")  or !imagePath.equals("")) Picasso.get().load(imagePath).into(imageViewProfile)
-        else imageViewProfile.setImageResource(R.drawable.avatar)
 
         val shareButton : ImageButton = this.findViewById(R.id.shareButton)
         shareButton.setOnClickListener {
@@ -108,6 +113,8 @@ class TripDetails : AppCompatActivity() {
             myIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
         }
+
+
 
     }
     /**
