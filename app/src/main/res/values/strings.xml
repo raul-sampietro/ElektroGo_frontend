@@ -148,8 +148,8 @@
     <string name="Oct">Octubre</string>
     <string name="Nov">Novembre</string>
     <string name="Dec">Decembre</string>
-
-
+    <string name="channel_name">Chat</string>
+    <string name="channel_description">Notifications coming from messages received on the chat</string>
 
 
 </resources>

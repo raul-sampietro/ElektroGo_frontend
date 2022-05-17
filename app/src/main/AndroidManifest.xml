@@ -95,6 +95,9 @@
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
+
+        <service android:enabled="true" android:name=".ChatService" />
+
     </application>
 
 </manifest>
