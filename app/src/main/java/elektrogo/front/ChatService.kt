@@ -2,15 +2,16 @@ package elektrogo.front
 
 import android.app.Service
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.ViewModelProvider
+import com.squareup.picasso.Picasso
 import elektrogo.front.controller.ChatController
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
-import elektrogo.front.ui.chatConversation.ChatConversationViewModel
 
 
 class ChatService : Service() {
@@ -21,14 +22,9 @@ class ChatService : Service() {
     private lateinit var builder: NotificationCompat.Builder
     private var context = this
     private lateinit var activeChats: ArrayList<String>
-    private lateinit var prevConversation: ArrayList<elektrogo.front.model.Message>
-    private lateinit var conversation: ArrayList<elektrogo.front.model.Message>
+    private lateinit var prevMessages: ArrayList<elektrogo.front.model.Message>
+    private lateinit var messages: ArrayList<elektrogo.front.model.Message>
     private lateinit var currentUser: String
-    private var firstIteration: Int = 0
-
-    private suspend fun getActiveChats() {
-        activeChats = FrontendController.getChatList(SessionController.getUsername(this))
-    }
 
     // Handler that receives messages from the thread
     private inner class ServiceHandler(looper: Looper) : Handler(looper) {
@@ -37,10 +33,37 @@ class ChatService : Service() {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
-                with(NotificationManagerCompat.from(context)) {
-                    // notificationId is a unique int for each notification that you must define
-                    notify(notificationId, builder.build())
-                    notificationId += 1
+                while (true) {
+                    messages = ChatController.getReceivedMessages(currentUser)
+                    if (messages.size > prevMessages.size) {
+                        var index: Int = prevMessages.size
+                        val limit: Int = messages.size
+                        prevMessages = messages
+                        while (index < limit ) {
+                            val message: elektrogo.front.model.Message = messages[index]
+                            //name of the user who sent the message
+                            builder.setContentTitle(message.sender)
+                            //content of the message
+                            builder.setContentText(message.message)
+                            //photo of the user who sent the message
+                            val defaultImage = R.id.userImage
+                            var imagePath = message.sender?.let { ChatController.getUsersProfilePhoto(it) }
+
+                            if (imagePath == "null") {
+                                imagePath = defaultImage.toString()
+                            }
+                            val myBitmap = BitmapFactory.decodeFile(imagePath)
+                            builder.setLargeIcon(myBitmap)
+
+                            with(NotificationManagerCompat.from(context)) {
+                                // notificationId is a unique int for each notification that you must define
+                                notify(notificationId, builder.build())
+                                notificationId += 1
+                            }
+                            ++index
+                        }
+                    }
+                    Thread.sleep(4000)
                 }
 
             } catch (e: InterruptedException) {
@@ -67,7 +90,7 @@ class ChatService : Service() {
             serviceHandler = ServiceHandler(looper)
         }
         currentUser = SessionController.getUsername(this)
-        prevConversation = arrayListOf()
+        prevMessages = ChatController.getReceivedMessages(currentUser)
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
@@ -83,53 +106,14 @@ class ChatService : Service() {
             .setContentText(textContent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        //check if there are new messages coming from backend and send a "message" to display notification
-        /*
-        with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(1, builder.build())
+        serviceHandler?.obtainMessage()?.also { msg ->
+            msg.arg1 = startId
+            serviceHandler?.sendMessage(msg)
         }
-        */
 
-        while (true) {
-            /* METODO PRIMITIVO
-            activeChats = ChatController.getChatList(currentUser)
-            for (userB in activeChats) {
-                conversation = ChatController.getConversation(currentUser, userB)
-                if (firstIteration == 0) {
-                    prevConversation = conversation
-                    firstIteration = 1
-                }
-                if (conversation.size > prevConversation.size) {
-                    var index: Int = prevConversation.size
-                    val limit: Int = conversation.size
-                    prevConversation = conversation
-                    while (index + 1 < limit ) {
-                        val message: elektrogo.front.model.Message = conversation[index+1]
-                        //name of the user who sent the message
-                        builder.setContentTitle(message.sender)
-                        //content of the message
-                        builder.setContentText(message.message)
-                        //photo of the user who sent the message
-                        //builder.setLargeIcon()
+        // If we get killed, after returning from here, restart
+        return START_STICKY
 
-                        // For each start request, send a message to start a job and deliver the
-                        // start ID so we know which request we're stopping when we finish the job
-                        serviceHandler?.obtainMessage()?.also { msg ->
-                            msg.arg1 = startId
-                            serviceHandler?.sendMessage(msg)
-                        }
-                        ++index
-                    }
-                }
-            }
-             */
-
-             // Implementar nuevo metodo con FrontendController.getReceivedMessages(currentUser)
-             Thread.sleep(4000)
-            // If we get killed, after returning from here, restart
-            return START_STICKY
-        }
     }
 
     override fun onBind(intent: Intent): IBinder? {
@@ -138,6 +122,6 @@ class ChatService : Service() {
     }
 
     override fun onDestroy() {
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "service done", Toast.LENGTH_SHORT).show()
     }
 }
