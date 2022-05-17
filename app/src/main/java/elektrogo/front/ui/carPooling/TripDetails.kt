@@ -86,7 +86,7 @@ class TripDetails : AppCompatActivity() {
 
         val ratingPair = viewModel.getRating(username!!)
         if (ratingPair.first != 200) {
-            Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue)
         val numValorations : TextView = this.findViewById(R.id.numberValorations)
         numValorations.text = "(${ratingPair.second!!.numberOfRatings})"

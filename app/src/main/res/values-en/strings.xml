@@ -139,6 +139,16 @@
     <string name="ToolbarPerfil">Profile</string>
     <string name="CrearTrajecte">Create new trip</string>
     <string name="MyTrips">My trips</string>
+    <string name="DataFilter">Date</string>
+    <string name="FinsFilter">To</string>
+    <string name="DesdeFilter">From</string>
+    <string name="OrigenString">Orign</string>
+    <string name="DestiString">Destination</string>
+    <string name="details">Details:</string>
+    <string name="restriccions">Restrictions:</string>
+    <string name="encara_hi_ha">There are still</string>
+    <string name="seients_disponibles">free seats</string>
+    <string name="anfitrio">Host:</string>
 
 
 </resources>

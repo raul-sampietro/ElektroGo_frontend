@@ -138,6 +138,16 @@
     <string name="ToolbarPerfil">Perfil</string>
     <string name="CrearTrajecte">Crear trayecto</string>
     <string name="MyTrips">Mis trayectos</string>
+    <string name="DataFilter">Fecha</string>
+    <string name="FinsFilter">Hasta</string>
+    <string name="DesdeFilter">Desde</string>
+    <string name="OrigenString">Origen</string>
+    <string name="DestiString">Destino</string>
+    <string name="details">Detalles:</string>
+    <string name="restriccions">Restricciones:</string>
+    <string name="encara_hi_ha">Aún hay</string>
+    <string name="seients_disponibles">asientos disponibles</string>
+    <string name="anfitrio">Anfitrión:</string>
 
 
 </resources>

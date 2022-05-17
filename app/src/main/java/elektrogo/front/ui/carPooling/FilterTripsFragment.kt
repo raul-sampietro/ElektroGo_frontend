@@ -146,9 +146,9 @@ class FilterTripsFragment : Fragment() {
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
         autocompleteSupportFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragmentFiltrar) as AutocompleteSupportFragment
-        autocompleteSupportFragment.setHint("Origen")
+        autocompleteSupportFragment.setHint(getString(R.string.OrigenString))
         autocompleteSupportFragment2 = childFragmentManager.findFragmentById(R.id.autocomplete_fragmentFiltrar2) as AutocompleteSupportFragment
-        autocompleteSupportFragment2.setHint("Desti")
+        autocompleteSupportFragment2.setHint(getString(R.string.DestiString))
         getAutocompleteLocation()
 
         val crossCallbackOrigin = requireActivity().findViewById<View>(R.id.viewCrossCallbackOriginFiltrar)
@@ -176,14 +176,20 @@ class FilterTripsFragment : Fragment() {
         filtrarButton.setOnClickListener {
             if (validate()) {
                 //mostro els trajectes resultants de la busqueda
-               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                if (result.first != 200) {
-                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-                }
-                else {
-                    filteredList = result.second
-                    listView.adapter = ListAdapterTrips(context as Activity, filteredList)
-                }
+               try{
+                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                   if (result.first != 200) {
+                       Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                   }
+                   else {
+                       filteredList = result.second
+                       listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+                   }
+               }
+               catch (e: Exception){
+                   Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+               }
+
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
@@ -196,19 +202,25 @@ class FilterTripsFragment : Fragment() {
             dateSelected = null
             fromTimeSelected = null
             toTimeSelected = null
-            dateButton.text = "Data"
-            timeToButton.text = "Fins a"
-            timeFromButton.text = "Des de"
+            dateButton.text = getString(R.string.DataFilter)
+            timeToButton.text = getString(R.string.FinsFilter)
+            timeFromButton.text = getString(R.string.DesdeFilter)
             autocompleteSupportFragment2.setText("")
             //mostro uns trajectes default a la llista
-            var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
-            if (resultDefault.first != 200) {
-                Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-            }
-            else {
-                filteredList = resultDefault.second
-                listView.adapter = ListAdapterTrips(context as Activity, filteredList)
-            }
+           try {
+               var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+               if (resultDefault.first != 200) {
+                   Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+               }
+               else {
+                   filteredList = resultDefault.second
+                   listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+               }
+           }
+           catch (e: Exception){
+               Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+           }
+
         }
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
@@ -355,16 +367,16 @@ class FilterTripsFragment : Fragment() {
     private fun validate() :Boolean {
         var valid : Boolean = true
 
-        if (dateButton.text != "Data" && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
+        if (dateButton.text != getString(R.string.DataFilter) && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
             valid = false
             Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
         }
 
-        if (timeFromButton.text !="Des de" && timeToButton.text != "Fins a" &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
+        if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
             valid = false
             Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
         }
-        else if(timeFromButton.text!="Des de" && dateButton.text!="Data" && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
+        else if(timeFromButton.text!= getString(R.string.DesdeFilter) && dateButton.text!= getString(R.string.DataFilter) && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
             valid = false
             Toast.makeText(context, "L'hora d'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals",Toast.LENGTH_LONG).show()
         }
