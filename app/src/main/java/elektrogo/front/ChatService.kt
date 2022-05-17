@@ -4,13 +4,10 @@ import android.app.Service
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.*
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.squareup.picasso.Picasso
 import elektrogo.front.controller.ChatController
-import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 
 
@@ -21,10 +18,10 @@ class ChatService : Service() {
     private var notificationId = 1
     private lateinit var builder: NotificationCompat.Builder
     private var context = this
-    private lateinit var activeChats: ArrayList<String>
     private lateinit var prevMessages: ArrayList<elektrogo.front.model.Message>
     private lateinit var messages: ArrayList<elektrogo.front.model.Message>
     private lateinit var currentUser: String
+    private var interrupted: Boolean = false
 
     // Handler that receives messages from the thread
     private inner class ServiceHandler(looper: Looper) : Handler(looper) {
@@ -33,7 +30,7 @@ class ChatService : Service() {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
-                while (true) {
+                while (true and !interrupted) {
                     messages = ChatController.getReceivedMessages(currentUser)
                     if (messages.size > prevMessages.size) {
                         var index: Int = prevMessages.size
@@ -45,6 +42,7 @@ class ChatService : Service() {
                             builder.setContentTitle(message.sender)
                             //content of the message
                             builder.setContentText(message.message)
+                            /*
                             //photo of the user who sent the message
                             val defaultImage = R.id.userImage
                             var imagePath = message.sender?.let { ChatController.getUsersProfilePhoto(it) }
@@ -54,7 +52,7 @@ class ChatService : Service() {
                             }
                             val myBitmap = BitmapFactory.decodeFile(imagePath)
                             builder.setLargeIcon(myBitmap)
-
+                             */
                             with(NotificationManagerCompat.from(context)) {
                                 // notificationId is a unique int for each notification that you must define
                                 notify(notificationId, builder.build())
@@ -94,9 +92,11 @@ class ChatService : Service() {
     }
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show()
 
         context = this
+
+        interrupted = false
 
         val textTitle = "New Notification"
         val textContent = "text of the notification"
@@ -122,6 +122,7 @@ class ChatService : Service() {
     }
 
     override fun onDestroy() {
-        Toast.makeText(context, "service done", Toast.LENGTH_SHORT).show()
+        interrupted = true
+        //Toast.makeText(context, "service done", Toast.LENGTH_SHORT).show()
     }
 }

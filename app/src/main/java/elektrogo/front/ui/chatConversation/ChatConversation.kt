@@ -1,6 +1,7 @@
 package elektrogo.front.ui.chatConversation
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import elektrogo.front.ChatService
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
@@ -23,7 +25,7 @@ class ChatConversation : AppCompatActivity() {
     private lateinit var adapter: ChatConversationAdapter
     private lateinit var thread: Thread
     private lateinit var recyclerView: RecyclerView
-
+    private var interrupted: Boolean = false
     //userA is the current user
 
     private fun changeData(newConversation: ArrayList<Message>) {
@@ -34,6 +36,11 @@ class ChatConversation : AppCompatActivity() {
 
     @SuppressLint("WrongViewCast", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        stopService(Intent(this, ChatService::class.java))
+
+        interrupted = false
+
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[ChatConversationViewModel::class.java]
         setContentView(R.layout.activity_chat_conversation)
@@ -65,7 +72,7 @@ class ChatConversation : AppCompatActivity() {
 
 
         thread = Thread {
-            while(true) {
+            while(true and !interrupted) {
                 Thread.sleep(2000)
                 val conversationIncoming = viewModel.getConversation(userA, userB)
                 if (conversationIncoming.size > conversation.size) {
@@ -79,8 +86,11 @@ class ChatConversation : AppCompatActivity() {
 
         val backButton : ImageButton = findViewById(R.id.backButtonConversation)
         backButton.setOnClickListener {
-            if (thread.isAlive) thread.interrupt()
-            finish()
+            if (thread.isAlive) {
+                interrupted = true
+                startService(Intent(this, ChatService::class.java))
+            }
+                super.onBackPressed()
         }
 
         val editText : EditText = findViewById(R.id.messageToSend)
@@ -101,8 +111,10 @@ class ChatConversation : AppCompatActivity() {
         }
     }
     override fun onBackPressed() {
-        // First check if the thread isAlive(). To avoid NullPointerException
-        if (thread.isAlive) thread.interrupt()
+        if (thread.isAlive) {
+            interrupted = true
+        }
+        startService(Intent(this, ChatService::class.java))
         super.onBackPressed()
     }
 
