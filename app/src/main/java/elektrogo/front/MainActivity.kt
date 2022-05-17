@@ -197,7 +197,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 intent.putExtra("origin", currentFragment)
                 Log.i("CurrentFragment", currentFragment)
                 startActivity(intent);
-                startActivity(getIntent());
                 overridePendingTransition(0, 0);
             }
             R.id.spanish -> {
