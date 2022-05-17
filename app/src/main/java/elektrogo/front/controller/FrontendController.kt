@@ -344,5 +344,13 @@ object FrontendController {
             } else trips = httpResponse.receive()
             return Pair(status, trips)
     }
+
+    suspend fun reportUser(rep: Report): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}/reports") { //confirmar que ha de ser post
+            contentType(ContentType.Application.Json)
+            body = rep
+        }
+        return httpResponse.status.value
+    }
 }
 
