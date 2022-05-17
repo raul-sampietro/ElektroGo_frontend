@@ -217,7 +217,7 @@ class NewCarPoolingFragment() : Fragment() {
                 else if (minute >= 10 && hour < 10) selectedHour.setText("0$hour:$minute")
                 else selectedHour.setText("$hour:$minute")
                 selectedHour.setError(null)
-            }, minute, hour, true)
+            }, hour, minute, true)
 
             tpd.show()
         }

@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -29,6 +30,7 @@ import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
 import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
+import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
+    lateinit var currentFragment: String
 
 
     //Configuració dels events clic
@@ -53,31 +56,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.pooling -> {
                 toolbar2.title = "Pooling"
                 val filtrarTrajectesFragment = FilterTripsFragment()
+                currentFragment = "FilterTripsFragment"
                 openFragment(filtrarTrajectesFragment)
                 return@OnItemSelectedListener true
             }
             R.id.mapa -> {
-                toolbar2.title = "Mapa"
+                toolbar2.title = getString(R.string.ToolbarMapa)
                 //linia que havia escrit la Marina
                 val mapsFragment /*: MapsFragment*/ = MapsFragment(this)
+                currentFragment = "MapsFragment"
                 openFragment(mapsFragment)
                 return@OnItemSelectedListener true
             }
             R.id.ruta -> {
-                toolbar2.title = "Ruta"
+                toolbar2.title = getString(R.string.ToolbarRuta)
                 val routeFragment = RouteFragment()
+                currentFragment = "RouteFragment"
                 openFragment(routeFragment)
                 return@OnItemSelectedListener true
             }
             R.id.chat -> {
-                toolbar2.title = "Chat"
+                toolbar2.title = getString(R.string.ToolbarChat)
                 val chatFragment = ChatListFragment()
+                currentFragment= "ChatListFragment"
                 openFragment(chatFragment)
                 return@OnItemSelectedListener true
             }
             R.id.perfil -> {
-                toolbar2.title = "Perfil"
+                toolbar2.title = getString(R.string.ToolbarPerfil)
                 val perfilFragment = ProfileFragment()
+                currentFragment= "ProfileFragment"
                 openFragment(perfilFragment)
                 return@OnItemSelectedListener true
             }
@@ -85,8 +93,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         false
     }
 
-    //Inicialització de la barra superior
-    private lateinit var toolbar:ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         context = this
@@ -106,16 +112,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView : NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-        toolbar = supportActionBar!!
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
 
         //Fem que la funcionalitat que se selecciona per defecte en obrir l'app sigui el mapa
         //Si es ve de la vista de VehicleList, el fragment seleccionat és el perfil
-        if (intent.getStringExtra("origin").isNullOrBlank())
+        if (intent.getStringExtra("origin").isNullOrBlank()) {
             bottomNavigation.selectedItemId = R.id.mapa
-        else if (intent.getStringExtra("origin").equals("vehicleList"))
+            currentFragment = "MapsFragment"
+        }
+        else if (intent.getStringExtra("origin").equals("vehicleList")) {
             bottomNavigation.selectedItemId = R.id.perfil
+            currentFragment="ProfileFragment"
+        }
+        else if (intent.getStringExtra("origin").equals("MapsFragment")) {
+            bottomNavigation.selectedItemId = R.id.mapa
+            currentFragment = "MapsFragment"
+        }
+        else if (intent.getStringExtra("origin").equals("RouteFragment")) {
+            bottomNavigation.selectedItemId = R.id.ruta
+            currentFragment = "RouteFragment"
+        }
+        else if (intent.getStringExtra("origin").equals("FilterTripsFragment")) {
+            bottomNavigation.selectedItemId = R.id.pooling
+            currentFragment = "FilterTripsFragment"
+        }
+        else if (intent.getStringExtra("origin").equals("ChatListFragment")) {
+            bottomNavigation.selectedItemId = R.id.chat
+            currentFragment = "ChatListFragment"
+        }
+        else if (intent.getStringExtra("origin").equals("ProfileFragment")) {
+            bottomNavigation.selectedItemId = R.id.perfil
+            currentFragment = "ProfileFragment"
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -164,6 +193,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Preference.setLoginCount("ca")
                 finish();
                 overridePendingTransition(0, 0);
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra("origin", currentFragment)
+                Log.i("CurrentFragment", currentFragment)
+                startActivity(intent);
                 startActivity(getIntent());
                 overridePendingTransition(0, 0);
             }
@@ -171,14 +204,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Preference.setLoginCount("es")
                 finish();
                 overridePendingTransition(0, 0);
-                startActivity(getIntent());
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra("origin", currentFragment)
+                Log.i("CurrentFragment", currentFragment)
+                startActivity(intent);
                 overridePendingTransition(0, 0);
             }
             R.id.english -> {
                 Preference.setLoginCount("en")
                 finish();
                 overridePendingTransition(0, 0);
-                startActivity(getIntent());
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra("origin", currentFragment)
+                Log.i("CurrentFragment", currentFragment)
+                startActivity(intent)
                 overridePendingTransition(0, 0);
             }
         }
