@@ -192,21 +192,26 @@ object FrontendController {
         startTimeMin: String?,
         startTimeMax: String?
     ): Pair<Int, ArrayList<CarPooling>> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel") {
-            parameter("LatO", originLatitude)
-            parameter("LongO", originLongitude)
-            parameter("LatD", destinationLatitude)
-            parameter("LongD", destinationLongitude)
-            parameter("sDate", dateIni)
-            parameter("sTimeMin", startTimeMin)
-            parameter("sTimeMax", startTimeMax)
+        try {
+            val httpResponse: HttpResponse = client.get("${URL_BASE}car-pooling/sel") {
+                parameter("LatO", originLatitude)
+                parameter("LongO", originLongitude)
+                parameter("LatD", destinationLatitude)
+                parameter("LongD", destinationLongitude)
+                parameter("sDate", dateIni)
+                parameter("sTimeMin", startTimeMin)
+                parameter("sTimeMax", startTimeMax)
+            }
+            val trips: ArrayList<CarPooling>
+            val status: Int = httpResponse.status.value
+            if (httpResponse.status.value != 200) {
+                trips = ArrayList<CarPooling>()
+            } else trips = httpResponse.receive()
+            return Pair(status, trips)
         }
-        val trips: ArrayList<CarPooling>
-        val status: Int = httpResponse.status.value
-        if (httpResponse.status.value != 200) {
-            trips = ArrayList<CarPooling>()
-        } else trips = httpResponse.receive()
-        return Pair(status, trips)
+        catch(e: Exception){
+            return Pair(504, ArrayList<CarPooling>())
+        }
     }
 
     suspend fun getAllTrips(): Pair<Int, ArrayList<CarPooling>> {
@@ -336,6 +341,7 @@ object FrontendController {
     }
 
     suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
+        try {
             val httpResponse: HttpResponse = client.get("${URL_BASE}car-poolings/order")
             val trips: ArrayList<CarPooling>
             val status: Int = httpResponse.status.value
@@ -343,6 +349,10 @@ object FrontendController {
                 trips = ArrayList<CarPooling>()
             } else trips = httpResponse.receive()
             return Pair(status, trips)
+        }
+        catch(e: Exception){
+            return Pair(504, ArrayList<CarPooling>())
+        }
     }
 }
 

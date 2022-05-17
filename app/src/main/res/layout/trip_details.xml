@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Origen:"
+            android:text= "@string/origen"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:text="Destí:"
+            android:text="@string/dest"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Detalls:"
+            android:text="@string/details"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -176,7 +176,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Restriccions:"
+            android:text="@string/restriccions"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -207,7 +207,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Encara hi ha"
+                android:text="@string/encara_hi_ha"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal" />
@@ -227,7 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="seients disponibles"
+                android:text="@string/seients_disponibles"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal" />
@@ -249,7 +249,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Anfitrió:"
+            android:text="@string/anfitrio"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
