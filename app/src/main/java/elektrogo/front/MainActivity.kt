@@ -9,11 +9,16 @@ package elektrogo.front
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.media.Image
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +30,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
@@ -145,6 +152,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             bottomNavigation.selectedItemId = R.id.perfil
             currentFragment = "ProfileFragment"
         }
+
+        loadNavInfo()
+    }
+
+    private fun loadNavInfo() {
+        //TODO al no ser el layout mostrat aqui, no es pot fer find view by id
+      //  val ProfileImage : ImageView = findViewById(R.id.profile_imageNav)
+      //  val ProfileName : TextView = findViewById(R.id.usernameNav)
+      //  ProfileName.text=SessionController.getUsername(this)
+      //  Picasso.get().load(SessionController.getImageUrl(this)).into(ProfileImage)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
