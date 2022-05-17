@@ -28,12 +28,10 @@ import kotlinx.coroutines.runBlocking
 class GuestProfileFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ProfileFragment()
+        fun newInstance() = GuestProfileFragment()
     }
 
     private var viewModel: ProfileViewModel = ProfileViewModel()
-    private var _binding: ProfileFragmentBinding? = null
-    private val binding get() = _binding!!
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreateView(
@@ -41,7 +39,7 @@ class GuestProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.profile_fragment, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_guest_profile, container, false)
 
         val username = getArguments()?.getString("username")
         val un: TextView = view.findViewById(R.id.profile_username)
