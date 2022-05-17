@@ -16,4 +16,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="colorPrimary">@color/green_logo</item>
+        <item name="colorPrimaryDark">@color/dark_green</item>
+        <item name="colorAccent">@color/dark_green</item>
+        <item name="android:statusBarColor">@color/dark_green</item>
+    </style>
 </resources>

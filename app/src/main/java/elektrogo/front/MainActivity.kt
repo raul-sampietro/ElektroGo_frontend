@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var currentFragment: String
 
-
     //Configuració dels events clic
     private val mOnNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
         when (item.itemId) {
@@ -92,7 +91,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         false
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         context = this
@@ -168,6 +166,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onConfigurationChanged(newConfig)
         toggle.onConfigurationChanged(newConfig)
     }
+
     /**
      * @brief Metode per obrir un fragment.
      * @param fragment Fragment que es vol obrir.
