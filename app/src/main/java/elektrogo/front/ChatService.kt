@@ -1,6 +1,8 @@
 package elektrogo.front
 
+import android.app.PendingIntent
 import android.app.Service
+import android.app.TaskStackBuilder
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.*
@@ -9,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import elektrogo.front.controller.ChatController
 import elektrogo.front.controller.session.SessionController
+import elektrogo.front.ui.chatConversation.ChatConversation
 
 
 class ChatService : Service() {
@@ -53,6 +56,22 @@ class ChatService : Service() {
                             val myBitmap = BitmapFactory.decodeFile(imagePath)
                             builder.setLargeIcon(myBitmap)
                              */
+
+                            // Configure on tap action
+                            val resultIntent = Intent(context, ChatConversation::class.java).apply {
+                                putExtra("userA", currentUser)
+                                putExtra("userB", message.sender)
+                            }
+                            // Create the TaskStackBuilder
+                            val resultPendingIntent: PendingIntent? = TaskStackBuilder.create(context).run {
+                                // Add the intent, which inflates the back stack
+                                addNextIntentWithParentStack(resultIntent)
+                                // Get the PendingIntent containing the entire back stack
+                                getPendingIntent(0,
+                                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+                            }
+                            builder.setContentIntent(resultPendingIntent)
+
                             with(NotificationManagerCompat.from(context)) {
                                 // notificationId is a unique int for each notification that you must define
                                 notify(notificationId, builder.build())
@@ -105,6 +124,8 @@ class ChatService : Service() {
             .setContentTitle(textTitle)
             .setContentText(textContent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+
 
         serviceHandler?.obtainMessage()?.also { msg ->
             msg.arg1 = startId

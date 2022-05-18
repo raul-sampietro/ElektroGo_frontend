@@ -32,7 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.chatConversation.ChatConversation"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
 
         <activity
             android:name=".ui.carPooling.TripDetails"
