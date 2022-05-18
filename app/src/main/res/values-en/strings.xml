@@ -134,6 +134,7 @@
     <string name="espanol">Español</string>
     <string name="preferences">Preferences</string>
     <string name="buttonCancelTrip">Cancel trip</string>
+    <string name="rao_de_cancel_lacio">Reason</string>
 
 
 </resources>

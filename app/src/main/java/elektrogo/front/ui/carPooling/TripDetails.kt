@@ -110,7 +110,6 @@ class TripDetails : AppCompatActivity() {
         if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
-
                 /*val alertDialog: AlertDialog? = this.let {
                     val builder = AlertDialog.Builder(it)
                     builder.apply {
@@ -140,9 +139,8 @@ class TripDetails : AppCompatActivity() {
                     builder.create()
                 }
                 alertDialog!!.show()*/
-
                 val confirmDialog = CancelTripDialog()
-                confirmDialog.show(XDXDXDXDFragmentManager, "confirmDialog") ??? probar si funciona asi
+                confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
         }
 
