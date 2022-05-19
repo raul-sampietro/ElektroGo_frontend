@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id = "@+id/guestProfile"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.profile.GuestProfileFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/pooling"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:background="@drawable/profile_rounded_box_with_shadow"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:civ_border_color="#FF000000"
+                        app:civ_border_width="2dp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/profile_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Username"
+                        android:textAlignment="center"
+                        android:textColor="@color/dark_green"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        tools:ignore="RtlSymmetry" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <ImageView
+                            android:id="@+id/estrella1"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:src="@drawable/ic_starplena" />
+
+                        <ImageView
+                            android:id="@+id/estrella2"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/ic_starplena" />
+
+                        <ImageView
+                            android:id="@+id/estrella3"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/ic_starplena" />
+
+                        <ImageView
+                            android:id="@+id/estrella4"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/ic_starplena" />
+
+                        <ImageView
+                            android:id="@+id/estrella5"
+                            android:layout_width="27dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/ic_starplena" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/profile_guest_valorar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Valorar" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/profile_guest_denuciar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Denunciar" />
+
+    </LinearLayout>
+
+
+</FrameLayout>
