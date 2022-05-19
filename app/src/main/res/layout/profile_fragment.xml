@@ -2,17 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -28,7 +25,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UselessParent">
 
                     <RelativeLayout
                         android:layout_width="80dp"
@@ -124,7 +122,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -264,22 +262,19 @@
                 android:textColor="@color/black"/>
 
             <Button
-                android:id="@+id/profile_MyTrips"
-                android:layout_width="194dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:linksClickable="false"
-                android:text="@string/profile_my_trips" />
-
-            <Button
                 android:id="@+id/profile_delete_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Esborrar compte" />
 
-        </LinearLayout>
-    </ScrollView>
+            <Button
+                android:id="@+id/other_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Perfil Altre" />
 
+        </LinearLayout>
 
 </FrameLayout>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.carPooling.TripDetails">
 
     <include
@@ -95,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Origen:"
+            android:text= "@string/origen"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -122,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
-            android:text="Destí:"
+            android:text="@string/dest"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -147,7 +149,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Detalls:"
+            android:text="@string/details"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -176,7 +178,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Restriccions:"
+            android:text="@string/restriccions"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -207,7 +209,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Encara hi ha"
+                android:text="@string/encara_hi_ha"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal" />
@@ -227,7 +229,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="seients disponibles"
+                android:text="@string/seients_disponibles"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal" />
@@ -249,10 +251,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Anfitrió:"
+            android:text="@string/anfitrio"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -261,20 +264,21 @@
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp">
+            <RelativeLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_imageDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:civ_border_width="1dp"
-                app:civ_border_color="#FF000000"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="1dp" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -348,9 +352,25 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_cancelarTrajecte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FF0000"
+                android:text="@string/buttonCancelTrip"
+                tools:ignore="TextContrastCheck" />
+        </LinearLayout>
 
     </LinearLayout>
 
 </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

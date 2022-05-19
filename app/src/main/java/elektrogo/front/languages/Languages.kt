@@ -14,9 +14,8 @@ class Languages : AppCompatActivity() {
     lateinit var Preference: Preference
     lateinit var context: Context
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+  /*  override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_proba_languages)
         context = this
         Preference = Preference(this)
         val englishButton : Button = this.findViewById(R.id.english)
@@ -52,5 +51,5 @@ class Languages : AppCompatActivity() {
         Preference = Preference(newBase!!)
         val lang = Preference.getLoginCount()
         super.attachBaseContext(lang?.let { MyContextWrapper.wrap(newBase, it) })
-    }
+    }*/
 }
