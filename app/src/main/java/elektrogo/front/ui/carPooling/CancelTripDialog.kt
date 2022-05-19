@@ -12,7 +12,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import com.google.android.material.textfield.TextInputEditText
 import elektrogo.front.R
-import elektrogo.front.ui.valorarUsuari.ValorarUsuariFragment
 
 class CancelTripDialog : DialogFragment() {
 
