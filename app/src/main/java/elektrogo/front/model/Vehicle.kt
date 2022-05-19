@@ -10,5 +10,6 @@ data class Vehicle(
     var drivingRange : Int,
     var fabricationYear : Int,
     var seats : Int,
-    var imageId : String?
+    var imageId : String?,
+    var verification: String?
 )
