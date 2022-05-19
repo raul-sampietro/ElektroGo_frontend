@@ -34,6 +34,7 @@ class CancelTripDialog : DialogFragment() {
                 setPositiveButton("CONFIRMAR",
                     DialogInterface.OnClickListener { dialog, id ->
 
+                        //TODO: crida http a back amb l'url que digui en Gerard i control d'errors, i treue strings hardcodejades
                         Toast.makeText(context, "Motiu: ${motiu.text.toString()}", Toast.LENGTH_LONG).show()
 
                         requireActivity().finish()
