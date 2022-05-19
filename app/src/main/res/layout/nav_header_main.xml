@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="150dp"
     android:background="@color/green_logo"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
-    android:gravity="bottom"
+    android:gravity="center|left"
     android:orientation="vertical"
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Light">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -28,14 +28,13 @@
                 android:id="@+id/profile_imageNav"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/avatar"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="1dp" />
 
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_gravity="center"
@@ -45,13 +44,11 @@
                 android:id="@+id/usernameNav"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="15dp"
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeTextType="uniform"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:text="TU NOMBRE AQUI"/>
+                android:textStyle="bold"/>
 
 
             </LinearLayout>

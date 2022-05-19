@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -31,6 +32,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
+import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.languages.MyContextWrapper
@@ -42,6 +44,7 @@ import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
 import elektrogo.front.ui.preferences.PreferencesActivity
+import org.w3c.dom.Text
 
 /**
  * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
@@ -55,6 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var currentFragment: String
+    lateinit var navigationView: NavigationView
 
 
     //Configuració dels events clic
@@ -117,6 +121,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeButtonEnabled(true)
 
         val navigationView : NavigationView = findViewById(R.id.nav_view)
+        val header : View = navigationView.getHeaderView(0)
+        val profileImage : ImageView = header.findViewById(R.id.profile_imageNav)
+        val usernameText : TextView = header.findViewById(R.id.usernameNav)
+        if (SessionController.getImageUrl(this)!="null") {
+            Picasso.get().load(SessionController.getImageUrl(this)).into(profileImage)
+        }
+        else profileImage.setImageResource(R.drawable.avatar)
+        usernameText.text= SessionController.getUsername(this)
         navigationView.setNavigationItemSelectedListener(this)
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
@@ -153,15 +165,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             currentFragment = "ProfileFragment"
         }
 
-        loadNavInfo()
-    }
-
-    private fun loadNavInfo() {
-        //TODO al no ser el layout mostrat aqui, no es pot fer find view by id
-      //  val ProfileImage : ImageView = findViewById(R.id.profile_imageNav)
-      //  val ProfileName : TextView = findViewById(R.id.usernameNav)
-      //  ProfileName.text=SessionController.getUsername(this)
-      //  Picasso.get().load(SessionController.getImageUrl(this)).into(ProfileImage)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
