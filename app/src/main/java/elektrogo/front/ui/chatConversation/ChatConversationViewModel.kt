@@ -11,10 +11,15 @@ class ChatConversationViewModel : ViewModel(){
     private lateinit var userB: String
 
     fun getConversation(userA: String, userB: String) : ArrayList<Message> = runBlocking {
-        FrontendController.getConversation(userA, userB)
+        return@runBlocking FrontendController.getConversation(userA, userB)
     }
 
     fun sendMessage(sender: String, receiver: String, message: String) : Int  = runBlocking{
-        FrontendController.sendMessage(sender, receiver, message)
+        return@runBlocking FrontendController.sendMessage(sender, receiver, message)
     }
+
+    fun getUsersProfilePhoto(username: String): String = runBlocking {
+        return@runBlocking FrontendController.getUserProfilePhoto(username)
+    }
+
 }

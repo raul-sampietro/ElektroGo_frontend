@@ -69,7 +69,8 @@ dependencies {
 
     implementation("io.ktor:ktor-client-serialization:$ktor_version")
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha02"
 
@@ -78,4 +79,7 @@ dependencies {
 
     //Circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Custom calendar
+    implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 }

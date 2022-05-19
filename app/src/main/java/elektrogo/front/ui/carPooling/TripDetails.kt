@@ -8,11 +8,13 @@ package elektrogo.front.ui.carPooling
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
@@ -28,6 +30,8 @@ class TripDetails : AppCompatActivity() {
      */
     private var viewModel: TripDetailsViewModel = TripDetailsViewModel()
 
+    private lateinit var toolbar2 : Toolbar
+
     /**
      * @brief Metode que s'executa un cop l'activity ha estat creada. S'encarrega de mostrar per pantalla l'informacio rebuda per parametres del trajecte a veure'n els detalls.
      * @param savedInstanceState Estat de la instancia.
@@ -37,7 +41,11 @@ class TripDetails : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trip_details)
-        val username = intent.getStringExtra("username")
+        toolbar2  = findViewById(R.id.toolbar_main)
+        toolbar2.title= getString(R.string.detailsLabel)
+        setSupportActionBar(toolbar2)
+
+        val username= intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
         var startTime = intent.getStringExtra("startTime")
         val offeredSeats = intent.getIntExtra("offeredSeats", 1)
@@ -54,8 +62,6 @@ class TripDetails : AppCompatActivity() {
         val seatsText : TextView = this.findViewById(R.id.occupiedseats)
         val restrictionText : TextView = this.findViewById(R.id.restrictionsInfo)
         val detailsText : TextView = this.findViewById(R.id.detailsInfo)
-        val origin: TextView = this.findViewById(R.id.originDetails)
-        val destination: TextView = this.findViewById(R.id.destDetails)
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
 
@@ -75,37 +81,25 @@ class TripDetails : AppCompatActivity() {
         seatsText.text = occupied
         restrictionText.text = restrictions
         detailsText.text=details
-        origin.text = originString
-        destination.text=destinationString
 
-        var originBrief : String
-        if (originString!!.length > 20){
-            originBrief = originString.substring(0, 20)
-            originBrief += "..."
-            origin.text = originBrief
-        }
-        else origin.text = originString
         originFull.text = originString
-        var destinationBrief : String
-        if (destinationString!!.length > 20){
-            destinationBrief = destinationString.substring(0, 20)
-            destinationBrief += "..."
-            destination.text = destinationBrief
-        }
-        else destination.text = destinationString
         destinationFull.text=destinationString
 
-        val ratingPair = viewModel.getRating(username!!)
+        val imageViewProfile : ImageView = findViewById(R.id.profile_image2)
+        var imagePath : String = viewModel.getUsersProfilePhoto(username!!)
+        Log.i("imagePath", imagePath)
+        if (imagePath.equals("null") || imagePath.equals("")) {
+            imageViewProfile.setImageResource(R.drawable.avatar)
+        }
+        else Picasso.get().load(imagePath).into(imageViewProfile)
+
+        val ratingPair = viewModel.getRating(username)
         if (ratingPair.first != 200) {
-            Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue)
         val numValorations : TextView = this.findViewById(R.id.numberValorations)
         numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
 
-        val imageViewProfile : ImageView = this.findViewById(R.id.profile_imageDetails)
-        val imagePath = viewModel.getUsersProfilePhoto(username)
-        if (!imagePath.equals("null")  or !imagePath.equals("")) Picasso.get().load(imagePath).into(imageViewProfile)
-        else imageViewProfile.setImageResource(R.drawable.avatar)
 
         val shareButton : ImageButton = this.findViewById(R.id.shareButton)
         shareButton.setOnClickListener {
@@ -119,6 +113,8 @@ class TripDetails : AppCompatActivity() {
             myIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
         }
+
+
 
     }
     /**

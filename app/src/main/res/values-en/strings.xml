@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ElektroGo</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="generar_ruta">Generate route</string>
+    <string name="places_autocomplete_search_hint">Search location</string>
+    <string name="origen">Origin:</string>
+    <string name="dest">Destnation:</string>
+    <string name="autonomia_actual">Actual range:</string>
+    <string name="km">km</string>
+    <string name="autonomia">Range:</string>
+    <string name="errorOnFields">Fill all the fields correctly in order to be able to generate a route</string>
+    <string name="errorOnLocation"> An error has occurred related to your location. Please, try again </string>
+    <string name="fieldRequired">This field is required</string>
+    <string name="errorOnRoute">An error has occurred, there are no routes available</string>
+
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="Mapa">Map</string>
+    <string name="title_pooling">Pooling</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_route">Route</string>
+    <string name="title_map">Map</string>
+
+    <string name="LicensePlateLabel">Indicate the number plate</string>
+    <string name="LicensePlateExample">1234ABC</string>
+
+    <string name="CarBrandLabel">Indicate the vehicle brand</string>
+    <string name="CarBrandHint">Tesla</string>
+
+    <string name="VehicleModelLabel">Indicate the vehicle model</string>
+    <string name="VehicleModelExample">X</string>
+
+    <string name="DrivingRangeLabel">Indicate the range of the vehicle (km)</string>
+    <string name="DrivingRangeExample">100</string>
+
+    <string name="FabricationYearLabel">Year of production</string>
+    <string name="FabricationYearInput">2020</string>
+
+    <string name="SaveVehicle">Add</string>
+    <string name="AddVehicle">Add vehicle</string>
+
+    <string name="MyVehicles">My vehicles</string>
+    <string name="BecomeDriver">Register driving license</string>
+    <string name="Achievements">Trophies</string>
+    <string name="PersonalInformation">Personal information</string>
+    <string name="Username">User name</string>
+    <string name="CompleteName">Name</string>
+    <string name="email">Email</string>
+    <string name="Login">Login with</string>
+
+
+    <string name="ObligatoryField">This field is required</string>
+    <string name="notEnoughCharactersLicensePlate"> 7 or 8 caracters are required</string>
+    <string name="invalidLicensePlate">The number plate format is not valid</string>
+    <string name="VehicleImageButton">Add vehicle image</string>
+    <string name="ObligatoryFieldImage">You have to add an image of the vehicle</string>
+    <string name="VehicleCreatedSuccessfully">The vehicle has been registered</string>
+    <string name="VehicleNotCreated">One or more fields are incorrect</string>
+    <string name="AskLocation"> Access your device settings and accept the permissions required</string>
+    <string name="WhenLocationDenied">To enable location on this app, access to your device settings and accept the permissions required</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="seatsVehicleLabel">Indicate the number of seats on your vehicle</string>
+    <string name="seatsVehicleExample">5</string>
+
+    <string name="VehicleSeats">Seats</string>
+
+    <string name="DriverVehicleAlreadyExists">You have already registered this vehicle</string>
+    <string name="VehicleAlreadyExists">This vehicle already exists</string>
+    <string name="WrongVehicleInfo">There is an existing vehicle with the same numberplate but different information, please contact us</string>
+    <string name="ServerError">An error has occurred, try this again later</string>
+    <string name="btnValorar">Rate</string>
+    <string name="valorar_usuari">Rate a user</string>
+
+    <string name="dateLabel">Date</string>
+    <string name="HourButton">Time</string>
+    <string name="HourExample">12:00</string>
+    <string name="PublishButton">Post</string>
+    <string name="ExampleDate">23/6/2022</string>
+    <string name="TrajectDetailsLabel">Trip details:</string>
+    <string name="ExampleDetailsTraject">We will take the AP-7. I am not used to driving very fast, etc.</string>
+    <string name="VehicleLabel">Vehicle:</string>
+    <string name="RestTextExample">·Dogs are not allowed\n·Smoking inside the vehicle is not allowed\n·Etc.</string>
+    <string name="SeatsOffered">Available seats:</string>
+    <string name="RestTrip">Trip restrictions:</string>
+    <string name="DataIncorrecte">The trip date is incorrect</string>
+    <string name="HoraIncorrecte">The trip time is incorrect</string>
+
+    <string name="savedCarpooling">The trip has been posted</string>
+    <string name="errorCarpooling">An error has occurred, try this again later</string>
+
+    <string name="hora_d_inici">start time</string>
+    <string name="dataFiltrar">Date</string>
+    <string name="buscarFiltrar">Search</string>
+    <string name="errorFieldsFiltrar">Fill all the fields correctly in order to search trips</string>
+
+
+    <!-- FirstLoginFragment -->
+    <string name="firstLoginWelcome">Welcome,</string>
+    <string name="firstLoginTo">a</string>
+    <string name="firstLoginSelectUsername">Please select your username </string>
+    <string name="firstLoginWarning">Warning: </string>
+    <string name="firstLoginWarning2">it will be visible to everyone</string>
+    <string name="firstLoginUsername">username</string>
+    <string name="firstLoginSave">Save</string>
+
+    <string name="facebook_app_id">850446215915012</string>
+    <string name="fb_login_protocol_scheme">fb850446215915012</string>
+    <string name="facebook_client_token">d2fe733d766ef258b456bfcbbdb78de2</string>
+    <string name="profile_logout_button">Log Out</string>
+
+    <string name="shareOwnTrip">I have created a new trip on ElektroGo with date %1$s at %2$s with origin %3$s and destination %4$s. There are only %5$s seats available! \n\nJoin me via the ElektroGo app: https://marccastellsdostal.wixsite.com/elektrogo</string>
+    <string name="shareTrip">I have found a this trip on ElektroGo with date %1$s at %2$s with origin %3$s and destination %4$s. There are only %5$s seats available! \n\nJoin via the ElektroGo app: https://marccastellsdostal.wixsite.com/elektrogo</string>
+    <string name="share">Share with</string>
+    <string name="chat">Chat</string>
+    <string name="message">Message</string>
+    <string name="resetFilters">Reset</string>
+    <string name="textProva">This is a test text</string>
+    <string name="catalaMenu">Catalan</string>
+    <string name="castellaMenu">Spanish</string>
+    <string name="anglesMenu">English</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="detailsLabel">Trip details</string>
+    <string name="llistaVehicles">Vehicles list</string>
+
+
+    <string name="select_Language">Select the language:</string>
+    <string name="catala">Català</string>
+    <string name="english">English</string>
+    <string name="espanol">Español</string>
+    <string name="preferences">Preferences</string>
+    <string name="ToolbarMapa">Map</string>
+    <string name="ToolbarRuta">Route</string>
+    <string name="ToolbarChat">Chat</string>
+    <string name="ToolbarPerfil">Profile</string>
+    <string name="CrearTrajecte">Create new trip</string>
+    <string name="MyTrips">My trips</string>
+    <string name="DataFilter">Date</string>
+    <string name="FinsFilter">To</string>
+    <string name="DesdeFilter">From</string>
+    <string name="OrigenString">Orign</string>
+    <string name="DestiString">Destination</string>
+    <string name="details">Details:</string>
+    <string name="restriccions">Restrictions:</string>
+    <string name="encara_hi_ha">There are still</string>
+    <string name="seients_disponibles">free seats</string>
+    <string name="anfitrio">Host:</string>
+
+
+</resources>

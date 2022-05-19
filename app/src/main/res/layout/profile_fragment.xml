@@ -262,6 +262,14 @@
                 android:textColor="@color/black"/>
 
             <Button
+                android:id="@+id/profile_MyTrips"
+                android:layout_width="194dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:linksClickable="false"
+                android:text="@string/profile_my_trips" />
+
+            <Button
                 android:id="@+id/profile_delete_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
