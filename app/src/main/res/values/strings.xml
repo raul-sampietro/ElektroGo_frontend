@@ -164,6 +164,8 @@
     <string name="encara_hi_ha">Encara hi ha</string>
     <string name="seients_disponibles">seients disponibles</string>
     <string name="anfitrio">Anfitrió:</string>
+    <string name="buttonCancelTrip">Cancel·lar trajecte</string>
+    <string name="rao_de_cancel_lacio">Motiu</string>
 
 
 </resources>

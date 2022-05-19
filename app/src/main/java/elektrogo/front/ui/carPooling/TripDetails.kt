@@ -6,6 +6,7 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,10 +16,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import android.view.ViewManager
+import android.widget.*
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
+import elektrogo.front.ui.CarPooling.CancelTripDialog
 import java.text.SimpleDateFormat
+
 
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
@@ -65,7 +70,6 @@ class TripDetails : AppCompatActivity() {
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
 
-
         usernameText.text = username
         var dateTmp = startDate
         val input = SimpleDateFormat("yyyy-MM-dd")
@@ -104,7 +108,7 @@ class TripDetails : AppCompatActivity() {
         val shareButton : ImageButton = this.findViewById(R.id.shareButton)
         shareButton.setOnClickListener {
             val  myIntent : Intent = Intent(Intent.ACTION_SEND)
-            myIntent.setType("text/plain")
+            myIntent.type = "text/plain"
             var shareBody :String = ""
             if (SessionController.getUsername(this) == username ){
                 shareBody = getString(R.string.shareOwnTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
@@ -114,7 +118,43 @@ class TripDetails : AppCompatActivity() {
             startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
         }
 
+        val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
+        if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
+        else {
+            btnCancel.setOnClickListener {
+                /*val alertDialog: AlertDialog? = this.let {
+                    val builder = AlertDialog.Builder(it)
+                    builder.apply {
 
+                        val inflater = layoutInflater
+
+                        // Inflate and set the layout for the dialog
+                        // Pass null as the parent view because its going in the dialog layout
+                        setView(inflater.inflate(R.layout.valorar_usuari_fragment, null))
+
+                        setTitle("Confirmació")
+
+                        setMessage("Segur que vols cancel·lar aquest trajecte?")
+
+                        setPositiveButton("SÍ",
+                            DialogInterface.OnClickListener { dialog, id ->
+
+
+
+                                finish()
+                                Toast.makeText(context, "Trajecte cancel·lat", Toast.LENGTH_LONG).show()
+                            })
+                        setNegativeButton("NO",
+                            DialogInterface.OnClickListener { dialog, id -> })
+                    }
+                    // Crea el dialeg
+                    builder.create()
+                }
+                alertDialog!!.show()*/
+                val confirmDialog = CancelTripDialog()
+                confirmDialog.show(supportFragmentManager, "confirmDialog")
+            }
+        }
 
     }
     /**
