@@ -6,7 +6,6 @@
  */
 package elektrogo.front.ui.carPooling
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +20,6 @@ import android.widget.*
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
-import elektrogo.front.ui.CarPooling.CancelTripDialog
 import java.text.SimpleDateFormat
 
 
@@ -60,6 +58,8 @@ class TripDetails : AppCompatActivity() {
         val originString = intent.getStringExtra("originString")
         val destinationString= intent.getStringExtra("destinationString")
         val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
+        val latDest = intent.getDoubleExtra("destinationLat", 1.0)
+        val lonDest = intent.getDoubleExtra("destinationLon", 1.0)
 
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
@@ -72,6 +72,12 @@ class TripDetails : AppCompatActivity() {
         val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
 
         //TODO: Crida amb el servei de RevPollution
+        val qualityAir: String = viewModel.getAirQuality(latDest, lonDest)
+        if (qualityAir == "Bad") qaImage.setImageResource(R.drawable.airbad)
+        else if (qualityAir == "Mid") qaImage.setImageResource(R.drawable.airmid)
+        else if (qualityAir == "Good") qaImage.setImageResource(R.drawable.airgood)
+        else qaImage.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
+
 
         usernameText.text = username
         var dateTmp = startDate

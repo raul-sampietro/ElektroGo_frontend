@@ -163,8 +163,8 @@
                     android:id="@+id/airqualityImage"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:srcCompat="@drawable/airgood"
-                    android:layout_marginStart="25dp"/>
+                    android:layout_marginStart="25dp"
+                    app:srcCompat="@drawable/ic_baseline_image_not_supported_24" />
             </LinearLayout>
 
         </LinearLayout>
