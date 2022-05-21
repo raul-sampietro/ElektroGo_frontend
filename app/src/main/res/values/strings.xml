@@ -164,6 +164,8 @@
     <string name="encara_hi_ha">Encara hi ha</string>
     <string name="seients_disponibles">seients disponibles</string>
     <string name="anfitrio">Anfitrió:</string>
+    <string name="TripsNavMenu">My trips</string>
+    <string name="vehiclesMenu">My vehicles</string>
 
 
 </resources>

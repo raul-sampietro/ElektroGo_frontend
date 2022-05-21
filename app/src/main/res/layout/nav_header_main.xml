@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_header"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="90dp"
     android:background="@color/green_logo"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     android:gravity="center|left"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="5dp"
     android:theme="@style/ThemeOverlay.AppCompat.Light">
 
     <LinearLayout
@@ -19,8 +19,8 @@
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="10dp"
             android:layout_gravity="center">
 
