@@ -17,8 +17,7 @@
     <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+        android:orientation="vertical"
     android:layout_marginTop="55dp">
 
 
@@ -119,24 +118,57 @@
             android:layout_marginEnd="20dp"
             android:background="#95C59A" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:text="@string/dest"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/destinationFull"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="Madrid"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/dest"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/destinationFull"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="Madrid"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/airqualityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_gravity="center"
+                    android:text="Qualitat del aire:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+
+                <ImageView
+                    android:id="@+id/airqualityImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/airgood"
+                    android:layout_marginStart="25dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
