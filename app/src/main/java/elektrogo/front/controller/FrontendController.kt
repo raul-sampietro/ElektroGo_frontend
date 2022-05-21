@@ -359,5 +359,15 @@ object FrontendController {
             return Pair(504, ArrayList<CarPooling>())
         }
     }
+
+
+    //SERVEI REVPOLLUTION
+    suspend fun getAirQuality(lat: Double, lon: Double): String {
+        val httpResponse: HttpResponse = client.get("http://10.4.41.56/RevPollution/services/stations/quality?lat=${lat}&lon=${lon}")
+        if (httpResponse.status.value != 200) {
+            return ""
+        }
+        return httpResponse.receive()
+    }
 }
 

@@ -20,10 +20,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
-import elektrogo.front.languages.Languages
 import elektrogo.front.model.Driver
-import elektrogo.front.ui.carPooling.NewCarPoolingFragment
-import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking

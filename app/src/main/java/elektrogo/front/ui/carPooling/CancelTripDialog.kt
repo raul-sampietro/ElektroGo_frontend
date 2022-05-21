@@ -1,18 +1,12 @@
-package elektrogo.front.ui.CarPooling
+package elektrogo.front.ui.carPooling
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.setFragmentResult
 import com.google.android.material.textfield.TextInputEditText
 import elektrogo.front.R
-import elektrogo.front.ui.valorarUsuari.ValorarUsuariFragment
 
 class CancelTripDialog : DialogFragment() {
 
