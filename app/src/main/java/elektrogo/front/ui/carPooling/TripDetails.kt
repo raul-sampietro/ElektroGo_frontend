@@ -69,6 +69,9 @@ class TripDetails : AppCompatActivity() {
         val detailsText : TextView = this.findViewById(R.id.detailsInfo)
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
+        val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
+
+        //TODO: Crida amb el servei de RevPollution
 
         usernameText.text = username
         var dateTmp = startDate
