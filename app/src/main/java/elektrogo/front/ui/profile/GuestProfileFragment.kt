@@ -51,6 +51,13 @@ class GuestProfileFragment : Fragment() {
         if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
 
+
+        if (username?.let { viewModel.getDriver(it) } == true) {
+            val imageVerificat: ImageView = view.findViewById(R.id.verificat)
+            imageVerificat.setImageResource(R.drawable.verificat)
+        }
+
+
         val ratingPair = username?.let { viewModel.getRating(it) }
         if (ratingPair != null) {
             if (ratingPair.first != 200) {

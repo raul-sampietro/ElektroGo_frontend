@@ -2,7 +2,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id = "@+id/guestProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.GuestProfileFragment">
@@ -10,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id = "@+id/guestProfile"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -47,16 +47,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/profile_username"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Username"
-                        android:textAlignment="center"
-                        android:textColor="@color/dark_green"
-                        android:textSize="30sp"
-                        android:textStyle="bold"
-                        tools:ignore="RtlSymmetry" />
+                        android:orientation="horizontal"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:id="@+id/profile_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Username"
+                            android:textAlignment="center"
+                            android:textColor="@color/dark_green"
+                            android:textSize="30sp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlSymmetry" />
+
+                        <ImageView
+                            android:id="@+id/verificat"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
