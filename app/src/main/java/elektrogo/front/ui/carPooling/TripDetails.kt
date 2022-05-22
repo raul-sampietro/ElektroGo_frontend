@@ -131,35 +131,6 @@ class TripDetails : AppCompatActivity() {
         if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
-                /*val alertDialog: AlertDialog? = this.let {
-                    val builder = AlertDialog.Builder(it)
-                    builder.apply {
-
-                        val inflater = layoutInflater
-
-                        // Inflate and set the layout for the dialog
-                        // Pass null as the parent view because its going in the dialog layout
-                        setView(inflater.inflate(R.layout.valorar_usuari_fragment, null))
-
-                        setTitle("Confirmació")
-
-                        setMessage("Segur que vols cancel·lar aquest trajecte?")
-
-                        setPositiveButton("SÍ",
-                            DialogInterface.OnClickListener { dialog, id ->
-
-
-
-                                finish()
-                                Toast.makeText(context, "Trajecte cancel·lat", Toast.LENGTH_LONG).show()
-                            })
-                        setNegativeButton("NO",
-                            DialogInterface.OnClickListener { dialog, id -> })
-                    }
-                    // Crea el dialeg
-                    builder.create()
-                }
-                alertDialog!!.show()*/
                 val confirmDialog = CancelTripDialog()
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
