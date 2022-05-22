@@ -21,7 +21,9 @@ import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
 import elektrogo.front.model.Driver
+import elektrogo.front.ui.CarPooling.CancelTripDialog
 import elektrogo.front.ui.login.LoginActivity
+import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking
 
@@ -142,6 +144,18 @@ class GuestProfileFragment : Fragment() {
                     }
                 }
             }
+        }
+
+
+        val btnValorar = view.findViewById<Button>(R.id.profile_guest_valorar)
+        btnValorar.setOnClickListener {
+            val valorarDialog = ValorarUsuariDialog()
+
+            val bundle = Bundle()
+            bundle.putString("guestUser", username) //passem l'usuari que es vol valorar al dialog
+
+            valorarDialog.arguments = bundle
+            valorarDialog.show(childFragmentManager, "confirmDialog")
         }
 
         return view

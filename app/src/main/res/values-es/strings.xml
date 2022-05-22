@@ -150,6 +150,8 @@
     <string name="anfitrio">Anfitrión:</string>
     <string name="buttonCancelTrip">Cancelar trayecto</string>
     <string name="rao_de_cancel_lacio">Motivo</string>
+    <string name="eliminaValoracio">Elimina</string>
+    <string name="comentariValoracio">Write a comment</string>
 
 
 </resources>
