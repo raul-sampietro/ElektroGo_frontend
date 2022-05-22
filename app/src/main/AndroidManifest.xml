@@ -79,7 +79,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        view raw
 
         <activity
             android:name="com.facebook.CustomTabActivity"
