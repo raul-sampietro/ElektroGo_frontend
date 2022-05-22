@@ -237,7 +237,13 @@ object FrontendController {
         return waypoints
     }
 
-
+    suspend fun unrateUser(userWhoRates: String, ratedUser: String): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}users/unrate") {
+            parameter("userWhoRates", userWhoRates)
+            parameter("ratedUser", ratedUser)
+        }
+        return httpResponse.status.value
+    }
 
     suspend fun saveCarpooling(trip: CarPooling): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE_WB}car-pooling/create") {
@@ -352,6 +358,18 @@ object FrontendController {
             parameter("sender", sender)
             parameter("receiver", receiver)
             parameter("message", message)
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            return responseJson.status
+        }
+        else return httpResponse.status.value
+    }
+
+    suspend fun deleteChat(userA: String, userB: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_BASE}chat/"){
+            parameter("userA", userA)
+            parameter("userB", userB)
         }
         if (httpResponse.status.value != 200) {
             val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)

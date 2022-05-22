@@ -2,18 +2,21 @@ package elektrogo.front.ui.chatList
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import com.squareup.picasso.Picasso
+import elektrogo.front.MainActivity
 import elektrogo.front.R
+import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
 import elektrogo.front.ui.chatConversation.ChatConversation
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 
 class ChatListAdapter(private val context : Activity, private val chatList : ArrayList<String>)
     : ArrayAdapter<String>(context, R.layout.fragment_vehicle_list_item, chatList) {
@@ -37,10 +40,34 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
         user.text = v
 
         val imageViewProfile : ImageView = view.findViewById(R.id.userImage)
-        /* TODO no se porque se hace muchas veces esta peticion
+        // TODO no se porque se hace muchas veces esta peticion
         val imagePath = viewModel.getUsersProfilePhoto(user.text as String)
         if (imagePath != "null") Picasso.get().load(imagePath).into(imageViewProfile)
-        */
+
+        val deleteButton : Button = view.findViewById(R.id.deleteChatButton)
+        deleteButton.setOnClickListener {
+            val alertDialog: AlertDialog? = parent.context.let {
+                val builder = AlertDialog.Builder(it)
+                // TODO 3 hardcoded strings
+                builder.setMessage("Vols esborrar el xat amb ${user.text}?")
+                builder.apply {
+                    setPositiveButton("SI",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            Toast.makeText(parent.context, "Esborrant xat", Toast.LENGTH_LONG).show()
+                            val currentUser = SessionController.getUsername(context)
+                            viewModel.deleteChat(currentUser, v)
+                            notifyDataSetChanged()
+                        })
+                    setNegativeButton("NO",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            Toast.makeText(parent.context, "El xat no s'ha esborrat", Toast.LENGTH_LONG).show()
+                        })
+                }
+                // Create the AlertDialog
+                builder.create()
+            }
+            alertDialog?.show()
+        }
 
         view.setOnClickListener{
             val intent = Intent(context, ChatConversation::class.java).apply {
