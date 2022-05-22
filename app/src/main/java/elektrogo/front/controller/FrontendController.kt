@@ -149,9 +149,17 @@ object FrontendController {
      * @post Si s'ha pogut connectar amb el servidor, retorna l'status de la crida HTTP.
      */
     suspend fun rateUser(rating: Rating): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}users/rate") { //confirmar que ha de ser post
+        val httpResponse: HttpResponse = client.post("${URL_BASE}users/rate") {
             contentType(ContentType.Application.Json)
             body = rating
+        }
+        return httpResponse.status.value
+    }
+
+    suspend fun unrateUser(userWhoRates: String, ratedUser: String): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}users/unrate") {
+            parameter("userWhoRates", userWhoRates)
+            parameter("ratedUser", ratedUser)
         }
         return httpResponse.status.value
     }

@@ -39,8 +39,6 @@ class CancelTripDialog : DialogFragment() {
                         requireActivity().finish()
                         Toast.makeText(context, "Trajecte cancel·lat", Toast.LENGTH_LONG).show()
                     })
-                setNegativeButton("ENRERE",
-                    DialogInterface.OnClickListener { dialog, id -> })
             }
             // Crea el dialeg
             builder.create()

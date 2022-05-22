@@ -148,11 +148,13 @@ class GuestProfileFragment : Fragment() {
 
 
         val btnValorar = view.findViewById<Button>(R.id.profile_guest_valorar)
-
         btnValorar.setOnClickListener {
-            Toast.makeText(activity, "Vols valorar ??? XDXD", Toast.LENGTH_LONG).show()
-
             val valorarDialog = ValorarUsuariDialog()
+
+            val bundle = Bundle()
+            bundle.putString("guestUser", username) //passem l'usuari que es vol valorar al dialog
+
+            valorarDialog.arguments = bundle
             valorarDialog.show(childFragmentManager, "confirmDialog")
         }
 

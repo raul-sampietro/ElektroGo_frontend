@@ -151,6 +151,8 @@
     <string name="anfitrio">Host:</string>
     <string name="buttonCancelTrip">Cancel trip</string>
     <string name="rao_de_cancel_lacio">Reason</string>
+    <string name="eliminaValoracio">Delete</string>
+    <string name="comentariValoracio">Escribe un comentario</string>
 
 
 </resources>
