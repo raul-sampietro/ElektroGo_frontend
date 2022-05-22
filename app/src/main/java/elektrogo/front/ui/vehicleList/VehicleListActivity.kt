@@ -16,6 +16,7 @@ class VehicleListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vehicle_list)
         toolbar2  = findViewById(R.id.toolbar_main)
+        toolbar2.title= getString(R.string.llistaVehicles)
         setSupportActionBar(toolbar2)
         loadFragment(vehicleListFragment)
     }

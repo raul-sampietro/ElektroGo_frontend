@@ -9,7 +9,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import com.google.android.material.textfield.TextInputEditText
 import elektrogo.front.R
+import elektrogo.front.controller.FrontendController
+import elektrogo.front.controller.session.SessionController
+import elektrogo.front.model.Rating
+import kotlinx.coroutines.runBlocking
 
 class ValorarUsuariFragment : Fragment() {
 
@@ -22,8 +27,10 @@ class ValorarUsuariFragment : Fragment() {
     private var stars = arrayListOf<ImageView>()
 
     private var puntuacio = 0
-
+    private lateinit var ratedUser:String
+    private lateinit var commentView:TextInputEditText
     private lateinit var valorarBtn:Button
+
 
 
     override fun onCreateView(
@@ -52,9 +59,20 @@ class ValorarUsuariFragment : Fragment() {
             }
         }
 
+        commentView = requireView().findViewById(R.id.comment)
+
         valorarBtn = requireView().findViewById(R.id.buttonValorarUsuari)
         valorarBtn.setOnClickListener {
-            Toast.makeText(activity, "Puntuacio: $puntuacio", Toast.LENGTH_SHORT).show()
+
+            val userWhoRates = SessionController.getUsername(requireActivity())
+            val valoracio = Rating(userWhoRates, ratedUser, puntuacio, commentView.text.toString())
+
+            var status = -1
+            try { status = runBlocking{ FrontendController.rateUser(valoracio) } }
+            catch (e: Exception) {}
+
+            if (status == 200) Toast.makeText(activity, "Has valorat a $ratedUser amb $puntuacio estrelles.", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(activity, "No s'ha pogut valorar a $ratedUser.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -64,5 +82,7 @@ class ValorarUsuariFragment : Fragment() {
             else stars[i].setImageResource(R.drawable.ic_starbuida)
         }
     }
+
+    fun setRatedUser(username: String) { ratedUser = username }
 
 }

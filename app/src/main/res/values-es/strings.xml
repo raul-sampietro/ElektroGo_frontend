@@ -132,7 +132,24 @@
     <string name="english">English</string>
     <string name="espanol">Español</string>
     <string name="preferences">Preferencias</string>
-
+    <string name="ToolbarMapa">Mapa</string>
+    <string name="ToolbarRuta">Ruta</string>
+    <string name="ToolbarChat">Chat</string>
+    <string name="ToolbarPerfil">Perfil</string>
+    <string name="CrearTrajecte">Crear trayecto</string>
+    <string name="MyTrips">Mis trayectos</string>
+    <string name="DataFilter">Fecha</string>
+    <string name="FinsFilter">Hasta</string>
+    <string name="DesdeFilter">Desde</string>
+    <string name="OrigenString">Origen</string>
+    <string name="DestiString">Destino</string>
+    <string name="details">Detalles:</string>
+    <string name="restriccions">Restricciones:</string>
+    <string name="encara_hi_ha">Aún hay</string>
+    <string name="seients_disponibles">asientos disponibles</string>
+    <string name="anfitrio">Anfitrión:</string>
+    <string name="buttonCancelTrip">Cancelar trayecto</string>
+    <string name="rao_de_cancel_lacio">Motivo</string>
 
 
 </resources>

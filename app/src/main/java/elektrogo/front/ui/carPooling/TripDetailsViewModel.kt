@@ -35,4 +35,8 @@ class TripDetailsViewModel : ViewModel() {
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
 
+    fun getAirQuality(lat: Double, lon: Double): String = runBlocking {
+        return@runBlocking FrontendController.getAirQuality(lat, lon)
+    }
+
 }
