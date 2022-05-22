@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -79,6 +80,16 @@ class ChatListFragment() : Fragment() {
             }
         }
         thread.start()
+
+        val searchButton: Button = view.findViewById(R.id.serachChat)
+        searchButton.setOnClickListener {
+
+        }
+
+        val difuButton: Button = view.findViewById(R.id.sendDifu)
+        difuButton.setOnClickListener {
+
+        }
 
         return view
     }
