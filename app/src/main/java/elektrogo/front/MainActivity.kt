@@ -160,6 +160,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             bottomNavigation.selectedItemId = R.id.perfil
             currentFragment = "ProfileFragment"
         }
+
+        //Iniciem el service que envia notificacions per al xat
+        createNotificationChannel()
+        Intent(this, ChatService::class.java).also { intent ->
+            startService(intent)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

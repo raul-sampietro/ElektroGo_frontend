@@ -9,4 +9,8 @@ class ChatListItemViewModel : ViewModel() {
     fun getUsersProfilePhoto(username: String): String = runBlocking {
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
+
+    fun deleteChat(userA: String, userB: String) = runBlocking {
+        return@runBlocking FrontendController.deleteChat(userA, userB)
+    }
 }

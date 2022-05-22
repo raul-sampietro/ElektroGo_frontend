@@ -338,6 +338,18 @@ object FrontendController {
         else return httpResponse.status.value
     }
 
+    suspend fun deleteChat(userA: String, userB: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_BASE}chat/"){
+            parameter("userA", userA)
+            parameter("userB", userB)
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            return responseJson.status
+        }
+        else return httpResponse.status.value
+    }
+
     suspend fun getReceivedMessages(user: String): ArrayList<Message> {
         val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByReceived") {
             parameter("user", user)

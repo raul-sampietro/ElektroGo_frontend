@@ -58,6 +58,7 @@ class ChatListFragment() : Fragment() {
         adapter = ChatListAdapter(container?.context as Activity, chatList)
         listView.adapter = adapter
 
+        // TODO Ponerlo como thread
         object : CountDownTimer(120000, 6000) {
             override fun onTick(p0: Long) {
                 chatList = viewModel.getChatList(username)
