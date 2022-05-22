@@ -36,7 +36,14 @@ class ChatListFragment() : Fragment() {
     private lateinit var viewModel: ChatListViewModel
     private lateinit var chatList: ArrayList<String>
     private lateinit var adapter: ChatListAdapter
+    private lateinit var thread: Thread
+    private var interrupted: Boolean = false
 
+
+    private fun changeData(newChatList: ArrayList<String>) {
+        chatList = newChatList
+        adapter.updateData(chatList)
+    }
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -58,16 +65,20 @@ class ChatListFragment() : Fragment() {
         adapter = ChatListAdapter(container?.context as Activity, chatList)
         listView.adapter = adapter
 
-        // TODO Ponerlo como thread
-        object : CountDownTimer(120000, 6000) {
-            override fun onTick(p0: Long) {
-                chatList = viewModel.getChatList(username)
-                adapter.updateData(chatList)
-            }
+        interrupted = false
 
-            override fun onFinish() {
+        thread = Thread {
+            while (true and !interrupted) {
+                Thread.sleep(5000);
+                val chatListIncoming = viewModel.getChatList(username)
+                if (chatListIncoming.size != chatList.size) {
+                    activity?.runOnUiThread {
+                        changeData(chatListIncoming)
+                    }
+                }
             }
-        }.start()
+        }
+        thread.start()
 
         return view
     }
@@ -83,4 +94,10 @@ class ChatListFragment() : Fragment() {
         viewModel = ViewModelProvider(this)[ChatListViewModel::class.java]
     }
 
+    override fun onDestroyView() {
+        if (thread.isAlive) {
+            interrupted = true
+        }
+        super.onDestroyView()
+    }
 }
