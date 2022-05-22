@@ -51,15 +51,94 @@ object FrontendController {
 
         }
 
-    //++++++++++++++++++++++
-    // REVIEWED PATHS
-    //++++++++++++++++++++++
+    // #################################################
+    // #  USERS                                        #
+    // #################################################
 
-    private const val URL_CHARGING_STATIONS = "${URL_BASE}/charging-stations"
+    private const val URL_USERS = "${URL_BASE}/users"
+
+    suspend fun addUser(user: User): Int {
+        val httpResponse: HttpResponse = client.post(URL_USERS) {
+            contentType(ContentType.Application.Json)
+            body = user
+        }
+        if (httpResponse.status.value != 201) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        }
+        else return httpResponse.status.value
+    }
+
+    suspend fun getUserById(id: String, provider: String): User? {
+        val httpResponse: HttpResponse = client.get("${URL_USERS}/provider/${provider}/id/${id}")
+        if (httpResponse.status.value != 200) {
+            return null
+        }
+        return httpResponse.receive()
+    }
+
+    /**
+     * @brief Metode que es comunica amb BackEnd per tal d'obtenir el path o uri de la fotografia de perfil d'un usuari.
+     * @param username nom d'usuari del usuari per el que volem la imatge de perfil.
+     * @return Retorna un String que es el path de la imatge de perfil de l'usuari per el qual l'hem demanat, si no en te retorna el string buit.
+     */
+    suspend fun getUserProfilePhoto(username: String): String {
+        val httpResponse: HttpResponse = client.get("URL_USERS/${username}")
+        if (httpResponse.status.value != 200) {
+            return ""
+        }
+        val user : User = httpResponse.receive()
+        return user.imageUrl
+    }
+
+    /**
+     * @brief Metode que es comunica amb Backend per tal d'obtenir la valoracio mitjana d'un usuari.
+     * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
+     * @return Retorna un Pair<Int,RatingAvg> on el int es el code status i RatingAvg un objecte amb valor del rating i numero de persones que han valorat.
+     */
+    suspend fun getRating(username: String): Pair<Int, RatingAvg?> {
+        val httpResponse: HttpResponse = client.get("${URL_USERS}/${username}/ratings/avg") {
+            contentType(ContentType.Application.Json)
+        }
+        val status: Int = httpResponse.status.value
+        val avgRating: RatingAvg?
+        if (httpResponse.status.value != 200) {
+            avgRating = RatingAvg(-1.0,-1)
+        } else avgRating = httpResponse.receive()
+        return Pair(status, avgRating)
+    }
+
+    // #################################################
+    // #  RATINGS                                      #
+    // #################################################
+
+    private const val URL_RATINGS = "${URL_BASE}/ratings"
+
+    /**
+     * @brief Metode que envia un Rating d'un usuari a Backend per enregistrar-lo a la BD.
+     * @pre
+     * @post Si s'ha pogut connectar amb el servidor, retorna l'status de la crida HTTP.
+     */
+    suspend fun rateUser(rating: Rating): Int {
+        val httpResponse: HttpResponse = client.post(URL_RATINGS) {
+            contentType(ContentType.Application.Json)
+            body = rating
+        }
+        return httpResponse.status.value
+    }
+
+    // #################################################
+    // #  REPORTS                                      #
+    // #################################################
+
+    private const val URL_REPORTS = "${URL_BASE}/reports"
 
     // #################################################
     // #  CHARGING STATIONS                            #
     // #################################################
+
+    private const val URL_CHARGING_STATIONS = "${URL_BASE}/charging-stations"
 
     /**
      * @brief Metode que obte totes les ChargingStations emmagatzemades as la BD de Backend.
@@ -82,7 +161,6 @@ object FrontendController {
     //++++++++++++++++++++++
 
     private const val URL_VEHICLE = "${URL_BASE_WB}vehicles/"
-    private const val URL_USER = "${URL_BASE_WB}user/"
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE_WB}drivers/${username}/vehicles") {
@@ -159,18 +237,7 @@ object FrontendController {
         return waypoints
     }
 
-    /**
-     * @brief Metode que envia un Rating d'un usuari a Backend per enregistrar-lo a la BD.
-     * @pre
-     * @post Si s'ha pogut connectar amb el servidor, retorna l'status de la crida HTTP.
-     */
-    suspend fun rateUser(rating: Rating): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}users/rate") { //confirmar que ha de ser post
-            contentType(ContentType.Application.Json)
-            body = rating
-        }
-        return httpResponse.status.value
-    }
+
 
     suspend fun saveCarpooling(trip: CarPooling): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE_WB}car-pooling/create") {
@@ -252,51 +319,6 @@ object FrontendController {
         return Pair(status, trips)
     }
 
-
-    /**
-     * @brief Metode que es comunica amb Backend per tal d'obtenir la valoracio mitjana d'un usuari.
-     * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
-     * @return Retorna un Pair<Int,RatingAvg> on el int es el code status i RatingAvg un objecte amb valor del rating i numero de persones que han valorat.
-     */
-
-    suspend fun getRating(username: String): Pair<Int, RatingAvg?> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}user/avgRate") {
-            contentType(ContentType.Application.Json)
-            parameter("userName", username)
-        }
-        val status: Int = httpResponse.status.value
-        val avgRating: RatingAvg?
-        if (httpResponse.status.value != 200) {
-             avgRating = RatingAvg(-1.0,-1)
-        } else avgRating = httpResponse.receive()
-        return Pair(status, avgRating)
-    }
-
-
-    suspend fun getUserById(id: String, provider: String): User? {
-        val httpResponse: HttpResponse = client.get(URL_USER) {
-            parameter("id", id)
-            parameter("provider", provider)
-        }
-        if (httpResponse.status.value != 200) {
-            return null
-        }
-        return httpResponse.receive()
-    }
-
-    suspend fun addUser(user: User): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}users/create") {
-            contentType(ContentType.Application.Json)
-            body = user
-        }
-        if (httpResponse.status.value != 200) {
-            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-            val statusCode = responseJson.status
-            return statusCode
-        }
-        else return httpResponse.status.value
-    }
-
     suspend fun addDriver(driver: Driver): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE_WB}drivers/create") {
             contentType(ContentType.Application.Json)
@@ -308,22 +330,6 @@ object FrontendController {
             return statusCode
         }
         else return httpResponse.status.value
-    }
-
-    /**
-     * @brief Metode que es comunica amb BackEnd per tal d'obtenir el path o uri de la fotografia de perfil d'un usuari.
-     * @param username nom d'usuari del usuari per el que volem la imatge de perfil.
-     * @return Retorna un String que es el path de la imatge de perfil de l'usuari per el qual l'hem demanat, si no en te retorna el string buit.
-     */
-    suspend fun getUserProfilePhoto(username: String): String {
-        val httpResponse: HttpResponse = client.get(URL_USER) {
-            parameter("username", username)
-        }
-        if (httpResponse.status.value != 200) {
-            return ""
-        }
-        val user : User = httpResponse.receive()
-        return user.imageUrl
     }
 
     suspend fun getChatList(username: String): ArrayList<String> {
