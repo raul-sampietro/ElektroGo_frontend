@@ -29,7 +29,7 @@ object FrontendController {
     private const val URL_BASE = "http://10.4.41.58:8080/"
 
     //private const val URL_BASE = "http://10.6.11.69:8080/"
-    private const val URL_VEHICLE = "${URL_BASE}vehicle/"
+    private const val URL_VEHICLE = "${URL_BASE}vehicles/"
     private const val URL_USER = "${URL_BASE}user/"
 
     //Add functions you need here :)
@@ -53,8 +53,7 @@ object FrontendController {
         }
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
-        val httpResponse: HttpResponse = client.post("${URL_VEHICLE}create?") {
-            parameter("userNDriver", username)
+        val httpResponse: HttpResponse = client.post("${URL_BASE}drivers/${username}/vehicles") {
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
@@ -65,6 +64,7 @@ object FrontendController {
         } else return httpResponse.status.value
     }
 
+    //TODO POT FALLAR
     @OptIn(InternalAPI::class)
     suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap) {
         val stream = ByteArrayOutputStream()
@@ -72,7 +72,7 @@ object FrontendController {
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
-            url = "${URL_VEHICLE}setImage?numberPlate=$licensePlate",
+            url = "${URL_BASE}vehicles/${licensePlate}/image",
             formData = formData {
                 append("image", image, Headers.build {
                     append(HttpHeaders.ContentType, "image/png")
@@ -83,14 +83,12 @@ object FrontendController {
     }
 
     suspend fun getVehicleList(username: String): ArrayList<Vehicle> {
-        val vehicles: ArrayList<Vehicle> = client.get("${URL_VEHICLE}readVehicles") {
-            parameter("userName", username)
-        }
+        val vehicles: ArrayList<Vehicle> = client.get("${URL_BASE}drivers/${username}/vehicles")
         return vehicles
     }
 
     suspend fun deleteVehicle(username: String, numberPlate: String) {
-        val response: HttpResponse = client.post("${URL_VEHICLE}deleteDriverVehicle") {
+        val response: HttpResponse = client.delete("${URL_BASE}drivers/${username}/vehicles/${numberPlate}") {
             parameter("nPVehicle", username)
             parameter("userDriver", numberPlate)
         }
@@ -352,6 +350,13 @@ object FrontendController {
         else return httpResponse.status.value
     }
 
+    suspend fun getReceivedMessages(user: String): ArrayList<Message> {
+        val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByReceived") {
+            parameter("user", user)
+        }
+        return chats
+    }
+
     suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
         try {
             val httpResponse: HttpResponse = client.get("${URL_BASE}car-poolings/order")
@@ -365,6 +370,16 @@ object FrontendController {
         catch(e: Exception){
             return Pair(504, ArrayList<CarPooling>())
         }
+    }
+
+
+    //SERVEI REVPOLLUTION
+    suspend fun getAirQuality(lat: Double, lon: Double): String {
+        val httpResponse: HttpResponse = client.get("http://10.4.41.56/RevPollution/services/stations/quality?lat=${lat}&lon=${lon}")
+        if (httpResponse.status.value != 200) {
+            return ""
+        }
+        return httpResponse.receive()
     }
 }
 

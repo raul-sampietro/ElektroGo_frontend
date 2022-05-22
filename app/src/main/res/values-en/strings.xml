@@ -149,6 +149,8 @@
     <string name="encara_hi_ha">There are still</string>
     <string name="seients_disponibles">free seats</string>
     <string name="anfitrio">Host:</string>
+    <string name="buttonCancelTrip">Cancel trip</string>
+    <string name="rao_de_cancel_lacio">Reason</string>
 
 
 </resources>

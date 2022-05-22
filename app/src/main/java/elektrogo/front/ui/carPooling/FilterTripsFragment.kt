@@ -110,7 +110,7 @@ class FilterTripsFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private  var viewModel: FilterTripsViewModel = FilterTripsViewModel()
+    private  var viewModel = FilterTripsViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -235,6 +235,11 @@ class FilterTripsFragment : Fragment() {
             i.putExtra("originString", filteredList[position].origin)
             i.putExtra("destinationString", filteredList[position].destination)
             i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+            i.putExtra("destinationLat", filteredList[position].latitudeDestination)
+            i.putExtra("destinationLon", filteredList[position].longitudeDestination)
+            Log.i("coordenadas", filteredList[position].latitudeDestination.toString())
+            Log.i("coordenadas", filteredList[position].longitudeDestination.toString())
+
             startActivity(i)
         })
 

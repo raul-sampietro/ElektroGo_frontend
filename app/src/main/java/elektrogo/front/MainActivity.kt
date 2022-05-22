@@ -6,6 +6,8 @@
 
 package elektrogo.front
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -14,7 +16,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -30,7 +31,6 @@ import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
 import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
-import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
@@ -48,6 +48,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var currentFragment: String
+
+    //configura les notificacions del sistema
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        val name = getString(R.string.channel_name)
+        val descriptionText = getString(R.string.channel_description)
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channelId = "ChatChannel"
+        val channel = NotificationChannel(channelId, name, importance).apply {
+            description = descriptionText
+        }
+        // Register the channel with the system
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
 
     //Configuració dels events clic
     private val mOnNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->

@@ -40,6 +40,7 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
         user.text = v
 
         val imageViewProfile : ImageView = view.findViewById(R.id.userImage)
+        // TODO no se porque se hace muchas veces esta peticion
         val imagePath = viewModel.getUsersProfilePhoto(user.text as String)
         if (imagePath != "null") Picasso.get().load(imagePath).into(imageViewProfile)
 
