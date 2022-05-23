@@ -149,6 +149,10 @@
     <string name="anfitrio">Anfitrió:</string>
     <string name="buttonCancelTrip">Cancel·lar trajecte</string>
     <string name="rao_de_cancel_lacio">Motiu</string>
+    <string name="ok">D\'acord</string>
+    <string name="pregunta_difusio">Escull a qui vols enviar el missatge</string>
+    <string name="cancel">cancel·lar</string>
+    <string name="next">continua</string>
 
 
 </resources>

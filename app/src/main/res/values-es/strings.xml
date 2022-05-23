@@ -150,6 +150,11 @@
     <string name="anfitrio">Anfitrión:</string>
     <string name="buttonCancelTrip">Cancelar trayecto</string>
     <string name="rao_de_cancel_lacio">Motivo</string>
+    <string name="ok">De acuerdo</string>
+    <string name="pregunta_difusio">Selecciona a quien quieras enviar el mensaje</string>
+    <string name="cancel">cancelar</string>
+    <string name="channel_description">Notifications coming from messages received on the chat</string>
+    <string name="next">continuar</string>
 
 
 </resources>

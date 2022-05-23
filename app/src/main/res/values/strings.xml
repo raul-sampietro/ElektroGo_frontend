@@ -148,8 +148,8 @@
     <string name="Oct">Octubre</string>
     <string name="Nov">Novembre</string>
     <string name="Dec">Decembre</string>
-    <string name="channel_name">Chat</string>
-    <string name="channel_description">Notifications coming from messages received on the chat</string>
+    <string name="channel_name" translatable="false">Chat</string>
+    <string name="channel_description" translatable="false">Notifications coming from messages received on the chat</string>
     <string name="ToolbarMapa">Mapa</string>
     <string name="ToolbarRuta">Ruta</string>
     <string name="ToolbarChat">Chat</string>
@@ -168,6 +168,10 @@
     <string name="anfitrio">Anfitrió:</string>
     <string name="buttonCancelTrip">Cancel·lar trajecte</string>
     <string name="rao_de_cancel_lacio">Motiu</string>
+    <string name="cancel">cancelar</string>
+    <string name="ok">D\'acord</string>
+    <string name="pregunta_difusio">Escull a qui vols enviar el missatge</string>
+    <string name="next">next</string>
 
 
 </resources>

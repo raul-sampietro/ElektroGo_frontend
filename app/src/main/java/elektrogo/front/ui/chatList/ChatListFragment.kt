@@ -18,11 +18,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.ui.chatConversation.ChatConversation
 import elektrogo.front.ui.chatConversation.ChatConversationAdapter
+import elektrogo.front.ui.dialog.sendDifuDialog
 
 /**
  * @brief La clase Chat representa la GUI de la pantalla on l'usuari veura el sistema de xat entre usuaris.
@@ -39,11 +42,16 @@ class ChatListFragment() : Fragment() {
     private lateinit var adapter: ChatListAdapter
     private lateinit var thread: Thread
     private var interrupted: Boolean = false
+    private lateinit var difuUsers: ArrayList<String>
 
 
     private fun changeData(newChatList: ArrayList<String>) {
         chatList = newChatList
         adapter.updateData(chatList)
+    }
+
+    fun postUsersDifuList(list: ArrayList<String>) {
+        difuUsers = list
     }
 
     /**
@@ -70,7 +78,7 @@ class ChatListFragment() : Fragment() {
 
         thread = Thread {
             while (true and !interrupted) {
-                Thread.sleep(5000);
+                Thread.sleep(5000)
                 val chatListIncoming = viewModel.getChatList(username)
                 if (chatListIncoming.size != chatList.size) {
                     activity?.runOnUiThread {
@@ -81,13 +89,18 @@ class ChatListFragment() : Fragment() {
         }
         thread.start()
 
-        val searchButton: Button = view.findViewById(R.id.serachChat)
+        val searchButton: FloatingActionButton = view.findViewById(R.id.serachChat)
         searchButton.setOnClickListener {
+
 
         }
 
-        val difuButton: Button = view.findViewById(R.id.sendDifu)
+        val difuButton: FloatingActionButton = view.findViewById(R.id.sendDifu)
         difuButton.setOnClickListener {
+            // first step: Choose the list of users
+            val sendDifuFragment = sendDifuDialog()
+            sendDifuFragment.show(this.parentFragmentManager, "game")
+            //second step: Write the message
 
         }
 
