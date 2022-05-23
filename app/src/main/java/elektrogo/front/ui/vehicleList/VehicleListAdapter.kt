@@ -35,7 +35,8 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         val v = vehicleList[position]
         val imageViewPhoto : ImageView =view.findViewById(R.id.vehicleImage)
         val nPlate = v.numberPlate
-        Picasso.get().load("http://10.4.41.58:8080/vehicles/$nPlate/image").into(imageViewPhoto)
+        // TODO change to server address
+        Picasso.get().load("http://192.168.1.82:8080/vehicles/${nPlate}/image").into(imageViewPhoto)
         numberPlate.text = nPlate
         brand.text = v.brand
         model.text = v.model

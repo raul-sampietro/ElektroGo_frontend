@@ -28,11 +28,11 @@ object FrontendController {
     //private const val URL_BASE_WB = "http://10.4.41.58:8080/"
     //private const val URL_BASE = "http://10.4.41.58:8080"
     // HOME
-    //private const val URL_BASE_WB = "http://192.168.1.83:8080/"
-    //private const val URL_BASE = "http://192.168.1.83:8080"
+    private const val URL_BASE_WB = "http://192.168.1.82:8080/"
+    private const val URL_BASE = "http://192.168.1.82:8080"
     // MOBILE NETWORK
-    private const val URL_BASE_WB = "http://192.168.43.104:8080/"
-    private const val URL_BASE = "http://192.168.43.104:8080"
+    //private const val URL_BASE_WB = "http://192.168.43.104:8080/"
+    //private const val URL_BASE = "http://192.168.43.104:8080"
 
     //Add functions you need here :)
     private val client =
@@ -165,7 +165,7 @@ object FrontendController {
     private const val URL_VEHICLES = "${URL_BASE}/vehicles"
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}drivers/${username}/vehicles") {
+        val httpResponse: HttpResponse = client.post("${URL_VEHICLES}/from/${username}") {
             contentType(ContentType.Application.Json)
             body = vehicleInfo
         }
@@ -184,7 +184,7 @@ object FrontendController {
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
-            url = "${URL_BASE_WB}vehicles/${licensePlate}/image",
+            url = "${URL_VEHICLES}/${licensePlate}/image",
             formData = formData {
                 append("image", image, Headers.build {
                     append(HttpHeaders.ContentType, "image/png")
@@ -195,15 +195,12 @@ object FrontendController {
     }
 
     suspend fun getVehicleList(username: String): ArrayList<Vehicle> {
-        val vehicles: ArrayList<Vehicle> = client.get("${URL_BASE_WB}drivers/${username}/vehicles")
+        val vehicles: ArrayList<Vehicle> = client.get("${URL_VEHICLES}/from/${username}")
         return vehicles
     }
 
-    suspend fun deleteVehicle(username: String, numberPlate: String) {
-        val response: HttpResponse = client.delete("${URL_BASE_WB}drivers/${username}/vehicles/${numberPlate}") {
-            parameter("nPVehicle", username)
-            parameter("userDriver", numberPlate)
-        }
+    suspend fun deleteVehicle(numberPlate: String, username: String) {
+        val response: HttpResponse = client.delete("${URL_VEHICLES}/${numberPlate}/from/${username}")
     }
 
     // #################################################
