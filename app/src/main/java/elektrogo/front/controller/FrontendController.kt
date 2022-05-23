@@ -5,9 +5,7 @@
  */
 package elektrogo.front.controller
 import android.graphics.Bitmap
-import android.util.Log
 import com.google.gson.Gson
-import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.*
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -97,23 +95,6 @@ object FrontendController {
         return user.imageUrl
     }
 
-    /**
-     * @brief Metode que es comunica amb Backend per tal d'obtenir la valoracio mitjana d'un usuari.
-     * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
-     * @return Retorna un Pair<Int,RatingAvg> on el int es el code status i RatingAvg un objecte amb valor del rating i numero de persones que han valorat.
-     */
-    suspend fun getRating(username: String): Pair<Int, RatingAvg?> {
-        val httpResponse: HttpResponse = client.get("${URL_USERS}/${username}/ratings/avg") {
-            contentType(ContentType.Application.Json)
-        }
-        val status: Int = httpResponse.status.value
-        val avgRating: RatingAvg?
-        if (httpResponse.status.value != 200) {
-            avgRating = RatingAvg(-1.0,-1)
-        } else avgRating = httpResponse.receive()
-        return Pair(status, avgRating)
-    }
-
     // #################################################
     // #  RATINGS                                      #
     // #################################################
@@ -130,6 +111,28 @@ object FrontendController {
             contentType(ContentType.Application.Json)
             body = rating
         }
+        return httpResponse.status.value
+    }
+
+    /**
+     * @brief Metode que es comunica amb Backend per tal d'obtenir la valoracio mitjana d'un usuari.
+     * @param username nom d'usuari del usuari per el que volem la valoracio mitjana.
+     * @return Retorna un Pair<Int,RatingAvg> on el int es el code status i RatingAvg un objecte amb valor del rating i numero de persones que han valorat.
+     */
+    suspend fun getRating(username: String): Pair<Int, RatingAvg?> {
+        val httpResponse: HttpResponse = client.get("${URL_RATINGS}/to/${username}/avg") {
+            contentType(ContentType.Application.Json)
+        }
+        val status: Int = httpResponse.status.value
+        val avgRating: RatingAvg?
+        if (httpResponse.status.value != 200) {
+            avgRating = RatingAvg(-1.0,-1)
+        } else avgRating = httpResponse.receive()
+        return Pair(status, avgRating)
+    }
+
+    suspend fun unrateUser(userFrom: String, userTo: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_RATINGS}/from/${userFrom}/to/${userTo}")
         return httpResponse.status.value
     }
 
@@ -240,14 +243,6 @@ object FrontendController {
             waypoints = arrayListOf(statusCode.toDouble())
         } else waypoints = httpResponse.receive()
         return waypoints
-    }
-
-    suspend fun unrateUser(userWhoRates: String, ratedUser: String): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}users/unrate") {
-            parameter("userWhoRates", userWhoRates)
-            parameter("ratedUser", ratedUser)
-        }
-        return httpResponse.status.value
     }
 
     suspend fun saveCarpooling(trip: CarPooling): Int {

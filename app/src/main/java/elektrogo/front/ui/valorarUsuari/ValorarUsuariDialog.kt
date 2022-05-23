@@ -2,7 +2,6 @@ package elektrogo.front.ui.valorarUsuari
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.ViewManager
 import android.widget.Button
