@@ -172,6 +172,14 @@
     <string name="ok">D\'acord</string>
     <string name="pregunta_difusio">Escull a qui vols enviar el missatge</string>
     <string name="next">next</string>
+    <string name="message_to_send">Type the message you want to send</string>
+    <string name="message_sent">messages sent</string>
+    <string name="esborrarXat">"Vols esborrar el xat amb "</string>
+    <string name="si">SI</string>
+    <string name="esborrantXat">Esborrant xat</string>
+    <string name="xatNoEsborrat">Xat no esborrat</string>
+    <string name="no">NO</string>
+    <string name="envia">enviar</string>
 
 
 </resources>

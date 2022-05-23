@@ -156,6 +156,14 @@
     <string name="cancel">cancel</string>
     <string name="channel_description">Notifications coming from messages received on the chat</string>
     <string name="next">next</string>
+    <string name="message_to_send">Type the message you want to send</string>
+    <string name="message_sent">messages sent</string>
+    <string name="esborrarXat">"Do you want to delete the chat with "</string>
+    <string name="si">YES</string>
+    <string name="esborrantXat">Deleting chat</string>
+    <string name="xatNoEsborrat">Chat not deleted</string>
+    <string name="no">NO</string>
+    <string name="envia">send</string>
 
 
 </resources>
