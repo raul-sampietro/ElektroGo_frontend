@@ -163,6 +163,9 @@
     <string name="xatNoEsborrat">Chat no borrado</string>
     <string name="no">NO</string>
     <string name="envia">enviar</string>
+    <string name="buscaUsuari">Buscar a...</string>
+    <string name="confirma">confirmar</string>
+    <string name="errorChatNotFound">Error, conversación no encontrada</string>
 
 
 </resources>

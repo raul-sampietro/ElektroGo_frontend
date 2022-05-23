@@ -24,10 +24,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import elektrogo.front.R
-import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.ui.chatConversation.ChatConversation
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 /**
@@ -47,6 +45,7 @@ class ChatListFragment() : Fragment() {
     private var interrupted: Boolean = false
     private lateinit var builder1: AlertDialog.Builder
     private lateinit var builder2: AlertDialog.Builder
+    private lateinit var builder3: AlertDialog.Builder
     private var message: String = ""
     private var selectedItems = ArrayList<Int>() // Where we track the selected items
     private var correspondingItems = ArrayList<String>()
@@ -95,11 +94,12 @@ class ChatListFragment() : Fragment() {
 
         builder1 = AlertDialog.Builder(this.context)
         builder2 = AlertDialog.Builder(this.context)
+        builder3 = AlertDialog.Builder(this.context)
 
         val searchButton: FloatingActionButton = view.findViewById(R.id.serachChat)
         searchButton.setOnClickListener {
-
-
+            configureBuilder3()
+            builder3.show()
         }
 
         val difuButton: FloatingActionButton = view.findViewById(R.id.sendDifu)
@@ -109,6 +109,33 @@ class ChatListFragment() : Fragment() {
         }
 
         return view
+    }
+
+    private fun configureBuilder3() {
+        builder3.setTitle(R.string.buscaUsuari)
+        val input = EditText(this.context)
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder3.setView(input)
+
+            // Set the action buttons
+            .setPositiveButton(R.string.confirma,
+                DialogInterface.OnClickListener { dialog, id ->
+                    val userB = input.text.toString()
+                    if (chatList.contains(userB)) {
+                        val intent = Intent(this.context, ChatConversation::class.java).apply {
+                            putExtra("userA", username)
+                            putExtra("userB", userB)
+                        }
+                        this.context?.startActivity(intent)
+                    }
+                    else {
+                        Toast.makeText(this.context, R.string.errorChatNotFound, Toast.LENGTH_LONG).show()
+                    }
+                })
+            .setNegativeButton(R.string.cancel,
+                DialogInterface.OnClickListener { dialog, id ->
+                })
     }
 
     private fun configureBuilder2() {
