@@ -225,6 +225,118 @@ object FrontendController {
         return Pair(status, stations)
     }
 
+    // #################################################
+    // #  CAR POOLING                                  #
+    // #################################################
+
+    private const val URL_CAR_POOLING = "${URL_BASE}/car-pooling"
+
+    suspend fun saveCarpooling(trip: CarPooling): Int {
+        val httpResponse: HttpResponse = client.post(URL_CAR_POOLING) {
+            contentType(ContentType.Application.Json)
+            body = trip
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        } else return httpResponse.status.value
+    }
+
+    /**
+     * @brief Metode que es comunica amb FrontendController per tal d'obtenir tots les trajectes pels quals els valors coincideixen amb els parametres passats.
+     * @param originLatitude latitud del origen del trajecte desitjat.
+     * @param originLongitude longitud del origen del trajecte desitjat.
+     * @param destinationLatitude latitud del destí del trajecte desitjat.
+     * @param destinationLongitude longitud del destí del trajecte desitjat.
+     * @param dateIni data d'inici del trajecte
+     * @param startTimeMin hora en la que es vol que com a mínim comenci el trajecte.
+     * @param startTimeMax hora en la que es vol que com a macim comenci el trajecte.
+     * @post Es retorna un llistat de objectes CarPooling que representen els trajectes que coincideixen amb la cerca.
+     * @return Retorna un Pair < Int, Array<CarPooling>> on int es el status code i el array els trajectes resultants.
+     */
+    suspend fun getTrips(
+        originLatitude: Double,
+        originLongitude: Double,
+        destinationLatitude: Double,
+        destinationLongitude: Double,
+        dateIni: String?,
+        startTimeMin: String?,
+        startTimeMax: String?
+    ): Pair<Int, ArrayList<CarPooling>> {
+        try {
+            val httpResponse: HttpResponse = client.get("${URL_CAR_POOLING}/search") {
+                parameter("LatO", originLatitude)
+                parameter("LongO", originLongitude)
+                parameter("LatD", destinationLatitude)
+                parameter("LongD", destinationLongitude)
+                parameter("sDate", dateIni)
+                parameter("sTimeMin", startTimeMin)
+                parameter("sTimeMax", startTimeMax)
+            }
+            val trips: ArrayList<CarPooling>
+            val status: Int = httpResponse.status.value
+            if (httpResponse.status.value != 200) {
+                trips = ArrayList<CarPooling>()
+            } else trips = httpResponse.receive()
+            return Pair(status, trips)
+        }
+        catch(e: Exception){
+            return Pair(504, ArrayList<CarPooling>())
+        }
+    }
+
+    suspend fun getAllTrips(): Pair<Int, ArrayList<CarPooling>> {
+        val httpResponse: HttpResponse = client.get(URL_CAR_POOLING) {
+
+        }
+        val trips: ArrayList<CarPooling>
+        val status: Int = httpResponse.status.value
+        if (httpResponse.status.value != 200) {
+            trips = ArrayList<CarPooling>()
+        } else trips = httpResponse.receive()
+        return Pair(status, trips)
+    }
+
+    suspend fun getTripsByUsername(username: String?): Pair<Int, ArrayList<CarPooling>> {
+        val httpResponse: HttpResponse = client.get("${URL_CAR_POOLING}/from/${username}")
+        val trips: ArrayList<CarPooling>
+        val status: Int = httpResponse.status.value
+        if (httpResponse.status.value != 200) {
+            trips = ArrayList<CarPooling>()
+        } else trips = httpResponse.receive()
+        return Pair(status, trips)
+    }
+
+    suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
+        try {
+            val httpResponse: HttpResponse = client.get(URL_CAR_POOLING) {
+                parameter("order", true)
+            }
+            val trips: ArrayList<CarPooling>
+            val status: Int = httpResponse.status.value
+            if (httpResponse.status.value != 200) {
+                trips = ArrayList<CarPooling>()
+            } else trips = httpResponse.receive()
+            return Pair(status, trips)
+        }
+        catch(e: Exception){
+            return Pair(504, ArrayList<CarPooling>())
+        }
+    }
+
+    // #################################################
+    // #  ROUTES                                       #
+    // #################################################
+
+    private const val URL_ROUTES = "${URL_BASE}/routes"
+
+    // #################################################
+    // #  CHAT                                         #
+    // #################################################
+
+    private const val URL_CHAT = "${URL_BASE}/chat"
+
     //++++++++++++++++++++++
     // TO REVIEW
     //++++++++++++++++++++++
@@ -262,85 +374,6 @@ object FrontendController {
             waypoints = arrayListOf(statusCode.toDouble())
         } else waypoints = httpResponse.receive()
         return waypoints
-    }
-
-    suspend fun saveCarpooling(trip: CarPooling): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}car-pooling/create") {
-            contentType(ContentType.Application.Json)
-            body = trip
-        }
-        if (httpResponse.status.value != 200) {
-            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-            val statusCode = responseJson.status
-            return statusCode
-        } else return httpResponse.status.value
-    }
-
-    /**
-     * @brief Metode que es comunica amb FrontendController per tal d'obtenir tots les trajectes pels quals els valors coincideixen amb els parametres passats.
-     * @param originLatitude latitud del origen del trajecte desitjat.
-     * @param originLongitude longitud del origen del trajecte desitjat.
-     * @param destinationLatitude latitud del destí del trajecte desitjat.
-     * @param destinationLongitude longitud del destí del trajecte desitjat.
-     * @param dateIni data d'inici del trajecte
-     * @param startTimeMin hora en la que es vol que com a mínim comenci el trajecte.
-     * @param startTimeMax hora en la que es vol que com a macim comenci el trajecte.
-     * @post Es retorna un llistat de objectes CarPooling que representen els trajectes que coincideixen amb la cerca.
-     * @return Retorna un Pair < Int, Array<CarPooling>> on int es el status code i el array els trajectes resultants.
-     */
-    suspend fun getTrips(
-        originLatitude: Double,
-        originLongitude: Double,
-        destinationLatitude: Double,
-        destinationLongitude: Double,
-        dateIni: String?,
-        startTimeMin: String?,
-        startTimeMax: String?
-    ): Pair<Int, ArrayList<CarPooling>> {
-        try {
-            val httpResponse: HttpResponse = client.get("${URL_BASE_WB}car-pooling/sel") {
-                parameter("LatO", originLatitude)
-                parameter("LongO", originLongitude)
-                parameter("LatD", destinationLatitude)
-                parameter("LongD", destinationLongitude)
-                parameter("sDate", dateIni)
-                parameter("sTimeMin", startTimeMin)
-                parameter("sTimeMax", startTimeMax)
-            }
-            val trips: ArrayList<CarPooling>
-            val status: Int = httpResponse.status.value
-            if (httpResponse.status.value != 200) {
-                trips = ArrayList<CarPooling>()
-            } else trips = httpResponse.receive()
-            return Pair(status, trips)
-        }
-        catch(e: Exception){
-            return Pair(504, ArrayList<CarPooling>())
-        }
-    }
-
-    suspend fun getAllTrips(): Pair<Int, ArrayList<CarPooling>> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}car-poolings") {
-
-        }
-        val trips: ArrayList<CarPooling>
-        val status: Int = httpResponse.status.value
-        if (httpResponse.status.value != 200) {
-            trips = ArrayList<CarPooling>()
-        } else trips = httpResponse.receive()
-        return Pair(status, trips)
-    }
-
-    suspend fun getTripsByUsername(username: String?): Pair<Int, ArrayList<CarPooling>> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}userTrip/TripByUser") {
-            parameter("username", username)
-        }
-        val trips: ArrayList<CarPooling>
-        val status: Int = httpResponse.status.value
-        if (httpResponse.status.value != 200) {
-            trips = ArrayList<CarPooling>()
-        } else trips = httpResponse.receive()
-        return Pair(status, trips)
     }
 
     suspend fun getChatList(username: String): ArrayList<String> {
@@ -388,21 +421,6 @@ object FrontendController {
             parameter("user", user)
         }
         return chats
-    }
-
-    suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
-        try {
-            val httpResponse: HttpResponse = client.get("${URL_BASE_WB}car-poolings/order")
-            val trips: ArrayList<CarPooling>
-            val status: Int = httpResponse.status.value
-            if (httpResponse.status.value != 200) {
-                trips = ArrayList<CarPooling>()
-            } else trips = httpResponse.receive()
-            return Pair(status, trips)
-        }
-        catch(e: Exception){
-            return Pair(504, ArrayList<CarPooling>())
-        }
     }
 
 
