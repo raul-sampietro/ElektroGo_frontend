@@ -151,6 +151,21 @@
     <string name="rao_de_cancel_lacio">Motiu</string>
     <string name="eliminaValoracio">Elimina</string>
     <string name="comentariValoracio">Escriu un comentari</string>
+    <string name="ok">D\'acord</string>
+    <string name="pregunta_difusio">Escull a qui vols enviar el missatge</string>
+    <string name="cancel">cancel·lar</string>
+    <string name="next">continuar</string>
+    <string name="message_to_send">Escriu el missatge que vols enviar</string>
+    <string name="message_sent">missatges enviats</string>
+    <string name="esborrarXat">"Vols esborrar el xat amb "</string>
+    <string name="si">SI</string>
+    <string name="esborrantXat">Esborrant xat</string>
+    <string name="xatNoEsborrat">Xat no esborrat</string>
+    <string name="no">NO</string>
+    <string name="envia">enviar</string>
+    <string name="buscaUsuari">Buscar a...</string>
+    <string name="confirma">confirmar</string>
+    <string name="errorChatNotFound">Error, conversa no trobada</string>
 
 
 </resources>
