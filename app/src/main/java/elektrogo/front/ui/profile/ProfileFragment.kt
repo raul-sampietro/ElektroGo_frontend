@@ -20,10 +20,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
-import elektrogo.front.languages.Languages
 import elektrogo.front.model.Driver
-import elektrogo.front.ui.carPooling.NewCarPoolingFragment
-import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking
@@ -56,6 +53,11 @@ class ProfileFragment : Fragment() {
         if (!imagePath.equals("null") and !imagePath.equals("")) Picasso.get().load(imagePath)
             .into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
+
+        if (viewModel.getDriver(user)) {
+            val imageVerificat: ImageView = view.findViewById(R.id.verificat)
+            imageVerificat.setImageResource(R.drawable.verificat)
+        }
 
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
@@ -200,7 +202,7 @@ class ProfileFragment : Fragment() {
         val guestprofileButton: Button = view.findViewById(R.id.other_profile)
         guestprofileButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("username", "samragu")
+            bundle.putString("username", "MarcCastells")
 
             val fragmentGuest = GuestProfileFragment()
 
