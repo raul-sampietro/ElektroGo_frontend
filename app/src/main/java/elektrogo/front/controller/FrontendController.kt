@@ -26,10 +26,15 @@ import java.io.ByteArrayOutputStream
  * @brief L'objecte FrontendController es un singleton que conte totes les funcions que fan crides HTTP a Backend.
  */
 object FrontendController {
+    // SERVER
     //private const val URL_BASE_WB = "http://10.4.41.58:8080/"
     //private const val URL_BASE = "http://10.4.41.58:8080"
-    private const val URL_BASE_WB = "http://192.168.1.83:8080/"
-    private const val URL_BASE = "http://192.168.1.83:8080"
+    // HOME
+    //private const val URL_BASE_WB = "http://192.168.1.83:8080/"
+    //private const val URL_BASE = "http://192.168.1.83:8080"
+    // MOBILE NETWORK
+    private const val URL_BASE_WB = "http://192.168.43.104:8080/"
+    private const val URL_BASE = "http://192.168.43.104:8080"
 
     //Add functions you need here :)
     private val client =
@@ -339,14 +344,14 @@ object FrontendController {
     }
 
     suspend fun getChatList(username: String): ArrayList<String> {
-        val chats: ArrayList<String> = client.get("${URL_BASE_WB}chat/findByUser") {
+        val chats: ArrayList<String> = client.get("${URL_BASE_WB}chats/findByUser") {
             parameter("user", username)
         }
         return chats
     }
 
     suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_BASE_WB}chat/findByConversation") {
+        val chats: ArrayList<Message> = client.get("${URL_BASE_WB}chats/findByConversation") {
             parameter("userA", userA)
             parameter("userB", userB)
         }
@@ -354,7 +359,7 @@ object FrontendController {
     }
 
     suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
-        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}chat/sendMessage"){
+        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}chats/sendMessage"){
             parameter("sender", sender)
             parameter("receiver", receiver)
             parameter("message", message)
@@ -367,7 +372,7 @@ object FrontendController {
     }
 
     suspend fun deleteChat(userA: String, userB: String): Int {
-        val httpResponse: HttpResponse = client.delete("${URL_BASE}chat/"){
+        val httpResponse: HttpResponse = client.delete("${URL_BASE}chats/"){
             parameter("userA", userA)
             parameter("userB", userB)
         }
@@ -379,7 +384,7 @@ object FrontendController {
     }
 
     suspend fun getReceivedMessages(user: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_BASE_WB}chat/findByReceived") {
+        val chats: ArrayList<Message> = client.get("${URL_BASE_WB}chats/findByReceived") {
             parameter("user", user)
         }
         return chats
