@@ -143,32 +143,26 @@ object FrontendController {
     private const val URL_REPORTS = "${URL_BASE}/reports"
 
     // #################################################
-    // #  CHARGING STATIONS                            #
+    // #  DRIVERS                                      #
     // #################################################
 
-    private const val URL_CHARGING_STATIONS = "${URL_BASE}/charging-stations"
+    private const val URL_DRIVERS = "${URL_BASE}/drivers"
 
-    /**
-     * @brief Metode que obte totes les ChargingStations emmagatzemades as la BD de Backend.
-     * @pre
-     * @post Si s'ha pogut connectar amb el servidor, totes les ChargingStations de la BD s'han afegit a l'arrayList stations, i es retornen juntament amb l'status de la crida HTTP.
-     */
-    suspend fun getChargingPoints(): Pair<Int, ArrayList<ChargingStation>> {
-        val httpResponse: HttpResponse = client.get(URL_CHARGING_STATIONS)
-        val status: Int = httpResponse.status.value
-
-        val stations: ArrayList<ChargingStation>
-        if (status != 200) stations = ArrayList<ChargingStation>()
-        else stations = httpResponse.receive()
-
-        return Pair(status, stations)
+    suspend fun addDriver(username: String): Int {
+        val httpResponse: HttpResponse = client.post("${URL_DRIVERS}/${username}")
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        }
+        else return httpResponse.status.value
     }
 
-    //++++++++++++++++++++++
-    // TO REVIEW
-    //++++++++++++++++++++++
+    // #################################################
+    // #  VEHICLES                                     #
+    // #################################################
 
-    private const val URL_VEHICLE = "${URL_BASE_WB}vehicles/"
+    private const val URL_VEHICLES = "${URL_BASE}/vehicles"
 
     suspend fun sendVehicleInfo(vehicleInfo: Vehicle, username: String): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE_WB}drivers/${username}/vehicles") {
@@ -211,6 +205,34 @@ object FrontendController {
             parameter("userDriver", numberPlate)
         }
     }
+
+    // #################################################
+    // #  CHARGING STATIONS                            #
+    // #################################################
+
+    private const val URL_CHARGING_STATIONS = "${URL_BASE}/charging-stations"
+
+    /**
+     * @brief Metode que obte totes les ChargingStations emmagatzemades as la BD de Backend.
+     * @pre
+     * @post Si s'ha pogut connectar amb el servidor, totes les ChargingStations de la BD s'han afegit a l'arrayList stations, i es retornen juntament amb l'status de la crida HTTP.
+     */
+    suspend fun getChargingPoints(): Pair<Int, ArrayList<ChargingStation>> {
+        val httpResponse: HttpResponse = client.get(URL_CHARGING_STATIONS)
+        val status: Int = httpResponse.status.value
+
+        val stations: ArrayList<ChargingStation>
+        if (status != 200) stations = ArrayList<ChargingStation>()
+        else stations = httpResponse.receive()
+
+        return Pair(status, stations)
+    }
+
+    //++++++++++++++++++++++
+    // TO REVIEW
+    //++++++++++++++++++++++
+
+    private const val URL_VEHICLE = "${URL_BASE_WB}vehicles/"
 
     /**
      * @brief S'encarrega de fer les crides a FrontendController corresponents per tal d'enviar la informacio d'origen, desti i autonomia per la ruta i rebre els waypoints.
@@ -256,7 +278,6 @@ object FrontendController {
             return statusCode
         } else return httpResponse.status.value
     }
-
 
     /**
      * @brief Metode que es comunica amb FrontendController per tal d'obtenir tots les trajectes pels quals els valors coincideixen amb els parametres passats.
@@ -323,19 +344,6 @@ object FrontendController {
             trips = ArrayList<CarPooling>()
         } else trips = httpResponse.receive()
         return Pair(status, trips)
-    }
-
-    suspend fun addDriver(driver: Driver): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}drivers/create") {
-            contentType(ContentType.Application.Json)
-            body = driver
-        }
-        if (httpResponse.status.value != 200) {
-            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-            val statusCode = responseJson.status
-            return statusCode
-        }
-        else return httpResponse.status.value
     }
 
     suspend fun getChatList(username: String): ArrayList<String> {
