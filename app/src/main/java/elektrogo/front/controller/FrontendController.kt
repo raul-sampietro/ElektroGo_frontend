@@ -150,9 +150,17 @@ object FrontendController {
      * @post Si s'ha pogut connectar amb el servidor, retorna l'status de la crida HTTP.
      */
     suspend fun rateUser(rating: Rating): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}users/rate") { //confirmar que ha de ser post
+        val httpResponse: HttpResponse = client.post("${URL_BASE}users/rate") {
             contentType(ContentType.Application.Json)
             body = rating
+        }
+        return httpResponse.status.value
+    }
+
+    suspend fun unrateUser(userWhoRates: String, ratedUser: String): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}users/unrate") {
+            parameter("userWhoRates", userWhoRates)
+            parameter("ratedUser", ratedUser)
         }
         return httpResponse.status.value
     }
@@ -339,6 +347,18 @@ object FrontendController {
         else return httpResponse.status.value
     }
 
+    suspend fun deleteChat(userA: String, userB: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_BASE}chat/"){
+            parameter("userA", userA)
+            parameter("userB", userB)
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            return responseJson.status
+        }
+        else return httpResponse.status.value
+    }
+
     suspend fun getReceivedMessages(user: String): ArrayList<Message> {
         val chats: ArrayList<Message> = client.get("${URL_BASE}chat/findByReceived") {
             parameter("user", user)
@@ -361,11 +381,20 @@ object FrontendController {
         }
     }
 
+
     suspend fun  getDriver(username: String): Boolean {
         val httpResponse: HttpResponse = client.get("${URL_BASE}driver") {
             parameter("userName", username)
         }
         return httpResponse.status.value == 200
+
+    //SERVEI REVPOLLUTION
+    suspend fun getAirQuality(lat: Double, lon: Double): String {
+        val httpResponse: HttpResponse = client.get("http://10.4.41.56/RevPollution/services/stations/quality?lat=${lat}&lon=${lon}")
+        if (httpResponse.status.value != 200) {
+            return ""
+        }
+        return httpResponse.receive()
     }
 }
 

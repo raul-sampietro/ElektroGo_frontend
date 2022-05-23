@@ -11,18 +11,13 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
@@ -36,7 +31,6 @@ import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
 import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
-import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
@@ -165,6 +159,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         else if (intent.getStringExtra("origin").equals("ProfileFragment")) {
             bottomNavigation.selectedItemId = R.id.perfil
             currentFragment = "ProfileFragment"
+        }
+
+        //Iniciem el service que envia notificacions per al xat
+        createNotificationChannel()
+        Intent(this, ChatService::class.java).also { intent ->
+            startService(intent)
         }
     }
 

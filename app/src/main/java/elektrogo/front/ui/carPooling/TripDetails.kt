@@ -6,7 +6,6 @@
  */
 package elektrogo.front.ui.carPooling
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +20,6 @@ import android.widget.*
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
-import elektrogo.front.ui.CarPooling.CancelTripDialog
 import java.text.SimpleDateFormat
 
 
@@ -60,6 +58,8 @@ class TripDetails : AppCompatActivity() {
         val originString = intent.getStringExtra("originString")
         val destinationString= intent.getStringExtra("destinationString")
         val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
+        val latDest = intent.getDoubleExtra("destinationLat", 1.0)
+        val lonDest = intent.getDoubleExtra("destinationLon", 1.0)
 
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
@@ -69,6 +69,15 @@ class TripDetails : AppCompatActivity() {
         val detailsText : TextView = this.findViewById(R.id.detailsInfo)
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
+        val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
+
+        //TODO: Crida amb el servei de RevPollution
+        val qualityAir: String = viewModel.getAirQuality(latDest, lonDest)
+        if (qualityAir == "Bad") qaImage.setImageResource(R.drawable.airbad)
+        else if (qualityAir == "Mid") qaImage.setImageResource(R.drawable.airmid)
+        else if (qualityAir == "Good") qaImage.setImageResource(R.drawable.airgood)
+        else qaImage.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
+
 
         usernameText.text = username
         var dateTmp = startDate
@@ -122,35 +131,6 @@ class TripDetails : AppCompatActivity() {
         if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
-                /*val alertDialog: AlertDialog? = this.let {
-                    val builder = AlertDialog.Builder(it)
-                    builder.apply {
-
-                        val inflater = layoutInflater
-
-                        // Inflate and set the layout for the dialog
-                        // Pass null as the parent view because its going in the dialog layout
-                        setView(inflater.inflate(R.layout.valorar_usuari_fragment, null))
-
-                        setTitle("Confirmació")
-
-                        setMessage("Segur que vols cancel·lar aquest trajecte?")
-
-                        setPositiveButton("SÍ",
-                            DialogInterface.OnClickListener { dialog, id ->
-
-
-
-                                finish()
-                                Toast.makeText(context, "Trajecte cancel·lat", Toast.LENGTH_LONG).show()
-                            })
-                        setNegativeButton("NO",
-                            DialogInterface.OnClickListener { dialog, id -> })
-                    }
-                    // Crea el dialeg
-                    builder.create()
-                }
-                alertDialog!!.show()*/
                 val confirmDialog = CancelTripDialog()
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
