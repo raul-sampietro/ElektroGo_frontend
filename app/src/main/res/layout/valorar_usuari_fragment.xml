@@ -5,8 +5,7 @@
     android:id="@+id/EstrellesValorar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    tools:context=".ui.valorarUsuari.ValorarUsuariFragment">
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
