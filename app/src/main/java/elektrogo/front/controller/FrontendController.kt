@@ -331,18 +331,6 @@ object FrontendController {
 
     private const val URL_ROUTES = "${URL_BASE}/routes"
 
-    // #################################################
-    // #  CHAT                                         #
-    // #################################################
-
-    private const val URL_CHAT = "${URL_BASE}/chat"
-
-    //++++++++++++++++++++++
-    // TO REVIEW
-    //++++++++++++++++++++++
-
-    private const val URL_VEHICLE = "${URL_BASE_WB}vehicles/"
-
     /**
      * @brief S'encarrega de fer les crides a FrontendController corresponents per tal d'enviar la informacio d'origen, desti i autonomia per la ruta i rebre els waypoints.
      * @param latitudeDestination latitud  del lloc de desti.
@@ -361,10 +349,10 @@ object FrontendController {
         drivingRange: Int
     ): ArrayList<Double> {
         val httpResponse: HttpResponse = client.get("${URL_BASE_WB}route/calculate") {
-            parameter("oriLat", latitudeOrigin)
-            parameter("oriLon", longitudeOrigin)
-            parameter("destLat", latitudeDestination)
-            parameter("destLon", longitudeDestination)
+            parameter("latO", latitudeOrigin)
+            parameter("longO", longitudeOrigin)
+            parameter("latD", latitudeDestination)
+            parameter("longD", longitudeDestination)
             parameter("range", drivingRange)
         }
         val waypoints: ArrayList<Double>
@@ -375,6 +363,18 @@ object FrontendController {
         } else waypoints = httpResponse.receive()
         return waypoints
     }
+
+    // #################################################
+    // #  CHAT                                         #
+    // #################################################
+
+    private const val URL_CHAT = "${URL_BASE}/chat"
+
+    //++++++++++++++++++++++
+    // TO REVIEW
+    //++++++++++++++++++++++
+
+    private const val URL_VEHICLE = "${URL_BASE_WB}vehicles/"
 
     suspend fun getChatList(username: String): ArrayList<String> {
         val chats: ArrayList<String> = client.get("${URL_BASE_WB}chats/findByUser") {
