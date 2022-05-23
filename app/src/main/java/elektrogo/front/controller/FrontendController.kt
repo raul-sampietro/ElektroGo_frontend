@@ -20,6 +20,7 @@ import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.*
+import kotlinx.coroutines.isActive
 import java.io.ByteArrayOutputStream
 
 /**
@@ -380,6 +381,12 @@ object FrontendController {
         }
     }
 
+
+    suspend fun  getDriver(username: String): Boolean {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}driver") {
+            parameter("userName", username)
+        }
+        return httpResponse.status.value == 200
 
     //SERVEI REVPOLLUTION
     suspend fun getAirQuality(lat: Double, lon: Double): String {

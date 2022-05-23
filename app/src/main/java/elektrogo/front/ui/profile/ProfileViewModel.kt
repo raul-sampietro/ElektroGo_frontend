@@ -13,5 +13,7 @@ class ProfileViewModel : ViewModel() {
     fun getUsersProfilePhoto(username: String): String = runBlocking {
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
-    // TODO: Implement the ViewModel
+    fun getDriver(username: String) = runBlocking {
+        return@runBlocking FrontendController.getDriver(username)
+    }
 }
