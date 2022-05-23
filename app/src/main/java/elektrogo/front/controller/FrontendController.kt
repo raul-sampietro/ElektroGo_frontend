@@ -365,36 +365,23 @@ object FrontendController {
     }
 
     // #################################################
-    // #  CHAT                                         #
+    // #  CHATS                                        #
     // #################################################
 
-    private const val URL_CHAT = "${URL_BASE}/chat"
-
-    //++++++++++++++++++++++
-    // TO REVIEW
-    //++++++++++++++++++++++
-
-    private const val URL_VEHICLE = "${URL_BASE_WB}vehicles/"
+    private const val URL_CHATS = "${URL_BASE}/chat"
 
     suspend fun getChatList(username: String): ArrayList<String> {
-        val chats: ArrayList<String> = client.get("${URL_BASE_WB}chats/findByUser") {
-            parameter("user", username)
-        }
+        val chats: ArrayList<String> = client.get("${URL_CHATS}/${username}")
         return chats
     }
 
     suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_BASE_WB}chats/findByConversation") {
-            parameter("userA", userA)
-            parameter("userB", userB)
-        }
+        val chats: ArrayList<Message> = client.get("${URL_CHATS}/messages/${userA}/${userB}")
         return chats
     }
 
     suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
-        val httpResponse: HttpResponse = client.post("${URL_BASE_WB}chats/sendMessage"){
-            parameter("sender", sender)
-            parameter("receiver", receiver)
+        val httpResponse: HttpResponse = client.post("$${URL_CHATS}/messages/${sender}/${receiver}"){
             parameter("message", message)
         }
         if (httpResponse.status.value != 200) {
@@ -423,8 +410,10 @@ object FrontendController {
         return chats
     }
 
+    // #################################################
+    // #  REVPOLLUTION SERVICE                         #
+    // #################################################
 
-    //SERVEI REVPOLLUTION
     suspend fun getAirQuality(lat: Double, lon: Double): String {
         val httpResponse: HttpResponse = client.get("http://10.4.41.56/RevPollution/services/stations/quality?lat=${lat}&lon=${lon}")
         if (httpResponse.status.value != 200) {
