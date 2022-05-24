@@ -153,6 +153,25 @@
     <string name="rao_de_cancel_lacio">Reason</string>
     <string name="eliminaValoracio">Delete</string>
     <string name="comentariValoracio">Escribe un comentario</string>
+    <string name="ok">ok</string>
+    <string name="pregunta_difusio">Select who you want to send the message to</string>
+    <string name="cancel">cancel</string>
+    <string name="channel_description">Notifications coming from messages received on the chat</string>
+    <string name="next">next</string>
+    <string name="message_to_send">Type the message you want to send</string>
+    <string name="message_sent">messages sent</string>
+    <string name="esborrarXat">"Do you want to delete the chat with "</string>
+    <string name="si">YES</string>
+    <string name="esborrantXat">Deleting chat</string>
+    <string name="xatNoEsborrat">Chat not deleted</string>
+    <string name="no">NO</string>
+    <string name="envia">send</string>
+    <string name="buscaUsuari">Find...</string>
+    <string name="confirma">confirm</string>
+    <string name="errorChatNotFound">Error: chat conversation not found</string>
+    <string name="TripsNavMenu">My trips</string>
+    <string name="vehiclesMenu">My vehicles</string>
+    <string name="perfil">Profile</string>
 
 
 </resources>

@@ -21,8 +21,6 @@ import elektrogo.front.ui.preferences.PreferencesActivity
 class TripsActivity : AppCompatActivity() {
 
     lateinit var Preference: Preference
-    private lateinit var drawer: DrawerLayout
-    private lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var fragToLoad : String
 
@@ -41,11 +39,6 @@ class TripsActivity : AppCompatActivity() {
             toolbar2  = findViewById(R.id.toolbar_main)
             toolbar2.title = getString(R.string.MyTrips)
             setSupportActionBar(toolbar2)
-            drawer = findViewById(R.id.tripsAct)
-            toggle = ActionBarDrawerToggle(this, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-            drawer.addDrawerListener(toggle)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setHomeButtonEnabled(true)
         }
     }
 
@@ -55,33 +48,7 @@ class TripsActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-     fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_item_one -> {
-                var i : Intent = Intent(this, PreferencesActivity::class.java)
-                startActivity(i)
-            }
 
-        }
-        drawer.closeDrawer(GravityCompat.START)
-        return true
-    }
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        if (fragToLoad != "NewCarPoolingFragment") toggle.syncState()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        if (fragToLoad != "NewCarPoolingFragment") toggle.onConfigurationChanged(newConfig)
-    }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (fragToLoad != "NewCarPoolingFragment") {
-            var inflater: MenuInflater = menuInflater
-            inflater.inflate(R.menu.menubar, menu)
-        }
-        return true
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

@@ -95,6 +95,14 @@ object FrontendController {
         return user.imageUrl
     }
 
+    suspend fun deleteUser(username: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_USERS}/${username}")
+        return if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            responseJson.status
+        } else httpResponse.status.value
+    }
+
     // #################################################
     // #  RATINGS                                      #
     // #################################################
@@ -156,6 +164,11 @@ object FrontendController {
             return statusCode
         }
         else return httpResponse.status.value
+    }
+
+    suspend fun  getDriver(username: String): Boolean {
+        val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
+        return httpResponse.status.value == 200
     }
 
     // #################################################

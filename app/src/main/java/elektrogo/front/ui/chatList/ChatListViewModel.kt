@@ -11,4 +11,8 @@ class ChatListViewModel : ViewModel() {
         return@runBlocking FrontendController.getChatList(username)
     }
 
+    fun sendMessage(sender: String, receiver: String, message: String) = runBlocking {
+        return@runBlocking FrontendController.sendMessage(sender, receiver, message)
+    }
+
 }

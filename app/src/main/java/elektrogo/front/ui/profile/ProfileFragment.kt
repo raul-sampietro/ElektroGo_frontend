@@ -54,6 +54,11 @@ class ProfileFragment : Fragment() {
             .into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
 
+        if (viewModel.getDriver(user)) {
+            val imageVerificat: ImageView = view.findViewById(R.id.verificat)
+            imageVerificat.setImageResource(R.drawable.verificat)
+        }
+
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG)
@@ -196,7 +201,7 @@ class ProfileFragment : Fragment() {
         val guestprofileButton: Button = view.findViewById(R.id.other_profile)
         guestprofileButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("username", "samragu")
+            bundle.putString("username", "MarcCastells")
 
             val fragmentGuest = GuestProfileFragment()
 

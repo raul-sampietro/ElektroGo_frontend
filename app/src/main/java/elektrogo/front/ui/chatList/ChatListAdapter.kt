@@ -40,7 +40,6 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
         user.text = v
 
         val imageViewProfile : ImageView = view.findViewById(R.id.userImage)
-        // TODO no se porque se hace muchas veces esta peticion
         val imagePath = viewModel.getUsersProfilePhoto(user.text as String)
         if (imagePath != "null") Picasso.get().load(imagePath).into(imageViewProfile)
 
@@ -48,19 +47,19 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
         deleteButton.setOnClickListener {
             val alertDialog: AlertDialog? = parent.context.let {
                 val builder = AlertDialog.Builder(it)
-                // TODO 3 hardcoded strings
-                builder.setMessage("Vols esborrar el xat amb ${user.text}?")
+                val message1: String = R.string.esborrarXat.toString().plus("${user.text}?")
+                builder.setMessage(message1)
                 builder.apply {
-                    setPositiveButton("SI",
+                    setPositiveButton(R.string.si,
                         DialogInterface.OnClickListener { dialog, id ->
-                            Toast.makeText(parent.context, "Esborrant xat", Toast.LENGTH_LONG).show()
+                            Toast.makeText(parent.context, R.string.esborrantXat, Toast.LENGTH_LONG).show()
                             val currentUser = SessionController.getUsername(context)
                             viewModel.deleteChat(currentUser, v)
                             notifyDataSetChanged()
                         })
-                    setNegativeButton("NO",
+                    setNegativeButton(R.string.no,
                         DialogInterface.OnClickListener { dialog, id ->
-                            Toast.makeText(parent.context, "El xat no s'ha esborrat", Toast.LENGTH_LONG).show()
+                            Toast.makeText(parent.context, R.string.xatNoEsborrat, Toast.LENGTH_LONG).show()
                         })
                 }
                 // Create the AlertDialog
