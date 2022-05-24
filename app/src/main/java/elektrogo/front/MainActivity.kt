@@ -41,10 +41,13 @@ import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
 import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
+import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
 import elektrogo.front.ui.preferences.PreferencesActivity
+import elektrogo.front.ui.profile.ProfileActivity
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 import org.w3c.dom.Text
 
 /**
@@ -110,13 +113,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 openFragment(chatFragment)
                 return@OnItemSelectedListener true
             }
-            R.id.perfil -> {
-                toolbar2.title = getString(R.string.ToolbarPerfil)
-                val perfilFragment = ProfileFragment()
-                currentFragment= "ProfileFragment"
-                openFragment(perfilFragment)
-                return@OnItemSelectedListener true
-            }
         }
         false
     }
@@ -156,10 +152,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             bottomNavigation.selectedItemId = R.id.mapa
             currentFragment = "MapsFragment"
         }
-        else if (intent.getStringExtra("origin").equals("vehicleList")) {
-            bottomNavigation.selectedItemId = R.id.perfil
-            currentFragment="ProfileFragment"
-        }
         else if (intent.getStringExtra("origin").equals("MapsFragment")) {
             bottomNavigation.selectedItemId = R.id.mapa
             currentFragment = "MapsFragment"
@@ -176,10 +168,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             bottomNavigation.selectedItemId = R.id.chat
             currentFragment = "ChatListFragment"
         }
-        else if (intent.getStringExtra("origin").equals("ProfileFragment")) {
-            bottomNavigation.selectedItemId = R.id.perfil
-            currentFragment = "ProfileFragment"
-        }
+
 
         //Iniciem el service que envia notificacions per al xat
         createNotificationChannel()
@@ -192,7 +181,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_item_one -> {
-                var i : Intent = Intent(this, PreferencesActivity::class.java)
+                var i  = Intent(this, ProfileActivity::class.java)
                 startActivity(i)
             }
             R.id.nav_item_two -> {
@@ -200,7 +189,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
             R.id.nav_item_three -> {
-
+                val intent = Intent(this, VehicleListActivity::class.java)
+                startActivity(intent)
             }
 
         }
