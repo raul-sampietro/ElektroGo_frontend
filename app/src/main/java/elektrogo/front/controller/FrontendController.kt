@@ -387,6 +387,7 @@ object FrontendController {
             parameter("userName", username)
         }
         return httpResponse.status.value == 200
+    }
 
     //SERVEI REVPOLLUTION
     suspend fun getAirQuality(lat: Double, lon: Double): String {
@@ -395,6 +396,14 @@ object FrontendController {
             return ""
         }
         return httpResponse.receive()
+    }
+
+    suspend fun getBlocks(username: String): ArrayList<Block> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}users/" + username + "/blocks/recieved")
+        if (httpResponse.status.value != 200) {
+            return ArrayList()
+        }
+        else return httpResponse.receive()
     }
 }
 

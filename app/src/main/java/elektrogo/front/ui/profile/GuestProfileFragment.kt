@@ -1,5 +1,6 @@
 package elektrogo.front.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.model.Block
 import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
@@ -35,6 +37,7 @@ class GuestProfileFragment : Fragment() {
     private var viewModel: ProfileViewModel = ProfileViewModel()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,6 +60,21 @@ class GuestProfileFragment : Fragment() {
             val imageVerificat: ImageView = view.findViewById(R.id.verificat)
             imageVerificat.setImageResource(R.drawable.verificat)
         }
+
+        val blockedList : ArrayList<Block>? = username?.let { viewModel.getBlocks(it) }
+        val textblock : TextView = view.findViewById(R.id.block)
+
+        if (blockedList != null) {
+            var blocked = false
+            for (block in blockedList) {
+                if (block.blockUser == SessionController.getUsername(requireActivity())) {
+                    blocked = true
+                }
+            }
+            if (blocked) textblock.text = "Estic bloquejat"
+            else textblock.text = "No estic bloquejat"
+        }
+        else textblock.text = "Hi ha hagut un error"
 
 
         val ratingPair = username?.let { viewModel.getRating(it) }

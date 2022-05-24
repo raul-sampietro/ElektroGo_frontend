@@ -135,6 +135,14 @@
             android:layout_gravity="center_horizontal"
             android:text="Denunciar" />
 
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
     </LinearLayout>
 
 
