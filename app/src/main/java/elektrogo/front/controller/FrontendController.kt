@@ -323,10 +323,11 @@ object FrontendController {
         return Pair(status, trips)
     }
 
-    suspend fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> {
+    suspend fun askForTripsDefault(username: String): Pair<Int, ArrayList<CarPooling>> {
         try {
             val httpResponse: HttpResponse = client.get(URL_CAR_POOLING) {
                 parameter("order", true)
+                parameter("username", username)
             }
             val trips: ArrayList<CarPooling>
             val status: Int = httpResponse.status.value

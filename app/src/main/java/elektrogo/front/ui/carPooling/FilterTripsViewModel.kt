@@ -52,8 +52,8 @@ class FilterTripsViewModel : ViewModel() {
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
 
-    fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> = runBlocking {
-        return@runBlocking FrontendController.askForTripsDefault()
+    fun askForTripsDefault(username: String): Pair<Int, ArrayList<CarPooling>> = runBlocking {
+        return@runBlocking FrontendController.askForTripsDefault(username)
     }
 
 }
