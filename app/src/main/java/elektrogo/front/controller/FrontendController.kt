@@ -36,7 +36,7 @@ object FrontendController {
 
     //Add functions you need here :)
     private val client =
-        HttpClient(Android) {   //Exemple de com fer una crida amb el nostre servidor!
+        HttpClient(Android) {
             expectSuccess = false
             engine {
                 connectTimeout = 10_000
@@ -275,7 +275,8 @@ object FrontendController {
         destinationLongitude: Double,
         dateIni: String?,
         startTimeMin: String?,
-        startTimeMax: String?
+        startTimeMax: String?,
+        username: String
     ): Pair<Int, ArrayList<CarPooling>> {
         try {
             val httpResponse: HttpResponse = client.get("${URL_CAR_POOLING}/search") {
@@ -286,6 +287,7 @@ object FrontendController {
                 parameter("sDate", dateIni)
                 parameter("sTimeMin", startTimeMin)
                 parameter("sTimeMax", startTimeMax)
+                parameter("username", username)
             }
             val trips: ArrayList<CarPooling>
             val status: Int = httpResponse.status.value

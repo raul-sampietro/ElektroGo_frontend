@@ -31,6 +31,7 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import java.time.LocalDate
 import java.time.LocalTime
@@ -177,7 +178,7 @@ class FilterTripsFragment : Fragment() {
             if (validate()) {
                 //mostro els trajectes resultants de la busqueda
                try{
-                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected, SessionController.getUsername(requireContext()))
                    if (result.first != 200) {
                        Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
                    }
