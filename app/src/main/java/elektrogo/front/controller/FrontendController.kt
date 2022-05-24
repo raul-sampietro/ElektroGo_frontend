@@ -368,7 +368,7 @@ object FrontendController {
     // #  CHATS                                        #
     // #################################################
 
-    private const val URL_CHATS = "${URL_BASE}/chat"
+    private const val URL_CHATS = "${URL_BASE}/chats"
 
     suspend fun getChatList(username: String): ArrayList<String> {
         val chats: ArrayList<String> = client.get("${URL_CHATS}/${username}")
