@@ -5,9 +5,7 @@
  */
 package elektrogo.front.controller
 import android.graphics.Bitmap
-import android.util.Log
 import com.google.gson.Gson
-import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.*
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -20,7 +18,6 @@ import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.*
-import kotlinx.coroutines.isActive
 import java.io.ByteArrayOutputStream
 
 /**
@@ -396,6 +393,16 @@ object FrontendController {
             return ""
         }
         return httpResponse.receive()
+    }
+
+    suspend fun deleteUser(username: String): Int {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}users/delete") {
+            parameter("username", username)
+        }
+        return if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            responseJson.status
+        } else httpResponse.status.value
     }
 }
 

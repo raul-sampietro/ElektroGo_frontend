@@ -11,11 +11,18 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.media.Image
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -26,6 +33,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
+import elektrogo.front.controller.session.Session
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
@@ -35,6 +45,7 @@ import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
 import elektrogo.front.ui.preferences.PreferencesActivity
+import org.w3c.dom.Text
 
 /**
  * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
@@ -48,6 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var currentFragment: String
+    lateinit var navigationView: NavigationView
 
     //configura les notificacions del sistema
     private fun createNotificationChannel() {
@@ -125,6 +137,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeButtonEnabled(true)
 
         val navigationView : NavigationView = findViewById(R.id.nav_view)
+        val header : View = navigationView.getHeaderView(0)
+        val profileImage : ImageView = header.findViewById(R.id.profile_imageNav)
+        val usernameText : TextView = header.findViewById(R.id.usernameNav)
+        if (SessionController.getImageUrl(this)!="null") {
+            Picasso.get().load(SessionController.getImageUrl(this)).into(profileImage)
+        }
+        else profileImage.setImageResource(R.drawable.avatar)
+        usernameText.text= SessionController.getUsername(this)
         navigationView.setNavigationItemSelectedListener(this)
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
@@ -166,6 +186,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         Intent(this, ChatService::class.java).also { intent ->
             startService(intent)
         }
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -173,6 +194,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_item_one -> {
                 var i : Intent = Intent(this, PreferencesActivity::class.java)
                 startActivity(i)
+            }
+            R.id.nav_item_two -> {
+                val intent = Intent(this, TripsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_three -> {
+
             }
 
         }

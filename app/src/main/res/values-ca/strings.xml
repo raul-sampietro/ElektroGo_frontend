@@ -166,6 +166,9 @@
     <string name="buscaUsuari">Buscar a...</string>
     <string name="confirma">confirmar</string>
     <string name="errorChatNotFound">Error, conversa no trobada</string>
+    <string name="TripsNavMenu">Els meus trajectes</string>
+    <string name="vehiclesMenu">Els meus vehicles</string>
+    <string name="perfil">Perfil</string>
 
 
 </resources>
