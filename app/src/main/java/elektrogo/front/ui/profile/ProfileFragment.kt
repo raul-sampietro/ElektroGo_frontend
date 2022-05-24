@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -19,9 +20,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
-import elektrogo.front.languages.Languages
 import elektrogo.front.model.Driver
-import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking
@@ -49,14 +48,21 @@ class ProfileFragment : Fragment() {
         username.text = SessionController.getUsername(requireActivity())
 
         val user = SessionController.getUsername(requireActivity());
-        val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
+        val imageViewProfile: ImageView = view.findViewById(R.id.profile_image)
         val imagePath = viewModel.getUsersProfilePhoto(user)
-        if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
+        if (!imagePath.equals("null") and !imagePath.equals("")) Picasso.get().load(imagePath)
+            .into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
+
+        if (viewModel.getDriver(user)) {
+            val imageVerificat: ImageView = view.findViewById(R.id.verificat)
+            imageVerificat.setImageResource(R.drawable.verificat)
+        }
 
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
-            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG)
+                .show()
         } else {
             val star1: ImageView = view.findViewById(R.id.estrella1)
             val star2: ImageView = view.findViewById(R.id.estrella2)
@@ -64,7 +70,7 @@ class ProfileFragment : Fragment() {
             val star4: ImageView = view.findViewById(R.id.estrella4)
             val star5: ImageView = view.findViewById(R.id.estrella5)
 
-            var rating = ratingPair.second!!.ratingValue/2
+            var rating = ratingPair.second!!.ratingValue / 2
             var decimalValue = rating - rating.toInt()
             var enterValue = rating.toInt()
 
@@ -145,6 +151,17 @@ class ProfileFragment : Fragment() {
             }
         }
 
+        val buttonCars: Button = view.findViewById(R.id.AddVehicleButton)
+        buttonCars.setOnClickListener {
+            val intent = Intent(container?.context, VehicleListActivity::class.java)
+            startActivity(intent)
+        }
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         val userCompleteName: TextView = view.findViewById(R.id.completeName)
         userCompleteName.text = SessionController.getName(requireActivity());
 
@@ -160,19 +177,6 @@ class ProfileFragment : Fragment() {
             val httpStatus: Int = addDriver(new)
             Toast.makeText(requireContext(), httpStatus.toString(), Toast.LENGTH_SHORT).show()
         }
-
-        val buttonCars: Button = view.findViewById(R.id.AddVehicleButton)
-        buttonCars.setOnClickListener {
-            val intent = Intent(container?.context, VehicleListActivity::class.java)
-            startActivity(intent)
-        }
-
-        val buttonTrips: Button = view.findViewById(R.id.profile_MyTrips)
-        buttonTrips.setOnClickListener {
-            val intent = Intent(container?.context, TripsActivity::class.java)
-            startActivity(intent)
-        }
-
         // Logout button
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -195,7 +199,20 @@ class ProfileFragment : Fragment() {
 
         }
 
-        return view
+        val guestprofileButton: Button = view.findViewById(R.id.other_profile)
+        guestprofileButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("username", "MarcCastells")
+
+            val fragmentGuest = GuestProfileFragment()
+
+            fragmentGuest.arguments = bundle
+
+            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.main_container, fragmentGuest)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
 

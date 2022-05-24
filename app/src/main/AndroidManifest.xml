@@ -32,7 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.chatConversation.ChatConversation"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
 
         <activity
             android:name=".ui.carPooling.TripDetails"
@@ -40,11 +41,6 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -76,6 +72,17 @@
             android:label="@string/app_name" />
 
         <activity
+            android:name=".ui.SplashScreenActivity"
+            android:theme="@style/SplashTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        view raw
+
+        <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
@@ -92,6 +99,9 @@
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
+
+        <service android:enabled="true" android:name=".ChatService" />
+
     </application>
 
 </manifest>

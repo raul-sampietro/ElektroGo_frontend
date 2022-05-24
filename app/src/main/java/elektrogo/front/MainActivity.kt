@@ -6,6 +6,8 @@
 
 package elektrogo.front
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -39,7 +41,6 @@ import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
 import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
-import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
@@ -60,6 +61,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var currentFragment: String
     lateinit var navigationView: NavigationView
 
+    //configura les notificacions del sistema
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        val name = getString(R.string.channel_name)
+        val descriptionText = getString(R.string.channel_description)
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channelId = "ChatChannel"
+        val channel = NotificationChannel(channelId, name, importance).apply {
+            description = descriptionText
+        }
+        // Register the channel with the system
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
 
     //Configuració dels events clic
     private val mOnNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
@@ -103,7 +120,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         false
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         context = this
@@ -165,6 +181,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             currentFragment = "ProfileFragment"
         }
 
+        //Iniciem el service que envia notificacions per al xat
+        createNotificationChannel()
+        Intent(this, ChatService::class.java).also { intent ->
+            startService(intent)
+        }
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -195,6 +217,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onConfigurationChanged(newConfig)
         toggle.onConfigurationChanged(newConfig)
     }
+
     /**
      * @brief Metode per obrir un fragment.
      * @param fragment Fragment que es vol obrir.

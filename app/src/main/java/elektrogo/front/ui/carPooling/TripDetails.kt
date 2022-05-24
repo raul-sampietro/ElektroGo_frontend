@@ -8,16 +8,20 @@ package elektrogo.front.ui.carPooling
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import android.view.ViewManager
+import android.widget.*
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import java.text.SimpleDateFormat
+
 
 /**
  * @brief La clase tripDetails es l'activity on es mostra els detalls del trajecte seleccionat.
@@ -44,7 +48,7 @@ class TripDetails : AppCompatActivity() {
         toolbar2.title= getString(R.string.detailsLabel)
         setSupportActionBar(toolbar2)
 
-        val username = intent.getStringExtra("username")
+        val username= intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
         var startTime = intent.getStringExtra("startTime")
         val offeredSeats = intent.getIntExtra("offeredSeats", 1)
@@ -54,6 +58,8 @@ class TripDetails : AppCompatActivity() {
         val originString = intent.getStringExtra("originString")
         val destinationString= intent.getStringExtra("destinationString")
         val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
+        val latDest = intent.getDoubleExtra("destinationLat", 1.0)
+        val lonDest = intent.getDoubleExtra("destinationLon", 1.0)
 
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
@@ -63,6 +69,14 @@ class TripDetails : AppCompatActivity() {
         val detailsText : TextView = this.findViewById(R.id.detailsInfo)
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
+        val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
+
+        //TODO: Crida amb el servei de RevPollution
+        val qualityAir: String = viewModel.getAirQuality(latDest, lonDest)
+        if (qualityAir == "Bad") qaImage.setImageResource(R.drawable.airbad)
+        else if (qualityAir == "Mid") qaImage.setImageResource(R.drawable.airmid)
+        else if (qualityAir == "Good") qaImage.setImageResource(R.drawable.airgood)
+        else qaImage.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
 
 
         usernameText.text = username
@@ -84,22 +98,26 @@ class TripDetails : AppCompatActivity() {
         originFull.text = originString
         destinationFull.text=destinationString
 
-        val ratingPair = viewModel.getRating(username!!)
+        val imageViewProfile : ImageView = findViewById(R.id.profile_image2)
+        var imagePath : String = viewModel.getUsersProfilePhoto(username!!)
+        Log.i("imagePath", imagePath)
+        if (imagePath.equals("null") || imagePath.equals("")) {
+            imageViewProfile.setImageResource(R.drawable.avatar)
+        }
+        else Picasso.get().load(imagePath).into(imageViewProfile)
+
+        val ratingPair = viewModel.getRating(username)
         if (ratingPair.first != 200) {
             Toast.makeText(this, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue)
         val numValorations : TextView = this.findViewById(R.id.numberValorations)
         numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
 
-        val imageViewProfile : ImageView = this.findViewById(R.id.profile_imageDetails)
-        val imagePath = viewModel.getUsersProfilePhoto(username)
-        if (!imagePath.equals("null")  or !imagePath.equals("")) Picasso.get().load(imagePath).into(imageViewProfile)
-        else imageViewProfile.setImageResource(R.drawable.avatar)
 
         val shareButton : ImageButton = this.findViewById(R.id.shareButton)
         shareButton.setOnClickListener {
             val  myIntent : Intent = Intent(Intent.ACTION_SEND)
-            myIntent.setType("text/plain")
+            myIntent.type = "text/plain"
             var shareBody :String = ""
             if (SessionController.getUsername(this) == username ){
                 shareBody = getString(R.string.shareOwnTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
@@ -107,6 +125,15 @@ class TripDetails : AppCompatActivity() {
             else shareBody = getString(R.string.shareTrip, dateTmp,startTime.substring(0, startTime.length-3),originString,destinationString, (offeredSeats-occupiedSeats).toString() )
             myIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
+        }
+
+        val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
+        if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
+        else {
+            btnCancel.setOnClickListener {
+                val confirmDialog = CancelTripDialog()
+                confirmDialog.show(supportFragmentManager, "confirmDialog")
+            }
         }
 
     }
