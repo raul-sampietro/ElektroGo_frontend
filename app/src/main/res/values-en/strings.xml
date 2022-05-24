@@ -151,6 +151,7 @@
     <string name="anfitrio">Host:</string>
     <string name="TripsNavMenu">My trips</string>
     <string name="vehiclesMenu">My vehicles</string>
+    <string name="perfil">Profile</string>
 
 
 </resources>

@@ -173,6 +173,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 var i : Intent = Intent(this, PreferencesActivity::class.java)
                 startActivity(i)
             }
+            R.id.nav_item_two -> {
+                val intent = Intent(this, TripsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_three -> {
+
+            }
 
         }
         drawer.closeDrawer(GravityCompat.START)
