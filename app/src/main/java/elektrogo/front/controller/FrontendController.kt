@@ -392,10 +392,7 @@ object FrontendController {
     }
 
     suspend fun deleteChat(userA: String, userB: String): Int {
-        val httpResponse: HttpResponse = client.delete("${URL_BASE}chats/"){
-            parameter("userA", userA)
-            parameter("userB", userB)
-        }
+        val httpResponse: HttpResponse = client.delete("${URL_CHATS}/${userA}/${userB}")
         if (httpResponse.status.value != 200) {
             val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
             return responseJson.status
@@ -404,9 +401,7 @@ object FrontendController {
     }
 
     suspend fun getReceivedMessages(user: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_BASE_WB}chats/findByReceived") {
-            parameter("user", user)
-        }
+        val chats: ArrayList<Message> = client.get("${URL_CHATS}/messages/to/${user}")
         return chats
     }
 
