@@ -35,7 +35,7 @@ class CancelTripDialog : DialogFragment() {
                 setPositiveButton("CONFIRMAR",
                     DialogInterface.OnClickListener { dialog, id ->
 
-                        //TODO: crida http a back amb l'url que digui en Gerard i control d'errors, i treue strings hardcodejades
+                        //TODO: Treue strings hardcodejades
 
                         val tripID = arguments?.getString("tripID")!!
 
