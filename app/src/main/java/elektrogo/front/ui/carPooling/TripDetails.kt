@@ -48,6 +48,7 @@ class TripDetails : AppCompatActivity() {
         toolbar2.title= getString(R.string.detailsLabel)
         setSupportActionBar(toolbar2)
 
+        val tripID= intent.getStringExtra("tripID")
         val username= intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
         var startTime = intent.getStringExtra("startTime")
@@ -132,6 +133,11 @@ class TripDetails : AppCompatActivity() {
         else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
+
+                val bundle = Bundle()
+                bundle.putString("tripID", tripID) //passem l'identificador del trajecte
+                confirmDialog.arguments = bundle
+
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
         }

@@ -341,6 +341,14 @@ object FrontendController {
         }
     }
 
+    suspend fun cancelTrip(trip: CanceledTrip): Int {
+        val httpResponse: HttpResponse = client.put("${URL_CAR_POOLING}/${trip.id}/cancel"){
+            contentType(ContentType.Application.Json)
+            body = trip
+        }
+        return httpResponse.status.value
+    }
+
     // #################################################
     // #  ROUTES                                       #
     // #################################################
