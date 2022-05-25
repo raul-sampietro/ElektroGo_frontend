@@ -432,5 +432,10 @@ object FrontendController {
         }
         return httpResponse.receive()
     }
+
+    suspend fun getUserCreatedTrips(username: String): Pair<Int, ArrayList<CarPooling>> {
+        val httpResposte : HttpResponse = client.get ("")
+        return Pair(200, ArrayList<CarPooling>())
+    }
 }
 

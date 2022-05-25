@@ -176,12 +176,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/filterListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            tools:listitem="@layout/filter_list_item">
+            <ListView
+                android:id="@+id/filterListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                tools:listitem="@layout/filter_list_item">
 
             </ListView>
 
