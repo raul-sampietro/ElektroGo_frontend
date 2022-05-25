@@ -173,8 +173,7 @@ class ProfileFragment : Fragment() {
 
         val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
         buttonDriver.setOnClickListener {
-            val new = Driver(SessionController.getUsername(requireContext()))
-            val httpStatus: Int = addDriver(new)
+            val httpStatus: Int = addDriver(SessionController.getUsername(requireContext()))
             Toast.makeText(requireContext(), httpStatus.toString(), Toast.LENGTH_SHORT).show()
         }
         // Logout button
@@ -209,15 +208,15 @@ class ProfileFragment : Fragment() {
             fragmentGuest.arguments = bundle
 
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.main_container, fragmentGuest)
+            transaction.replace(this.id, fragmentGuest)
             transaction.addToBackStack(null)
             transaction.commit()
         }
     }
 
 
-    private fun addDriver(driver: Driver): Int = runBlocking {
-        FrontendController.addDriver(driver)
+    private fun addDriver(username: String): Int = runBlocking {
+        FrontendController.addDriver(username)
     }
 
     override fun onDestroyView() {

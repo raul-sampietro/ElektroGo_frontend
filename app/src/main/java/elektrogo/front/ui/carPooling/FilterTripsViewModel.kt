@@ -29,8 +29,8 @@ class FilterTripsViewModel : ViewModel() {
      * @return Retorna un Pair < Int, Array<CarPooling>> on int es el status code i el array els trajectes resultants.
      */
 
-   fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?): Pair <Int, ArrayList<CarPooling>> = runBlocking{
-        return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax)
+   fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?, username: String): Pair <Int, ArrayList<CarPooling>> = runBlocking{
+        return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax, username)
     }
 
     /**
@@ -52,8 +52,8 @@ class FilterTripsViewModel : ViewModel() {
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
 
-    fun askForTripsDefault(): Pair<Int, ArrayList<CarPooling>> = runBlocking {
-        return@runBlocking FrontendController.askForTripsDefault()
+    fun askForTripsDefault(username: String): Pair<Int, ArrayList<CarPooling>> = runBlocking {
+        return@runBlocking FrontendController.askForTripsDefault(username)
     }
 
 }

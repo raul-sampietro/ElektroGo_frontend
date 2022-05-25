@@ -1,14 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.preferences.PreferencesActivity">
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nom_d_usuari"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginStart="10dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/usernameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeMaxTextSize="16sp"
+            android:text="Marina Alapont Vidal "/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/correu_electronic"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginStart="10dp"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/userMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMinTextSize="8sp"
+            android:autoSizeMaxTextSize="16sp"
+            android:text="marina.alapont@estudiantat.upc.edu "/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -18,14 +77,14 @@
             android:text="@string/select_Language"
             android:textColor="#000000"
             android:layout_marginStart="10dp"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/radiobuttongroup"
             android:layout_marginStart="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" >
 
             <RadioButton
                 android:id="@+id/englishButton"
@@ -48,4 +107,19 @@
         </RadioGroup>
 
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deleteButton"
+            android:text="@string/eliminar_compte"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@android:color/holo_red_dark"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

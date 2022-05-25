@@ -169,6 +169,13 @@
     <string name="buscaUsuari">Find...</string>
     <string name="confirma">confirm</string>
     <string name="errorChatNotFound">Error: chat conversation not found</string>
+    <string name="TripsNavMenu">My trips</string>
+    <string name="vehiclesMenu">My vehicles</string>
+    <string name="perfil">Profile</string>
+    <string name="ajustos">Settings</string>
+    <string name="nom_d_usuari"> Username:</string>
+    <string name="correu_electronic">E-mail:</string>
+    <string name="eliminar_compte">Eliminar Cuenta</string>
     <string name="block">Block</string>
     <string name="report">Report</string>
 

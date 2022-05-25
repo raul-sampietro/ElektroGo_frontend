@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
         <item
+            android:id="@+id/nav_item_two"
+            android:icon="@drawable/calendar_month"
+            android:title="@string/TripsNavMenu" />
+        <item
+            android:id="@+id/nav_item_three"
+            android:icon="@drawable/car_rental"
+            android:title="@string/vehiclesMenu" />
+        <item
             android:id="@+id/nav_item_one"
+            android:icon="@drawable/person"
+            android:title="@string/perfil" />
+        <item
+            android:id="@+id/nav_item_four"
+            android:icon="@drawable/logout_petit"
+            android:title= "@string/profile_logout_button" />
+        <item
+            android:id="@+id/nav_item_five"
             android:icon="@drawable/ic_baseline_settings_24"
-            android:title="Settings"
-        />
+            android:title="@string/ajustos" />
     </group>
 </menu>
