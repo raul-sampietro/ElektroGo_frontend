@@ -202,7 +202,7 @@ class ProfileFragment : Fragment() {
         val guestprofileButton: Button = view.findViewById(R.id.other_profile)
         guestprofileButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("username", "MarcCastells")
+            bundle.putString("username", "samragu")
 
             val fragmentGuest = GuestProfileFragment()
 

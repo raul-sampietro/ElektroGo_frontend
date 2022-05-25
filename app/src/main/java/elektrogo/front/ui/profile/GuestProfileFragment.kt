@@ -37,7 +37,7 @@ class GuestProfileFragment : Fragment() {
     private var viewModel: ProfileViewModel = ProfileViewModel()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "CutPasteId")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,7 +62,10 @@ class GuestProfileFragment : Fragment() {
         }
 
         val blockedList : ArrayList<Block>? = username?.let { viewModel.getBlocks(it) }
-        val textblock : TextView = view.findViewById(R.id.block)
+        val textBlock : TextView = view.findViewById(R.id.block)
+        val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
+        val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
+        val blockButton : Button = view.findViewById(R.id.profile_guest_bloquejar)
 
         if (blockedList != null) {
             var blocked = false
@@ -71,10 +74,18 @@ class GuestProfileFragment : Fragment() {
                     blocked = true
                 }
             }
-            if (blocked) textblock.text = "Estic bloquejat"
-            else textblock.text = "No estic bloquejat"
+            if (blocked) {
+                textBlock.text = "Estic bloquejat"
+                rateButton.setVisibility(View.GONE)
+                reportButton.setVisibility(View.GONE)
+                blockButton.setVisibility(View.GONE)
+
+            }
+            else {
+                textBlock.text = "No estic bloquejat"
+            }
         }
-        else textblock.text = "Hi ha hagut un error"
+        else textBlock.text = "Hi ha hagut un error"
 
 
         val ratingPair = username?.let { viewModel.getRating(it) }

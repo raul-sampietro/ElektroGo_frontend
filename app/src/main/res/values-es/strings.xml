@@ -168,6 +168,8 @@
     <string name="buscaUsuari">Buscar a...</string>
     <string name="confirma">confirmar</string>
     <string name="errorChatNotFound">Error, conversación no encontrada</string>
+    <string name="block">Bloquear</string>
+    <string name="report">Denunciar</string>
 
 
 </resources>
