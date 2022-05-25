@@ -61,11 +61,15 @@ class GuestProfileFragment : Fragment() {
             imageVerificat.setImageResource(R.drawable.verificat)
         }
 
+
         val blockedList : ArrayList<Block>? = username?.let { viewModel.getBlocks(it) }
+        val achivementText : TextView = view.findViewById(R.id.achievements)
+        val trophy : ImageView = view.findViewById(R.id.trophyImg)
         val textBlock : TextView = view.findViewById(R.id.block)
         val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
         val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
         val blockButton : Button = view.findViewById(R.id.profile_guest_bloquejar)
+
 
         if (blockedList != null) {
             var blocked = false
@@ -76,16 +80,15 @@ class GuestProfileFragment : Fragment() {
             }
             if (blocked) {
                 textBlock.text = "Estic bloquejat"
+                achivementText.setVisibility(View.GONE)
+                trophy.setVisibility(View.GONE)
                 rateButton.setVisibility(View.GONE)
                 reportButton.setVisibility(View.GONE)
                 blockButton.setVisibility(View.GONE)
 
             }
-            else {
-                textBlock.text = "No estic bloquejat"
-            }
         }
-        else textBlock.text = "Hi ha hagut un error"
+        else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
 
 
         val ratingPair = username?.let { viewModel.getRating(it) }
