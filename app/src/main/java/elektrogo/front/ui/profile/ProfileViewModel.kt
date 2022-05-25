@@ -2,6 +2,7 @@ package elektrogo.front.ui.profile
 
 import androidx.lifecycle.ViewModel
 import elektrogo.front.controller.FrontendController
+import elektrogo.front.model.Achievement
 import elektrogo.front.model.Block
 import elektrogo.front.model.RatingAvg
 import kotlinx.coroutines.runBlocking
@@ -21,5 +22,9 @@ class ProfileViewModel : ViewModel() {
 
     fun getBlocks(username: String) : ArrayList<Block> = runBlocking {
         return@runBlocking FrontendController.getBlocks(username)
+    }
+
+    fun getAchievement(achievement: String, username: String) : Achievement = runBlocking {
+        return@runBlocking FrontendController.getAchievement(achievement, username)
     }
 }
