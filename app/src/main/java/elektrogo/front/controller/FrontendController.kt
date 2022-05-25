@@ -448,9 +448,13 @@ object FrontendController {
 
     suspend fun addMemberToATrip(username: String, tripId: Long?): Int {
         val httpResponse : HttpResponse = client.post("${URL_CAR_POOLING}/${tripId}/from/${username}")
-        val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-        val statusCode = responseJson.status
-        return statusCode
+        var status: Int = httpResponse.status.value
+        if (status!=200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            status = statusCode
+        }
+        return status
     }
 }
 
