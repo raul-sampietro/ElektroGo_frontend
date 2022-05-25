@@ -442,5 +442,10 @@ object FrontendController {
         } else trips = httpResponse.receive()
         return Pair(status, trips)
     }
+
+    suspend fun addMemberToATrip(username: String, tripId: Long?): Int {
+        val httpResponse : HttpResponse = client.post("${URL_CAR_POOLING}/${tripId}/from/${username}")
+        return httpResponse.status.value
+    }
 }
 

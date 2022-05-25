@@ -13,7 +13,7 @@ class AddMemberDialogViewModel :  ViewModel(){
         return@runBlocking FrontendController.getUserCreatedTrips(username)
     }
 
-   // fun addMemberToATrip (username: String, trip : CarPooling) : Int = runBlocking {
-     //   return@runBlocking FrontendController.addMemberToATrip(username, trip)
-    //}
+    fun addMemberToATrip (username: String, tripId : Long?) : Int = runBlocking {
+       return@runBlocking FrontendController.addMemberToATrip(username, tripId)
+    }
 }

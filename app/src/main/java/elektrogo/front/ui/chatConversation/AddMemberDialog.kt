@@ -45,11 +45,19 @@ class AddMemberDialog : DialogFragment() {
                     listView.adapter = ListAdapterTrips(requireActivity(), resultList)
                 }
 
-             //   val username = arguments?.getString("member")!!
+                val username = arguments?.getString("member")!!
 
-                listView.setOnItemClickListener({ parent, view, position, id ->
-                 //   viewModel.addMemberToATrip(username, resultList[position])
-                })
+                listView.setOnItemClickListener { parent, view, position, id ->
+                    val status = viewModel.addMemberToATrip(username, resultList[position].id)
+                    if (status!=200) {
+                        Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                        dismiss()
+                    }
+                    else {
+                        Toast.makeText(requireContext(),"Membre afegit correctament", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+                }
             }
             // Crea el dialeg
             builder.create()
