@@ -109,6 +109,12 @@ class ChatConversation : AppCompatActivity() {
             adapter.updateData(conversation)
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
+
+        val addMemberButton : ImageButton = findViewById(R.id.addMemberButton)
+
+        addMemberButton.setOnClickListener {
+            //mostrar finestra emergent amb els viatges de la persona
+        }
     }
     override fun onBackPressed() {
         if (thread.isAlive) {
