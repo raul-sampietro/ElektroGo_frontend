@@ -450,5 +450,25 @@ object FrontendController {
         }
         return httpResponse.receive()
     }
+
+    suspend fun getUserCreatedTrips(username: String): Pair<Int, ArrayList<CarPooling>> {
+        val httpResponse : HttpResponse = client.get ("${URL_CAR_POOLING}/created/${username}")
+        val trips: ArrayList<CarPooling>
+        var status: Int = httpResponse.status.value
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            status=statusCode
+            trips = ArrayList<CarPooling>()
+        } else trips = httpResponse.receive()
+        return Pair(status, trips)
+    }
+
+    suspend fun addMemberToATrip(username: String, tripId: Long?): Int {
+        val httpResponse : HttpResponse = client.post("${URL_CAR_POOLING}/${tripId}/from/${username}")
+        val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+        val statusCode = responseJson.status
+        return statusCode
+    }
 }
 

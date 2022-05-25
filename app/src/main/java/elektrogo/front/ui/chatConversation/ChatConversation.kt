@@ -3,11 +3,13 @@ package elektrogo.front.ui.chatConversation
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import elektrogo.front.ChatService
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
+import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
 
 
 class ChatConversation : AppCompatActivity() {
@@ -108,6 +111,17 @@ class ChatConversation : AppCompatActivity() {
             conversation = viewModel.getConversation(userA, userB)
             adapter.updateData(conversation)
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+        }
+
+        val addMemberButton : ImageButton = findViewById(R.id.addMemberButton)
+
+        addMemberButton.setOnClickListener {
+            Log.i("add", "Le he dado click")
+            val addMember = AddMemberDialog()
+            val bundle = Bundle()
+            bundle.putString("member", b!!.getString("userB"))
+            addMember.arguments = bundle
+            addMember.show( supportFragmentManager , "AddMemberDialog")
         }
     }
     override fun onBackPressed() {
