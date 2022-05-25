@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -21,6 +18,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.model.Achievement
 import elektrogo.front.model.Block
 import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
@@ -62,9 +60,9 @@ class GuestProfileFragment : Fragment() {
         }
 
 
-        val blockedList : ArrayList<Block>? = username?.let { viewModel.getBlocks(it) }
+        val blockedList : ArrayList<Block> = viewModel.getBlocks(SessionController.getUsername(requireActivity()))
         val achivementText : TextView = view.findViewById(R.id.achievements)
-        val trophy : ImageView = view.findViewById(R.id.trophyImg)
+        val trophy : LinearLayout = view.findViewById(R.id.trophy)
         val textBlock : TextView = view.findViewById(R.id.block)
         val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
         val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
@@ -74,12 +72,12 @@ class GuestProfileFragment : Fragment() {
         if (blockedList != null) {
             var blocked = false
             for (block in blockedList) {
-                if (block.blockUser == SessionController.getUsername(requireActivity())) {
+                if (block.userBlocking == username) {
                     blocked = true
                 }
             }
             if (blocked) {
-                textBlock.text = "Estic bloquejat"
+                textBlock.text = "Aquest usuari t'ha bloquejat"
                 achivementText.setVisibility(View.GONE)
                 trophy.setVisibility(View.GONE)
                 rateButton.setVisibility(View.GONE)
@@ -87,9 +85,35 @@ class GuestProfileFragment : Fragment() {
                 blockButton.setVisibility(View.GONE)
 
             }
+            else {
+                val a : Achievement? =
+                    username?.let { viewModel.getAchievement("Traveler", it) }
+
+                if (a != null) {
+                    val trophyImg : ImageView = view.findViewById(R.id.trophyImg)
+                    val trophyName : TextView = view.findViewById(R.id.trophyName)
+                    val trophyPoints : TextView = view.findViewById(R.id.trophyPoints)
+
+                    if (a.points < 10) {
+                        trophyImg.setImageResource(R.drawable.no_prize_small)
+                    }
+                    else if (a.points in 10..20) {
+                        trophyImg.setImageResource(R.drawable.bronze_small)
+                    }
+                    else if (a.points in 20..30) {
+                        trophyImg.setImageResource(R.drawable.silver_small)
+                    }
+                    else if (a.points > 30) {
+                        trophyImg.setImageResource(R.drawable.gold_small)
+                    }
+
+                    trophyName.text = a.achievement
+                    trophyPoints.text = a.points.toString()
+
+                }
+            }
         }
         else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
-
 
         val ratingPair = username?.let { viewModel.getRating(it) }
         if (ratingPair != null) {

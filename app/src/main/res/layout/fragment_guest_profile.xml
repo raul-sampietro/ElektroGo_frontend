@@ -133,6 +133,7 @@
         </TextView>
 
         <LinearLayout
+            android:id="@+id/trophy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -144,29 +145,25 @@
                 android:id="@+id/trophyImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/no_prize_small"
                 android:layout_gravity="center"
                 />
 
             <TextView
-                android:id="@+id/carpoolingPoints"
+                android:id="@+id/trophyName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="20sp"
-                android:text="Punts carpooling"/>
+                android:textSize="20sp"/>
 
             <TextView
+                android:id="@+id/trophyPoints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="20sp"
-                android:text="54"/>
-
-
+                android:textSize="20sp"/>
 
         </LinearLayout>
 

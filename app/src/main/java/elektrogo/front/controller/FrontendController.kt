@@ -481,5 +481,10 @@ object FrontendController {
             ArrayList()
         } else httpResponse.receive()
     }
+
+    suspend fun getAchievement(achievement: String, username: String): Achievement {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}/achievements/${achievement}/users/${username}")
+        return httpResponse.receive()
+    }
 }
 
