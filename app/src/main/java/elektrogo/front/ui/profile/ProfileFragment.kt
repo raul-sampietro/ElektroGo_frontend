@@ -201,14 +201,14 @@ class ProfileFragment : Fragment() {
         val guestprofileButton: Button = view.findViewById(R.id.other_profile)
         guestprofileButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("username", "MarcCastells")
+            bundle.putString("username", "samragu")// el segon string ha de ser el nom de l'usuari del guestprofile
 
             val fragmentGuest = GuestProfileFragment()
 
             fragmentGuest.arguments = bundle
 
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.main_container, fragmentGuest)
+            transaction.replace(this.id, fragmentGuest)
             transaction.addToBackStack(null)
             transaction.commit()
         }

@@ -139,6 +139,16 @@ object FrontendController {
         return Pair(status, avgRating)
     }
 
+    suspend fun getRating(userFrom: String, userTo:String): Pair<Int, Rating?> {
+        val httpResponse: HttpResponse = client.get("${URL_RATINGS}/from/$userFrom/to/$userTo") {
+            contentType(ContentType.Application.Json)
+        }
+        val status: Int = httpResponse.status.value
+        var valoracio: Rating? = null
+        if (httpResponse.status.value == 200) valoracio = httpResponse.receive()
+        return Pair(status, valoracio)
+    }
+
     suspend fun unrateUser(userFrom: String, userTo: String): Int {
         val httpResponse: HttpResponse = client.delete("${URL_RATINGS}/from/${userFrom}/to/${userTo}")
         return httpResponse.status.value

@@ -1,8 +1,10 @@
 package elektrogo.front.ui.valorarUsuari
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
 import android.view.ViewManager
 import android.widget.Button
 import android.widget.ImageView
@@ -25,6 +27,7 @@ class ValorarUsuariDialog : DialogFragment() {
     private lateinit var valorarBtn: Button
     private lateinit var eliminarBtn: Button
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
@@ -32,9 +35,11 @@ class ValorarUsuariDialog : DialogFragment() {
 
             builder.apply {
 
-                setTitle("Valora")
-
+                val userWhoRates = SessionController.getUsername(requireActivity())
                 ratedUser = arguments?.getString("guestUser")!!
+                var rated = false
+
+                setTitle("Valora")
                 setMessage("Com vols valorar a ${ratedUser}?")
 
                 val guiValorar = layoutInflater.inflate(R.layout.valorar_usuari_fragment, null)
@@ -53,22 +58,18 @@ class ValorarUsuariDialog : DialogFragment() {
 
                 valorarBtn.setOnClickListener {
 
-                    val userWhoRates = SessionController.getUsername(requireActivity()) //TODO: SI SE COGE PARA MIRAR SI SE MUESTRA EL BOTON ELIMINAR, HACER SOLO UNA LLAMADA Y GUARDAR EN UNA VARIABLE
                     val valoracio = Rating(userWhoRates, ratedUser, puntuacio*2, commentView.text.toString())
-
                     var status = -1
                     try { status = runBlocking{ FrontendController.rateUser(valoracio) } }
                     catch (e: Exception) {}
 
-                    if (status == 200) Toast.makeText(activity, "Has valorat a $ratedUser amb $puntuacio estrelles.", Toast.LENGTH_SHORT).show()
+                    if (status == 201) Toast.makeText(activity, "Has valorat a $ratedUser amb $puntuacio estrelles.", Toast.LENGTH_SHORT).show()
                     else Toast.makeText(activity, "No s'ha pogut valorar a $ratedUser.", Toast.LENGTH_SHORT).show()
 
                     dismiss() // tanca el dialog
                 }
 
                 eliminarBtn.setOnClickListener {
-
-                    val userWhoRates = SessionController.getUsername(requireActivity()) //TODO: SI SE COGE PARA MIRAR SI SE MUESTRA EL BOTON ELIMINAR, HACER SOLO UNA LLAMADA Y GUARDAR EN UNA VARIABLE
 
                     var status = -1
                     try { status = runBlocking{ FrontendController.unrateUser(userWhoRates, ratedUser) } }
@@ -80,11 +81,23 @@ class ValorarUsuariDialog : DialogFragment() {
                     dismiss() // tanca el dialog
                 }
 
-                //TODO: Aquí mirar si el usuario ya ha sido valorado, para mostrar el botón de eliminar, y además setear las estrellas a la valoracion que toque
+                var statAndRating: Pair<Int, Rating?>
+                try { statAndRating = runBlocking{ FrontendController.getRating(userWhoRates, ratedUser) } }
+                catch (e: Exception) {
+                    statAndRating = Pair(-1, null)
+                }
 
-                var rated = true
-                if (!rated) {
-                    (eliminarBtn.parent as ViewManager).removeView(eliminarBtn)
+                if (statAndRating.first == 200 && (statAndRating.second != null)) {
+                    rated = true
+                    puntuacio = statAndRating.second!!.points/2
+                    if (statAndRating.second!!.comment != null) {
+                        commentView.text = statAndRating.second!!.comment!!.toEditable()
+                    }
+                }
+                if (!rated) (eliminarBtn.parent as ViewManager).removeView(eliminarBtn)
+                else {
+                    setStars()
+                    valorarBtn.text = "Modificar" //TODO: treure string hardcodejada, i la resta del fitxer
                 }
 
                 //logica per canviar la puntuacio tocant les estrelles
@@ -95,7 +108,6 @@ class ValorarUsuariDialog : DialogFragment() {
                         setStars()
                     }
                 }
-
 
             }
 
@@ -111,6 +123,8 @@ class ValorarUsuariDialog : DialogFragment() {
             else stars[i].setImageResource(R.drawable.ic_starbuida)
         }
     }
+
+    private fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
 
 
 }
