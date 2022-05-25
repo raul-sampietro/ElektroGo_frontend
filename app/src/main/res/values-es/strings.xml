@@ -90,7 +90,7 @@
     <string name="HoraIncorrecte">La hora del trayecto es incorrecta</string>
 
     <string name="savedCarpooling">El trayecto se ha publicado</string>
-    <string name="errorCarpooling">Ha havido un error con el serivors. Intentalo más tarde.</string>
+    <string name="errorCarpooling">Ha habido un error con el servidor. Intentalo más tarde.</string>
 
     <string name="hora_d_inici">hora de inicio</string>
     <string name="dataFiltrar">Fecha</string>
