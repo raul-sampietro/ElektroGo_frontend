@@ -27,25 +27,35 @@ class AddMemberDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = androidx.appcompat.app.AlertDialog.Builder(it)
-            val listView: ListView = requireActivity().findViewById(R.id.addMemberTripsList)
 
             builder.apply {
+                Log.i("add", "Estoy en el dialog")
 
                 setTitle("Add member to a trip")
                 val fragmentAdd = layoutInflater.inflate(R.layout.add_member_fragment, null)
                 setView(fragmentAdd)
+                val listView: ListView = fragmentAdd.findViewById(R.id.addMemberTripsList ) as ListView
+                val array = ArrayList<CarPooling>()
+                val carpooling1 : CarPooling = CarPooling(1, "2022-05-25", "11:05:00", 4, 1, "none", "none2", "1234MAV", "Canet de Mar", "Vic", "MarinaA", "2022-05-24", 4.2, 1.4,2.3,4.4)
+                array.add(carpooling1)
+                array.add(carpooling1)
+                array.add(carpooling1)
+                array.add(carpooling1)
+                array.add(carpooling1)
+               // var result : Pair <Int, ArrayList<CarPooling>> = viewModel.getUserCreatedTrips(SessionController.getUsername(requireContext()))
+              //  if (result.first != 200) {
+              //      Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+              //  }
+             //   else {
+                   // resultList = result.second
+                    resultList=array
+                    listView.adapter = ListAdapterTrips(requireActivity(), resultList)
+                //}
 
-                var result : Pair <Int, ArrayList<CarPooling>> = viewModel.getUserCreatedTrips(SessionController.getUsername(requireContext()))
-                if (result.first != 200) {
-                    Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
-                }
-                else {
-                    resultList = result.second
-                    listView.adapter = ListAdapterTrips(context as Activity, resultList)
-                }
+                val username = arguments?.getString("member")!!
 
-                listView.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
-                    //crida a afegir membre
+                listView.setOnItemClickListener({ parent, view, position, id ->
+                    viewModel.addMemberToATrip(username, resultList[position])
                 })
             }
             // Crea el dialeg

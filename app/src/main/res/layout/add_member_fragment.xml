@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="Selecciona un trajecte en el qual afegir el membre"/>_
     <ListView
         android:id="@+id/addMemberTripsList"
         android:layout_width="match_parent"
@@ -12,4 +22,5 @@
         tools:listitem="@layout/filter_list_item">
 
     </ListView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
