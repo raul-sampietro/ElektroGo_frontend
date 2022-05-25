@@ -188,6 +188,10 @@
     <string name="TripsNavMenu">My trips</string>
     <string name="vehiclesMenu">My vehicles</string>
     <string name="perfil">Perfil</string>
+    <string name="ajustos">Ajustos</string>
+    <string name="nom_d_usuari">Nom d\'usuari:</string>
+    <string name="correu_electronic">Correu electronic</string>
+    <string name="eliminar_compte">Eliminar Compte</string>
 
 
 </resources>

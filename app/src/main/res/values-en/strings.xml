@@ -172,6 +172,10 @@
     <string name="TripsNavMenu">My trips</string>
     <string name="vehiclesMenu">My vehicles</string>
     <string name="perfil">Profile</string>
+    <string name="ajustos">Settings</string>
+    <string name="nom_d_usuari"> Username:</string>
+    <string name="correu_electronic">E-mail:</string>
+    <string name="eliminar_compte">Eliminar Cuenta</string>
 
 
 </resources>
