@@ -12,4 +12,8 @@ class AddMemberDialogViewModel :  ViewModel(){
     fun getUserCreatedTrips(username: String): Pair <Int, ArrayList<CarPooling>> = runBlocking{
         return@runBlocking FrontendController.getUserCreatedTrips(username)
     }
+
+    fun addMemberToATrip (username: String, trip : CarPooling) : Int = runBlocking {
+        return@runBlocking FrontendController.addMemberToATrip(username, trip)
+    }
 }
