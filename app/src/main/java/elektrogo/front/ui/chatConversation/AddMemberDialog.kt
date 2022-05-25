@@ -50,7 +50,14 @@ class AddMemberDialog : DialogFragment() {
                 listView.setOnItemClickListener { parent, view, position, id ->
                     val status = viewModel.addMemberToATrip(username, resultList[position].id)
                     if (status!=200) {
-                        Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                        Log.i("holaaaaa", status.toString())
+                        if (status == 448){
+                            Log.i("holaaaaa", "${status}")
+                            Toast.makeText(context, "Ja has afegit aquest usuari al trajecte seleccionat", Toast.LENGTH_LONG).show()
+                        }
+                        else {
+                            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                        }
                         dismiss()
                     }
                     else {
