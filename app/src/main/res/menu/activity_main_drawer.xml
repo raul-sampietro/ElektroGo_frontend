@@ -5,21 +5,22 @@
         <item
             android:id="@+id/nav_item_two"
             android:icon="@drawable/calendar_month"
-            android:title="@string/TripsNavMenu"
-            />
+            android:title="@string/TripsNavMenu" />
         <item
             android:id="@+id/nav_item_three"
             android:icon="@drawable/car_rental"
-            android:title="@string/vehiclesMenu"
-            />
+            android:title="@string/vehiclesMenu" />
         <item
             android:id="@+id/nav_item_one"
             android:icon="@drawable/person"
-            android:title="@string/perfil"
-            />
+            android:title="@string/perfil" />
         <item
             android:id="@+id/nav_item_four"
             android:icon="@drawable/logout_petit"
             android:title= "@string/profile_logout_button" />
+        <item
+            android:id="@+id/nav_item_five"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/ajustos" />
     </group>
 </menu>

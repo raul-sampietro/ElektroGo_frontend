@@ -19,9 +19,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +29,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
@@ -45,6 +46,7 @@ import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
+import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.preferences.PreferencesActivity
 import elektrogo.front.ui.profile.ProfileActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
@@ -190,6 +192,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_item_three -> {
                 val intent = Intent(this, VehicleListActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_four -> {
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build()
+                val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+                    mGoogleSignInClient.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                SessionController.setCurrentSession(null)
+                Toast.makeText(this, "Successfully signed out", Toast.LENGTH_SHORT).show()
+                this.finish()
+
+            }
+            R.id.nav_item_five -> {
+                val intent = Intent (this, PreferencesActivity::class.java)
                 startActivity(intent)
             }
 
