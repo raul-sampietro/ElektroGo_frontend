@@ -35,28 +35,36 @@ class AddMemberDialog : DialogFragment() {
                 val fragmentAdd = layoutInflater.inflate(R.layout.add_member_fragment, null)
                 setView(fragmentAdd)
                 val listView: ListView = fragmentAdd.findViewById(R.id.addMemberTripsList ) as ListView
-                val array = ArrayList<CarPooling>()
-                val carpooling1 : CarPooling = CarPooling(1, "2022-05-25", "11:05:00", 4, 1, "none", "none2", "1234MAV", "Canet de Mar", "Vic", "MarinaA", "2022-05-24", 4.2, 1.4,2.3,4.4)
-                array.add(carpooling1)
-                array.add(carpooling1)
-                array.add(carpooling1)
-                array.add(carpooling1)
-                array.add(carpooling1)
-               // var result : Pair <Int, ArrayList<CarPooling>> = viewModel.getUserCreatedTrips(SessionController.getUsername(requireContext()))
-              //  if (result.first != 200) {
-              //      Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
-              //  }
-             //   else {
-                   // resultList = result.second
-                    resultList=array
+
+                var result : Pair <Int, ArrayList<CarPooling>> = viewModel.getUserCreatedTrips(SessionController.getUsername(requireContext()))
+                if (result.first != 200) {
+                    Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                }
+                else {
+                    resultList = result.second
                     listView.adapter = ListAdapterTrips(requireActivity(), resultList)
-                //}
+                }
 
                 val username = arguments?.getString("member")!!
 
-                listView.setOnItemClickListener({ parent, view, position, id ->
-                    viewModel.addMemberToATrip(username, resultList[position])
-                })
+                listView.setOnItemClickListener { parent, view, position, id ->
+                    val status = viewModel.addMemberToATrip(username, resultList[position].id)
+                    if (status!=200) {
+                        Log.i("holaaaaa", status.toString())
+                        if (status == 448){
+                            Log.i("holaaaaa", "${status}")
+                            Toast.makeText(context, "Ja has afegit aquest usuari al trajecte seleccionat", Toast.LENGTH_LONG).show()
+                        }
+                        else {
+                            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                        }
+                        dismiss()
+                    }
+                    else {
+                        Toast.makeText(requireContext(),"Membre afegit correctament", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+                }
             }
             // Crea el dialeg
             builder.create()

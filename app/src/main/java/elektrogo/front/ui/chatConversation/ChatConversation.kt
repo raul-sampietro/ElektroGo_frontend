@@ -120,6 +120,7 @@ class ChatConversation : AppCompatActivity() {
             val addMember = AddMemberDialog()
             val bundle = Bundle()
             bundle.putString("member", b!!.getString("userB"))
+            addMember.arguments = bundle
             addMember.show( supportFragmentManager , "AddMemberDialog")
         }
     }
