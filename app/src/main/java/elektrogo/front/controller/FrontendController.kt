@@ -434,8 +434,13 @@ object FrontendController {
     }
 
     suspend fun getUserCreatedTrips(username: String): Pair<Int, ArrayList<CarPooling>> {
-        val httpResposte : HttpResponse = client.get ("")
-        return Pair(200, ArrayList<CarPooling>())
+        val httpResponse : HttpResponse = client.get ("${URL_CAR_POOLING}/created/${username}")
+        val trips: ArrayList<CarPooling>
+        val status: Int = httpResponse.status.value
+        if (httpResponse.status.value != 200) {
+            trips = ArrayList<CarPooling>()
+        } else trips = httpResponse.receive()
+        return Pair(status, trips)
     }
 }
 
