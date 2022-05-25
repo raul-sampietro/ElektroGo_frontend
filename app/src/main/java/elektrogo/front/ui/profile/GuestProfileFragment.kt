@@ -1,5 +1,6 @@
 package elektrogo.front.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.model.Block
 import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
@@ -35,6 +37,7 @@ class GuestProfileFragment : Fragment() {
     private var viewModel: ProfileViewModel = ProfileViewModel()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
+    @SuppressLint("SetTextI18n", "CutPasteId")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,6 +60,35 @@ class GuestProfileFragment : Fragment() {
             val imageVerificat: ImageView = view.findViewById(R.id.verificat)
             imageVerificat.setImageResource(R.drawable.verificat)
         }
+
+
+        val blockedList : ArrayList<Block>? = username?.let { viewModel.getBlocks(it) }
+        val achivementText : TextView = view.findViewById(R.id.achievements)
+        val trophy : ImageView = view.findViewById(R.id.trophyImg)
+        val textBlock : TextView = view.findViewById(R.id.block)
+        val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
+        val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
+        val blockButton : Button = view.findViewById(R.id.profile_guest_bloquejar)
+
+
+        if (blockedList != null) {
+            var blocked = false
+            for (block in blockedList) {
+                if (block.blockUser == SessionController.getUsername(requireActivity())) {
+                    blocked = true
+                }
+            }
+            if (blocked) {
+                textBlock.text = "Estic bloquejat"
+                achivementText.setVisibility(View.GONE)
+                trophy.setVisibility(View.GONE)
+                rateButton.setVisibility(View.GONE)
+                reportButton.setVisibility(View.GONE)
+                blockButton.setVisibility(View.GONE)
+
+            }
+        }
+        else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
 
 
         val ratingPair = username?.let { viewModel.getRating(it) }

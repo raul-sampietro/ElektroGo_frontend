@@ -176,6 +176,8 @@
     <string name="nom_d_usuari"> Username:</string>
     <string name="correu_electronic">E-mail:</string>
     <string name="eliminar_compte">Eliminar Cuenta</string>
+    <string name="block">Block</string>
+    <string name="report">Report</string>
 
 
 </resources>

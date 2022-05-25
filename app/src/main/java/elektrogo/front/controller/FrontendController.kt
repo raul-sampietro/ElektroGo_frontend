@@ -474,5 +474,12 @@ object FrontendController {
         }
         return status
     }
+
+    suspend fun getBlocks(username: String): ArrayList<Block> {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}/blocks/to/${username}")
+        return if (httpResponse.status.value != 200) {
+            ArrayList()
+        } else httpResponse.receive()
+    }
 }
 
