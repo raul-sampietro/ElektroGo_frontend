@@ -10,6 +10,9 @@ import elektrogo.front.R
 
 class VehicleListActivity : AppCompatActivity() {
     private val vehicleListFragment = VehicleListFragment()
+
+    private val verifyingDriverFragment = VerifyingDriverFragment()
+
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +21,7 @@ class VehicleListActivity : AppCompatActivity() {
         toolbar2  = findViewById(R.id.toolbar_main)
         toolbar2.title= getString(R.string.llistaVehicles)
         setSupportActionBar(toolbar2)
-        loadFragment(vehicleListFragment)
+        loadFragment(verifyingDriverFragment)
     }
 
     //Listener del botó d'enrere de la barra d'Android
