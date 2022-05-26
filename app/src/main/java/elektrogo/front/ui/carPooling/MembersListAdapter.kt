@@ -62,6 +62,10 @@ class MembersListAdapter (private val context : Activity, private val memberList
             val id = idTrip
             val username = f.username
             val result = viewModel.deleteMemberFromTrip(id,username)
+            if (result!=200) {
+                Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_SHORT).show()
+            }
+            notifyDataSetChanged()
         }
 
         return view
