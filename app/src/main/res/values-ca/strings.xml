@@ -175,6 +175,7 @@
     <string name="eliminar_compte">Eliminar Compte</string>
     <string name="block">Bloquejar</string>
     <string name="report">Denunciar</string>
+    <string name="verificant">Els administradors estan verificant la teva sol·licitud</string>
 
 
 </resources>

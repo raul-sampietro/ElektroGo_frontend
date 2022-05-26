@@ -178,5 +178,7 @@
     <string name="block">Bloquear</string>
     <string name="report">Denunciar</string>
 
+    <string name="verificant">Los administradores están verificando tu solicitud</string>
+
 
 </resources>
