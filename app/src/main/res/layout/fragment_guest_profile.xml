@@ -119,13 +119,61 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:id="@+id/achievements"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Achievements"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:paddingTop="20dp"
+            android:paddingStart="15dp"
+            tools:ignore="RtlSymmetry">
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/trophy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/trophyImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/trophyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/trophyPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
         <Button
             android:layout_marginTop="20dp"
             android:id="@+id/profile_guest_valorar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Valorar" />
+            android:text="@string/btnValorar" />
 
         <Button
             android:layout_marginTop="20dp"
@@ -133,7 +181,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Denunciar" />
+            android:text="@string/report" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/profile_guest_bloquejar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/block" />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

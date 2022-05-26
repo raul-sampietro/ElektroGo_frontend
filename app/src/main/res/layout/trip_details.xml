@@ -387,6 +387,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_marginTop="20dp"
+            android:background="#95C59A" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Membres"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/listMembers"
+            android:clickable="true"
+            tools:listitem="@layout/member_list_item">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
@@ -400,6 +428,8 @@
                 android:text="@string/buttonCancelTrip"
                 tools:ignore="TextContrastCheck" />
         </LinearLayout>
+
+
 
     </LinearLayout>
 

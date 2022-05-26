@@ -175,6 +175,8 @@
     <string name="nom_d_usuari">Nombre de usuario:</string>
     <string name="correu_electronic">Correo electrónico:</string>
     <string name="eliminar_compte">Delete Account</string>
+    <string name="block">Bloquear</string>
+    <string name="report">Denunciar</string>
 
 
 </resources>

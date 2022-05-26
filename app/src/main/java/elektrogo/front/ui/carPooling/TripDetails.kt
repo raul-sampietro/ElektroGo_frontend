@@ -6,6 +6,7 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,8 @@ import android.widget.*
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
+import elektrogo.front.model.CarPooling
+import elektrogo.front.model.User
 import java.text.SimpleDateFormat
 
 
@@ -48,6 +51,7 @@ class TripDetails : AppCompatActivity() {
         toolbar2.title= getString(R.string.detailsLabel)
         setSupportActionBar(toolbar2)
 
+        val tripID= intent.getStringExtra("tripID")
         val username= intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
         var startTime = intent.getStringExtra("startTime")
@@ -60,6 +64,7 @@ class TripDetails : AppCompatActivity() {
         val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
         val latDest = intent.getDoubleExtra("destinationLat", 1.0)
         val lonDest = intent.getDoubleExtra("destinationLon", 1.0)
+        val id = intent.getLongExtra("id",1)
 
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
@@ -70,6 +75,17 @@ class TripDetails : AppCompatActivity() {
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
         val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
+        //Obtenci dels membres que participen en el trajecte
+        val listView: ListView = this.findViewById(R.id.listMembers)
+        var memberList : ArrayList<User>
+        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(id)
+        if (resultDefault.first != 200) {
+            Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+        }
+        else {
+            memberList = resultDefault.second
+            listView.adapter = MembersListAdapter(this as Activity, memberList)
+        }
 
         //TODO: Crida amb el servei de RevPollution
         val qualityAir: String = viewModel.getAirQuality(latDest, lonDest)
@@ -132,6 +148,11 @@ class TripDetails : AppCompatActivity() {
         else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
+
+                val bundle = Bundle()
+                bundle.putString("tripID", tripID) //passem l'identificador del trajecte
+                confirmDialog.arguments = bundle
+
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
         }

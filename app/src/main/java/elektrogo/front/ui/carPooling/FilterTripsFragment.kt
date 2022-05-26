@@ -227,6 +227,7 @@ class FilterTripsFragment : Fragment() {
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             val i = Intent(context, TripDetails::class.java)
+            i.putExtra("tripID", filteredList[position].id.toString())
             i.putExtra("username", filteredList[position].username)
             i.putExtra("startDate", filteredList[position].startDate)
             i.putExtra("startTime", filteredList[position].startTime)
@@ -239,9 +240,7 @@ class FilterTripsFragment : Fragment() {
             i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
             i.putExtra("destinationLat", filteredList[position].latitudeDestination)
             i.putExtra("destinationLon", filteredList[position].longitudeDestination)
-            Log.i("coordenadas", filteredList[position].latitudeDestination.toString())
-            Log.i("coordenadas", filteredList[position].longitudeDestination.toString())
-
+            i.putExtra("id", filteredList[position].id)
             startActivity(i)
         })
 
