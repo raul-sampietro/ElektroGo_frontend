@@ -17,13 +17,13 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_marginTop="10dp"
                 android:id="@+id/imageView6"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                tools:src="@tools:sample/avatars"
-                android:scaleType="fitCenter"
+                android:layout_marginTop="10dp"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_image_not_supported_24"
                 />
 
             <Button
@@ -35,13 +35,14 @@
                 android:text="@string/insertDNImage" />
 
             <ImageView
-                android:layout_marginTop="20dp"
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                tools:src="@tools:sample/avatars"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:adjustViewBounds="true"/>
+                android:src="@drawable/ic_baseline_image_not_supported_24"
+                 />
 
             <Button
                 android:id="@+id/reverseButton"
