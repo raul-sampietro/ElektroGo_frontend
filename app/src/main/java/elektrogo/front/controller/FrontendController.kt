@@ -515,5 +515,10 @@ object FrontendController {
         return httpResponse.receive()
     }
 
+    suspend fun abandonTrip(id: Long, username: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_CAR_POOLING}/${id}/from/${username}")
+        return httpResponse.status.value;
+    }
+
 }
 

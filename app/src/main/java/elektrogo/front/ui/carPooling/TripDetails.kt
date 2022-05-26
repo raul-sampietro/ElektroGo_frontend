@@ -81,7 +81,7 @@ class TripDetails : AppCompatActivity() {
         val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
         //Obtenci dels membres que participen en el trajecte
         val listView: ListView = this.findViewById(R.id.listMembers)
-        var memberList : ArrayList<User>
+        var memberList : ArrayList<User> = arrayListOf()
         var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(id!!)
         if (resultDefault.first != 200) {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard2", Toast.LENGTH_LONG).show()
@@ -153,7 +153,31 @@ class TripDetails : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val cancelDay = formatter.parse(cancelDate)
 
-        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
+        var userParticipates = false;
+        for (u: User in memberList) {
+            if (u.username == SessionController.getUsername(this)) {
+                userParticipates = true;
+            }
+        }
+        if (userParticipates && (SessionController.getUsername(this) != username) && (today < cancelDay) && state !="cancelled" && state != "finished") {
+            if (userParticipates) {
+                btnCancel.setText("ABANDONAR TRAJECTE") //PREGUNTAR MARINA COMO PONER ESTO NO HARDCODED
+                btnCancel.setOnClickListener {
+                    val status = viewModel.abandonTrip(id, SessionController.getUsername(this));
+                    if (status != 200) {
+                        Toast.makeText(
+                            this,
+                            "${status}:Hi ha hagut un error abandonant el trajecte",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    else {
+                        //TODO: REFRESH FRAGMENT OR (RELOAD MEMEBERLIST, HIDE ABANDON TRIP BUTTON AND SHOW ADD MEMBER)
+                    }
+                }
+            }
+        }
+        else if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
