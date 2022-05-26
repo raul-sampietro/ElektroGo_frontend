@@ -180,5 +180,9 @@
 
     <string name="verificant">Los administradores están verificando tu solicitud</string>
 
+    <string name="insertDNImage">Añade una imagen de la part frontal del DNI</string>
+    <string name="insert2DNImage">Añade una imagen de la part reversa del DNI</string>
+    <string name="sendButton">Enviar</string>
+
 
 </resources>

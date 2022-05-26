@@ -181,5 +181,8 @@
 
     <string name="verificant">Admins are currently verifing your request</string>
 
+    <string name="insertDNImage">Insert a image of the frontal part of the NIE</string>
+    <string name="insert2DNImage">Insert a image of the reverse part of the NIE</string>
+    <string name="sendButton">Send</string>
 
 </resources>

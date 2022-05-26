@@ -199,4 +199,8 @@
     <string name="ajustos">Ajustos</string>
     <string name="nom_d_usuari">Nom d\'usuari:</string>
     <string name="verificant">Els administradors estan verificant la teva sol·licitud</string>
+
+    <string name="insertDNImage">Insereix una imatge de la part frontal DNI</string>
+    <string name="insert2DNImage">Insereix una imatge de la part reversa del DNI</string>
+    <string name="sendButton">Enviar</string>
 </resources>
