@@ -58,6 +58,7 @@ class MembersListAdapter (private val context : Activity, private val memberList
         val deleteButton : ImageButton = view.findViewById(R.id.deleteMemberButton)
 
         deleteButton.setOnClickListener {
+            Log.i("funciona", "estoy en el onclick dentro del adapter")
             val id = idTrip
             val username = f.username
             val result = viewModel.deleteMemberFromTrip(id,username)
