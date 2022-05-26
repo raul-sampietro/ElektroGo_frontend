@@ -495,6 +495,14 @@ object FrontendController {
     }
 
 
+    suspend fun reportUser(rep: Report): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}/reports") { //confirmar que ha de ser post
+            contentType(ContentType.Application.Json)
+            body = rep
+        }
+        return httpResponse.status.value
+    }
+
     suspend fun getBlocks(username: String): ArrayList<Block> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/blocks/to/${username}")
         return if (httpResponse.status.value != 200) {
@@ -506,9 +514,6 @@ object FrontendController {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/achievements/${achievement}/users/${username}")
         return httpResponse.receive()
     }
-
-
-
 
 }
 

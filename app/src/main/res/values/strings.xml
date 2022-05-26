@@ -96,6 +96,9 @@
     <string name="buscarFiltrar">Buscar</string>
     <string name="errorFieldsFiltrar">Ompli els camps de forma correcta per tal de poder cercar trajectes</string>
 
+    <string name="enunciatDenuncia">Indica a continuació el motiu de la denúncia:</string>
+    <string name="hintDenuncia">El motiu de la denuncia és...</string>
+    <string name="bttDenuncia">Fer Denúncia</string>
 
     <!-- FirstLoginFragment -->
     <string name="firstLoginWelcome">Benvingut/da,</string>
