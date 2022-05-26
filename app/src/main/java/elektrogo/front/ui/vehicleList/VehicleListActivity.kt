@@ -21,7 +21,7 @@ class VehicleListActivity : AppCompatActivity() {
         toolbar2  = findViewById(R.id.toolbar_main)
         toolbar2.title= getString(R.string.llistaVehicles)
         setSupportActionBar(toolbar2)
-        loadFragment(verifyingDriverFragment)
+        loadFragment(vehicleListFragment)
     }
 
     //Listener del botó d'enrere de la barra d'Android
