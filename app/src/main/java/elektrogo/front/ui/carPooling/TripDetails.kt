@@ -21,7 +21,6 @@ import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
-import jdk.internal.org.jline.utils.Colors.s
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,23 +51,24 @@ class TripDetails : AppCompatActivity() {
         toolbar2.title= getString(R.string.detailsLabel)
         setSupportActionBar(toolbar2)
 
-        val tripSerialized = intent.getSerializableExtra("Trip") as String
-        val Trip : CarPooling = Gson().fromJson(tripSerialized, CarPooling.class)
-        val username= Trip!!.username
-        val startDate = Trip.startDate
-        val startTime = Trip.startTime
-        val cancelDate = Trip.cancelDate
-        val state = Trip.state
-        val offeredSeats = Trip.offeredSeats
-        val occupiedSeats = Trip.occupiedSeats
-        val restrictions = Trip.restrictions
-        val details = Trip.details
-        val originString = Trip.origin
-        val destinationString= Trip.destination
-        val vehicleNumberPlate = Trip.vehicleNumberPlate
-        val latDest = Trip.latitudeDestination
-        val lonDest = Trip.longitudeDestination
-        val id = Trip.id
+        val tripSerialized = intent.getStringExtra("Trip")
+        val trip : CarPooling = Gson().fromJson(tripSerialized, CarPooling::class.java)
+        Log.i("llego", trip.id.toString())
+        val username= trip!!.username
+        val startDate = trip.startDate
+        val startTime = trip.startTime
+        val cancelDate = trip.cancelDate
+        val state = trip.state
+        val offeredSeats = trip.offeredSeats
+        val occupiedSeats = trip.occupiedSeats
+        val restrictions = trip.restrictions
+        val details = trip.details
+        val originString = trip.origin
+        val destinationString= trip.destination
+        val vehicleNumberPlate = trip.vehicleNumberPlate
+        val latDest = trip.latitudeDestination
+        val lonDest = trip.longitudeDestination
+        val id = trip.id
 
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
@@ -82,13 +82,13 @@ class TripDetails : AppCompatActivity() {
         //Obtenci dels membres que participen en el trajecte
         val listView: ListView = this.findViewById(R.id.listMembers)
         var memberList : ArrayList<User>
-        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(Trip.id!!)
+        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(trip.id!!)
         if (resultDefault.first != 200) {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
             memberList = resultDefault.second
-            listView.adapter = MembersListAdapter(this as Activity, memberList, Trip.id!!, Trip!!)
+            listView.adapter = MembersListAdapter(this as Activity, memberList, trip.id!!, trip!!)
         }
 
         //TODO: Crida amb el servei de RevPollution
