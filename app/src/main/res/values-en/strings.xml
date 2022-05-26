@@ -179,5 +179,7 @@
     <string name="block">Block</string>
     <string name="report">Report</string>
 
+    <string name="verificant">Admins are currently verifing your request</string>
+
 
 </resources>

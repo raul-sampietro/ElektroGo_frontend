@@ -10,6 +10,9 @@ import elektrogo.front.R
 
 class VehicleListActivity : AppCompatActivity() {
     private val vehicleListFragment = VehicleListFragment()
+
+    private val verifyingDriverFragment = VerifyingDriverFragment()
+
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -137,6 +137,11 @@
     <string name="espanol">Español</string>
     <string name="preferences">Preferències</string>
 
+    <string name="correu_electronic">Correu electrònic:</string>
+    <string name="eliminar_compte">Eliminar Compte</string>
+    <string name="block">Bloquejar</string>
+    <string name="report">Denunciar</string>
+
     <string name="month">Mes</string>
 
     <string name="Jan">Gener</string>
@@ -193,10 +198,5 @@
     <string name="perfil">Perfil</string>
     <string name="ajustos">Ajustos</string>
     <string name="nom_d_usuari">Nom d\'usuari:</string>
-    <string name="correu_electronic">Correu electronic</string>
-    <string name="eliminar_compte">Eliminar Compte</string>
-    <string name="block">Bloquejar</string>
-    <string name="report">Denunciar</string>
-
-
+    <string name="verificant">Els administradors estan verificant la teva sol·licitud</string>
 </resources>
