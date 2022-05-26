@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="ChangeLanguage"
+        android:id="@+id/language"
+        android:icon="@drawable/ic_language_24"
+        app:showAsAction="always" >
+
+        <menu>
+            <item
+                android:title="@string/catalaMenu"
+                android:id="@+id/catalan"
+                android:icon="@drawable/ic_language_24"
+                app:showAsAction="always" />
+            <item
+                android:title="@string/castellaMenu"
+                android:id="@+id/spanish"
+                android:icon="@drawable/ic_language_24"
+                app:showAsAction="always" />
+            <item
+                android:title="@string/anglesMenu"
+                android:id="@+id/english"
+                android:icon="@drawable/ic_language_24"
+                app:showAsAction="always" />
+
+        </menu>
+    </item>
+
+
+</menu>

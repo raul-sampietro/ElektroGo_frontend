@@ -40,7 +40,7 @@
                         android:layout_marginTop="5dp"
                         android:text="8:30"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/dateFiltered"
@@ -50,19 +50,19 @@
                         android:layout_marginTop="10dp"
                         android:text="23/04/2022"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/path"></ImageView>
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/path" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
@@ -70,18 +70,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:autoSizeMaxTextSize="16sp"
+                        android:autoSizeMinTextSize="12sp"
+                        android:autoSizeTextType="uniform"
                         android:text="Barcelona"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:maxLines="1"
+                        android:textSize="16sp"
+                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/citynameDest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:autoSizeMaxTextSize="16sp"
+                        android:autoSizeMinTextSize="12sp"
+                        android:autoSizeTextType="uniform"
+                        android:maxLines="1"
                         android:text="Madrid"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="16sp"
+                        android:textColor="@color/black" />
                 </LinearLayout>
 
 
@@ -107,7 +115,6 @@
                         android:id="@+id/profile_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/avatar"
                         app:civ_border_color="#FF000000"
                         app:civ_border_width="1dp" />
 
@@ -126,9 +133,8 @@
                         android:layout_marginTop="15dp"
                         android:autoSizeTextType="uniform"
                         android:autoSizeMinTextSize="12sp"
-                        android:autoSizeMaxTextSize="26sp"
+                        android:autoSizeMaxTextSize="24sp"
                         android:textColor="@color/black"
-                        android:textSize="26sp"
                         android:text="Marina Alapont"
                         android:textStyle="bold" />
 
@@ -172,6 +178,14 @@
                             android:layout_height="27dp"
                             android:layout_marginStart="5dp"
                             android:src="@drawable/ic_starplena" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/numberValorations"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginStart="10dp"
+                            android:text="(0)"
+                            android:textSize="16sp"/>
                     </LinearLayout>
 
                     <LinearLayout

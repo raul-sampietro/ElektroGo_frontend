@@ -12,7 +12,12 @@
             android:id="@+id/ruta"
             android:icon="@drawable/ic_ruta"/>
 
+    <item   android:title="@string/chat"
+        android:id="@+id/chat"
+        android:icon="@drawable/ic_baseline_chat_24"/>
+
     <item   android:title="@string/title_profile"
             android:id="@+id/perfil"
             android:icon="@drawable/ic_perfil"/>
+
 </menu>
