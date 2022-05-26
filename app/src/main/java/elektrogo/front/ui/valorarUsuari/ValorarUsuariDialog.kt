@@ -39,8 +39,8 @@ class ValorarUsuariDialog : DialogFragment() {
                 ratedUser = arguments?.getString("guestUser")!!
                 var rated = false
 
-                setTitle("Valora")
-                setMessage("Com vols valorar a ${ratedUser}?")
+                setTitle(getString(R.string.Valora))
+                setMessage(getString(R.string.ComValorar) + " $ratedUser?")
 
                 val guiValorar = layoutInflater.inflate(R.layout.valorar_usuari_fragment, null)
                 setView(guiValorar)
@@ -63,8 +63,8 @@ class ValorarUsuariDialog : DialogFragment() {
                     try { status = runBlocking{ FrontendController.rateUser(valoracio) } }
                     catch (e: Exception) {}
 
-                    if (status == 201) Toast.makeText(activity, "Has valorat a $ratedUser amb $puntuacio estrelles.", Toast.LENGTH_SHORT).show()
-                    else Toast.makeText(activity, "No s'ha pogut valorar a $ratedUser.", Toast.LENGTH_SHORT).show()
+                    if (status == 201) Toast.makeText(activity, getString(R.string.HasValoratA) + " $ratedUser " + getString(R.string.amb) + " $puntuacio " + getString(R.string.Estrelles), Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(activity, getString(R.string.NoSHaPogutValorarA) + " $ratedUser.", Toast.LENGTH_SHORT).show()
 
                     dismiss() // tanca el dialog
                 }
@@ -75,8 +75,8 @@ class ValorarUsuariDialog : DialogFragment() {
                     try { status = runBlocking{ FrontendController.unrateUser(userWhoRates, ratedUser) } }
                     catch (e: Exception) {}
 
-                    if (status == 200) Toast.makeText(activity, "Has eliminat la valoració.", Toast.LENGTH_SHORT).show()
-                    else Toast.makeText(activity, "No s'ha pogut eliminar la valoració.", Toast.LENGTH_SHORT).show()
+                    if (status == 200) Toast.makeText(activity, getString(R.string.ValoracioEliminada), Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(activity, getString(R.string.ErrorEliminarValoracio), Toast.LENGTH_SHORT).show()
 
                     dismiss() // tanca el dialog
                 }
@@ -97,7 +97,7 @@ class ValorarUsuariDialog : DialogFragment() {
                 if (!rated) (eliminarBtn.parent as ViewManager).removeView(eliminarBtn)
                 else {
                     setStars()
-                    valorarBtn.text = "Modificar" //TODO: treure string hardcodejada, i la resta del fitxer
+                    valorarBtn.text = getString(R.string.ModificarValoracio)
                 }
 
                 //logica per canviar la puntuacio tocant les estrelles

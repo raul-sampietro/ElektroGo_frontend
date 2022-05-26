@@ -175,6 +175,24 @@
     <string name="eliminar_compte">Eliminar Compte</string>
     <string name="block">Bloquejar</string>
     <string name="report">Denunciar</string>
+    <string name="confirmation">Confirmació</string>
 
+    <string name="MotiuCancelacio">Dona un motiu i confirma</string>
+    <string name="ConfirmarButton">CONFIRMAR</string>
+    <string name="trajecteCancelat">Trajecte cancel·lat</string>
+    <string name="ErrorCancelarTrajecte">No s\'ha pogut canel·lar el trajecte.</string>
+    <string name="GetStationsServerTimeout">No s\'ha pogut connectar amb el servidor.</string>
+    <string name="GetStationsServerError">No s\'han pogut obtenir les estacions de càrrega. ERROR:</string>
+    <string name="SanTrobat">S\'han trobat</string>
+    <string name="EstacionsDeCarrega">estacions de càrrega</string>
+    <string name="Valora">Valora</string>
+    <string name="ComValorar">Com vols valorar a</string>
+    <string name="HasValoratA">Has valorat a</string>
+    <string name="amb">amb</string>
+    <string name="Estrelles">estrelles.</string>
+    <string name="NoSHaPogutValorarA">No s\'ha pogut valorar a</string>
+    <string name="ValoracioEliminada">Has eliminat la valoració.</string>
+    <string name="ErrorEliminarValoracio">No s\'ha pogut eliminar la valoració.</string>
+    <string name="ModificarValoracio">Modificar</string>
 
 </resources>
