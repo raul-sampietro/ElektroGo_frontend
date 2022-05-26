@@ -231,6 +231,8 @@ class FilterTripsFragment : Fragment() {
             i.putExtra("username", filteredList[position].username)
             i.putExtra("startDate", filteredList[position].startDate)
             i.putExtra("startTime", filteredList[position].startTime)
+            i.putExtra("cancelDate", filteredList[position].cancelDate)
+            i.putExtra("state", filteredList[position].state)
             i.putExtra("offeredSeats",filteredList[position].offeredSeats)
             i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
             i.putExtra("restrictions", filteredList[position].restrictions)

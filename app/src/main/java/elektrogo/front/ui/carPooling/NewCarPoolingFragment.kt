@@ -277,7 +277,7 @@ class NewCarPoolingFragment() : Fragment() {
                 var cancelDate: LocalDate = LocalDate.parse(dataJSON!!, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusDays(1)
                 var newCarPoolingInfo = CarPooling(null, dataJSON,hour, dropSeats.selectedItem.toString().toInt(),
                     1, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
-                    SessionController.getUsername(requireContext()), cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                    SessionController.getUsername(requireContext()), cancelDate.toString(), "current", latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
                     latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble())
 
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())

@@ -6,6 +6,7 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +22,7 @@ import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -41,6 +43,7 @@ class TripDetails : AppCompatActivity() {
      * @pre
      * @post capta l'informacio pasada desde el fragment filterTripsFragment i la mostra per pantalla.
      */
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trip_details)
@@ -51,7 +54,9 @@ class TripDetails : AppCompatActivity() {
         val tripID= intent.getStringExtra("tripID")
         val username= intent.getStringExtra("username")
         val startDate = intent.getStringExtra("startDate")
-        var startTime = intent.getStringExtra("startTime")
+        val startTime = intent.getStringExtra("startTime")
+        val cancelDate = intent.getStringExtra("cancelDate")
+        val state = intent.getStringExtra("state")
         val offeredSeats = intent.getIntExtra("offeredSeats", 1)
         val occupiedSeats = intent.getIntExtra("occupiedSeats", 1)
         val restrictions = intent.getStringExtra("restrictions")
@@ -129,7 +134,12 @@ class TripDetails : AppCompatActivity() {
         }
 
         val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
-        if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
+
+        val today = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val cancelDay = formatter.parse(cancelDate)
+
+        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
