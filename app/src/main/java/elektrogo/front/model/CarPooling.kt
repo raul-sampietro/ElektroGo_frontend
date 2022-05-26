@@ -62,6 +62,10 @@ data class CarPooling(
      */
     var cancelDate: String,
     /**
+     * @brief es l'estat en que es troba el trajecte
+     */
+    var state: String,
+    /**
      * @brief coordenada latitud de l'origen
      */
     var latitudeOrigin: Double,
