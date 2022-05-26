@@ -159,23 +159,33 @@ class TripDetails : AppCompatActivity() {
                 userParticipates = true;
             }
         }
+        Toast.makeText(
+            this, "${userParticipates},${(SessionController.getUsername(this) != username)},${(today < cancelDay)}, ${state}}", Toast.LENGTH_LONG).show()
+
         if (userParticipates && (SessionController.getUsername(this) != username) && (today < cancelDay) && state !="cancelled" && state != "finished") {
-            if (userParticipates) {
-                btnCancel.setText("ABANDONAR TRAJECTE") //PREGUNTAR MARINA COMO PONER ESTO NO HARDCODED
-                btnCancel.setOnClickListener {
-                    val status = viewModel.abandonTrip(id, SessionController.getUsername(this));
-                    if (status != 200) {
-                        Toast.makeText(
-                            this,
-                            "${status}:Hi ha hagut un error abandonant el trajecte",
-                            Toast.LENGTH_LONG
-                        ).show()
+            btnCancel.setText("ABANDONAR TRAJECTE") //PREGUNTAR MARINA COMO PONER ESTO NO HARDCODED
+            btnCancel.setOnClickListener {
+                val status = viewModel.abandonTrip(id, SessionController.getUsername(this));
+                if (status != 200) {
+                    Toast.makeText(
+                        this,
+                        "${status}:Hi ha hagut un error abandonant el trajecte",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else { //Trip abandoned successfully
+                    var memberListAux : ArrayList<User> = arrayListOf()
+
+                    for (u: User in memberList) {
+                        if (u.username != SessionController.getUsername(this)) {
+                            memberListAux.add(u);
+                        }
                     }
-                    else {
-                        //TODO: REFRESH FRAGMENT OR (RELOAD MEMEBERLIST, HIDE ABANDON TRIP BUTTON AND SHOW ADD MEMBER)
-                    }
+                    listView.adapter = MembersListAdapter(this as Activity, memberListAux,id, trip)
+                    (btnCancel.parent as ViewManager).removeView(btnCancel)
                 }
             }
+
         }
         else if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
