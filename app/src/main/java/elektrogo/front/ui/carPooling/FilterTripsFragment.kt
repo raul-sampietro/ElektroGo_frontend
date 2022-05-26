@@ -240,9 +240,7 @@ class FilterTripsFragment : Fragment() {
             i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
             i.putExtra("destinationLat", filteredList[position].latitudeDestination)
             i.putExtra("destinationLon", filteredList[position].longitudeDestination)
-            Log.i("coordenadas", filteredList[position].latitudeDestination.toString())
-            Log.i("coordenadas", filteredList[position].longitudeDestination.toString())
-
+            i.putExtra("id", filteredList[position].id)
             startActivity(i)
         })
 
