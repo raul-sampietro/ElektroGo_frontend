@@ -100,7 +100,7 @@
                 android:textSize="14sp"/>
 
             <ImageButton
-                android:id="@+id/deleteChatButton"
+                android:id="@+id/deleteMemberButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:backgroundTint="#FF0000"

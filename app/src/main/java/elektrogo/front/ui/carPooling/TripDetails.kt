@@ -84,7 +84,7 @@ class TripDetails : AppCompatActivity() {
         }
         else {
             memberList = resultDefault.second
-            listView.adapter = MembersListAdapter(this as Activity, memberList)
+            listView.adapter = MembersListAdapter(this as Activity, memberList, id)
         }
 
         //TODO: Crida amb el servei de RevPollution

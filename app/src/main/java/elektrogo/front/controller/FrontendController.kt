@@ -396,6 +396,12 @@ object FrontendController {
         return status
     }
 
+    suspend fun deleteMemberFromTrip(id: Long, username: String): Int {
+        val httpResponse : HttpResponse = client.delete("${URL_CAR_POOLING}/${id}/from/${username}")
+        var status: Int = httpResponse.status.value
+        return status
+    }
+
     // #################################################
     // #  ROUTES                                       #
     // #################################################
@@ -500,6 +506,8 @@ object FrontendController {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/achievements/${achievement}/users/${username}")
         return httpResponse.receive()
     }
+
+
 
 
 }

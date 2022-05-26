@@ -12,17 +12,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
 import java.text.SimpleDateFormat
 
-class MembersListAdapter (private val context : Activity, private val memberList : ArrayList<User>) : ArrayAdapter<User>(context, R.layout.member_list_item, memberList){
+class MembersListAdapter (private val context : Activity, private val memberList : ArrayList<User>, private val idTrip: Long) : ArrayAdapter<User>(context, R.layout.member_list_item, memberList){
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
@@ -57,6 +54,14 @@ class MembersListAdapter (private val context : Activity, private val memberList
         if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
         return view
+
+        val deleteButton : ImageButton = view.findViewById(R.id.deleteMemberButton)
+
+        deleteButton.setOnClickListener {
+            val id = idTrip
+            val username = f.username
+            val result = viewModel.deleteMemberFromTrip(id,username)
+        }
     }
     /**
      * @brief Metode que s'encarrega de renderitzar les estrelles que te l'usuari segons la valoracio mitjana que rep.
