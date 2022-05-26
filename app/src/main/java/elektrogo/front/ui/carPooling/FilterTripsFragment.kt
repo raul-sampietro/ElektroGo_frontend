@@ -30,6 +30,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.gson.Gson
 import elektrogo.front.R
 import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
@@ -227,22 +228,8 @@ class FilterTripsFragment : Fragment() {
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             val i = Intent(context, TripDetails::class.java)
-            i.putExtra("tripID", filteredList[position].id.toString())
-            i.putExtra("username", filteredList[position].username)
-            i.putExtra("startDate", filteredList[position].startDate)
-            i.putExtra("startTime", filteredList[position].startTime)
-            i.putExtra("cancelDate", filteredList[position].cancelDate)
-            i.putExtra("state", filteredList[position].state)
-            i.putExtra("offeredSeats",filteredList[position].offeredSeats)
-            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
-            i.putExtra("restrictions", filteredList[position].restrictions)
-            i.putExtra("details", filteredList[position].details)
-            i.putExtra("originString", filteredList[position].origin)
-            i.putExtra("destinationString", filteredList[position].destination)
-            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
-            i.putExtra("destinationLat", filteredList[position].latitudeDestination)
-            i.putExtra("destinationLon", filteredList[position].longitudeDestination)
-            i.putExtra("id", filteredList[position].id)
+            val myjson : String = Gson().toJson(filteredList[position])
+            i.putExtra("Trip", myjson)
             startActivity(i)
         })
 

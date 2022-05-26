@@ -56,4 +56,8 @@ class FilterTripsViewModel : ViewModel() {
         return@runBlocking FrontendController.askForTripsDefault(username)
     }
 
+    fun deleteMemberFromTrip(id: Long, username: String) : Int = runBlocking {
+        return@runBlocking FrontendController.deleteMemberFromTrip(id,username)
+    }
+
 }

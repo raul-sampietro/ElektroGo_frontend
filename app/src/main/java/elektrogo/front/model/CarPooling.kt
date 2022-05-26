@@ -64,7 +64,7 @@ data class CarPooling(
     /**
      * @brief es l'estat en que es troba el trajecte
      */
-    var state: String,
+    var state: String?,
     /**
      * @brief coordenada latitud de l'origen
      */
