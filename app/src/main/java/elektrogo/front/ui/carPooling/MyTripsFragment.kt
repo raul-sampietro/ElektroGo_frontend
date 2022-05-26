@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
 import com.github.sundeepk.compactcalendarview.CompactCalendarView.CompactCalendarViewListener
 import com.github.sundeepk.compactcalendarview.domain.Event
+import com.google.gson.Gson
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
@@ -107,19 +108,8 @@ class MyTripsFragment : Fragment() {
 
         listView.setOnItemClickListener { parent, Listview, position, id ->
             val i = Intent(context, TripDetails::class.java)
-            i.putExtra("tripID", filteredList[position].id.toString())
-            i.putExtra("username", filteredList[position].username)
-            i.putExtra("startDate", filteredList[position].startDate)
-            i.putExtra("startTime", filteredList[position].startTime)
-            i.putExtra("cancelDate", filteredList[position].cancelDate)
-            i.putExtra("state", filteredList[position].state)
-            i.putExtra("offeredSeats", filteredList[position].offeredSeats)
-            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
-            i.putExtra("restrictions", filteredList[position].restrictions)
-            i.putExtra("details", filteredList[position].details)
-            i.putExtra("originString", filteredList[position].origin)
-            i.putExtra("destinationString", filteredList[position].destination)
-            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+            val myjson : String = Gson().toJson(filteredList[position])
+            i.putExtra("Trip", myjson)
             startActivity(i)
         }
 

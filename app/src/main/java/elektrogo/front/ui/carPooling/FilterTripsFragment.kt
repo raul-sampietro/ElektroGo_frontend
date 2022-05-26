@@ -229,7 +229,6 @@ class FilterTripsFragment : Fragment() {
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             val i = Intent(context, TripDetails::class.java)
             val myjson : String = Gson().toJson(filteredList[position])
-            Log.i("llego", filteredList[position].toString())
             i.putExtra("Trip", myjson)
             startActivity(i)
         })

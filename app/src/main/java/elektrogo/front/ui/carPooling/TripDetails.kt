@@ -82,13 +82,13 @@ class TripDetails : AppCompatActivity() {
         //Obtenci dels membres que participen en el trajecte
         val listView: ListView = this.findViewById(R.id.listMembers)
         var memberList : ArrayList<User>
-        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(trip.id!!)
+        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(id!!)
         if (resultDefault.first != 200) {
-            Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard2", Toast.LENGTH_LONG).show()
         }
         else {
             memberList = resultDefault.second
-            listView.adapter = MembersListAdapter(this as Activity, memberList, trip.id!!, trip!!)
+            listView.adapter = MembersListAdapter(this as Activity, memberList,id, trip)
         }
 
         //TODO: Crida amb el servei de RevPollution

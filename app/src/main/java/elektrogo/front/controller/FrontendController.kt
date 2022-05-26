@@ -360,7 +360,7 @@ object FrontendController {
     }
 
     suspend fun getMembersByTrip(id: Long): Pair<Int, ArrayList<User>> {
-        val httpResponse : HttpResponse = client.get("${URL_CAR_POOLING}/car-pooling/${id}/users")
+        val httpResponse : HttpResponse = client.get("${URL_CAR_POOLING}/${id}/users")
         val members: ArrayList<User>
         var status: Int = httpResponse.status.value
         if (httpResponse.status.value != 200) {

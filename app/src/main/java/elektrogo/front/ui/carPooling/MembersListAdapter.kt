@@ -70,10 +70,9 @@ class MembersListAdapter (private val context : Activity, private val memberList
                 Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_SHORT).show()
             }
             val i = Intent(parent.context, TripDetails::class.java)
-            Log.i("llego", "llego a antes del put extra")
             i.putExtra("Trip", Gson().toJson(Trip))
-            Log.i("llego", "llego a despues del put extra")
             parent.context.startActivity(i)
+            context.finish()
 
         }
 
