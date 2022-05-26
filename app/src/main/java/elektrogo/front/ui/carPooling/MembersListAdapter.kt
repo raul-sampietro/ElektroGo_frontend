@@ -8,18 +8,22 @@ package elektrogo.front.ui.carPooling
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat.startActivity
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.text.SimpleDateFormat
 
-class MembersListAdapter (private val context : Activity, private val memberList : ArrayList<User>, private val idTrip: Long) : ArrayAdapter<User>(context, R.layout.member_list_item, memberList){
+class MembersListAdapter (private val context : Activity, private val memberList : ArrayList<User>, private val idTrip: Long, private val Trip : CarPooling) : ArrayAdapter<User>(context, R.layout.member_list_item, memberList){
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
@@ -65,7 +69,10 @@ class MembersListAdapter (private val context : Activity, private val memberList
             if (result!=200) {
                 Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_SHORT).show()
             }
-            notifyDataSetChanged()
+            val i = Intent(parent.context, TripDetails::class.java)
+            i.putExtra("Trip", Gson().toJson(Trip))
+            parent.context.startActivity(i)
+
         }
 
         return view

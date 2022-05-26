@@ -6,24 +6,22 @@
  */
 package elektrogo.front.ui.carPooling
 
-import android.app.Activity
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.ViewManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
+import jdk.internal.org.jline.utils.Colors.s
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -54,22 +52,23 @@ class TripDetails : AppCompatActivity() {
         toolbar2.title= getString(R.string.detailsLabel)
         setSupportActionBar(toolbar2)
 
-        val tripID= intent.getStringExtra("tripID")
-        val username= intent.getStringExtra("username")
-        val startDate = intent.getStringExtra("startDate")
-        val startTime = intent.getStringExtra("startTime")
-        val cancelDate = intent.getStringExtra("cancelDate")
-        val state = intent.getStringExtra("state")
-        val offeredSeats = intent.getIntExtra("offeredSeats", 1)
-        val occupiedSeats = intent.getIntExtra("occupiedSeats", 1)
-        val restrictions = intent.getStringExtra("restrictions")
-        val details = intent.getStringExtra("details")
-        val originString = intent.getStringExtra("originString")
-        val destinationString= intent.getStringExtra("destinationString")
-        val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
-        val latDest = intent.getDoubleExtra("destinationLat", 1.0)
-        val lonDest = intent.getDoubleExtra("destinationLon", 1.0)
-        val id = intent.getLongExtra("id",1)
+        val tripSerialized = intent.getSerializableExtra("Trip") as String
+        val Trip : CarPooling = Gson().fromJson(tripSerialized, CarPooling.class)
+        val username= Trip!!.username
+        val startDate = Trip.startDate
+        val startTime = Trip.startTime
+        val cancelDate = Trip.cancelDate
+        val state = Trip.state
+        val offeredSeats = Trip.offeredSeats
+        val occupiedSeats = Trip.occupiedSeats
+        val restrictions = Trip.restrictions
+        val details = Trip.details
+        val originString = Trip.origin
+        val destinationString= Trip.destination
+        val vehicleNumberPlate = Trip.vehicleNumberPlate
+        val latDest = Trip.latitudeDestination
+        val lonDest = Trip.longitudeDestination
+        val id = Trip.id
 
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
@@ -83,13 +82,13 @@ class TripDetails : AppCompatActivity() {
         //Obtenci dels membres que participen en el trajecte
         val listView: ListView = this.findViewById(R.id.listMembers)
         var memberList : ArrayList<User>
-        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(id)
+        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(Trip.id!!)
         if (resultDefault.first != 200) {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
         else {
             memberList = resultDefault.second
-            listView.adapter = MembersListAdapter(this as Activity, memberList, id)
+            listView.adapter = MembersListAdapter(this as Activity, memberList, Trip.id!!, Trip!!)
         }
 
         //TODO: Crida amb el servei de RevPollution
@@ -160,7 +159,7 @@ class TripDetails : AppCompatActivity() {
                 val confirmDialog = CancelTripDialog()
 
                 val bundle = Bundle()
-                bundle.putString("tripID", tripID) //passem l'identificador del trajecte
+                bundle.putString("tripID", id.toString()) //passem l'identificador del trajecte
                 confirmDialog.arguments = bundle
 
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
