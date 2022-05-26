@@ -38,6 +38,7 @@ class MembersListAdapter (private val context : Activity, private val memberList
         val view = inflater.inflate(R.layout.member_list_item, null)
 
         val f = memberList[position]
+        Log.i("funciona", "hola")
 
         val usernameText : TextView= view.findViewById(R.id.usernameItem)
         usernameText.text = f.username
@@ -53,7 +54,6 @@ class MembersListAdapter (private val context : Activity, private val memberList
         val imagePath = f.imageUrl
         if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
-        return view
 
         val deleteButton : ImageButton = view.findViewById(R.id.deleteMemberButton)
 
@@ -63,6 +63,10 @@ class MembersListAdapter (private val context : Activity, private val memberList
             val username = f.username
             val result = viewModel.deleteMemberFromTrip(id,username)
         }
+
+        return view
+
+
     }
     /**
      * @brief Metode que s'encarrega de renderitzar les estrelles que te l'usuari segons la valoracio mitjana que rep.
