@@ -21,7 +21,6 @@ import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AddressComponent
-import com.google.android.libraries.places.api.model.AddressComponents
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -29,11 +28,9 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
-import io.ktor.http.*
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -217,7 +214,7 @@ class NewCarPoolingFragment() : Fragment() {
                 else if (minute >= 10 && hour < 10) selectedHour.setText("0$hour:$minute")
                 else selectedHour.setText("$hour:$minute")
                 selectedHour.setError(null)
-            }, minute, hour, true)
+            }, hour, minute, true)
 
             tpd.show()
         }
@@ -280,7 +277,7 @@ class NewCarPoolingFragment() : Fragment() {
                 var cancelDate: LocalDate = LocalDate.parse(dataJSON!!, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusDays(1)
                 var newCarPoolingInfo = CarPooling(null, dataJSON,hour, dropSeats.selectedItem.toString().toInt(),
                     1, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
-                    SessionController.getUsername(requireContext()), cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                    SessionController.getUsername(requireContext()), cancelDate.toString(), "current", latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
                     latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble())
 
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())

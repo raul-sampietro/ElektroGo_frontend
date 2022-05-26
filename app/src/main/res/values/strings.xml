@@ -151,8 +151,52 @@
     <string name="Oct">Octubre</string>
     <string name="Nov">Novembre</string>
     <string name="Dec">Decembre</string>
-
-
+    <string name="channel_name" translatable="false">Chat</string>
+    <string name="channel_description" translatable="false">Notifications coming from messages received on the chat</string>
+    <string name="ToolbarMapa">Mapa</string>
+    <string name="ToolbarRuta">Ruta</string>
+    <string name="ToolbarChat">Chat</string>
+    <string name="ToolbarPerfil">Perfil</string>
+    <string name="CrearTrajecte">Crear Trajecte</string>
+    <string name="MyTrips">Els meus trajectes</string>
+    <string name="DataFilter">Data</string>
+    <string name="FinsFilter">Fins a</string>
+    <string name="DesdeFilter">Des de</string>
+    <string name="OrigenString">Origen</string>
+    <string name="DestiString">Desti</string>
+    <string name="details">Detalls:</string>
+    <string name="restriccions">Restriccions:</string>
+    <string name="encara_hi_ha">Encara hi ha</string>
+    <string name="seients_disponibles">seients disponibles</string>
+    <string name="anfitrio">Anfitrió:</string>
+    <string name="buttonCancelTrip">Cancel·lar trajecte</string>
+    <string name="rao_de_cancel_lacio">Motiu</string>
+    <string name="eliminaValoracio">Elimina</string>
+    <string name="comentariValoracio">Escriu un comentari</string>
+    <string name="cancel">cancelar</string>
+    <string name="ok">D\'acord</string>
+    <string name="pregunta_difusio">Escull a qui vols enviar el missatge</string>
+    <string name="next">next</string>
+    <string name="message_to_send">Type the message you want to send</string>
+    <string name="message_sent">messages sent</string>
+    <string name="esborrarXat">"Vols esborrar el xat amb "</string>
+    <string name="si">SI</string>
+    <string name="esborrantXat">Esborrant xat</string>
+    <string name="xatNoEsborrat">Xat no esborrat</string>
+    <string name="no">NO</string>
+    <string name="envia">enviar</string>
+    <string name="buscaUsuari">Buscar a...</string>
+    <string name="confirma">confirmar</string>
+    <string name="errorChatNotFound">Error, chat conversation not found</string>
+    <string name="TripsNavMenu">My trips</string>
+    <string name="vehiclesMenu">My vehicles</string>
+    <string name="perfil">Perfil</string>
+    <string name="ajustos">Ajustos</string>
+    <string name="nom_d_usuari">Nom d\'usuari:</string>
+    <string name="correu_electronic">Correu electronic</string>
+    <string name="eliminar_compte">Eliminar Compte</string>
+    <string name="block">Bloquejar</string>
+    <string name="report">Denunciar</string>
 
 
 </resources>

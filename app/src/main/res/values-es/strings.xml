@@ -110,7 +110,7 @@
     <string name="facebook_app_id">850446215915012</string>
     <string name="fb_login_protocol_scheme">fb850446215915012</string>
     <string name="facebook_client_token">d2fe733d766ef258b456bfcbbdb78de2</string>
-    <string name="profile_logout_button">Tancar Sessió</string>
+    <string name="profile_logout_button">Cerrar Sesión</string>
 
     <string name="shareOwnTrip">He creado un nuevo trayecto en ElektroGo para el día %1$s a las %2$s con origen %3$s y destinación %4$s. Solo quedan %5$s asientos libres! \n\nÚnete a mi a traves de la aplicación: https://marccastellsdostal.wixsite.com/elektrogo</string>
     <string name="shareTrip">He encontrado un trayecto en la app de ElektroGo para el día %1$s a las %2$s con origen %3$s y destinación %4$s. Solo quedan %5$s asientos libres! \n\nÚnete a traves de la aplicación: https://marccastellsdostal.wixsite.com/elektrogo</string>
@@ -132,7 +132,51 @@
     <string name="english">English</string>
     <string name="espanol">Español</string>
     <string name="preferences">Preferencias</string>
-
+    <string name="ToolbarMapa">Mapa</string>
+    <string name="ToolbarRuta">Ruta</string>
+    <string name="ToolbarChat">Chat</string>
+    <string name="ToolbarPerfil">Perfil</string>
+    <string name="CrearTrajecte">Crear trayecto</string>
+    <string name="MyTrips">Mis trayectos</string>
+    <string name="DataFilter">Fecha</string>
+    <string name="FinsFilter">Hasta</string>
+    <string name="DesdeFilter">Desde</string>
+    <string name="OrigenString">Origen</string>
+    <string name="DestiString">Destino</string>
+    <string name="details">Detalles:</string>
+    <string name="restriccions">Restricciones:</string>
+    <string name="encara_hi_ha">Aún hay</string>
+    <string name="seients_disponibles">asientos disponibles</string>
+    <string name="anfitrio">Anfitrión:</string>
+    <string name="buttonCancelTrip">Cancelar trayecto</string>
+    <string name="rao_de_cancel_lacio">Motivo</string>
+    <string name="eliminaValoracio">Elimina</string>
+    <string name="comentariValoracio">Write a comment</string>
+    <string name="ok">De acuerdo</string>
+    <string name="pregunta_difusio">Selecciona a quien quieras enviar el mensaje</string>
+    <string name="cancel">cancelar</string>
+    <string name="channel_description">Notifications coming from messages received on the chat</string>
+    <string name="next">continuar</string>
+    <string name="message_to_send">Escribe el mensaje que quieres enviar</string>
+    <string name="message_sent">mensajes enviados</string>
+    <string name="esborrarXat">"Quieres borrar el chat con "</string>
+    <string name="si">SI</string>
+    <string name="esborrantXat">Borrando chat</string>
+    <string name="xatNoEsborrat">Chat no borrado</string>
+    <string name="no">NO</string>
+    <string name="envia">enviar</string>
+    <string name="buscaUsuari">Buscar a...</string>
+    <string name="confirma">confirmar</string>
+    <string name="errorChatNotFound">Error, conversación no encontrada</string>
+    <string name="TripsNavMenu">Mis trayectos</string>
+    <string name="vehiclesMenu">Mis vehículos</string>
+    <string name="perfil">Perfil</string>
+    <string name="ajustos">Ajustes</string>
+    <string name="nom_d_usuari">Nombre de usuario:</string>
+    <string name="correu_electronic">Correo electrónico:</string>
+    <string name="eliminar_compte">Delete Account</string>
+    <string name="block">Bloquear</string>
+    <string name="report">Denunciar</string>
 
 
 </resources>

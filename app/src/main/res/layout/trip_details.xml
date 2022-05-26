@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.carPooling.TripDetails">
 
     <include
@@ -15,9 +17,7 @@
     <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_marginTop="55dp">
+        android:orientation="vertical">
 
 
     <LinearLayout
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Origen:"
+            android:text= "@string/origen"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -117,24 +117,57 @@
             android:layout_marginEnd="20dp"
             android:background="#95C59A" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            android:text="Destí:"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/destinationFull"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:text="Madrid"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/dest"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/destinationFull"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="Madrid"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/airqualityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_gravity="center"
+                    android:text="Qualitat del aire:"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp" />
+
+
+                <ImageView
+                    android:id="@+id/airqualityImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="25dp"
+                    app:srcCompat="@drawable/ic_baseline_image_not_supported_24" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Detalls:"
+            android:text="@string/details"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -176,7 +209,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Restriccions:"
+            android:text="@string/restriccions"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -207,7 +240,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Encara hi ha"
+                android:text="@string/encara_hi_ha"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal" />
@@ -227,7 +260,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:text="seients disponibles"
+                android:text="@string/seients_disponibles"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="normal" />
@@ -249,10 +282,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Anfitrió:"
+            android:text="@string/anfitrio"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -261,20 +295,21 @@
             android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp">
+            <RelativeLayout
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_imageDetails"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:civ_border_width="1dp"
-                app:civ_border_color="#FF000000"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="1dp" />
 
-        </RelativeLayout>
+            </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -348,9 +383,55 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_marginTop="20dp"
+            android:background="#95C59A" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Membres"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/listMembers"
+            android:clickable="true"
+            tools:listitem="@layout/member_list_item">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_cancelarTrajecte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#FF0000"
+                android:text="@string/buttonCancelTrip"
+                tools:ignore="TextContrastCheck" />
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
 </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -121,7 +121,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:drawableRight="@drawable/clock"
-                    android:text="Des de" />
+                    android:text="@string/DesdeFilter" />
 
                 <Button
                     android:id="@+id/timeToButtonFiltrar"
@@ -131,7 +131,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:drawableRight="@drawable/clock"
-                    android:text="Fins a" />
+                    android:text="@string/FinsFilter" />
 
             </LinearLayout>
 
@@ -147,7 +147,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:drawableRight="@drawable/calendar"
-                    android:text="@string/dataFiltrar" />
+                    android:text="@string/DataFilter" />
 
                 <Button
                     android:layout_width="wrap_content"

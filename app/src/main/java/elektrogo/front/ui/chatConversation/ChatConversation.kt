@@ -1,20 +1,24 @@
 package elektrogo.front.ui.chatConversation
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import elektrogo.front.ChatService
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
+import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
 
 
 class ChatConversation : AppCompatActivity() {
@@ -22,11 +26,24 @@ class ChatConversation : AppCompatActivity() {
     private lateinit var viewModel: ChatConversationViewModel
     private lateinit var conversation: ArrayList<Message>
     private lateinit var adapter: ChatConversationAdapter
-
+    private lateinit var thread: Thread
+    private lateinit var recyclerView: RecyclerView
+    private var interrupted: Boolean = false
     //userA is the current user
+
+    private fun changeData(newConversation: ArrayList<Message>) {
+        conversation = newConversation
+        adapter.updateData(conversation)
+        recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+    }
 
     @SuppressLint("WrongViewCast", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        stopService(Intent(this, ChatService::class.java))
+
+        interrupted = false
+
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[ChatConversationViewModel::class.java]
         setContentView(R.layout.activity_chat_conversation)
@@ -49,27 +66,34 @@ class ChatConversation : AppCompatActivity() {
         val sessionController = SessionController
         val currentUser = sessionController.getUsername(this)
         conversation = viewModel.getConversation(userA, userB)
-        val recyclerView = findViewById<RecyclerView>(R.id.listConversation)
+        recyclerView = findViewById<RecyclerView>(R.id.listConversation)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ChatConversationAdapter(this, conversation, currentUser)
         recyclerView.adapter = adapter
         val position = adapter.itemCount - 1
         recyclerView.smoothScrollToPosition(position)
 
-        // TODO -> arreglar CountDownTimer para que no se acabe
-        object : CountDownTimer(180000, 1500) {
-            override fun onTick(p0: Long) {
-                conversation = viewModel.getConversation(userA, userB)
-                adapter.updateData(conversation)
-            }
 
-            override fun onFinish() {
+        thread = Thread {
+            while(true and !interrupted) {
+                Thread.sleep(2000)
+                val conversationIncoming = viewModel.getConversation(userA, userB)
+                if (conversationIncoming.size > conversation.size) {
+                    runOnUiThread {
+                        changeData(conversationIncoming)
+                    }
+                }
             }
-        }.start()
+        }
+        thread.start()
 
         val backButton : ImageButton = findViewById(R.id.backButtonConversation)
         backButton.setOnClickListener {
-            finish()
+            if (thread.isAlive) {
+                interrupted = true
+                startService(Intent(this, ChatService::class.java))
+            }
+                super.onBackPressed()
         }
 
         val editText : EditText = findViewById(R.id.messageToSend)
@@ -88,6 +112,24 @@ class ChatConversation : AppCompatActivity() {
             adapter.updateData(conversation)
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }
+
+        val addMemberButton : ImageButton = findViewById(R.id.addMemberButton)
+
+        addMemberButton.setOnClickListener {
+            Log.i("add", "Le he dado click")
+            val addMember = AddMemberDialog()
+            val bundle = Bundle()
+            bundle.putString("member", b!!.getString("userB"))
+            addMember.arguments = bundle
+            addMember.show( supportFragmentManager , "AddMemberDialog")
+        }
+    }
+    override fun onBackPressed() {
+        if (thread.isAlive) {
+            interrupted = true
+        }
+        startService(Intent(this, ChatService::class.java))
+        super.onBackPressed()
     }
 
 }

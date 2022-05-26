@@ -16,21 +16,22 @@ class VehicleListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vehicle_list)
         toolbar2  = findViewById(R.id.toolbar_main)
+        toolbar2.title= getString(R.string.llistaVehicles)
         setSupportActionBar(toolbar2)
         loadFragment(vehicleListFragment)
     }
 
     //Listener del botó d'enrere de la barra d'Android
-    override fun onBackPressed() {
+    //Ho comento perque ja no fa falta
+   /* override fun onBackPressed() {
         if (onBackPressedDispatcher.hasEnabledCallbacks()) {
             super.onBackPressed()
         } else {
             var intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("origin", "vehicleList")
             startActivity(intent)
             finish()
         }
-    }
+    }*/
 
     private fun loadFragment(fragment: Fragment) {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()

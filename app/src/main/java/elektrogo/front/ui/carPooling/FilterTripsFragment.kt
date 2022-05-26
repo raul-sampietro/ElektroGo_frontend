@@ -31,6 +31,8 @@ import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import elektrogo.front.R
+import elektrogo.front.controller.session.Session
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import java.time.LocalDate
 import java.time.LocalTime
@@ -110,7 +112,7 @@ class FilterTripsFragment : Fragment() {
     /**
      * @brief Instancia de la classe FiltrarTrajectesViewModel.
      */
-    private  var viewModel: FilterTripsViewModel = FilterTripsViewModel()
+    private  var viewModel = FilterTripsViewModel()
 
     /**
      * @brief Metode que s'executa al crear el fragment.
@@ -146,9 +148,9 @@ class FilterTripsFragment : Fragment() {
         if (!Places.isInitialized()) Places.initialize(this.requireContext(),resources.getString(R.string.google_maps_key))
         placesClient= Places.createClient(this.requireContext())
         autocompleteSupportFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragmentFiltrar) as AutocompleteSupportFragment
-        autocompleteSupportFragment.setHint("Origen")
+        autocompleteSupportFragment.setHint(getString(R.string.OrigenString))
         autocompleteSupportFragment2 = childFragmentManager.findFragmentById(R.id.autocomplete_fragmentFiltrar2) as AutocompleteSupportFragment
-        autocompleteSupportFragment2.setHint("Desti")
+        autocompleteSupportFragment2.setHint(getString(R.string.DestiString))
         getAutocompleteLocation()
 
         val crossCallbackOrigin = requireActivity().findViewById<View>(R.id.viewCrossCallbackOriginFiltrar)
@@ -165,7 +167,7 @@ class FilterTripsFragment : Fragment() {
 
         val listView: ListView = view.findViewById(R.id.filterListView)
         //mostro uns trajectes default a la llista
-        var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+        var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
         if (resultDefault.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
@@ -176,14 +178,20 @@ class FilterTripsFragment : Fragment() {
         filtrarButton.setOnClickListener {
             if (validate()) {
                 //mostro els trajectes resultants de la busqueda
-               var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
-                if (result.first != 200) {
-                    Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-                }
-                else {
-                    filteredList = result.second
-                    listView.adapter = ListAdapterTrips(context as Activity, filteredList)
-                }
+               try{
+                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected, SessionController.getUsername(requireContext()))
+                   if (result.first != 200) {
+                       Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                   }
+                   else {
+                       filteredList = result.second
+                       listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+                   }
+               }
+               catch (e: Exception){
+                   Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+               }
+
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
 
@@ -196,26 +204,35 @@ class FilterTripsFragment : Fragment() {
             dateSelected = null
             fromTimeSelected = null
             toTimeSelected = null
-            dateButton.text = "Data"
-            timeToButton.text = "Fins a"
-            timeFromButton.text = "Des de"
+            dateButton.text = getString(R.string.DataFilter)
+            timeToButton.text = getString(R.string.FinsFilter)
+            timeFromButton.text = getString(R.string.DesdeFilter)
             autocompleteSupportFragment2.setText("")
             //mostro uns trajectes default a la llista
-            var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
-            if (resultDefault.first != 200) {
-                Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
-            }
-            else {
-                filteredList = resultDefault.second
-                listView.adapter = ListAdapterTrips(context as Activity, filteredList)
-            }
+           try {
+               var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
+               if (resultDefault.first != 200) {
+                   Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+               }
+               else {
+                   filteredList = resultDefault.second
+                   listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+               }
+           }
+           catch (e: Exception){
+               Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+           }
+
         }
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             val i = Intent(context, TripDetails::class.java)
+            i.putExtra("tripID", filteredList[position].id.toString())
             i.putExtra("username", filteredList[position].username)
             i.putExtra("startDate", filteredList[position].startDate)
             i.putExtra("startTime", filteredList[position].startTime)
+            i.putExtra("cancelDate", filteredList[position].cancelDate)
+            i.putExtra("state", filteredList[position].state)
             i.putExtra("offeredSeats",filteredList[position].offeredSeats)
             i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
             i.putExtra("restrictions", filteredList[position].restrictions)
@@ -223,15 +240,16 @@ class FilterTripsFragment : Fragment() {
             i.putExtra("originString", filteredList[position].origin)
             i.putExtra("destinationString", filteredList[position].destination)
             i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+            i.putExtra("destinationLat", filteredList[position].latitudeDestination)
+            i.putExtra("destinationLon", filteredList[position].longitudeDestination)
+            i.putExtra("id", filteredList[position].id)
             startActivity(i)
         })
 
         createTripButton.setOnClickListener {
-            val fragmentNewCarPooling = NewCarPoolingFragment()
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.pooling, fragmentNewCarPooling, "findThisFragment")
-                .addToBackStack(null)
-                .commit();
+            val intent = Intent(context, TripsActivity::class.java)
+            intent.putExtra("fragment", "NewCarPoolingFragment")
+            startActivity(intent)
         }
         var day: Int = 28
         var month: Int = 10
@@ -289,7 +307,7 @@ class FilterTripsFragment : Fragment() {
                     fromTimeSelected = "$hour:$minute:00"
                 }
 
-            }, minute, hour, true)
+            }, hour, minute,  true)
 
             tpd.show()
         }
@@ -309,7 +327,7 @@ class FilterTripsFragment : Fragment() {
                     timeToButton.text = "$hour:$minute"
                     toTimeSelected = "$hour:$minute:00"
                 }
-            }, minute, hour, true)
+            }, hour, minute, true)
 
             tpd.show()
         }
@@ -357,16 +375,16 @@ class FilterTripsFragment : Fragment() {
     private fun validate() :Boolean {
         var valid : Boolean = true
 
-        if (dateButton.text != "Data" && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
+        if (dateButton.text != getString(R.string.DataFilter) && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
             valid = false
             Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
         }
 
-        if (timeFromButton.text !="Des de" && timeToButton.text != "Fins a" &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
+        if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
             valid = false
             Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
         }
-        else if(timeFromButton.text!="Des de" && dateButton.text!="Data" && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
+        else if(timeFromButton.text!= getString(R.string.DesdeFilter) && dateButton.text!= getString(R.string.DataFilter) && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
             valid = false
             Toast.makeText(context, "L'hora d'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals",Toast.LENGTH_LONG).show()
         }
