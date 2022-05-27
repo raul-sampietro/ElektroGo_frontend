@@ -151,14 +151,14 @@ class TripDetails : AppCompatActivity() {
             startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
         }
 
-        //val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
+        val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
 
         val today = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val cancelDay = formatter.parse(cancelDate)
 
-      //  if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
-       /* else {
+        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
+        else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
 
@@ -168,7 +168,7 @@ class TripDetails : AppCompatActivity() {
 
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
-        }*/
+        }
     }
     /**
      * @brief Metode que s'encarrega de renderitzar les estrelles que te l'usuari segons la valoracio mitjana que rep.
