@@ -187,4 +187,7 @@
 
     <string name="internalError">There was an error with the server</string>
     <string name="requiredImage">You must add both images before sending the request</string>
+
+    <string name="DriverAlreadyExists">You are already a driver.</string>
+    <string name="DriverRequestRecived">Petition sent.</string>
 </resources>

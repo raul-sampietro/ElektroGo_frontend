@@ -186,4 +186,9 @@
 
     <string name="internalError">Ha habido un error con el servidor</string>
     <string name="requiredImage">Tienes que añadir las dos imagenes antes de enviar el formulario</string>
+
+    <string name="DriverAlreadyExists">Ya estas registrado como conductor.</string>
+    <string name="DriverRequestRecived">La solicitud ha sido enviada correctamente</string>
+
+
 </resources>
