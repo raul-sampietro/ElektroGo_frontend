@@ -139,7 +139,6 @@
 
     <string name="correu_electronic">Correu electrònic:</string>
     <string name="eliminar_compte">Eliminar Compte</string>
-    <string name="block">Bloquejar</string>
     <string name="report">Denunciar</string>
 
     <string name="month">Mes</string>
@@ -203,10 +202,7 @@
     <string name="insertDNImage">Insereix una imatge de la part frontal del carnet de conduir</string>
     <string name="insert2DNImage">Insereix una imatge de la part reversa del carnet de conduir</string>
     <string name="sendButton">Enviar</string>
-    <string name="correu_electronic">Correu electronic</string>
-    <string name="eliminar_compte">Eliminar Compte</string>
     <string name="block">Bloquejar</string>
-    <string name="report">Denunciar</string>
     <string name="buttonJoinTrip">Join the trip!</string>
     <string name="abandonTrip">Abandonar trajecte</string>
     <string name="errorAbandonTrip">Hi ha hagut un error abandonant el trajecte</string>
