@@ -5,6 +5,7 @@
  */
 package elektrogo.front.controller
 import android.graphics.Bitmap
+import android.util.Log
 import com.google.gson.Gson
 import elektrogo.front.model.*
 import io.ktor.client.*
@@ -157,6 +158,15 @@ object FrontendController {
     // #################################################
 
     private const val URL_REPORTS = "${URL_BASE}/reports"
+
+    suspend fun reportUser(rep: Report): Int {
+        val httpResponse: HttpResponse = client.post(URL_REPORTS) {
+            contentType(ContentType.Application.Json)
+            body = rep
+        }
+        return httpResponse.status.value
+    }
+
 
     // #################################################
     // #  DRIVERS                                      #
@@ -504,13 +514,6 @@ object FrontendController {
         return httpResponse.receive()
     }
 
-    suspend fun reportUser(rep: Report): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}/reports") { //confirmar que ha de ser post
-            contentType(ContentType.Application.Json)
-            body = rep
-        }
-        return httpResponse.status.value
-    }
 
     suspend fun getBlocks(username: String): ArrayList<Block> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/blocks/to/${username}")
