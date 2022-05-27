@@ -180,6 +180,7 @@
     <string name="report">Report</string>
     <string name="buttonJoinTrip">Join trip!</string>
     <string name="abandonTrip">Abandon trip</string>
+    <string name="errorAbandonTrip">There was an error leaving the trip</string>
 
 
 </resources>

@@ -171,17 +171,14 @@ class TripDetails : AppCompatActivity() {
                 userParticipates = true;
             }
         }
-        Toast.makeText(
-            this, "${userParticipates},${(SessionController.getUsername(this) != username)},${(today < cancelDay)}, ${state}}", Toast.LENGTH_LONG).show()
-
         if (userParticipates && (SessionController.getUsername(this) != username) && (today < cancelDay) && state !="cancelled" && state != "finished") {
-            btnCancel.setText(R.string.abandonTrip) //PREGUNTAR MARINA COMO PONER ESTO NO HARDCODED
+            btnCancel.setText(R.string.abandonTrip)
             btnCancel.setOnClickListener {
                 val status = viewModel.abandonTrip(id, SessionController.getUsername(this));
                 if (status != 200) {
                     Toast.makeText(
                         this,
-                        "${status}:Hi ha hagut un error abandonant el trajecte",
+                        R.string.errorAbandonTrip,
                         Toast.LENGTH_LONG
                     ).show()
                 }

@@ -177,6 +177,7 @@
     <string name="report">Denunciar</string>
     <string name="buttonJoinTrip">Uneix-te al viatge!</string>
     <string name="abandonTrip">Abandonar trajecte</string>
+    <string name="errorAbandonTrip">Hi ha hagut un error abandonant el trajecte</string>
 
 
 </resources>
