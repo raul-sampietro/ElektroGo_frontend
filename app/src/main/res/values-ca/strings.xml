@@ -178,8 +178,8 @@
     <string name="verificant">Els administradors estan verificant la teva sol·licitud</string>
 
 
-    <string name="insertDNImage">Insereix una imatge de la part frontal del DNI</string>
-    <string name="insert2DNImage">Insereix una imatge de la part reversa del DNI</string>
+    <string name="insertDNImage">Insereix una imatge de la part frontal del carnet de conduir</string>
+    <string name="insert2DNImage">Insereix una imatge de la part reversa del carnet de conduir</string>
     <string name="sendButton">Enviar</string>
     <string name="internalError">Hi ha hagut un error amb el servidor</string>
     <string name="requiredImage">Has d\'afegir les dues imatges abans d\'enviar</string>

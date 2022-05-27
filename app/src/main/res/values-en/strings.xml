@@ -181,8 +181,8 @@
 
     <string name="verificant">Admins are currently verifing your request</string>
 
-    <string name="insertDNImage">Insert a image of the frontal part of the NIE</string>
-    <string name="insert2DNImage">Insert a image of the reverse part of the NIE</string>
+    <string name="insertDNImage">Insert a image of the frontal part of the drivers license</string>
+    <string name="insert2DNImage">Insert a image of the reverse part of the drivers license</string>
     <string name="sendButton">Send</string>
 
     <string name="internalError">There was an error with the server</string>
