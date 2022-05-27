@@ -81,11 +81,6 @@ class ProfileFragment : Fragment() {
         trophyName.text = a.achievement
         trophyPoints.text = a.points.toString()
 
-        val deletebttn : Button = view.findViewById(R.id.profile_delete_account)
-        deletebttn.setOnClickListener {
-            if (viewModel.deleteUser(user) != 200) Toast.makeText(context, "Un error ha ocorregut, intenteu-ho més tard", Toast.LENGTH_LONG).show()
-        }
-
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG)
@@ -184,18 +179,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val userCompleteName: TextView = view.findViewById(R.id.completeName)
-        userCompleteName.text = SessionController.getName(requireActivity());
+        userCompleteName.text = SessionController.getName(requireActivity())
 
         val userMail: TextView = view.findViewById(R.id.email)
-        userMail.text = SessionController.getEmail(requireActivity());
+        userMail.text = SessionController.getEmail(requireActivity())
 
         val provider: TextView = view.findViewById(R.id.login)
-        provider.text = SessionController.getProvider(requireActivity());
-
-        val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
-        deleteButton.setOnClickListener {
-
-        }
+        provider.text = SessionController.getProvider(requireActivity())
     }
 
     override fun onDestroyView() {
