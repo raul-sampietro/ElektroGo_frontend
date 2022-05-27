@@ -177,7 +177,8 @@
     <string name="eliminar_compte">Delete Account</string>
     <string name="block">Bloquear</string>
     <string name="report">Denunciar</string>
-    <string name="buttonJoinTrip">¡Unirese al viaje!</string>
+    <string name="buttonJoinTrip">¡Unirse al viaje!</string>
+    <string name="abandonTrip">Abandonar viaje</string>
 
 
 </resources>
