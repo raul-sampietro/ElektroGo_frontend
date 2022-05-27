@@ -29,7 +29,7 @@ class VehicleListActivity : AppCompatActivity() {
         toolbar2.title= getString(R.string.llistaVehicles)
         setSupportActionBar(toolbar2)
 
-        /*
+
         var httpResponse : Pair<Int, Driver?> = viewModel.getDriver(SessionController.getUsername(this))
         if (httpResponse.first == 432) loadFragment(formNewDriverFragment)
         else if (httpResponse.first == 200 && httpResponse.second!!.status == "pending") loadFragment(verifyingDriverFragment)
@@ -37,9 +37,7 @@ class VehicleListActivity : AppCompatActivity() {
         else {
             Toast.makeText(this, resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
         }
-         */
 
-        loadFragment(formNewDriverFragment)
     }
 
     //Listener del botó d'enrere de la barra d'Android
