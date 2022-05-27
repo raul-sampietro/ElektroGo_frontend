@@ -360,7 +360,7 @@ object FrontendController {
     }
 
     suspend fun getMembersByTrip(id: Long): Pair<Int, ArrayList<User>> {
-        val httpResponse : HttpResponse = client.get("${URL_CAR_POOLING}/car-pooling/${id}/users")
+        val httpResponse : HttpResponse = client.get("${URL_CAR_POOLING}/${id}/users")
         val members: ArrayList<User>
         var status: Int = httpResponse.status.value
         if (httpResponse.status.value != 200) {
@@ -393,6 +393,12 @@ object FrontendController {
             val statusCode = responseJson.status
             status = statusCode
         }
+        return status
+    }
+
+    suspend fun deleteMemberFromTrip(id: Long, username: String): Int {
+        val httpResponse : HttpResponse = client.delete("${URL_CAR_POOLING}/${id}/from/${username}")
+        var status: Int = httpResponse.status.value
         return status
     }
 
@@ -489,6 +495,14 @@ object FrontendController {
     }
 
 
+    suspend fun reportUser(rep: Report): Int {
+        val httpResponse: HttpResponse = client.post("${URL_BASE}/reports") { //confirmar que ha de ser post
+            contentType(ContentType.Application.Json)
+            body = rep
+        }
+        return httpResponse.status.value
+    }
+
     suspend fun getBlocks(username: String): ArrayList<Block> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/blocks/to/${username}")
         return if (httpResponse.status.value != 200) {
@@ -500,7 +514,6 @@ object FrontendController {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/achievements/${achievement}/users/${username}")
         return httpResponse.receive()
     }
-
 
 }
 
