@@ -440,6 +440,16 @@ tools:context=".ui.carPooling.TripDetails">
                 android:backgroundTint="#FF0000"
                 android:text="@string/buttonCancelTrip"
                 tools:ignore="TextContrastCheck" />
+
+            <Button
+                android:id="@+id/btn_finalitzarTrajecte"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/green_logo"
+                android:text="Finalitzar trajecte"
+                tools:ignore="TextContrastCheck" />
+
         </LinearLayout>
 
 
