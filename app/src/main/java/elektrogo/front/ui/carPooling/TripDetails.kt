@@ -107,7 +107,7 @@ class TripDetails : AppCompatActivity() {
         if (qualityAir == "Bad") qaImage.setImageResource(R.drawable.airbad)
         else if (qualityAir == "Mid") qaImage.setImageResource(R.drawable.airmid)
         else if (qualityAir == "Good") qaImage.setImageResource(R.drawable.airgood)
-        else qaImage.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
+        else qaImage.setImageResource(R.drawable.ic_baseline_wifi_off_24)
 
 
         usernameText.text = username
