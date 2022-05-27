@@ -157,7 +157,7 @@
     <string name="next">continuar</string>
     <string name="message_to_send">Escriu el missatge que vols enviar</string>
     <string name="message_sent">missatges enviats</string>
-    <string name="esborrarXat">"Vols esborrar el xat amb "</string>
+    <string name="esborrarXat">Vols esborrar aquest xat?</string>
     <string name="si">SI</string>
     <string name="esborrantXat">Esborrant xat</string>
     <string name="xatNoEsborrat">Xat no esborrat</string>
