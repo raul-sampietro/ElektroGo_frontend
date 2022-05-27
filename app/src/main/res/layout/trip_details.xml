@@ -402,6 +402,14 @@ tools:context=".ui.carPooling.TripDetails">
             android:textSize="22sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/noMembers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:text="No hi ha cap membre encara" />
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
