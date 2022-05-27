@@ -176,6 +176,7 @@
     <string name="block">Bloquejar</string>
     <string name="report">Denunciar</string>
     <string name="buttonJoinTrip">Uneix-te al viatge!</string>
+    <string name="abandonTrip">Abandonar trajecte</string>
 
 
 </resources>

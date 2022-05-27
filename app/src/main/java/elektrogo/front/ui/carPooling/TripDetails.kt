@@ -175,7 +175,7 @@ class TripDetails : AppCompatActivity() {
             this, "${userParticipates},${(SessionController.getUsername(this) != username)},${(today < cancelDay)}, ${state}}", Toast.LENGTH_LONG).show()
 
         if (userParticipates && (SessionController.getUsername(this) != username) && (today < cancelDay) && state !="cancelled" && state != "finished") {
-            btnCancel.setText("ABANDONAR TRAJECTE") //PREGUNTAR MARINA COMO PONER ESTO NO HARDCODED
+            btnCancel.setText(R.string.abandonTrip) //PREGUNTAR MARINA COMO PONER ESTO NO HARDCODED
             btnCancel.setOnClickListener {
                 val status = viewModel.abandonTrip(id, SessionController.getUsername(this));
                 if (status != 200) {
