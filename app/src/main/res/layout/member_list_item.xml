@@ -2,17 +2,24 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="10dp"
     android:layout_marginStart="30dp"
     android:layout_marginBottom="20dp"
-    android:orientation="horizontal"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:clickable="true">
 
     <RelativeLayout
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="5dp">
 
@@ -53,7 +60,8 @@
                 android:id="@+id/estrella1Item"
                 android:layout_width="27dp"
                 android:layout_height="27dp"
-                android:src="@drawable/ic_starplena">
+                android:src="@drawable/ic_starplena"
+                android:layout_marginTop="3dp">
 
             </ImageView>
 
@@ -62,6 +70,7 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/ic_starplena" />
 
             <ImageView
@@ -69,6 +78,7 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/ic_starplena" />
 
             <ImageView
@@ -76,6 +86,7 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/ic_starplena" />
 
             <ImageView
@@ -83,18 +94,34 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/ic_starplena" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/numberValorationsItem"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginStart="10dp"
                 android:text="(0)"
-                android:textSize="16sp"/>
+                android:textSize="14sp"/>
+
+
         </LinearLayout>
 
+
+
     </LinearLayout>
+    </LinearLayout>
+    <ImageButton
+        android:id="@+id/deleteMemberButton"
+        android:layout_gravity="center"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#FF0000"
+        android:layout_marginTop="5dp"
+        app:tint="@color/white"
+        android:src="@drawable/ic_delete_24"
+        android:layout_marginStart="10dp"/>
 
 </LinearLayout>

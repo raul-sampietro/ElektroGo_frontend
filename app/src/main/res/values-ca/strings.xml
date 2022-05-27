@@ -157,7 +157,7 @@
     <string name="next">continuar</string>
     <string name="message_to_send">Escriu el missatge que vols enviar</string>
     <string name="message_sent">missatges enviats</string>
-    <string name="esborrarXat">"Vols esborrar el xat amb "</string>
+    <string name="esborrarXat">Vols esborrar aquest xat?</string>
     <string name="si">SI</string>
     <string name="esborrantXat">Esborrant xat</string>
     <string name="xatNoEsborrat">Xat no esborrat</string>
@@ -175,7 +175,12 @@
     <string name="eliminar_compte">Eliminar Compte</string>
     <string name="block">Bloquejar</string>
     <string name="report">Denunciar</string>
+
     <string name="verificant">Els administradors estan verificant la teva sol·licitud</string>
+
+    <string name="buttonJoinTrip">Uneix-te al viatge!</string>
+    <string name="abandonTrip">Abandonar trajecte</string>
+    <string name="errorAbandonTrip">Hi ha hagut un error abandonant el trajecte</string>
 
 
     <string name="insertDNImage">Insereix una imatge de la part frontal del carnet de conduir</string>

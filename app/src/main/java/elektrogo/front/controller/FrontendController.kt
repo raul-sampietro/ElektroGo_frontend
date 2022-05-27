@@ -26,13 +26,11 @@ import java.io.ByteArrayOutputStream
  */
 object FrontendController {
     // SERVER
-    private const val URL_BASE_WB = "http://10.4.41.58:8080/"
     private const val URL_BASE = "http://10.4.41.58:8080"
     // HOME
     // private const val URL_BASE_WB = "http://192.168.1.82:8080/"
     // private const val URL_BASE = "http://192.168.1.82:8080"
     // MOBILE NETWORK
-    //private const val URL_BASE_WB = "http://192.168.43.104:8080/"
     //private const val URL_BASE = "http://192.168.43.104:8080"
 
     //Add functions you need here :)
@@ -160,6 +158,15 @@ object FrontendController {
     // #################################################
 
     private const val URL_REPORTS = "${URL_BASE}/reports"
+
+    suspend fun reportUser(rep: Report): Int {
+        val httpResponse: HttpResponse = client.post(URL_REPORTS) {
+            contentType(ContentType.Application.Json)
+            body = rep
+        }
+        return httpResponse.status.value
+    }
+
 
     // #################################################
     // #  DRIVERS                                      #
@@ -414,7 +421,7 @@ object FrontendController {
     }
 
     suspend fun getMembersByTrip(id: Long): Pair<Int, ArrayList<User>> {
-        val httpResponse : HttpResponse = client.get("${URL_CAR_POOLING}/car-pooling/${id}/users")
+        val httpResponse : HttpResponse = client.get("${URL_CAR_POOLING}/${id}/users")
         val members: ArrayList<User>
         var status: Int = httpResponse.status.value
         if (httpResponse.status.value != 200) {
@@ -450,6 +457,12 @@ object FrontendController {
         return status
     }
 
+    suspend fun deleteMemberFromTrip(id: Long, username: String): Int {
+        val httpResponse : HttpResponse = client.delete("${URL_CAR_POOLING}/${id}/from/${username}")
+        var status: Int = httpResponse.status.value
+        return status
+    }
+
     // #################################################
     // #  ROUTES                                       #
     // #################################################
@@ -473,7 +486,7 @@ object FrontendController {
         longitudeDestination: Double,
         drivingRange: Int
     ): ArrayList<Double> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}route/calculate") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}/route/calculate") {
             parameter("latO", latitudeOrigin)
             parameter("longO", longitudeOrigin)
             parameter("latD", latitudeDestination)
@@ -495,18 +508,26 @@ object FrontendController {
 
     private const val URL_CHATS = "${URL_BASE}/chats"
 
-    suspend fun getChatList(username: String): ArrayList<String> {
-        val chats: ArrayList<String> = client.get("${URL_CHATS}/${username}")
-        return chats
+    suspend fun getChatList(username: String): Pair<Int, ArrayList<String>> {
+        val httpResponse: HttpResponse = client.get("${URL_CHATS}/${username}")
+        val status: Int = httpResponse.status.value
+        val chats: ArrayList<String>
+        if (status != 200) chats = ArrayList<String>()
+        else chats = httpResponse.receive()
+        return Pair(status,chats)
     }
 
-    suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_CHATS}/messages/${userA}/${userB}")
-        return chats
+    suspend fun getConversation(userA: String, userB: String): Pair<Int, ArrayList<Message>> {
+        val httpResponse: HttpResponse = client.get("${URL_CHATS}/messages/${userA}/${userB}")
+        val status: Int = httpResponse.status.value
+        val chats: ArrayList<Message>
+        if (status != 200) chats = ArrayList<Message>()
+        else chats = httpResponse.receive()
+        return Pair(status,chats)
     }
 
     suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
-        val httpResponse: HttpResponse = client.post("$${URL_CHATS}/messages/${sender}/${receiver}"){
+        val httpResponse: HttpResponse = client.post("${URL_CHATS}/messages/${sender}/${receiver}"){
             parameter("message", message)
         }
         if (httpResponse.status.value != 200) {
@@ -526,7 +547,11 @@ object FrontendController {
     }
 
     suspend fun getReceivedMessages(user: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_CHATS}/messages/to/${user}")
+        val httpResponse: HttpResponse = client.get("${URL_CHATS}/messages/to/${user}")
+        val status: Int = httpResponse.status.value
+        val chats: ArrayList<Message>
+        if (status != 200) chats = ArrayList<Message>()
+        else chats = httpResponse.receive()
         return chats
     }
 
@@ -543,14 +568,6 @@ object FrontendController {
     }
 
 
-    suspend fun reportUser(rep: Report): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}/reports") { //confirmar que ha de ser post
-            contentType(ContentType.Application.Json)
-            body = rep
-        }
-        return httpResponse.status.value
-    }
-
     suspend fun getBlocks(username: String): ArrayList<Block> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/blocks/to/${username}")
         return if (httpResponse.status.value != 200) {
@@ -561,6 +578,16 @@ object FrontendController {
     suspend fun getAchievement(achievement: String, username: String): Achievement {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/achievements/${achievement}/users/${username}")
         return httpResponse.receive()
+    }
+
+    suspend fun finishTrip(id: Int): Int {
+        val httpResponse: HttpResponse = client.put("${URL_CAR_POOLING}/${id}/finish")
+        return httpResponse.status.value
+    }
+
+    suspend fun abandonTrip(id: Long, username: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_CAR_POOLING}/${id}/from/${username}")
+        return httpResponse.status.value;
     }
 
 }

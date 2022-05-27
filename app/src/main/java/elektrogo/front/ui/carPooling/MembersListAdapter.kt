@@ -8,21 +8,23 @@ package elektrogo.front.ui.carPooling
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.core.content.ContextCompat.startActivity
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.text.SimpleDateFormat
 
-class MembersListAdapter (private val context : Activity, private val memberList : ArrayList<User>) : ArrayAdapter<User>(context, R.layout.member_list_item, memberList){
+class MembersListAdapter (private val context : Activity, private val memberList : ArrayList<User>, private val idTrip: Long, private val Trip : CarPooling) : ArrayAdapter<User>(context, R.layout.member_list_item, memberList){
 
     /**
      * @brief Instancia de la classe filterTripsViewModel.
@@ -41,6 +43,7 @@ class MembersListAdapter (private val context : Activity, private val memberList
         val view = inflater.inflate(R.layout.member_list_item, null)
 
         val f = memberList[position]
+        Log.i("funciona", "hola")
 
         val usernameText : TextView= view.findViewById(R.id.usernameItem)
         usernameText.text = f.username
@@ -56,7 +59,27 @@ class MembersListAdapter (private val context : Activity, private val memberList
         val imagePath = f.imageUrl
         if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
+
+        val deleteButton : ImageButton = view.findViewById(R.id.deleteMemberButton)
+        if (SessionController.getUsername(context) != Trip.username) deleteButton.visibility= View.GONE
+        deleteButton.setOnClickListener {
+            Log.i("funciona", "estoy en el onclick dentro del adapter")
+            val id = idTrip
+            val username = f.username
+            val result = viewModel.deleteMemberFromTrip(id,username)
+            if (result!=200) {
+                Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_SHORT).show()
+            }
+            val i = Intent(parent.context, TripDetails::class.java)
+            i.putExtra("Trip", Gson().toJson(Trip))
+            parent.context.startActivity(i)
+            context.finish()
+
+        }
+
         return view
+
+
     }
     /**
      * @brief Metode que s'encarrega de renderitzar les estrelles que te l'usuari segons la valoracio mitjana que rep.
