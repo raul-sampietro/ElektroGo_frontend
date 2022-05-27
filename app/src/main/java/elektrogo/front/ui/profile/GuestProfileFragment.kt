@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.setFragmentResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,6 +23,7 @@ import elektrogo.front.model.Achievement
 import elektrogo.front.model.Block
 import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
+import elektrogo.front.ui.report.ReportUserFragment
 import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking
@@ -35,7 +37,7 @@ class GuestProfileFragment : Fragment() {
     private var viewModel: ProfileViewModel = ProfileViewModel()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
-    @SuppressLint("SetTextI18n", "CutPasteId")
+    @SuppressLint("SetTextI18n", "CutPasteId", "ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -140,6 +142,17 @@ class GuestProfileFragment : Fragment() {
                viewModel.blockUser(userActual, username)
            }
        }
+       
+        reportButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("guestUser", username) //passem l'usuari que es vol valorar al dialog
+            val reportUserFragment = ReportUserFragment();
+            reportUserFragment.arguments = bundle
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(this.id, reportUserFragment)
+            transaction.commit()
+
+        }
 
         val ratingPair = username?.let { viewModel.getRating(it) }
         if (ratingPair != null) {

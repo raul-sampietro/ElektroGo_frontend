@@ -5,6 +5,7 @@
  */
 package elektrogo.front.controller
 import android.graphics.Bitmap
+import android.util.Log
 import com.google.gson.Gson
 import elektrogo.front.model.*
 import io.ktor.client.*
@@ -27,6 +28,7 @@ object FrontendController {
     // SERVER
     private const val URL_BASE = "http://10.4.41.58:8080"
     // HOME
+    // private const val URL_BASE_WB = "http://192.168.1.82:8080/"
     // private const val URL_BASE = "http://192.168.1.82:8080"
     // MOBILE NETWORK
     //private const val URL_BASE = "http://192.168.43.104:8080"
@@ -36,8 +38,8 @@ object FrontendController {
         HttpClient(Android) {
             expectSuccess = false
             engine {
-                connectTimeout = 10_000
-                socketTimeout = 10_000
+                connectTimeout = 60_000
+                socketTimeout = 60_000
             }
             install(Logging) {
                 level = LogLevel.ALL
@@ -157,6 +159,15 @@ object FrontendController {
 
     private const val URL_REPORTS = "${URL_BASE}/reports"
 
+    suspend fun reportUser(rep: Report): Int {
+        val httpResponse: HttpResponse = client.post(URL_REPORTS) {
+            contentType(ContentType.Application.Json)
+            body = rep
+        }
+        return httpResponse.status.value
+    }
+
+
     // #################################################
     // #  DRIVERS                                      #
     // #################################################
@@ -182,6 +193,60 @@ object FrontendController {
         return false
     }
 
+    suspend fun  getDriver2(username: String): Pair<Int, Driver?> {
+        val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
+        if (httpResponse.status.value == 200) return Pair(httpResponse.status.value, httpResponse.receive())
+        val httpResponse1: httpRespostes = client.get("${URL_DRIVERS}/${username}")
+        val statusCode: Int = httpResponse1.status
+        return Pair(statusCode, null)
+    }
+
+    suspend fun newDriver(driver: Driver, username: String) : Int {
+        val httpResponse: HttpResponse = client.post("${URL_DRIVERS}/${username}") {
+            contentType(ContentType.Application.Json)
+            body = driver
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        } else return httpResponse.status.value
+    }
+
+    @OptIn(InternalAPI::class)
+    suspend fun sendFrontPhoto(username: String, frontImage : Bitmap) {
+        val stream = ByteArrayOutputStream()
+        frontImage.compress(Bitmap.CompressFormat.PNG, 1, stream)
+        val image = stream.toByteArray()
+        // TODO pas de parametres Http
+        val response: HttpResponse = client.submitFormWithBinaryData(
+            url = "${URL_DRIVERS}/${username}/imageFront",
+            formData = formData {
+                append("imageFront", image, Headers.build {
+                    append(HttpHeaders.ContentType, "image/png")
+                    append(HttpHeaders.ContentDisposition, "filename=ignore.png")
+                })
+            }
+        )
+    }
+
+    @OptIn(InternalAPI::class)
+    suspend fun sendReversePhoto(username: String, reverseImage : Bitmap) {
+        val stream = ByteArrayOutputStream()
+        reverseImage.compress(Bitmap.CompressFormat.PNG, 1, stream)
+        val image = stream.toByteArray()
+        // TODO pas de parametres Http
+        val response: HttpResponse = client.submitFormWithBinaryData(
+            url = "${URL_DRIVERS}/${username}/imageBack",
+            formData = formData {
+                append("imageBack", image, Headers.build {
+                    append(HttpHeaders.ContentType, "image/png")
+                    append(HttpHeaders.ContentDisposition, "filename=ignore.png")
+                })
+            }
+        )
+    }
+
     // #################################################
     // #  VEHICLES                                     #
     // #################################################
@@ -200,11 +265,10 @@ object FrontendController {
         } else return httpResponse.status.value
     }
 
-    //TODO POT FALLAR
     @OptIn(InternalAPI::class)
     suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap) {
         val stream = ByteArrayOutputStream()
-        vehiclePic.compress(Bitmap.CompressFormat.PNG, 20, stream)
+        vehiclePic.compress(Bitmap.CompressFormat.PNG, 5, stream)
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
@@ -507,13 +571,6 @@ object FrontendController {
         return httpResponse.receive()
     }
 
-    suspend fun reportUser(rep: Report): Int {
-        val httpResponse: HttpResponse = client.post("${URL_BASE}/reports") { //confirmar que ha de ser post
-            contentType(ContentType.Application.Json)
-            body = rep
-        }
-        return httpResponse.status.value
-    }
 
     suspend fun getBlocks(username: String): ArrayList<Block> {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/blocks/to/${username}")
@@ -536,4 +593,11 @@ object FrontendController {
         val httpResponse: HttpResponse = client.put("${URL_CAR_POOLING}/${id}/finish")
         return httpResponse.status.value
     }
+
+    suspend fun abandonTrip(id: Long, username: String): Int {
+        val httpResponse: HttpResponse = client.delete("${URL_CAR_POOLING}/${id}/from/${username}")
+        return httpResponse.status.value;
+    }
+
 }
+

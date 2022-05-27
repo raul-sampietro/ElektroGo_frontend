@@ -186,6 +186,18 @@
     <string name="enunciatDenuncia">Indicate below the reason of the report:</string>
     <string name="channel_name">Chat</string>
     <string name="youBlocked">You have blocked this user</string>
+    <string name="abandonTrip">Abandon trip</string>
+    <string name="errorAbandonTrip">There was an error leaving the trip</string>
 
+    <string name="verificant">Admins are currently verifing your request</string>
 
+    <string name="insertDNImage">Insert a image of the frontal part of the drivers license</string>
+    <string name="insert2DNImage">Insert a image of the reverse part of the drivers license</string>
+    <string name="sendButton">Send</string>
+
+    <string name="internalError">There was an error with the server</string>
+    <string name="requiredImage">You must add both images before sending the request</string>
+
+    <string name="DriverAlreadyExists">You are already a driver.</string>
+    <string name="DriverRequestRecived">Petition sent.</string>
 </resources>

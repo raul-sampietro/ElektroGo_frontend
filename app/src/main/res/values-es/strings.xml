@@ -90,7 +90,7 @@
     <string name="HoraIncorrecte">La hora del trayecto es incorrecta</string>
 
     <string name="savedCarpooling">El trayecto se ha publicado</string>
-    <string name="errorCarpooling">Ha havido un error con el serivors. Intentalo más tarde.</string>
+    <string name="errorCarpooling">Ha habido un error con el servidor. Intentalo más tarde.</string>
 
     <string name="hora_d_inici">hora de inicio</string>
     <string name="dataFiltrar">Fecha</string>
@@ -186,5 +186,21 @@
     <string name="channel_name">Chat</string>
     <string name="youBlocked">Has bloqeuado este usuario</string>
 
+    <string name="verificant">Los administradores están verificando tu solicitud</string>
+
+    <string name="insertDNImage">Añade una imagen de la part frontal del carnet de conducir</string>
+    <string name="insert2DNImage">Añade una imagen de la part reversa del carnet de conducir</string>
+    <string name="sendButton">Enviar</string>
+
+    <string name="internalError">Ha habido un error con el servidor</string>
+    <string name="requiredImage">Tienes que añadir las dos imagenes antes de enviar el formulario</string>
+
+    <string name="DriverAlreadyExists">Ya estas registrado como conductor.</string>
+    <string name="DriverRequestRecived">La solicitud ha sido enviada correctamente</string>
+
+
+    <string name="buttonJoinTrip">¡Unirse al viaje!</string>
+    <string name="abandonTrip">Abandonar viaje</string>
+    <string name="errorAbandonTrip">Ha habido un error abandonando el trayecto</string>
 
 </resources>
