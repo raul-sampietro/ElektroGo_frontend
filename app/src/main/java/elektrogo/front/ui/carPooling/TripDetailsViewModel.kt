@@ -44,4 +44,8 @@ class TripDetailsViewModel : ViewModel() {
         return@runBlocking FrontendController.getMembersByTrip(id)
     }
 
+    fun finishTrip(id: Int): Int = runBlocking {
+        FrontendController.finishTrip(id)
+    }
+
 }
