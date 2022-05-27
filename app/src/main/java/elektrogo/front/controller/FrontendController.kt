@@ -184,11 +184,57 @@ object FrontendController {
     }
 
     suspend fun  getDriver2(username: String): Pair<Int, Driver?> {
-        val httpResponseStatus: httpRespostes = client.get("${URL_DRIVERS}/${username}")
         val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
-        Log.i("Resposta driver", httpResponseStatus.toString())
+        val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+        val statusCode = responseJson.status
         if (httpResponse.status.value == 200) return Pair(httpResponse.status.value, httpResponse.receive())
-        return Pair(httpResponseStatus.status, null)
+        return Pair(statusCode, null)
+    }
+
+    suspend fun newDriver(driver: Driver, username: String) : Int {
+        val httpResponse: HttpResponse = client.post("${URL_DRIVERS}/${username}") {
+            contentType(ContentType.Application.Json)
+            body = driver
+        }
+        if (httpResponse.status.value != 200) {
+            val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
+            val statusCode = responseJson.status
+            return statusCode
+        } else return httpResponse.status.value
+    }
+
+    @OptIn(InternalAPI::class)
+    suspend fun sendFrontPhoto(username: String, frontImage : Bitmap) {
+        val stream = ByteArrayOutputStream()
+        frontImage.compress(Bitmap.CompressFormat.PNG, 5, stream)
+        val image = stream.toByteArray()
+        // TODO pas de parametres Http
+        val response: HttpResponse = client.submitFormWithBinaryData(
+            url = "${URL_DRIVERS}/${username}/imageFront",
+            formData = formData {
+                append("image", image, Headers.build {
+                    append(HttpHeaders.ContentType, "image/png")
+                    append(HttpHeaders.ContentDisposition, "filename=ignore.png")
+                })
+            }
+        )
+    }
+
+    @OptIn(InternalAPI::class)
+    suspend fun sendReversePhoto(username: String, reverseImage : Bitmap) {
+        val stream = ByteArrayOutputStream()
+        reverseImage.compress(Bitmap.CompressFormat.PNG, 5, stream)
+        val image = stream.toByteArray()
+        // TODO pas de parametres Http
+        val response: HttpResponse = client.submitFormWithBinaryData(
+            url = "${URL_DRIVERS}/${username}/imageBack",
+            formData = formData {
+                append("image", image, Headers.build {
+                    append(HttpHeaders.ContentType, "image/png")
+                    append(HttpHeaders.ContentDisposition, "filename=ignore.png")
+                })
+            }
+        )
     }
 
     // #################################################
@@ -209,11 +255,10 @@ object FrontendController {
         } else return httpResponse.status.value
     }
 
-    //TODO POT FALLAR
     @OptIn(InternalAPI::class)
     suspend fun sendVehiclePhoto(licensePlate: String, vehiclePic: Bitmap) {
         val stream = ByteArrayOutputStream()
-        vehiclePic.compress(Bitmap.CompressFormat.PNG, 20, stream)
+        vehiclePic.compress(Bitmap.CompressFormat.PNG, 5, stream)
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(

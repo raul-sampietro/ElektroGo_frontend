@@ -16,7 +16,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
+import elektrogo.front.model.Driver
 import java.io.FileNotFoundException
 import java.io.IOException
 
@@ -27,6 +30,8 @@ class NewDriverFragment : Fragment() {
     }
 
     private lateinit var viewModel: NewDriverViewModel
+
+    private val verifyingDriverFragment = VerifyingDriverFragment()
 
     private lateinit var frontImage : ImageView
 
@@ -82,7 +87,18 @@ class NewDriverFragment : Fragment() {
 
         sendButton.setOnClickListener {
             if (imageUriFront != null && imageUriReverse != null){
-            //crida a frontend controller
+                var driver = Driver(SessionController.getUsername(requireActivity()), "pendent")
+                var statusCode = viewModel.sendDriverInfo(driver, SessionController.getUsername(requireActivity()))
+
+                if (statusCode == 439) Toast.makeText(requireActivity(), resources.getString(R.string.DriverVehicleAlreadyExists), Toast.LENGTH_LONG).show()
+                else if (statusCode == 440) Toast.makeText(requireActivity(), resources.getString(R.string.WrongVehicleInfo), Toast.LENGTH_LONG).show()
+                else if (statusCode in 500..599) Toast.makeText(requireActivity(), resources.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                else if (statusCode == 200){
+                    viewModel.saveDriverFrontImage(SessionController.getUsername(requireActivity()), bitmapImageFront!!)
+                    viewModel.saveDriverReverseImage(SessionController.getUsername(requireActivity()), bitmapImageReverse!!)
+                    Toast.makeText(requireActivity(), resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
+                    loadFragment(verifyingDriverFragment)
+                }
             }
             else {
                 Toast.makeText(requireActivity(), resources.getString(R.string.requiredImage), Toast.LENGTH_LONG).show()
@@ -125,5 +141,11 @@ class NewDriverFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_container, fragment, "VehicleListFragment")
+        transaction.commit()
     }
 }
