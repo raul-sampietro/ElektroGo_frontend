@@ -318,8 +318,14 @@ class NewCarPoolingFragment() : Fragment() {
                 var addressFirst : String = ""
                 var addressSecond : String = ""
                 var hasFirst : Boolean = false
+                var hasSecond : Boolean = false
                 var i : AddressComponent
                 for (i in addressList) {
+                    if (i == addressList[0]) {
+                        Log.i("address", "soy el primero")
+                        hasFirst=true
+                        addressFirst = i.name
+                    }
                     if (i.types[0].equals("street_number")) {
                         addressNumber = i.name
                     }
@@ -328,18 +334,25 @@ class NewCarPoolingFragment() : Fragment() {
                         hasFirst=true
                     }
                     else if (i.types[0].equals("locality")){
-                        if(hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            addressSecond = i.name
+                            hasSecond = true
+                        }
                         else addressFirst = i.name
                     }
                     else if (i.types[0].equals("administrative_area_level_2")) {
-                        if(!hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            if(!hasSecond) addressSecond = i.name
+                        }
+                        else addressFirst= i.name
                     }
                 }
 
                 originText.error = null
                 latLngOrigin = place.latLng
                 originName = addressFirst
-                if (addressFirst != addressSecond){
+                Log.i("address2", addressSecond)
+                if (addressFirst != addressSecond && addressSecond!=""){
                     if(addressNumber != null) {
                         originName += " "
                         originName += addressNumber
@@ -358,13 +371,18 @@ class NewCarPoolingFragment() : Fragment() {
         autocompleteSupportFragment2.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 var addressList : List<AddressComponent> = place.addressComponents.asList()
-
                 var addressNumber : String? = null
                 var addressFirst : String = ""
                 var addressSecond : String = ""
                 var hasFirst : Boolean = false
+                var hasSecond : Boolean = false
                 var i : AddressComponent
                 for (i in addressList) {
+                    if (i == addressList[0]) {
+                        Log.i("address", "soy el primero")
+                        hasFirst=true
+                        addressFirst = i.name
+                    }
                     if (i.types[0].equals("street_number")) {
                         addressNumber = i.name
                     }
@@ -373,11 +391,17 @@ class NewCarPoolingFragment() : Fragment() {
                         hasFirst=true
                     }
                     else if (i.types[0].equals("locality")){
-                        if(hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            hasSecond=true
+                            addressSecond = i.name
+                        }
                         else addressFirst = i.name
                     }
                     else if (i.types[0].equals("administrative_area_level_2")) {
-                        if(!hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            if(!hasSecond) addressSecond = i.name
+                        }
+                        else addressFirst= i.name
                     }
                 }
 
@@ -385,7 +409,8 @@ class NewCarPoolingFragment() : Fragment() {
                 destinationText.error = null
                 latLngDestination = place.latLng
                 destinationName = addressFirst
-                if (addressFirst != addressSecond){
+                Log.i("address2", addressSecond)
+                if (addressFirst != addressSecond && addressSecond!=""){
                     if(addressNumber != null) {
                         destinationName += " "
                         destinationName += addressNumber
