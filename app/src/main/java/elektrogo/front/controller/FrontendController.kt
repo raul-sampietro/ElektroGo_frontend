@@ -5,6 +5,7 @@
  */
 package elektrogo.front.controller
 import android.graphics.Bitmap
+import android.util.Log
 import com.google.gson.Gson
 import elektrogo.front.model.*
 import io.ktor.client.*
@@ -183,9 +184,11 @@ object FrontendController {
     }
 
     suspend fun  getDriver2(username: String): Pair<Int, Driver?> {
+        val httpResponseStatus: httpRespostes = client.get("${URL_DRIVERS}/${username}")
         val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
+        Log.i("Resposta driver", httpResponseStatus.toString())
         if (httpResponse.status.value == 200) return Pair(httpResponse.status.value, httpResponse.receive())
-        return Pair(httpResponse.status.value, null)
+        return Pair(httpResponseStatus.status, null)
     }
 
     // #################################################

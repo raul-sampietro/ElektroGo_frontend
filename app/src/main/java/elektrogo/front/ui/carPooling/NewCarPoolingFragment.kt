@@ -285,7 +285,7 @@ class NewCarPoolingFragment() : Fragment() {
                 val status = viewModel.saveCarpooling(newCarPoolingInfo)
                 if (status == 200){
                     Toast.makeText(context, resources.getString(R.string.savedCarpooling),Toast.LENGTH_SHORT).show()
-                    fragmentManager?.popBackStack()
+                    requireActivity().finish()
                 } else Toast.makeText(context, resources.getString(R.string.errorCarpooling),Toast.LENGTH_SHORT).show()
 
             }
