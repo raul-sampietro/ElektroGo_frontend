@@ -21,6 +21,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
+import elektrogo.front.ui.chatConversation.ChatConversation
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -164,6 +165,17 @@ class TripDetails : AppCompatActivity() {
 
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
+        }
+
+        val btnUnirse: Button = this.findViewById(R.id.unirseTrajecte)
+        btnUnirse.setOnClickListener {
+            val context = this
+            val intent = Intent(context, ChatConversation::class.java).apply {
+                val currentUsername : String = SessionController.getUsername(context)
+                putExtra("userA", currentUsername)
+                putExtra("userB", username)
+            }
+            context.startActivity(intent)
         }
 
     }
