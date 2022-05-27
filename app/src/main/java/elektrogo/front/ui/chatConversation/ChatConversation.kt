@@ -65,19 +65,19 @@ class ChatConversation : AppCompatActivity() {
 
         val sessionController = SessionController
         val currentUser = sessionController.getUsername(this)
-        conversation = viewModel.getConversation(userA, userB)
+        conversation = viewModel.getConversation(userA, userB).second
         recyclerView = findViewById<RecyclerView>(R.id.listConversation)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ChatConversationAdapter(this, conversation, currentUser)
         recyclerView.adapter = adapter
         val position = adapter.itemCount - 1
-        recyclerView.smoothScrollToPosition(position)
+        if (position != -1) recyclerView.smoothScrollToPosition(position)
 
 
         thread = Thread {
             while(true and !interrupted) {
                 Thread.sleep(2000)
-                val conversationIncoming = viewModel.getConversation(userA, userB)
+                val conversationIncoming = viewModel.getConversation(userA, userB).second
                 if (conversationIncoming.size > conversation.size) {
                     runOnUiThread {
                         changeData(conversationIncoming)
@@ -108,7 +108,7 @@ class ChatConversation : AppCompatActivity() {
             if (message != "") viewModel.sendMessage(userA, userB, message)
             text.text.clear()
 
-            conversation = viewModel.getConversation(userA, userB)
+            conversation = viewModel.getConversation(userA, userB).second
             adapter.updateData(conversation)
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
         }

@@ -25,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
+import elektrogo.front.ui.carPooling.ListAdapterTrips
 import elektrogo.front.ui.chatConversation.ChatConversation
 
 
@@ -72,7 +73,15 @@ class ChatListFragment() : Fragment() {
 
         val sessionController = SessionController
         username = sessionController.getUsername(view.context)
-        chatList = viewModel.getChatList(username)
+
+        val result = viewModel.getChatList(username)
+        if (result.first != 200) {
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            chatList = ArrayList<String>()
+        }
+        else {
+            chatList = result.second
+        }
 
         adapter = ChatListAdapter(container?.context as Activity, chatList)
         listView.adapter = adapter
@@ -83,9 +92,9 @@ class ChatListFragment() : Fragment() {
             while (true and !interrupted) {
                 Thread.sleep(5000)
                 val chatListIncoming = viewModel.getChatList(username)
-                if (chatListIncoming.size != chatList.size) {
+                if (chatListIncoming.first == 200 && chatListIncoming.second.size != chatList.size) {
                     activity?.runOnUiThread {
-                        changeData(chatListIncoming)
+                        changeData(chatListIncoming.second)
                     }
                 }
             }

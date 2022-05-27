@@ -10,7 +10,7 @@ class ChatConversationViewModel : ViewModel(){
     private lateinit var userA: String
     private lateinit var userB: String
 
-    fun getConversation(userA: String, userB: String) : ArrayList<Message> = runBlocking {
+    fun getConversation(userA: String, userB: String) : Pair<Int, ArrayList<Message>> = runBlocking {
         return@runBlocking FrontendController.getConversation(userA, userB)
     }
 

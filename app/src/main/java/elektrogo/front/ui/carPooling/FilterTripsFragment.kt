@@ -30,6 +30,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.gson.Gson
 import elektrogo.front.R
 import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
@@ -227,22 +228,8 @@ class FilterTripsFragment : Fragment() {
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             val i = Intent(context, TripDetails::class.java)
-            i.putExtra("tripID", filteredList[position].id.toString())
-            i.putExtra("username", filteredList[position].username)
-            i.putExtra("startDate", filteredList[position].startDate)
-            i.putExtra("startTime", filteredList[position].startTime)
-            i.putExtra("cancelDate", filteredList[position].cancelDate)
-            i.putExtra("state", filteredList[position].state)
-            i.putExtra("offeredSeats",filteredList[position].offeredSeats)
-            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
-            i.putExtra("restrictions", filteredList[position].restrictions)
-            i.putExtra("details", filteredList[position].details)
-            i.putExtra("originString", filteredList[position].origin)
-            i.putExtra("destinationString", filteredList[position].destination)
-            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
-            i.putExtra("destinationLat", filteredList[position].latitudeDestination)
-            i.putExtra("destinationLon", filteredList[position].longitudeDestination)
-            i.putExtra("id", filteredList[position].id)
+            val myjson : String = Gson().toJson(filteredList[position])
+            i.putExtra("Trip", myjson)
             startActivity(i)
         })
 
@@ -298,7 +285,15 @@ class FilterTripsFragment : Fragment() {
             val tpd = TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { view, hour, minute ->
 
                 // Display Selected date in textbox
-                if (minute<10){
+                if (hour < 10 && minute < 10) {
+                    timeFromButton.text = "0$hour:0$minute"
+                    fromTimeSelected = "0$hour:0$minute:00"
+                }
+                else if (hour < 10){
+                    timeFromButton.text = "0$hour:$minute"
+                    fromTimeSelected = "0$hour:$minute:00"
+                }
+                else if (minute < 10){
                     timeFromButton.text = "$hour:0$minute"
                     fromTimeSelected = "$hour:0$minute:00"
                 }
@@ -319,7 +314,15 @@ class FilterTripsFragment : Fragment() {
 
             val tpd = TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { view, hour, minute ->
 
-                if (minute<10){
+                if (hour < 10 && minute < 10) {
+                    timeToButton.text = "0$hour:0$minute"
+                    toTimeSelected = "0$hour:0$minute:00"
+                }
+                else if (hour < 10){
+                    timeToButton.text = "0$hour:$minute"
+                    toTimeSelected = "0$hour:$minute:00"
+                }
+                else if (minute < 10){
                     timeToButton.text = "$hour:0$minute"
                     toTimeSelected = "$hour:0$minute:00"
                 }
@@ -380,7 +383,7 @@ class FilterTripsFragment : Fragment() {
             Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
         }
 
-        if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
+        if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) && (LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
             valid = false
             Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
         }
