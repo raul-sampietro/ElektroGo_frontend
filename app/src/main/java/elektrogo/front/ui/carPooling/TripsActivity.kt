@@ -1,22 +1,14 @@
 package elektrogo.front.ui.carPooling
 
 import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import elektrogo.front.R
 import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
-import elektrogo.front.ui.preferences.PreferencesActivity
 
 class TripsActivity : AppCompatActivity() {
 

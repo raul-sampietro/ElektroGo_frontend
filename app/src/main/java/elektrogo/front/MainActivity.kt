@@ -6,21 +6,20 @@
 
 package elektrogo.front
 
+import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
-import android.media.Image
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -31,11 +30,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Picasso
-import elektrogo.front.controller.session.Session
+import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.languages.MyContextWrapper
@@ -44,13 +42,11 @@ import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
 import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
-import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
 import elektrogo.front.ui.login.LoginActivity
-import elektrogo.front.ui.preferences.PreferencesActivity
 import elektrogo.front.ui.profile.ProfileActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
-import org.w3c.dom.Text
+import kotlinx.coroutines.runBlocking
 
 /**
  * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
@@ -64,7 +60,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var currentFragment: String
-    lateinit var navigationView: NavigationView
 
     //configura les notificacions del sistema
     private fun createNotificationChannel() {
@@ -207,9 +202,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 this.finish()
 
             }
-            R.id.nav_item_five -> {
-                val intent = Intent (this, PreferencesActivity::class.java)
-                startActivity(intent)
+            R.id.nav_item_seven ->{
+                val alertDialog: AlertDialog? = this.let {
+                    val builder = AlertDialog.Builder(it)
+                    // TODO 3 hardcoded strings
+                    builder.setMessage("Estas segur d'esborrar el teu compte?")
+                    builder.apply {
+                        setPositiveButton("SI",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                val status = runBlocking { FrontendController.deleteUser(SessionController.getUsername(context)) }
+                                if (status != 200)  Toast.makeText(context,"Hi ha hagut un problema. No s'ha pogut esborrar el compte.", Toast.LENGTH_SHORT).show()
+                                else {
+                                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                        .requestEmail()
+                                        .build()
+                                    val mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
+                                    mGoogleSignInClient.signOut()
+                                    val intent = Intent(context, LoginActivity::class.java)
+                                    startActivity(intent)
+                                    SessionController.setCurrentSession(null)
+                                    Toast.makeText(context, "Successfully deleted the account", Toast.LENGTH_SHORT).show()
+                                    finish();
+                                }
+                            })
+                        setNegativeButton("NO",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                Toast.makeText(context, "El compte no s'ha esborrat", Toast.LENGTH_LONG).show()
+                            })
+                    }
+                    builder.create()
+                }
+                alertDialog?.show()
             }
 
         }
@@ -217,6 +240,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()

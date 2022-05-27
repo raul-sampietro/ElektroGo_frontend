@@ -18,9 +18,17 @@
             android:id="@+id/nav_item_four"
             android:icon="@drawable/logout_petit"
             android:title= "@string/profile_logout_button" />
+
         <item
-            android:id="@+id/nav_item_five"
-            android:icon="@drawable/ic_baseline_settings_24"
-            android:title="@string/ajustos" />
+            android:id="@+id/nav_item_six"
+            android:icon="@drawable/ic_language_24"
+            android:title="Language"/>
+
+        <item
+            android:id="@+id/nav_item_seven"
+            android:icon="@drawable/ic_delete_24"
+            android:title="Delete Account"
+            android:iconTint="@color/white"/>
+
     </group>
 </menu>
