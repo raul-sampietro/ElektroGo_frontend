@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat.startActivity
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
 import elektrogo.front.ui.vehicleList.VehicleListActivity
@@ -60,7 +61,7 @@ class MembersListAdapter (private val context : Activity, private val memberList
         else imageViewProfile.setImageResource(R.drawable.avatar)
 
         val deleteButton : ImageButton = view.findViewById(R.id.deleteMemberButton)
-
+        if (SessionController.getUsername(context) != Trip.username) deleteButton.visibility= View.GONE
         deleteButton.setOnClickListener {
             Log.i("funciona", "estoy en el onclick dentro del adapter")
             val id = idTrip
