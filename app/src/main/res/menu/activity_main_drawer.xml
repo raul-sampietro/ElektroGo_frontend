@@ -20,31 +20,6 @@
             android:title= "@string/profile_logout_button" />
 
         <item
-            android:id="@+id/nav_item_six"
-            android:icon="@drawable/ic_language_24"
-            android:title="Change Language">
-            <menu android:checkableBehavior="all">
-            <group android:checkableBehavior="single">
-
-                 <item
-                     android:id="@+id/nav_subitem_one"
-                     android:icon="@drawable/ic_language_24"
-                     android:title="@string/catalaMenu" />
-                 <item
-                     android:id="@+id/nav_subitem_two"
-                     android:icon="@drawable/ic_language_24"
-                     android:title="@string/castellaMenu" />
-                 <item
-                     android:id="@+id/nav_subitem_three"
-                     android:icon="@drawable/ic_language_24"
-                     android:title="@string/anglesMenu" />
-                 </group>
-            </menu>
-        </item>
-
-
-
-        <item
             android:id="@+id/nav_item_seven"
             android:icon="@drawable/ic_delete_24"
             android:title="Delete Account"

@@ -2,10 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="ChangeLanguage"
+        android:title="Language"
         android:id="@+id/language"
-        android:icon="@drawable/ic_language_24"
-        app:showAsAction="always" >
+        android:icon="@drawable/translate"
+        android:iconTint="@color/black"
+        app:showAsAction="always|withText" >
 
         <menu>
             <item

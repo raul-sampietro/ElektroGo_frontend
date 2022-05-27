@@ -9,7 +9,6 @@ package elektrogo.front.ui.carPooling
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -32,12 +31,12 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.gson.Gson
 import elektrogo.front.R
-import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+
 
 /**
  * @brief La clase filterTripsFragment representa la GUI de la pantalla on l'usuari insereix les dades per cercar trajectes i on veu el llistat resultant.
@@ -137,6 +136,42 @@ class FilterTripsFragment : Fragment() {
      * @post capta les escritures de l'usuari als cercadors i diferents botons de data i hora . Al premer el boto de filtrar crida la funcio que capta les respostes i despres les mostra amb l'ajuda d'un ListAdapter. Si no s'ha omplert els camps obligatoris mostra l'error corresponent.
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       onCreatedMethod()
+    }
+    /**
+     * @brief Listener sobre els cercadors, fa els autocomplete de les localitzacions.
+     * @pre
+     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que esta buscant. En clickar una localitzacio es guarda les coordenades d'aquesta.
+     */
+    private fun getAutocompleteLocation () {
+        autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                originText.error = null
+                latLngOrigin = place.latLng
+                if (latLngOrigin == null) Toast.makeText(context, resources.getString(R.string.errorOnLocation),
+                    Toast.LENGTH_SHORT).show()
+            }
+            override fun onError(status: Status) {
+                Log.i("PlacesApiError", "An error occurred: $status")
+            }
+        })
+        autocompleteSupportFragment2.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        autocompleteSupportFragment2.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                destinationText.error = null
+                latLngDestination = place.latLng
+                if (latLngDestination == null)  Toast.makeText(context, resources.getString(R.string.errorOnLocation),
+                    Toast.LENGTH_LONG).show()
+            }
+            override fun onError(status: Status) {
+                Log.i("PlacesApiError", "An error occurred: $status")
+            }
+        })
+
+    }
+
+    private fun onCreatedMethod() {
         dateButton = requireActivity().findViewById(R.id.dataButtonFiltrar)
         resetButton = requireActivity().findViewById(R.id.reset)
         filtrarButton = requireActivity().findViewById(R.id.Filtrar)
@@ -166,7 +201,7 @@ class FilterTripsFragment : Fragment() {
         }
 
 
-        val listView: ListView = view.findViewById(R.id.filterListView)
+        val listView: ListView = view!!.findViewById(R.id.filterListView)
         //mostro uns trajectes default a la llista
         var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
         if (resultDefault.first != 200) {
@@ -179,19 +214,19 @@ class FilterTripsFragment : Fragment() {
         filtrarButton.setOnClickListener {
             if (validate()) {
                 //mostro els trajectes resultants de la busqueda
-               try{
-                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected, SessionController.getUsername(requireContext()))
-                   if (result.first != 200) {
-                       Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
-                   }
-                   else {
-                       filteredList = result.second
-                       listView.adapter = ListAdapterTrips(context as Activity, filteredList)
-                   }
-               }
-               catch (e: Exception){
-                   Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
-               }
+                try{
+                    var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected, SessionController.getUsername(requireContext()))
+                    if (result.first != 200) {
+                        Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                    }
+                    else {
+                        filteredList = result.second
+                        listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+                    }
+                }
+                catch (e: Exception){
+                    Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                }
 
             }
             else Toast.makeText(context, getString(R.string.errorFieldsFiltrar),Toast.LENGTH_SHORT).show()
@@ -210,19 +245,19 @@ class FilterTripsFragment : Fragment() {
             timeFromButton.text = getString(R.string.DesdeFilter)
             autocompleteSupportFragment2.setText("")
             //mostro uns trajectes default a la llista
-           try {
-               var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
-               if (resultDefault.first != 200) {
-                   Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
-               }
-               else {
-                   filteredList = resultDefault.second
-                   listView.adapter = ListAdapterTrips(context as Activity, filteredList)
-               }
-           }
-           catch (e: Exception){
-               Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
-           }
+            try {
+                var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
+                if (resultDefault.first != 200) {
+                    Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                }
+                else {
+                    filteredList = resultDefault.second
+                    listView.adapter = ListAdapterTrips(context as Activity, filteredList)
+                }
+            }
+            catch (e: Exception){
+                Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+            }
 
         }
 
@@ -277,7 +312,7 @@ class FilterTripsFragment : Fragment() {
             dpd.show()
         }
 
-       timeFromButton.setOnClickListener {
+        timeFromButton.setOnClickListener {
             var calendar = Calendar.getInstance()
             hour = calendar.get(Calendar.HOUR_OF_DAY)
             minute = calendar.get(Calendar.MINUTE)
@@ -335,38 +370,6 @@ class FilterTripsFragment : Fragment() {
             tpd.show()
         }
     }
-    /**
-     * @brief Listener sobre els cercadors, fa els autocomplete de les localitzacions.
-     * @pre
-     * @post Si l'usuari comença una cerca, es mostra les possibles localitzacions que esta buscant. En clickar una localitzacio es guarda les coordenades d'aquesta.
-     */
-    private fun getAutocompleteLocation () {
-        autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
-        autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-                originText.error = null
-                latLngOrigin = place.latLng
-                if (latLngOrigin == null) Toast.makeText(context, resources.getString(R.string.errorOnLocation),
-                    Toast.LENGTH_SHORT).show()
-            }
-            override fun onError(status: Status) {
-                Log.i("PlacesApiError", "An error occurred: $status")
-            }
-        })
-        autocompleteSupportFragment2.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
-        autocompleteSupportFragment2.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-            override fun onPlaceSelected(place: Place) {
-                destinationText.error = null
-                latLngDestination = place.latLng
-                if (latLngDestination == null)  Toast.makeText(context, resources.getString(R.string.errorOnLocation),
-                    Toast.LENGTH_LONG).show()
-            }
-            override fun onError(status: Status) {
-                Log.i("PlacesApiError", "An error occurred: $status")
-            }
-        })
-
-    }
 
     /**
      * @brief Metode que comprova que tots les camps obligatoris han estat omplerts i que el que s'ha omplert es correcte.
@@ -401,6 +404,11 @@ class FilterTripsFragment : Fragment() {
             destinationText.error=resources.getString(R.string.fieldRequired)
         }
         return valid
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onCreatedMethod()
     }
 
 
