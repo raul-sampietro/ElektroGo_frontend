@@ -285,7 +285,15 @@ class FilterTripsFragment : Fragment() {
             val tpd = TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { view, hour, minute ->
 
                 // Display Selected date in textbox
-                if (minute<10){
+                if (hour < 10 && minute < 10) {
+                    timeFromButton.text = "0$hour:0$minute"
+                    fromTimeSelected = "0$hour:0$minute:00"
+                }
+                else if (hour < 10){
+                    timeFromButton.text = "0$hour:$minute"
+                    fromTimeSelected = "0$hour:$minute:00"
+                }
+                else if (minute < 10){
                     timeFromButton.text = "$hour:0$minute"
                     fromTimeSelected = "$hour:0$minute:00"
                 }
@@ -306,7 +314,15 @@ class FilterTripsFragment : Fragment() {
 
             val tpd = TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { view, hour, minute ->
 
-                if (minute<10){
+                if (hour < 10 && minute < 10) {
+                    timeToButton.text = "0$hour:0$minute"
+                    toTimeSelected = "0$hour:0$minute:00"
+                }
+                else if (hour < 10){
+                    timeToButton.text = "0$hour:$minute"
+                    toTimeSelected = "0$hour:$minute:00"
+                }
+                else if (minute < 10){
                     timeToButton.text = "$hour:0$minute"
                     toTimeSelected = "$hour:0$minute:00"
                 }
@@ -367,7 +383,7 @@ class FilterTripsFragment : Fragment() {
             Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
         }
 
-        if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) &&(LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
+        if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) && (LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
             valid = false
             Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
         }
