@@ -447,14 +447,22 @@ object FrontendController {
 
     private const val URL_CHATS = "${URL_BASE}/chats"
 
-    suspend fun getChatList(username: String): ArrayList<String> {
-        val chats: ArrayList<String> = client.get("${URL_CHATS}/${username}")
-        return chats
+    suspend fun getChatList(username: String): Pair<Int, ArrayList<String>> {
+        val httpResponse: HttpResponse = client.get("${URL_CHATS}/${username}")
+        val status: Int = httpResponse.status.value
+        val chats: ArrayList<String>
+        if (status != 200) chats = ArrayList<String>()
+        else chats = httpResponse.receive()
+        return Pair(status,chats)
     }
 
-    suspend fun getConversation(userA: String, userB: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_CHATS}/messages/${userA}/${userB}")
-        return chats
+    suspend fun getConversation(userA: String, userB: String): Pair<Int, ArrayList<Message>> {
+        val httpResponse: HttpResponse = client.get("${URL_CHATS}/messages/${userA}/${userB}")
+        val status: Int = httpResponse.status.value
+        val chats: ArrayList<Message>
+        if (status != 200) chats = ArrayList<Message>()
+        else chats = httpResponse.receive()
+        return Pair(status,chats)
     }
 
     suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
@@ -478,7 +486,11 @@ object FrontendController {
     }
 
     suspend fun getReceivedMessages(user: String): ArrayList<Message> {
-        val chats: ArrayList<Message> = client.get("${URL_CHATS}/messages/to/${user}")
+        val httpResponse: HttpResponse = client.get("${URL_CHATS}/messages/to/${user}")
+        val status: Int = httpResponse.status.value
+        val chats: ArrayList<Message>
+        if (status != 200) chats = ArrayList<Message>()
+        else chats = httpResponse.receive()
         return chats
     }
 
