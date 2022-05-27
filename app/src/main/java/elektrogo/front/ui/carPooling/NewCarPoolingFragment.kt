@@ -314,6 +314,7 @@ class NewCarPoolingFragment() : Fragment() {
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 var addressList : List<AddressComponent> = place.addressComponents.asList()
+                Log.i("address", place.addressComponents.toString())
                 var addressNumber : String? = null
                 var addressFirst : String = ""
                 var addressSecond : String = ""
@@ -335,8 +336,10 @@ class NewCarPoolingFragment() : Fragment() {
                     }
                     else if (i.types[0].equals("locality")){
                         if(hasFirst) {
-                            addressSecond = i.name
-                            hasSecond = true
+                            if (addressFirst != i.name) {
+                                addressSecond = i.name
+                                hasSecond = true
+                            }
                         }
                         else addressFirst = i.name
                     }
@@ -392,8 +395,10 @@ class NewCarPoolingFragment() : Fragment() {
                     }
                     else if (i.types[0].equals("locality")){
                         if(hasFirst) {
-                            hasSecond=true
-                            addressSecond = i.name
+                            if (addressFirst != i.name) {
+                                addressSecond = i.name
+                                hasSecond = true
+                            }
                         }
                         else addressFirst = i.name
                     }
