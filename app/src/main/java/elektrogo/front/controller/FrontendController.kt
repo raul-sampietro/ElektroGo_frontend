@@ -49,6 +49,7 @@ object FrontendController {
                 serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                     prettyPrint = true
                     isLenient = true
+                    ignoreUnknownKeys = true
                 })
             }
 
@@ -179,6 +180,12 @@ object FrontendController {
     suspend fun  getDriver(username: String): Boolean {
         val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
         return httpResponse.status.value == 200
+    }
+
+    suspend fun  getDriver2(username: String): Pair<Int, Driver?> {
+        val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
+        if (httpResponse.status.value == 200) return Pair(httpResponse.status.value, httpResponse.receive())
+        return Pair(httpResponse.status.value, null)
     }
 
     // #################################################
