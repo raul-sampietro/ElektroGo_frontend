@@ -179,6 +179,6 @@
     <string name="report">Denunciar</string>
     <string name="buttonJoinTrip">¡Unirse al viaje!</string>
     <string name="abandonTrip">Abandonar viaje</string>
-
+    <string name="errorAbandonTrip">Ha habido un error abandonando el trayecto</string>
 
 </resources>
