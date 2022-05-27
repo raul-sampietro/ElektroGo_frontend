@@ -89,6 +89,11 @@ class TripDetails : AppCompatActivity() {
         }
         else {
             memberList = resultDefault.second
+            val nMembers = memberList.size
+            Log.i("nmembers", nMembers.toString())
+            val lp: LinearLayout.LayoutParams = listView.layoutParams as LinearLayout.LayoutParams
+            lp.height = nMembers*82*3
+            listView.layoutParams = lp
             listView.adapter = MembersListAdapter(this as Activity, memberList,id, trip)
         }
 
@@ -166,6 +171,7 @@ class TripDetails : AppCompatActivity() {
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
         }
+
 
         val btnUnirse: Button = this.findViewById(R.id.unirseTrajecte)
         btnUnirse.setOnClickListener {
