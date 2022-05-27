@@ -7,14 +7,6 @@
     android:layout_height="match_parent">
 
 
-    <androidx.drawerlayout.widget.DrawerLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tripsAct"
-        tools:openDrawer="start"
-        tools:context=".ui.carPooling.TripsActivity">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,13 +25,4 @@
 
             </FrameLayout>
         </LinearLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/nav_header_main"
-            app:menu="@menu/activity_main_drawer" />
-
-    </androidx.drawerlayout.widget.DrawerLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
