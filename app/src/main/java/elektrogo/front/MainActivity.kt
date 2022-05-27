@@ -133,12 +133,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val header : View = navigationView.getHeaderView(0)
         val profileImage : ImageView = header.findViewById(R.id.profile_imageNav)
         val usernameText : TextView = header.findViewById(R.id.usernameNav)
+        val clickeableLayout :LinearLayout = header.findViewById(R.id.headerProfile)
         if (SessionController.getImageUrl(this)!="null") {
             Picasso.get().load(SessionController.getImageUrl(this)).into(profileImage)
         }
         else profileImage.setImageResource(R.drawable.avatar)
         usernameText.text= SessionController.getUsername(this)
         navigationView.setNavigationItemSelectedListener(this)
+
+        clickeableLayout.setOnClickListener {
+            var i  = Intent(this, ProfileActivity::class.java)
+            i.putExtra("username", SessionController.getUsername(this))
+            startActivity(i)
+        }
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
