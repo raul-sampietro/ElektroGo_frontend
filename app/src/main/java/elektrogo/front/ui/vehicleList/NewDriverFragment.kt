@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import elektrogo.front.R
 import java.io.FileNotFoundException
@@ -82,6 +83,9 @@ class NewDriverFragment : Fragment() {
         sendButton.setOnClickListener {
             if (imageUriFront != null && imageUriReverse != null){
             //crida a frontend controller
+            }
+            else {
+                Toast.makeText(requireActivity(), resources.getString(R.string.requiredImage), Toast.LENGTH_LONG).show()
             }
         }
 

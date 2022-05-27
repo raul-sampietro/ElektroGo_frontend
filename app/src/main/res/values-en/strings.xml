@@ -186,4 +186,5 @@
     <string name="sendButton">Send</string>
 
     <string name="internalError">There was an error with the server</string>
+    <string name="requiredImage">You must add both images before sending the request</string>
 </resources>

@@ -185,4 +185,5 @@
     <string name="sendButton">Enviar</string>
 
     <string name="internalError">Ha habido un error con el servidor</string>
+    <string name="requiredImage">Tienes que añadir las dos imagenes antes de enviar el formulario</string>
 </resources>
