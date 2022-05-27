@@ -8,9 +8,12 @@ package elektrogo.front.ui.carPooling
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -18,9 +21,12 @@ import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
+import elektrogo.front.controller.FrontendController.finishTrip
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
+import elektrogo.front.ui.chatConversation.ChatConversation
+import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -88,6 +94,11 @@ class TripDetails : AppCompatActivity() {
         }
         else {
             memberList = resultDefault.second
+            val nMembers = memberList.size
+            if (memberList.size > 0 ) findViewById<TextView>(R.id.noMembers).visibility = View.GONE
+            val lp: LinearLayout.LayoutParams = listView.layoutParams as LinearLayout.LayoutParams
+            lp.height = nMembers*82*3
+            listView.layoutParams = lp
             listView.adapter = MembersListAdapter(this as Activity, memberList,id, trip)
         }
 
@@ -153,7 +164,8 @@ class TripDetails : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val cancelDay = formatter.parse(cancelDate)
 
-        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
+        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled"))
+                (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
@@ -164,6 +176,52 @@ class TripDetails : AppCompatActivity() {
 
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
+        }
+
+        val btnFinish: Button = findViewById(R.id.btn_finalitzarTrajecte)
+        val startDay = formatter.parse(startDate)
+
+        if ((SessionController.getUsername(this) != username) || (today < startDay) || (state == "finished"))
+            (btnFinish.parent as ViewManager).removeView(btnFinish)
+        else {
+            btnFinish.setOnClickListener {
+                val alertDialog: AlertDialog? = this.let {
+                    val builder = AlertDialog.Builder(it)
+                    // TODO hardcoded strings
+                    builder.setMessage("Vols finalitzar aquest trajecte?")
+                    builder.apply {
+                        setPositiveButton("SI",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                val status = viewModel.finishTrip(trip.id!!.toInt())
+                                if (status == 200)
+                                    Toast.makeText(context, "Trajecte finalitzat", Toast.LENGTH_LONG).show()
+                                else
+                                    Toast.makeText(context, "No s'ha pogut finalitzar el trajecte", Toast.LENGTH_LONG).show()
+                                //val intent = Intent(context, VehicleListActivity::class.java)
+                                //startActivity(intent)
+                                //finish()
+                            })
+                        setNegativeButton("NO",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                Toast.makeText(context, "No s'ha finalitzat el trajecte", Toast.LENGTH_LONG).show()
+                            })
+                    }
+                    builder.create()
+                }
+                alertDialog?.show()
+            }
+        }
+
+
+        val btnUnirse: Button = this.findViewById(R.id.unirseTrajecte)
+        btnUnirse.setOnClickListener {
+            val context = this
+            val intent = Intent(context, ChatConversation::class.java).apply {
+                val currentUsername : String = SessionController.getUsername(context)
+                putExtra("userA", currentUsername)
+                putExtra("userB", username)
+            }
+            context.startActivity(intent)
         }
 
     }
