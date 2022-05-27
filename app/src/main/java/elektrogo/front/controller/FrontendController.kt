@@ -185,9 +185,9 @@ object FrontendController {
 
     suspend fun  getDriver2(username: String): Pair<Int, Driver?> {
         val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
-        val responseJson = Gson().fromJson(httpResponse.readText(), httpRespostes::class.java)
-        val statusCode = responseJson.status
         if (httpResponse.status.value == 200) return Pair(httpResponse.status.value, httpResponse.receive())
+        val httpResponse1: httpRespostes = client.get("${URL_DRIVERS}/${username}")
+        val statusCode: Int = httpResponse1.status
         return Pair(statusCode, null)
     }
 
