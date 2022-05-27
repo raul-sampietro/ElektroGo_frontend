@@ -47,7 +47,7 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
         deleteButton.setOnClickListener {
             val alertDialog: AlertDialog? = parent.context.let {
                 val builder = AlertDialog.Builder(it)
-                val message1: String = R.string.esborrarXat.toString().plus("${user.text}?")
+                val message1 = R.string.esborrarXat
                 builder.setMessage(message1)
                 builder.apply {
                     setPositiveButton(R.string.si,

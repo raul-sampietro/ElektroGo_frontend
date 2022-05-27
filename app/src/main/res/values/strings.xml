@@ -96,6 +96,9 @@
     <string name="buscarFiltrar">Buscar</string>
     <string name="errorFieldsFiltrar">Ompli els camps de forma correcta per tal de poder cercar trajectes</string>
 
+    <string name="enunciatDenuncia">Indica a continuació el motiu de la denúncia:</string>
+    <string name="hintDenuncia">El motiu de la denuncia és...</string>
+    <string name="bttDenuncia">Fer Denúncia</string>
 
     <!-- FirstLoginFragment -->
     <string name="firstLoginWelcome">Benvingut/da,</string>
@@ -176,7 +179,7 @@
     <string name="next">next</string>
     <string name="message_to_send">Type the message you want to send</string>
     <string name="message_sent">messages sent</string>
-    <string name="esborrarXat">"Vols esborrar el xat amb "</string>
+    <string name="esborrarXat">Vols esborrar aquest xat?</string>
     <string name="si">SI</string>
     <string name="esborrantXat">Esborrant xat</string>
     <string name="xatNoEsborrat">Xat no esborrat</string>
@@ -192,6 +195,9 @@
     <string name="nom_d_usuari">Nom d\'usuari:</string>
     <string name="correu_electronic">Correu electronic</string>
     <string name="eliminar_compte">Eliminar Compte</string>
+    <string name="block">Bloquejar</string>
+    <string name="report">Denunciar</string>
+    <string name="buttonJoinTrip">Join the trip!</string>
 
 
 </resources>

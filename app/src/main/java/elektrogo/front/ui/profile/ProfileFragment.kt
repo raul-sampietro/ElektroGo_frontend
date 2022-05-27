@@ -20,6 +20,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
+import elektrogo.front.model.Achievement
 import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
@@ -59,6 +60,27 @@ class ProfileFragment : Fragment() {
             imageVerificat.setImageResource(R.drawable.verificat)
         }
 
+        val a : Achievement = viewModel.getAchievement("Traveler", SessionController.getUsername(requireActivity()))
+        val trophyImg : ImageView = view.findViewById(R.id.trophyImg)
+        val trophyName : TextView = view.findViewById(R.id.trophyName)
+        val trophyPoints : TextView = view.findViewById(R.id.trophyPoints)
+
+        if (a.points < 10) {
+            trophyImg.setImageResource(R.drawable.no_prize_small)
+        }
+        else if (a.points in 10..20) {
+            trophyImg.setImageResource(R.drawable.bronze_small)
+        }
+        else if (a.points in 20..30) {
+            trophyImg.setImageResource(R.drawable.silver_small)
+        }
+        else if (a.points > 30) {
+            trophyImg.setImageResource(R.drawable.gold_small)
+        }
+
+        trophyName.text = a.achievement
+        trophyPoints.text = a.points.toString()
+
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG)
@@ -70,8 +92,8 @@ class ProfileFragment : Fragment() {
             val star4: ImageView = view.findViewById(R.id.estrella4)
             val star5: ImageView = view.findViewById(R.id.estrella5)
 
-            var rating = ratingPair.second!!.ratingValue / 2
-            var decimalValue = rating - rating.toInt()
+            val rating = ratingPair.second!!.ratingValue / 2
+            val decimalValue = rating - rating.toInt()
             var enterValue = rating.toInt()
 
             when (enterValue) {
@@ -151,12 +173,6 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        val buttonCars: Button = view.findViewById(R.id.AddVehicleButton)
-        buttonCars.setOnClickListener {
-            val intent = Intent(container?.context, VehicleListActivity::class.java)
-            startActivity(intent)
-        }
-
         return view
     }
 
@@ -176,22 +192,6 @@ class ProfileFragment : Fragment() {
             val httpStatus: Int = addDriver(SessionController.getUsername(requireContext()))
             Toast.makeText(requireContext(), httpStatus.toString(), Toast.LENGTH_SHORT).show()
         }
-        // Logout button
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-        val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
-        view.findViewById<Button>(R.id.profile_logout).setOnClickListener {
-            mGoogleSignInClient.signOut()
-                .addOnCompleteListener(requireActivity(), OnCompleteListener  {
-                    val intent = Intent(requireActivity(), LoginActivity::class.java)
-                    startActivity(intent)
-                    SessionController.setCurrentSession(null)
-                    Toast.makeText(requireActivity(), "Successfully signed out", Toast.LENGTH_SHORT).show()
-                    requireActivity().finish()
-                })
-
-        }
 
         val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
         deleteButton.setOnClickListener {
@@ -201,14 +201,14 @@ class ProfileFragment : Fragment() {
         val guestprofileButton: Button = view.findViewById(R.id.other_profile)
         guestprofileButton.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("username", "MarcCastells")
+            bundle.putString("username", "samragu")
 
             val fragmentGuest = GuestProfileFragment()
 
             fragmentGuest.arguments = bundle
 
             val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(R.id.main_container, fragmentGuest)
+            transaction.replace(this.id, fragmentGuest)
             transaction.addToBackStack(null)
             transaction.commit()
         }

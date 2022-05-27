@@ -8,8 +8,4 @@ object ChatController {
         return@runBlocking FrontendController.getReceivedMessages(username)
     }
 
-    fun getUsersProfilePhoto(username: String): String = runBlocking {
-        return@runBlocking FrontendController.getUserProfilePhoto(username)
-    }
-
 }
