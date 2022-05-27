@@ -81,6 +81,11 @@ class ProfileFragment : Fragment() {
         trophyName.text = a.achievement
         trophyPoints.text = a.points.toString()
 
+        val deletebttn : Button = view.findViewById(R.id.profile_delete_account)
+        deletebttn.setOnClickListener {
+            if (viewModel.deleteUser(user) != 200) Toast.makeText(context, "Un error ha ocorregut, intenteu-ho més tard", Toast.LENGTH_LONG).show()
+        }
+
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG)
@@ -187,36 +192,10 @@ class ProfileFragment : Fragment() {
         val provider: TextView = view.findViewById(R.id.login)
         provider.text = SessionController.getProvider(requireActivity());
 
-        val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
-        buttonDriver.setOnClickListener {
-            val httpStatus: Int = addDriver(SessionController.getUsername(requireContext()))
-            Toast.makeText(requireContext(), httpStatus.toString(), Toast.LENGTH_SHORT).show()
-        }
-
         val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
         deleteButton.setOnClickListener {
 
         }
-
-        val guestprofileButton: Button = view.findViewById(R.id.other_profile)
-        guestprofileButton.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("username", "samragu")
-
-            val fragmentGuest = GuestProfileFragment()
-
-            fragmentGuest.arguments = bundle
-
-            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(this.id, fragmentGuest)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
-    }
-
-
-    private fun addDriver(username: String): Int = runBlocking {
-        FrontendController.addDriver(username)
     }
 
     override fun onDestroyView() {

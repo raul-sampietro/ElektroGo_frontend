@@ -21,6 +21,7 @@ import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
+import elektrogo.front.ui.profile.ProfileActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.text.SimpleDateFormat
 
@@ -75,6 +76,13 @@ class MembersListAdapter (private val context : Activity, private val memberList
             parent.context.startActivity(i)
             context.finish()
 
+        }
+
+        val infoUser : LinearLayout = view.findViewById(R.id.infoUser)
+        infoUser.setOnClickListener{
+            val i  = Intent(parent.context, ProfileActivity::class.java)
+            i.putExtra("username", f.username)
+            parent.context.startActivity(i)
         }
 
         return view

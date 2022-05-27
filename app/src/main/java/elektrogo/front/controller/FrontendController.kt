@@ -186,7 +186,11 @@ object FrontendController {
 
     suspend fun  getDriver(username: String): Boolean {
         val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
-        return httpResponse.status.value == 200
+        if (httpResponse.status.value == 200) {
+            val d : Driver = httpResponse.receive()
+            if (d.status == "verified") return true;
+        }
+        return false
     }
 
     suspend fun  getDriver2(username: String): Pair<Int, Driver?> {
@@ -573,6 +577,11 @@ object FrontendController {
         return if (httpResponse.status.value != 200) {
             ArrayList()
         } else httpResponse.receive()
+    }
+
+    suspend fun Block(username: String, userBlock: String): Boolean {
+        val httpResponse : HttpResponse = client.post("${URL_BASE}/blocks/${username}/block/${userBlock}")
+        return httpResponse.status.value == 200
     }
 
     suspend fun getAchievement(achievement: String, username: String): Achievement {

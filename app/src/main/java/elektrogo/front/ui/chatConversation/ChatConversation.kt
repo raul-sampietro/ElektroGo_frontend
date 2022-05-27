@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +15,7 @@ import elektrogo.front.ChatService
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
+import elektrogo.front.ui.profile.ProfileActivity
 import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
 
 
@@ -53,6 +51,11 @@ class ChatConversation : AppCompatActivity() {
         if (nameUserB != null) {
             if (b != null) {
                 nameUserB.text = b.getString("userB")
+            }
+            nameUserB.setOnClickListener{
+                val i  = Intent(this, ProfileActivity::class.java)
+                i.putExtra("username", nameUserB.text.toString())
+                startActivity(i)
             }
         }
 

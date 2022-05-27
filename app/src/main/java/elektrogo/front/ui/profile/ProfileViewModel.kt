@@ -27,4 +27,12 @@ class ProfileViewModel : ViewModel() {
     fun getAchievement(achievement: String, username: String) : Achievement = runBlocking {
         return@runBlocking FrontendController.getAchievement(achievement, username)
     }
+
+    fun deleteUser(username: String) : Int = runBlocking {
+        return@runBlocking FrontendController.deleteUser(username)
+    }
+
+    fun blockUser(username: String, blockUser: String) : Boolean = runBlocking {
+        return@runBlocking FrontendController.Block(username, blockUser)
+    }
 }
