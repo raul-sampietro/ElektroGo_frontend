@@ -35,7 +35,6 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         val v = vehicleList[position]
         val imageViewPhoto : ImageView =view.findViewById(R.id.vehicleImage)
         val nPlate = v.numberPlate
-        // TODO change to server address
         Picasso.get().load("http://10.4.41.58:8080/vehicles/${nPlate}/image").into(imageViewPhoto)
         numberPlate.text = nPlate
         brand.text = v.brand
@@ -48,7 +47,7 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         deleteVehicleButton.setOnClickListener {
             val alertDialog: AlertDialog? = parent.context.let {
                 val builder = AlertDialog.Builder(it)
-                // TODO 3 hardcoded strings
+                // TODO hardcoded strings
                 builder.setMessage("Vols esborrar el vehicle amb matrícula ${v.numberPlate}?")
                 builder.apply {
                     setPositiveButton("SI",

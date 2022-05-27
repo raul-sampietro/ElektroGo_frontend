@@ -25,12 +25,11 @@ import java.io.ByteArrayOutputStream
  */
 object FrontendController {
     // SERVER
-    private const val URL_BASE_WB = "http://10.4.41.58:8080/"
     private const val URL_BASE = "http://10.4.41.58:8080"
+    // HOME
     // private const val URL_BASE_WB = "http://192.168.1.82:8080/"
     // private const val URL_BASE = "http://192.168.1.82:8080"
     // MOBILE NETWORK
-    //private const val URL_BASE_WB = "http://192.168.43.104:8080/"
     //private const val URL_BASE = "http://192.168.43.104:8080"
 
     //Add functions you need here :)
@@ -424,7 +423,7 @@ object FrontendController {
         longitudeDestination: Double,
         drivingRange: Int
     ): ArrayList<Double> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE_WB}route/calculate") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}/route/calculate") {
             parameter("latO", latitudeOrigin)
             parameter("longO", longitudeOrigin)
             parameter("latD", latitudeDestination)
@@ -505,7 +504,6 @@ object FrontendController {
         return httpResponse.receive()
     }
 
-
     suspend fun reportUser(rep: Report): Int {
         val httpResponse: HttpResponse = client.post("${URL_BASE}/reports") { //confirmar que ha de ser post
             contentType(ContentType.Application.Json)
@@ -526,5 +524,8 @@ object FrontendController {
         return httpResponse.receive()
     }
 
+    suspend fun finishTrip(id: Int): Int {
+        val httpResponse: HttpResponse = client.put("${URL_CAR_POOLING}/${id}/finish")
+        return httpResponse.status.value
+    }
 }
-

@@ -71,7 +71,7 @@ class ChatConversation : AppCompatActivity() {
         adapter = ChatConversationAdapter(this, conversation, currentUser)
         recyclerView.adapter = adapter
         val position = adapter.itemCount - 1
-        recyclerView.smoothScrollToPosition(position)
+        if (position != -1) recyclerView.smoothScrollToPosition(position)
 
 
         thread = Thread {
