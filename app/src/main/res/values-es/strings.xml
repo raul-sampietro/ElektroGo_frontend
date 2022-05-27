@@ -180,9 +180,10 @@
 
     <string name="verificant">Los administradores están verificando tu solicitud</string>
 
-    <string name="insertDNImage">Añade una imagen de la part frontal del DNI</string>
-    <string name="insert2DNImage">Añade una imagen de la part reversa del DNI</string>
+    <string name="insertDNImage">Añade una imagen de la part frontal del carnet de conducir</string>
+    <string name="insert2DNImage">Añade una imagen de la part reversa del carnet de conducir</string>
     <string name="sendButton">Enviar</string>
 
     <string name="internalError">Ha habido un error con el servidor</string>
+    <string name="requiredImage">Tienes que añadir las dos imagenes antes de enviar el formulario</string>
 </resources>
