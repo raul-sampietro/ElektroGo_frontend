@@ -11,7 +11,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.ViewManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -88,6 +87,11 @@ class TripDetails : AppCompatActivity() {
         }
         else {
             memberList = resultDefault.second
+            val nMembers = memberList.size
+            Log.i("nmembers", nMembers.toString())
+            val lp: LinearLayout.LayoutParams = listView.layoutParams as LinearLayout.LayoutParams
+            lp.height = nMembers*82*3
+            listView.layoutParams = lp
             listView.adapter = MembersListAdapter(this as Activity, memberList,id, trip)
         }
 
@@ -147,14 +151,14 @@ class TripDetails : AppCompatActivity() {
             startActivity(Intent.createChooser(myIntent, getString(R.string.share)))
         }
 
-        val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
+        //val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
 
         val today = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val cancelDay = formatter.parse(cancelDate)
 
-        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
-        else {
+      //  if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
+       /* else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
 
@@ -164,8 +168,7 @@ class TripDetails : AppCompatActivity() {
 
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
-        }
-
+        }*/
     }
     /**
      * @brief Metode que s'encarrega de renderitzar les estrelles que te l'usuari segons la valoracio mitjana que rep.
