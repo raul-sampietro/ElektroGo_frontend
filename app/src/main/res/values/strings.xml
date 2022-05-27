@@ -197,6 +197,7 @@
     <string name="eliminar_compte">Eliminar Compte</string>
     <string name="block">Bloquejar</string>
     <string name="report">Denunciar</string>
+    <string name="buttonJoinTrip">Join the trip!</string>
 
 
 </resources>
