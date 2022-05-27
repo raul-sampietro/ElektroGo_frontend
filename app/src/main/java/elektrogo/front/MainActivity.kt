@@ -209,15 +209,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 this.finish()
 
             }
-            R.id.nav_subitem_one -> {
-                setLanguage("ca")
-            }
-            R.id.nav_subitem_two -> {
-                setLanguage("es")
-            }
-            R.id.nav_subitem_three -> {
-                setLanguage("en")
-            }
             R.id.nav_item_seven ->{
                 val alertDialog: AlertDialog? = this.let {
                     val builder = AlertDialog.Builder(it)
