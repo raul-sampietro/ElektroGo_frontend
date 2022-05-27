@@ -202,6 +202,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 this.finish()
 
             }
+            R.id.nav_subitem_one -> {
+                setLanguage("ca")
+            }
+            R.id.nav_subitem_two -> {
+                setLanguage("es")
+            }
+            R.id.nav_subitem_three -> {
+                setLanguage("en")
+            }
             R.id.nav_item_seven ->{
                 val alertDialog: AlertDialog? = this.let {
                     val builder = AlertDialog.Builder(it)
@@ -240,10 +249,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    override fun onResume() {
-        super.onResume()
-
+    private fun setLanguage(lang: String) {
+        Preference.setLoginCount(lang)
+        finish();
+        overridePendingTransition(0, 0);
+        val intent = Intent(context, MainActivity::class.java)
+        intent.putExtra("origin", currentFragment)
+        Log.i("CurrentFragment", currentFragment)
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
+
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
@@ -276,34 +292,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.catalan -> {
-                Preference.setLoginCount("ca")
-                finish();
-                overridePendingTransition(0, 0);
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("origin", currentFragment)
-                Log.i("CurrentFragment", currentFragment)
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+                setLanguage("ca")
             }
             R.id.spanish -> {
-                Preference.setLoginCount("es")
-                finish();
-                overridePendingTransition(0, 0);
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("origin", currentFragment)
-                Log.i("CurrentFragment", currentFragment)
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+                setLanguage("es")
             }
             R.id.english -> {
-                Preference.setLoginCount("en")
-                finish();
-                overridePendingTransition(0, 0);
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("origin", currentFragment)
-                Log.i("CurrentFragment", currentFragment)
-                startActivity(intent)
-                overridePendingTransition(0, 0);
+                setLanguage("en")
             }
         }
         return true

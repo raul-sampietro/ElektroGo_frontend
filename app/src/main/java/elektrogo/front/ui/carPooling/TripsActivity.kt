@@ -41,34 +41,6 @@ class TripsActivity : AppCompatActivity() {
     }
 
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.catalan -> {
-                Preference.setLoginCount("ca")
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(getIntent());
-                overridePendingTransition(0, 0);
-            }
-            R.id.spanish -> {
-                Preference.setLoginCount("es")
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(getIntent());
-                overridePendingTransition(0, 0);
-            }
-            R.id.english -> {
-                Preference.setLoginCount("en")
-                finish();
-                overridePendingTransition(0, 0);
-                startActivity(getIntent());
-                overridePendingTransition(0, 0);
-            }
-        }
-        return true
-    }
-
     override fun attachBaseContext(newBase: Context?) {
         Preference = Preference(newBase!!)
         val lang = Preference.getLoginCount()
