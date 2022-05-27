@@ -90,13 +90,12 @@ class NewDriverFragment : Fragment() {
                 var driver = Driver(SessionController.getUsername(requireActivity()), "pendent")
                 var statusCode = viewModel.sendDriverInfo(driver, SessionController.getUsername(requireActivity()))
 
-                if (statusCode == 439) Toast.makeText(requireActivity(), resources.getString(R.string.DriverVehicleAlreadyExists), Toast.LENGTH_LONG).show()
-                else if (statusCode == 440) Toast.makeText(requireActivity(), resources.getString(R.string.WrongVehicleInfo), Toast.LENGTH_LONG).show()
-                else if (statusCode in 500..599) Toast.makeText(requireActivity(), resources.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                if (statusCode == 439) Toast.makeText(requireActivity(), resources.getString(R.string.DriverAlreadyExists), Toast.LENGTH_LONG).show()
+                else if (statusCode == 500) Toast.makeText(requireActivity(), resources.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
                 else if (statusCode == 200){
                     viewModel.saveDriverFrontImage(SessionController.getUsername(requireActivity()), bitmapImageFront!!)
                     viewModel.saveDriverReverseImage(SessionController.getUsername(requireActivity()), bitmapImageReverse!!)
-                    Toast.makeText(requireActivity(), resources.getString(R.string.VehicleCreatedSuccessfully), Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireActivity(), resources.getString(R.string.DriverRequestRecived), Toast.LENGTH_LONG).show()
                     loadFragment(verifyingDriverFragment)
                 }
             }

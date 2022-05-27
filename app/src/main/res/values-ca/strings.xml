@@ -184,4 +184,6 @@
     <string name="internalError">Hi ha hagut un error amb el servidor</string>
     <string name="requiredImage">Has d\'afegir les dues imatges abans d\'enviar</string>
 
+    <string name="DriverAlreadyExists">Ja estas registrat com a conductor.</string>
+    <string name="DriverRequestRecived">La sol·licitud ha estat enviada correctament</string>
 </resources>
