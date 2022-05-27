@@ -47,6 +47,7 @@ class GuestProfileFragment : Fragment() {
         val un: TextView = view.findViewById(R.id.profile_username)
         un.text = username
 
+        if (username == null) Toast.makeText(context, "There has been a problem, try again later", Toast.LENGTH_LONG).show()
 
         val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
         val imagePath = username?.let { viewModel.getUsersProfilePhoto(it) }

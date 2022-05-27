@@ -178,7 +178,11 @@ object FrontendController {
 
     suspend fun  getDriver(username: String): Boolean {
         val httpResponse: HttpResponse = client.get("${URL_DRIVERS}/${username}")
-        return httpResponse.status.value == 200
+        if (httpResponse.status.value == 200) {
+            val d : Driver = httpResponse.receive()
+            if (d.status == "verified") return true;
+        }
+        return false
     }
 
     // #################################################

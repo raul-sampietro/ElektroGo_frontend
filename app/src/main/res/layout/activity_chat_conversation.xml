@@ -65,6 +65,7 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:clickable="true"
                 tools:ignore="UnknownId">
 
             </TextView>

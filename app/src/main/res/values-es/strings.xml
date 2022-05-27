@@ -178,6 +178,7 @@
     <string name="block">Bloquear</string>
     <string name="report">Denunciar</string>
     <string name="buttonJoinTrip">¡Unirese al viaje!</string>
+    <string name="deleteAccount" >Borrar cuenta</string>
 
 
 </resources>

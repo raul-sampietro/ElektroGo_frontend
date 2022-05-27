@@ -179,6 +179,7 @@
     <string name="block">Block</string>
     <string name="report">Report</string>
     <string name="buttonJoinTrip">Join trip!</string>
+    <string name="deleteAccount" >Delete Account</string>
 
 
 </resources>
