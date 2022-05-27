@@ -1,25 +1,30 @@
 package elektrogo.front.ui.preferences
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import elektrogo.front.R
 import elektrogo.front.controller.session.Session
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
+import elektrogo.front.ui.login.LoginActivity
 import io.ktor.http.cio.websocket.*
 import org.w3c.dom.Text
 
 class PreferencesActivity : AppCompatActivity() {
 
     private lateinit var radiobuttonGroup: RadioGroup
-
+    private var modelView = PreferencesViewModel()
     lateinit var preference: Preference
     lateinit var toolbar2 : Toolbar
 
@@ -79,7 +84,20 @@ class PreferencesActivity : AppCompatActivity() {
         })
 
         deleteButton.setOnClickListener {
-
+           val status = modelView.deleteAccount(SessionController.getUsername(this))
+           if (status != 200)  Toast.makeText(this,"Hi ha hagut un problema. No s'ha pogut esborrar el compte.", Toast.LENGTH_SHORT).show()
+           else {
+               val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                   .requestEmail()
+                   .build()
+               val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+               mGoogleSignInClient.signOut()
+               val intent = Intent(this, LoginActivity::class.java)
+               startActivity(intent)
+               SessionController.setCurrentSession(null)
+               Toast.makeText(this, "Successfully deleted the account", Toast.LENGTH_SHORT).show()
+               this.finish()
+           }
         }
     }
     override fun attachBaseContext(newBase: Context?) {

@@ -159,7 +159,7 @@
     <string name="next">continuar</string>
     <string name="message_to_send">Escribe el mensaje que quieres enviar</string>
     <string name="message_sent">mensajes enviados</string>
-    <string name="esborrarXat">"Quieres borrar el chat con "</string>
+    <string name="esborrarXat">Quieres borrar este chat?</string>
     <string name="si">SI</string>
     <string name="esborrantXat">Borrando chat</string>
     <string name="xatNoEsborrat">Chat no borrado</string>
@@ -177,6 +177,7 @@
     <string name="eliminar_compte">Delete Account</string>
     <string name="block">Bloquear</string>
     <string name="report">Denunciar</string>
+    <string name="buttonJoinTrip">¡Unirese al viaje!</string>
 
 
 </resources>
