@@ -40,8 +40,8 @@ object FrontendController {
         HttpClient(Android) {
             expectSuccess = false
             engine {
-                connectTimeout = 10_000
-                socketTimeout = 10_000
+                connectTimeout = 60_000
+                socketTimeout = 60_000
             }
             install(Logging) {
                 level = LogLevel.ALL
@@ -50,7 +50,6 @@ object FrontendController {
                 serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
                     prettyPrint = true
                     isLenient = true
-                    ignoreUnknownKeys = true
                 })
             }
 
@@ -206,13 +205,13 @@ object FrontendController {
     @OptIn(InternalAPI::class)
     suspend fun sendFrontPhoto(username: String, frontImage : Bitmap) {
         val stream = ByteArrayOutputStream()
-        frontImage.compress(Bitmap.CompressFormat.PNG, 5, stream)
+        frontImage.compress(Bitmap.CompressFormat.PNG, 1, stream)
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
             url = "${URL_DRIVERS}/${username}/imageFront",
             formData = formData {
-                append("image", image, Headers.build {
+                append("imageFront", image, Headers.build {
                     append(HttpHeaders.ContentType, "image/png")
                     append(HttpHeaders.ContentDisposition, "filename=ignore.png")
                 })
@@ -223,13 +222,13 @@ object FrontendController {
     @OptIn(InternalAPI::class)
     suspend fun sendReversePhoto(username: String, reverseImage : Bitmap) {
         val stream = ByteArrayOutputStream()
-        reverseImage.compress(Bitmap.CompressFormat.PNG, 5, stream)
+        reverseImage.compress(Bitmap.CompressFormat.PNG, 1, stream)
         val image = stream.toByteArray()
         // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
             url = "${URL_DRIVERS}/${username}/imageBack",
             formData = formData {
-                append("image", image, Headers.build {
+                append("imageBack", image, Headers.build {
                     append(HttpHeaders.ContentType, "image/png")
                     append(HttpHeaders.ContentDisposition, "filename=ignore.png")
                 })

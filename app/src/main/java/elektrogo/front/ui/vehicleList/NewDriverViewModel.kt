@@ -16,6 +16,6 @@ class NewDriverViewModel : ViewModel() {
     }
 
     fun saveDriverReverseImage(username: String, reverseImage: Bitmap) = runBlocking {
-        FrontendController.sendFrontPhoto(username, reverseImage)
+        FrontendController.sendReversePhoto(username, reverseImage)
     }
 }
