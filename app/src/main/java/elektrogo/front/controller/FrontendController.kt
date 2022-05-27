@@ -458,7 +458,7 @@ object FrontendController {
     }
 
     suspend fun sendMessage(sender: String, receiver: String , message: String): Int  {
-        val httpResponse: HttpResponse = client.post("$${URL_CHATS}/messages/${sender}/${receiver}"){
+        val httpResponse: HttpResponse = client.post("${URL_CHATS}/messages/${sender}/${receiver}"){
             parameter("message", message)
         }
         if (httpResponse.status.value != 200) {
