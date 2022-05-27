@@ -47,6 +47,8 @@ class GuestProfileFragment : Fragment() {
         val un: TextView = view.findViewById(R.id.profile_username)
         un.text = username
 
+        val userActual = SessionController.getUsername(requireActivity())
+
         if (username == null) Toast.makeText(context, "There has been a problem, try again later", Toast.LENGTH_LONG).show()
 
         val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
@@ -61,10 +63,11 @@ class GuestProfileFragment : Fragment() {
         }
 
 
-        val blockedList : ArrayList<Block> = viewModel.getBlocks(SessionController.getUsername(requireActivity()))
+        val blockedList : ArrayList<Block> = viewModel.getBlocks(userActual)
         val achivementText : TextView = view.findViewById(R.id.achievements)
         val trophy : LinearLayout = view.findViewById(R.id.trophy)
         val textBlock : TextView = view.findViewById(R.id.block)
+        val youBlocktext : TextView = view.findViewById(R.id.youBlock)
         val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
         val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
         val blockButton : Button = view.findViewById(R.id.profile_guest_bloquejar)
@@ -78,13 +81,11 @@ class GuestProfileFragment : Fragment() {
                 }
             }
             if (blocked) {
-                textBlock.text = "Aquest usuari t'ha bloquejat"
                 achivementText.setVisibility(View.GONE)
                 trophy.setVisibility(View.GONE)
                 rateButton.setVisibility(View.GONE)
                 reportButton.setVisibility(View.GONE)
                 blockButton.setVisibility(View.GONE)
-
             }
             else {
                 val a : Achievement? =
@@ -110,11 +111,35 @@ class GuestProfileFragment : Fragment() {
 
                     trophyName.text = a.achievement
                     trophyPoints.text = a.points.toString()
-
+                    textBlock.setVisibility(View.GONE)
                 }
             }
         }
         else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
+
+        val blockedListuser : ArrayList<Block>? = username?.let { viewModel.getBlocks(it) }
+
+        if (blockedListuser != null) {
+            var youBlocked = false
+            for (block in blockedListuser) {
+                if (block.userBlocking == userActual) {
+                    youBlocked = true
+                }
+            }
+            if (youBlocked) {
+                blockButton.setVisibility(View.GONE)
+            }
+            else {
+                youBlocktext.setVisibility(View.GONE)
+            }
+        }
+        else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
+
+       blockButton.setOnClickListener {
+           if (username != null) {
+               viewModel.blockUser(userActual, username)
+           }
+       }
 
         val ratingPair = username?.let { viewModel.getRating(it) }
         if (ratingPair != null) {

@@ -81,6 +81,11 @@ class ProfileFragment : Fragment() {
         trophyName.text = a.achievement
         trophyPoints.text = a.points.toString()
 
+        val deletebttn : Button = view.findViewById(R.id.profile_delete_account)
+        deletebttn.setOnClickListener {
+            if (viewModel.deleteUser(user) != 200) Toast.makeText(context, "Un error ha ocorregut, intenteu-ho més tard", Toast.LENGTH_LONG).show()
+        }
+
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG)

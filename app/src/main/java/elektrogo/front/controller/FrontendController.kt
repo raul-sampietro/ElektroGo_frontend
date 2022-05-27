@@ -522,6 +522,11 @@ object FrontendController {
         } else httpResponse.receive()
     }
 
+    suspend fun Block(username: String, userBlock: String): Boolean {
+        val httpResponse : HttpResponse = client.post("${URL_BASE}/blocks/${username}/block/${userBlock}")
+        return httpResponse.status.value == 200
+    }
+
     suspend fun getAchievement(achievement: String, username: String): Achievement {
         val httpResponse: HttpResponse = client.get("${URL_BASE}/achievements/${achievement}/users/${username}")
         return httpResponse.receive()

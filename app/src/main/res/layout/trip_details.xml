@@ -292,12 +292,15 @@ tools:context=".ui.carPooling.TripDetails">
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/infoUserHost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:background="?android:attr/selectableItemBackground">
 
             <RelativeLayout
                 android:layout_width="80dp"

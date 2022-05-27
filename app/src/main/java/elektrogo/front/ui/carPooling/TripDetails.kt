@@ -26,6 +26,7 @@ import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
 import elektrogo.front.ui.chatConversation.ChatConversation
+import elektrogo.front.ui.profile.ProfileActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -222,6 +223,13 @@ class TripDetails : AppCompatActivity() {
                 putExtra("userB", username)
             }
             context.startActivity(intent)
+        }
+
+        val infoUserHost : LinearLayout = this.findViewById(R.id.infoUserHost)
+        infoUserHost.setOnClickListener{
+            val i  = Intent(this, ProfileActivity::class.java)
+            i.putExtra("username", username)
+            startActivity(i)
         }
 
     }

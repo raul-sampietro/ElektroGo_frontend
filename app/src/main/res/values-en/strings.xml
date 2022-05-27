@@ -180,6 +180,12 @@
     <string name="report">Report</string>
     <string name="buttonJoinTrip">Join trip!</string>
     <string name="deleteAccount" >Delete Account</string>
+    <string name="blocked">You have been blocked by this user</string>
+    <string name="bttDenuncia">Report</string>
+    <string name="hintDenuncia">The reason of the report is ..</string>
+    <string name="enunciatDenuncia">Indicate below the reason of the report:</string>
+    <string name="channel_name">Chat</string>
+    <string name="youBlocked">You have blocked this user</string>
 
 
 </resources>

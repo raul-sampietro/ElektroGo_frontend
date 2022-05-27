@@ -177,6 +177,12 @@
     <string name="report">Denunciar</string>
     <string name="buttonJoinTrip">Uneix-te al viatge!</string>
     <string name="deleteAccount" >Esborrar compte</string>
+    <string name="blocked">Aquest usuari t\'ha bloquejat</string>
+    <string name="bttDenuncia">Fer denúncia</string>
+    <string name="hintDenuncia">El motiu de la denuncia és...</string>
+    <string name="enunciatDenuncia">Indica a continuació el motiu de la denúncia:</string>
+    <string name="channel_name" translatable="false">Xat</string>
+    <string name="youBlocked">Has bloquejat aquest usuari</string>
 
 
 </resources>

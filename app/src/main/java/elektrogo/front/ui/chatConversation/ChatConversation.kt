@@ -53,7 +53,7 @@ class ChatConversation : AppCompatActivity() {
                 nameUserB.text = b.getString("userB")
             }
             nameUserB.setOnClickListener{
-                var i  = Intent(this, ProfileActivity::class.java)
+                val i  = Intent(this, ProfileActivity::class.java)
                 i.putExtra("username", nameUserB.text.toString())
                 startActivity(i)
             }
