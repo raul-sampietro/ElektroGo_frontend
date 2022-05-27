@@ -11,6 +11,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -90,7 +91,7 @@ class TripDetails : AppCompatActivity() {
         else {
             memberList = resultDefault.second
             val nMembers = memberList.size
-            Log.i("nmembers", nMembers.toString())
+            if (memberList.size > 0 ) findViewById<TextView>(R.id.noMembers).visibility = View.GONE
             val lp: LinearLayout.LayoutParams = listView.layoutParams as LinearLayout.LayoutParams
             lp.height = nMembers*82*3
             listView.layoutParams = lp
