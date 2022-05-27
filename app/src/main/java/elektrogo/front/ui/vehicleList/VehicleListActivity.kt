@@ -13,6 +13,8 @@ class VehicleListActivity : AppCompatActivity() {
 
     private val verifyingDriverFragment = VerifyingDriverFragment()
 
+    private val formNewDriverFragment = NewDriverFragment()
+
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
