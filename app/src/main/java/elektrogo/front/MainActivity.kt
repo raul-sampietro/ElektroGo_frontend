@@ -11,11 +11,16 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.media.Image
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -24,17 +29,28 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
+import elektrogo.front.controller.session.Session
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
 import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
+import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
 import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
+import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.preferences.PreferencesActivity
+import elektrogo.front.ui.profile.ProfileActivity
+import elektrogo.front.ui.vehicleList.VehicleListActivity
+import org.w3c.dom.Text
 
 /**
  * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
@@ -48,6 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var toggle: ActionBarDrawerToggle
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var currentFragment: String
+    lateinit var navigationView: NavigationView
 
     //configura les notificacions del sistema
     private fun createNotificationChannel() {
@@ -98,13 +115,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 openFragment(chatFragment)
                 return@OnItemSelectedListener true
             }
-            R.id.perfil -> {
-                toolbar2.title = getString(R.string.ToolbarPerfil)
-                val perfilFragment = ProfileFragment()
-                currentFragment= "ProfileFragment"
-                openFragment(perfilFragment)
-                return@OnItemSelectedListener true
-            }
         }
         false
     }
@@ -125,6 +135,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeButtonEnabled(true)
 
         val navigationView : NavigationView = findViewById(R.id.nav_view)
+        val header : View = navigationView.getHeaderView(0)
+        val profileImage : ImageView = header.findViewById(R.id.profile_imageNav)
+        val usernameText : TextView = header.findViewById(R.id.usernameNav)
+        if (SessionController.getImageUrl(this)!="null") {
+            Picasso.get().load(SessionController.getImageUrl(this)).into(profileImage)
+        }
+        else profileImage.setImageResource(R.drawable.avatar)
+        usernameText.text= SessionController.getUsername(this)
         navigationView.setNavigationItemSelectedListener(this)
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
@@ -135,10 +153,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (intent.getStringExtra("origin").isNullOrBlank()) {
             bottomNavigation.selectedItemId = R.id.mapa
             currentFragment = "MapsFragment"
-        }
-        else if (intent.getStringExtra("origin").equals("vehicleList")) {
-            bottomNavigation.selectedItemId = R.id.perfil
-            currentFragment="ProfileFragment"
         }
         else if (intent.getStringExtra("origin").equals("MapsFragment")) {
             bottomNavigation.selectedItemId = R.id.mapa
@@ -156,23 +170,46 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             bottomNavigation.selectedItemId = R.id.chat
             currentFragment = "ChatListFragment"
         }
-        else if (intent.getStringExtra("origin").equals("ProfileFragment")) {
-            bottomNavigation.selectedItemId = R.id.perfil
-            currentFragment = "ProfileFragment"
-        }
+
 
         //Iniciem el service que envia notificacions per al xat
         createNotificationChannel()
         Intent(this, ChatService::class.java).also { intent ->
             startService(intent)
         }
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_item_one -> {
-                var i : Intent = Intent(this, PreferencesActivity::class.java)
+                var i  = Intent(this, ProfileActivity::class.java)
                 startActivity(i)
+            }
+            R.id.nav_item_two -> {
+                val intent = Intent(this, TripsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_three -> {
+                val intent = Intent(this, VehicleListActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_four -> {
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build()
+                val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+                    mGoogleSignInClient.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                SessionController.setCurrentSession(null)
+                Toast.makeText(this, "Successfully signed out", Toast.LENGTH_SHORT).show()
+                this.finish()
+
+            }
+            R.id.nav_item_five -> {
+                val intent = Intent (this, PreferencesActivity::class.java)
+                startActivity(intent)
             }
 
         }

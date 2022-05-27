@@ -6,21 +6,25 @@
  */
 package elektrogo.front.ui.carPooling
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import android.view.View
 import android.view.ViewManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
+import elektrogo.front.model.CarPooling
+import elektrogo.front.model.User
+import elektrogo.front.ui.chatConversation.ChatConversation
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -41,6 +45,7 @@ class TripDetails : AppCompatActivity() {
      * @pre
      * @post capta l'informacio pasada desde el fragment filterTripsFragment i la mostra per pantalla.
      */
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.trip_details)
@@ -48,18 +53,24 @@ class TripDetails : AppCompatActivity() {
         toolbar2.title= getString(R.string.detailsLabel)
         setSupportActionBar(toolbar2)
 
-        val username= intent.getStringExtra("username")
-        val startDate = intent.getStringExtra("startDate")
-        var startTime = intent.getStringExtra("startTime")
-        val offeredSeats = intent.getIntExtra("offeredSeats", 1)
-        val occupiedSeats = intent.getIntExtra("occupiedSeats", 1)
-        val restrictions = intent.getStringExtra("restrictions")
-        val details = intent.getStringExtra("details")
-        val originString = intent.getStringExtra("originString")
-        val destinationString= intent.getStringExtra("destinationString")
-        val vehicleNumberPlate = intent.getStringExtra("vehicleNumberPlate")
-        val latDest = intent.getDoubleExtra("destinationLat", 1.0)
-        val lonDest = intent.getDoubleExtra("destinationLon", 1.0)
+        val tripSerialized = intent.getStringExtra("Trip")
+        val trip : CarPooling = Gson().fromJson(tripSerialized, CarPooling::class.java)
+        Log.i("llego", trip.id.toString())
+        val username= trip!!.username
+        val startDate = trip.startDate
+        val startTime = trip.startTime
+        val cancelDate = trip.cancelDate
+        val state = trip.state
+        val offeredSeats = trip.offeredSeats
+        val occupiedSeats = trip.occupiedSeats
+        val restrictions = trip.restrictions
+        val details = trip.details
+        val originString = trip.origin
+        val destinationString= trip.destination
+        val vehicleNumberPlate = trip.vehicleNumberPlate
+        val latDest = trip.latitudeDestination
+        val lonDest = trip.longitudeDestination
+        val id = trip.id
 
         val usernameText :TextView  = this.findViewById(R.id.usernameDetails)
         val startDateText : TextView = this.findViewById(R.id.dateDetails)
@@ -70,6 +81,22 @@ class TripDetails : AppCompatActivity() {
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
         val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
+        //Obtenci dels membres que participen en el trajecte
+        val listView: ListView = this.findViewById(R.id.listMembers)
+        var memberList : ArrayList<User>
+        var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(id!!)
+        if (resultDefault.first != 200) {
+            Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard2", Toast.LENGTH_LONG).show()
+        }
+        else {
+            memberList = resultDefault.second
+            val nMembers = memberList.size
+            if (memberList.size > 0 ) findViewById<TextView>(R.id.noMembers).visibility = View.GONE
+            val lp: LinearLayout.LayoutParams = listView.layoutParams as LinearLayout.LayoutParams
+            lp.height = nMembers*82*3
+            listView.layoutParams = lp
+            listView.adapter = MembersListAdapter(this as Activity, memberList,id, trip)
+        }
 
         //TODO: Crida amb el servei de RevPollution
         val qualityAir: String = viewModel.getAirQuality(latDest, lonDest)
@@ -128,12 +155,34 @@ class TripDetails : AppCompatActivity() {
         }
 
         val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
-        if (SessionController.getUsername(this) != username) (btnCancel.parent as ViewManager).removeView(btnCancel)
+
+        val today = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val cancelDay = formatter.parse(cancelDate)
+
+        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
+
+                val bundle = Bundle()
+                bundle.putString("tripID", id.toString()) //passem l'identificador del trajecte
+                confirmDialog.arguments = bundle
+
                 confirmDialog.show(supportFragmentManager, "confirmDialog")
             }
+        }
+
+
+        val btnUnirse: Button = this.findViewById(R.id.unirseTrajecte)
+        btnUnirse.setOnClickListener {
+            val context = this
+            val intent = Intent(context, ChatConversation::class.java).apply {
+                val currentUsername : String = SessionController.getUsername(context)
+                putExtra("userA", currentUsername)
+                putExtra("userB", username)
+            }
+            context.startActivity(intent)
         }
 
     }

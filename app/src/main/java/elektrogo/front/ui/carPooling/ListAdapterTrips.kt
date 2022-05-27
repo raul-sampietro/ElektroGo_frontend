@@ -8,6 +8,7 @@ package elektrogo.front.ui.carPooling
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,8 @@ class ListAdapterTrips (private val context : Activity, private val filteredList
 
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.filter_list_item, null)
+
+        Log.i("add", "Estoy en el adapter")
 
         // TODO imageView
         val occupiedseats : TextView = view.findViewById(R.id.occupiedseats)
@@ -98,7 +101,9 @@ class ListAdapterTrips (private val context : Activity, private val filteredList
      * @post Es mostren les estrelles segons la valoracio que l'usuari te.
      */
     private fun renderRating(ratingPassed: Double, view: View?) {
-     val star1 : ImageView = view!!.findViewById(R.id.estrella1)
+        Log.i("add", "Estoy en el render rating")
+
+        val star1 : ImageView = view!!.findViewById(R.id.estrella1)
      val star2 : ImageView = view.findViewById(R.id.estrella2)
      val star3 : ImageView = view.findViewById(R.id.estrella3)
      val star4 : ImageView = view.findViewById(R.id.estrella4)

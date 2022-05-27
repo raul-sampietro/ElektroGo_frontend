@@ -30,7 +30,10 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
+import com.google.gson.Gson
 import elektrogo.front.R
+import elektrogo.front.controller.session.Session
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import java.time.LocalDate
 import java.time.LocalTime
@@ -165,7 +168,7 @@ class FilterTripsFragment : Fragment() {
 
         val listView: ListView = view.findViewById(R.id.filterListView)
         //mostro uns trajectes default a la llista
-        var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+        var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
         if (resultDefault.first != 200) {
             Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
         }
@@ -177,7 +180,7 @@ class FilterTripsFragment : Fragment() {
             if (validate()) {
                 //mostro els trajectes resultants de la busqueda
                try{
-                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected)
+                   var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected, SessionController.getUsername(requireContext()))
                    if (result.first != 200) {
                        Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
                    }
@@ -208,7 +211,7 @@ class FilterTripsFragment : Fragment() {
             autocompleteSupportFragment2.setText("")
             //mostro uns trajectes default a la llista
            try {
-               var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault()
+               var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
                if (resultDefault.first != 200) {
                    Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
                }
@@ -225,21 +228,8 @@ class FilterTripsFragment : Fragment() {
 
         listView.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             val i = Intent(context, TripDetails::class.java)
-            i.putExtra("username", filteredList[position].username)
-            i.putExtra("startDate", filteredList[position].startDate)
-            i.putExtra("startTime", filteredList[position].startTime)
-            i.putExtra("offeredSeats",filteredList[position].offeredSeats)
-            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
-            i.putExtra("restrictions", filteredList[position].restrictions)
-            i.putExtra("details", filteredList[position].details)
-            i.putExtra("originString", filteredList[position].origin)
-            i.putExtra("destinationString", filteredList[position].destination)
-            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
-            i.putExtra("destinationLat", filteredList[position].latitudeDestination)
-            i.putExtra("destinationLon", filteredList[position].longitudeDestination)
-            Log.i("coordenadas", filteredList[position].latitudeDestination.toString())
-            Log.i("coordenadas", filteredList[position].longitudeDestination.toString())
-
+            val myjson : String = Gson().toJson(filteredList[position])
+            i.putExtra("Trip", myjson)
             startActivity(i)
         })
 

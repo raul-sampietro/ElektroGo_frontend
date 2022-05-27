@@ -160,7 +160,7 @@
     <string name="next">next</string>
     <string name="message_to_send">Type the message you want to send</string>
     <string name="message_sent">messages sent</string>
-    <string name="esborrarXat">"Do you want to delete the chat with "</string>
+    <string name="esborrarXat">Do you want to delete this chat?</string>
     <string name="si">YES</string>
     <string name="esborrantXat">Deleting chat</string>
     <string name="xatNoEsborrat">Chat not deleted</string>
@@ -169,6 +169,16 @@
     <string name="buscaUsuari">Find...</string>
     <string name="confirma">confirm</string>
     <string name="errorChatNotFound">Error: chat conversation not found</string>
+    <string name="TripsNavMenu">My trips</string>
+    <string name="vehiclesMenu">My vehicles</string>
+    <string name="perfil">Profile</string>
+    <string name="ajustos">Settings</string>
+    <string name="nom_d_usuari"> Username:</string>
+    <string name="correu_electronic">E-mail:</string>
+    <string name="eliminar_compte">Eliminar Cuenta</string>
+    <string name="block">Block</string>
+    <string name="report">Report</string>
+    <string name="buttonJoinTrip">Join trip!</string>
 
 
 </resources>

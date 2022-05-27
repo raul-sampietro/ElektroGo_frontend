@@ -3,11 +3,13 @@ package elektrogo.front.ui.chatConversation
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import elektrogo.front.ChatService
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Message
+import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
 
 
 class ChatConversation : AppCompatActivity() {
@@ -62,7 +65,7 @@ class ChatConversation : AppCompatActivity() {
 
         val sessionController = SessionController
         val currentUser = sessionController.getUsername(this)
-        conversation = viewModel.getConversation(userA, userB)
+        conversation = viewModel.getConversation(userA, userB).second
         recyclerView = findViewById<RecyclerView>(R.id.listConversation)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = ChatConversationAdapter(this, conversation, currentUser)
@@ -74,7 +77,7 @@ class ChatConversation : AppCompatActivity() {
         thread = Thread {
             while(true and !interrupted) {
                 Thread.sleep(2000)
-                val conversationIncoming = viewModel.getConversation(userA, userB)
+                val conversationIncoming = viewModel.getConversation(userA, userB).second
                 if (conversationIncoming.size > conversation.size) {
                     runOnUiThread {
                         changeData(conversationIncoming)
@@ -105,9 +108,20 @@ class ChatConversation : AppCompatActivity() {
             if (message != "") viewModel.sendMessage(userA, userB, message)
             text.text.clear()
 
-            conversation = viewModel.getConversation(userA, userB)
+            conversation = viewModel.getConversation(userA, userB).second
             adapter.updateData(conversation)
             recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
+        }
+
+        val addMemberButton : ImageButton = findViewById(R.id.addMemberButton)
+
+        addMemberButton.setOnClickListener {
+            Log.i("add", "Le he dado click")
+            val addMember = AddMemberDialog()
+            val bundle = Bundle()
+            bundle.putString("member", b!!.getString("userB"))
+            addMember.arguments = bundle
+            addMember.show( supportFragmentManager , "AddMemberDialog")
         }
     }
     override fun onBackPressed() {
