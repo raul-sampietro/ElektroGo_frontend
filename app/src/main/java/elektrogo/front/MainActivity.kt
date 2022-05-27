@@ -186,6 +186,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_item_one -> {
                 var i  = Intent(this, ProfileActivity::class.java)
+                i.putExtra("username", SessionController.getUsername(this))
                 startActivity(i)
             }
             R.id.nav_item_two -> {

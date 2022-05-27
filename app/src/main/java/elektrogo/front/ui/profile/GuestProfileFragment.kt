@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.setFragmentResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,6 +23,7 @@ import elektrogo.front.model.Achievement
 import elektrogo.front.model.Block
 import elektrogo.front.model.Driver
 import elektrogo.front.ui.login.LoginActivity
+import elektrogo.front.ui.report.ReportUserFragment
 import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking
@@ -35,7 +37,7 @@ class GuestProfileFragment : Fragment() {
     private var viewModel: ProfileViewModel = ProfileViewModel()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
-    @SuppressLint("SetTextI18n", "CutPasteId")
+    @SuppressLint("SetTextI18n", "CutPasteId", "ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +49,9 @@ class GuestProfileFragment : Fragment() {
         val un: TextView = view.findViewById(R.id.profile_username)
         un.text = username
 
+        val userActual = SessionController.getUsername(requireActivity())
+
+        if (username == null) Toast.makeText(context, "There has been a problem, try again later", Toast.LENGTH_LONG).show()
 
         val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
         val imagePath = username?.let { viewModel.getUsersProfilePhoto(it) }
@@ -60,10 +65,11 @@ class GuestProfileFragment : Fragment() {
         }
 
 
-        val blockedList : ArrayList<Block> = viewModel.getBlocks(SessionController.getUsername(requireActivity()))
+        val blockedList : ArrayList<Block> = viewModel.getBlocks(userActual)
         val achivementText : TextView = view.findViewById(R.id.achievements)
         val trophy : LinearLayout = view.findViewById(R.id.trophy)
         val textBlock : TextView = view.findViewById(R.id.block)
+        val youBlocktext : TextView = view.findViewById(R.id.youBlock)
         val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
         val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
         val blockButton : Button = view.findViewById(R.id.profile_guest_bloquejar)
@@ -77,13 +83,11 @@ class GuestProfileFragment : Fragment() {
                 }
             }
             if (blocked) {
-                textBlock.text = "Aquest usuari t'ha bloquejat"
                 achivementText.setVisibility(View.GONE)
                 trophy.setVisibility(View.GONE)
                 rateButton.setVisibility(View.GONE)
                 reportButton.setVisibility(View.GONE)
                 blockButton.setVisibility(View.GONE)
-
             }
             else {
                 val a : Achievement? =
@@ -109,11 +113,46 @@ class GuestProfileFragment : Fragment() {
 
                     trophyName.text = a.achievement
                     trophyPoints.text = a.points.toString()
-
+                    textBlock.setVisibility(View.GONE)
                 }
             }
         }
         else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
+
+        val blockedListuser : ArrayList<Block>? = username?.let { viewModel.getBlocks(it) }
+
+        if (blockedListuser != null) {
+            var youBlocked = false
+            for (block in blockedListuser) {
+                if (block.userBlocking == userActual) {
+                    youBlocked = true
+                }
+            }
+            if (youBlocked) {
+                blockButton.setVisibility(View.GONE)
+            }
+            else {
+                youBlocktext.setVisibility(View.GONE)
+            }
+        }
+        else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
+
+       blockButton.setOnClickListener {
+           if (username != null) {
+               viewModel.blockUser(userActual, username)
+           }
+       }
+       
+        reportButton.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("guestUser", username) //passem l'usuari que es vol valorar al dialog
+            val reportUserFragment = ReportUserFragment();
+            reportUserFragment.arguments = bundle
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(this.id, reportUserFragment)
+            transaction.commit()
+
+        }
 
         val ratingPair = username?.let { viewModel.getRating(it) }
         if (ratingPair != null) {

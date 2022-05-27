@@ -175,7 +175,26 @@
     <string name="eliminar_compte">Eliminar Compte</string>
     <string name="block">Bloquejar</string>
     <string name="report">Denunciar</string>
+
+    <string name="verificant">Els administradors estan verificant la teva sol·licitud</string>
+
     <string name="buttonJoinTrip">Uneix-te al viatge!</string>
+    <string name="deleteAccount" >Esborrar compte</string>
+    <string name="blocked">Aquest usuari t\'ha bloquejat</string>
+    <string name="bttDenuncia">Fer denúncia</string>
+    <string name="hintDenuncia">El motiu de la denuncia és...</string>
+    <string name="enunciatDenuncia">Indica a continuació el motiu de la denúncia:</string>
+    <string name="channel_name" translatable="false">Xat</string>
+    <string name="youBlocked">Has bloquejat aquest usuari</string>
+    <string name="abandonTrip">Abandonar trajecte</string>
+    <string name="errorAbandonTrip">Hi ha hagut un error abandonant el trajecte</string>
 
+    <string name="insertDNImage">Insereix una imatge de la part frontal del carnet de conduir</string>
+    <string name="insert2DNImage">Insereix una imatge de la part reversa del carnet de conduir</string>
+    <string name="sendButton">Enviar</string>
+    <string name="internalError">Hi ha hagut un error amb el servidor</string>
+    <string name="requiredImage">Has d\'afegir les dues imatges abans d\'enviar</string>
 
+    <string name="DriverAlreadyExists">Ja estas registrat com a conductor.</string>
+    <string name="DriverRequestRecived">La sol·licitud ha estat enviada correctament</string>
 </resources>

@@ -26,6 +26,7 @@ import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
 import elektrogo.front.ui.chatConversation.ChatConversation
+import elektrogo.front.ui.profile.ProfileActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import java.text.SimpleDateFormat
 import java.util.*
@@ -87,7 +88,7 @@ class TripDetails : AppCompatActivity() {
         val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
         //Obtenci dels membres que participen en el trajecte
         val listView: ListView = this.findViewById(R.id.listMembers)
-        var memberList : ArrayList<User>
+        var memberList : ArrayList<User> = arrayListOf()
         var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(id!!)
         if (resultDefault.first != 200) {
             Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard2", Toast.LENGTH_LONG).show()
@@ -107,7 +108,7 @@ class TripDetails : AppCompatActivity() {
         if (qualityAir == "Bad") qaImage.setImageResource(R.drawable.airbad)
         else if (qualityAir == "Mid") qaImage.setImageResource(R.drawable.airmid)
         else if (qualityAir == "Good") qaImage.setImageResource(R.drawable.airgood)
-        else qaImage.setImageResource(R.drawable.ic_baseline_image_not_supported_24)
+        else qaImage.setImageResource(R.drawable.ic_baseline_wifi_off_24)
 
 
         usernameText.text = username
@@ -164,8 +165,39 @@ class TripDetails : AppCompatActivity() {
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         val cancelDay = formatter.parse(cancelDate)
 
-        if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled"))
-                (btnCancel.parent as ViewManager).removeView(btnCancel)
+
+        var userParticipates = false;
+        for (u: User in memberList) {
+            if (u.username == SessionController.getUsername(this)) {
+                userParticipates = true;
+            }
+        }
+        if (userParticipates && (SessionController.getUsername(this) != username) && (today < cancelDay) && state !="cancelled" && state != "finished") {
+            btnCancel.setText(R.string.abandonTrip)
+            btnCancel.setOnClickListener {
+                val status = viewModel.abandonTrip(id, SessionController.getUsername(this));
+                if (status != 200) {
+                    Toast.makeText(
+                        this,
+                        R.string.errorAbandonTrip,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else { //Trip abandoned successfully
+                    var memberListAux : ArrayList<User> = arrayListOf()
+
+                    for (u: User in memberList) {
+                        if (u.username != SessionController.getUsername(this)) {
+                            memberListAux.add(u);
+                        }
+                    }
+                    listView.adapter = MembersListAdapter(this as Activity, memberListAux,id, trip)
+                    (btnCancel.parent as ViewManager).removeView(btnCancel)
+                }
+            }
+
+        }
+        else if ((SessionController.getUsername(this) != username) || (today >= cancelDay) || (state == "cancelled")) (btnCancel.parent as ViewManager).removeView(btnCancel)
         else {
             btnCancel.setOnClickListener {
                 val confirmDialog = CancelTripDialog()
@@ -222,6 +254,13 @@ class TripDetails : AppCompatActivity() {
                 putExtra("userB", username)
             }
             context.startActivity(intent)
+        }
+
+        val infoUserHost : LinearLayout = this.findViewById(R.id.infoUserHost)
+        infoUserHost.setOnClickListener{
+            val i  = Intent(this, ProfileActivity::class.java)
+            i.putExtra("username", username)
+            startActivity(i)
         }
 
     }

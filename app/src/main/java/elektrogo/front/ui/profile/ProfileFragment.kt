@@ -179,44 +179,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         val userCompleteName: TextView = view.findViewById(R.id.completeName)
-        userCompleteName.text = SessionController.getName(requireActivity());
+        userCompleteName.text = SessionController.getName(requireActivity())
 
         val userMail: TextView = view.findViewById(R.id.email)
-        userMail.text = SessionController.getEmail(requireActivity());
+        userMail.text = SessionController.getEmail(requireActivity())
 
         val provider: TextView = view.findViewById(R.id.login)
-        provider.text = SessionController.getProvider(requireActivity());
-
-        val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
-        buttonDriver.setOnClickListener {
-            val httpStatus: Int = addDriver(SessionController.getUsername(requireContext()))
-            Toast.makeText(requireContext(), httpStatus.toString(), Toast.LENGTH_SHORT).show()
-        }
-
-        val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
-        deleteButton.setOnClickListener {
-
-        }
-
-        val guestprofileButton: Button = view.findViewById(R.id.other_profile)
-        guestprofileButton.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("username", "samragu")
-
-            val fragmentGuest = GuestProfileFragment()
-
-            fragmentGuest.arguments = bundle
-
-            val transaction: FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.replace(this.id, fragmentGuest)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
-    }
-
-
-    private fun addDriver(username: String): Int = runBlocking {
-        FrontendController.addDriver(username)
+        provider.text = SessionController.getProvider(requireActivity())
     }
 
     override fun onDestroyView() {

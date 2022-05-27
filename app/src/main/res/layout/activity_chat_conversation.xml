@@ -61,6 +61,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/cardViewUserConversation"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
                 android:text="Name of User"
                 android:textColor="@color/white"
                 android:textSize="20sp"
