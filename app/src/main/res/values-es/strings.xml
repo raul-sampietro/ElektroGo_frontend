@@ -250,5 +250,20 @@
     <string name="FinishedTrip">Finalizado</string>
     <string name="CancelledTrip">Cancelado</string>
 
+    <string name="month">Mes</string>
+
+    <string name="Jan">Enero</string>
+    <string name="Feb">Febrero</string>
+    <string name="Mar">Marzo</string>
+    <string name="Apr">Abril</string>
+    <string name="May">Mayo</string>
+    <string name="Jun">Junio</string>
+    <string name="Jul">Julio</string>
+    <string name="Aug">Agosto</string>
+    <string name="Sept">Septiembre</string>
+    <string name="Oct">Octubre</string>
+    <string name="Nov">Noviembre</string>
+    <string name="Dec">Diciembre</string>
+
 
 </resources>
