@@ -119,7 +119,7 @@ class ChatConversation : AppCompatActivity() {
         val addMemberButton : ImageButton = findViewById(R.id.addMemberButton)
 
         addMemberButton.setOnClickListener {
-            Log.i("add", "Le he dado click")
+            Toast.makeText(this, getString(R.string.opneningDialog), Toast.LENGTH_LONG).show()
             val addMember = AddMemberDialog()
             val bundle = Bundle()
             bundle.putString("member", b!!.getString("userB"))
