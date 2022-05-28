@@ -44,13 +44,12 @@ class MembersListAdapter (private val context : Activity, private val memberList
         val view = inflater.inflate(R.layout.member_list_item, null)
 
         val f = memberList[position]
-        Log.i("funciona", "hola")
 
         val usernameText : TextView= view.findViewById(R.id.usernameItem)
         usernameText.text = f.username
         val ratingPair = viewModel.getRating(f.username)
         if (ratingPair.first != 200) {
-            Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.errorRatings), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue, view)
 
         val numValorations : TextView = view.findViewById(R.id.numberValorationsItem)
@@ -64,12 +63,11 @@ class MembersListAdapter (private val context : Activity, private val memberList
         val deleteButton : ImageButton = view.findViewById(R.id.deleteMemberButton)
         if (SessionController.getUsername(context) != Trip.username) deleteButton.visibility= View.GONE
         deleteButton.setOnClickListener {
-            Log.i("funciona", "estoy en el onclick dentro del adapter")
             val id = idTrip
             val username = f.username
             val result = viewModel.deleteMemberFromTrip(id,username)
             if (result!=200) {
-                Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.errorDeleteMember), Toast.LENGTH_SHORT).show()
             }
             val i = Intent(parent.context, TripDetails::class.java)
             i.putExtra("Trip", Gson().toJson(Trip))

@@ -201,11 +201,11 @@ class FilterTripsFragment : Fragment() {
         }
 
 
-        val listView: ListView = view!!.findViewById(R.id.filterListView)
+        val listView: ListView = requireView().findViewById(R.id.filterListView)
         //mostro uns trajectes default a la llista
         var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
         if (resultDefault.first != 200) {
-            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.errorFilterTrips), Toast.LENGTH_LONG).show()
         }
         else {
             filteredList = resultDefault.second
@@ -217,7 +217,7 @@ class FilterTripsFragment : Fragment() {
                 try{
                     var result : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTrips(latLngOrigin, latLngDestination, dateSelected, fromTimeSelected, toTimeSelected, SessionController.getUsername(requireContext()))
                     if (result.first != 200) {
-                        Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, getString(R.string.errorFilterTrips), Toast.LENGTH_LONG).show()
                     }
                     else {
                         filteredList = result.second
@@ -248,7 +248,7 @@ class FilterTripsFragment : Fragment() {
             try {
                 var resultDefault : Pair <Int, ArrayList<CarPooling>> = viewModel.askForTripsDefault(SessionController.getUsername(requireContext()))
                 if (resultDefault.first != 200) {
-                    Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.errorFilterTrips), Toast.LENGTH_LONG).show()
                 }
                 else {
                     filteredList = resultDefault.second
@@ -383,16 +383,16 @@ class FilterTripsFragment : Fragment() {
 
         if (dateButton.text != getString(R.string.DataFilter) && LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) < LocalDate.now()) {
             valid = false
-            Toast.makeText(context, "La data seleccionada és incorrecta",Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.invalidDateFilter),Toast.LENGTH_LONG).show()
         }
 
         if (timeFromButton.text != getString(R.string.DesdeFilter) && timeToButton.text != getString(R.string.FinsFilter) && (LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm"))) >= (LocalTime.parse(timeToButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")))){
             valid = false
-            Toast.makeText(context, "El rang d'hores no és correcte. La primera hora donada ha de ser anterior a la segona.",Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.invalidTimeFilter),Toast.LENGTH_LONG).show()
         }
         else if(timeFromButton.text!= getString(R.string.DesdeFilter) && dateButton.text!= getString(R.string.DataFilter) && LocalTime.parse(timeFromButton.text.toString(), DateTimeFormatter.ofPattern("HH:mm")) < LocalTime.now() &&  LocalDate.parse(dateButton.text.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy")) == LocalDate.now()){
             valid = false
-            Toast.makeText(context, "L'hora d'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals",Toast.LENGTH_LONG).show()
+            Toast.makeText(context, getString(R.string.invalidFieldsFilter),Toast.LENGTH_LONG).show()
         }
 
         if (latLngOrigin==null) {

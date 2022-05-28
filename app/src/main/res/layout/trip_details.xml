@@ -153,7 +153,7 @@ tools:context=".ui.carPooling.TripDetails">
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_gravity="center"
-                    android:text="Qualitat del aire:"
+                    android:text="@string/airPollution"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="20sp" />
@@ -404,7 +404,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="20dp"
-            android:text="Membres:"
+            android:text="@string/members"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -415,7 +415,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="5dp"
-            android:text="No hi ha cap membre encara" />
+            android:text="@string/noMembersYet" />
 
         <ListView
             android:layout_width="match_parent"

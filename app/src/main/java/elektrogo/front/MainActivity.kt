@@ -206,7 +206,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 SessionController.setCurrentSession(null)
-                Toast.makeText(this, "Successfully signed out", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.signOutSuccesfull), Toast.LENGTH_SHORT).show()
                 this.finish()
 
             }
@@ -214,12 +214,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val alertDialog: AlertDialog? = this.let {
                     val builder = AlertDialog.Builder(it)
                     // TODO 3 hardcoded strings
-                    builder.setMessage("Estas segur d'esborrar el teu compte?")
+                    builder.setMessage(getString(R.string.deleteAccountVerification))
                     builder.apply {
                         setPositiveButton("SI",
                             DialogInterface.OnClickListener { dialog, id ->
                                 val status = runBlocking { FrontendController.deleteUser(SessionController.getUsername(context)) }
-                                if (status != 200)  Toast.makeText(context,"Hi ha hagut un problema. No s'ha pogut esborrar el compte.", Toast.LENGTH_SHORT).show()
+                                if (status != 200)  Toast.makeText(context,getString(R.string.errorDeleteAccount), Toast.LENGTH_SHORT).show()
                                 else {
                                     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                                         .requestEmail()
@@ -229,13 +229,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                                     val intent = Intent(context, LoginActivity::class.java)
                                     startActivity(intent)
                                     SessionController.setCurrentSession(null)
-                                    Toast.makeText(context, "Successfully deleted the account", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, getString(R.string.deleteAccountOk), Toast.LENGTH_SHORT).show()
                                     finish();
                                 }
                             })
                         setNegativeButton("NO",
                             DialogInterface.OnClickListener { dialog, id ->
-                                Toast.makeText(context, "El compte no s'ha esborrat", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, getString(R.string.noDeleteAccount), Toast.LENGTH_LONG).show()
                             })
                     }
                     builder.create()
