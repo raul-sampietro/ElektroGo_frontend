@@ -50,9 +50,13 @@ class MyTripsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       onViewCreatedMethod()
+    }
+
+    private fun onViewCreatedMethod(){
         initialize()
 
-        val listView: ListView = view.findViewById(R.id.filterListView)
+        val listView: ListView = requireView().findViewById(R.id.filterListView)
         val date : LocalDate = LocalDate.now()
         month = date.monthValue
         year = date.year
@@ -149,6 +153,7 @@ class MyTripsFragment : Fragment() {
 
     private fun initialize() {
         calendar = requireActivity().findViewById(R.id.compactcalendar_view)
+        calendar.removeAllEvents()
         forwardMonth = requireActivity().findViewById(R.id.forwardMonth)
         backwardMonth = requireActivity().findViewById(R.id.backwardMonth)
         actualMonth = requireActivity().findViewById(R.id.textMonth)
@@ -162,6 +167,11 @@ class MyTripsFragment : Fragment() {
             else println("$dateString is not equal to ${cP.startDate} ")
         }
         return tripsOnDate
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onViewCreatedMethod()
     }
 
 
