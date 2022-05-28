@@ -246,15 +246,18 @@ class TripDetails : AppCompatActivity() {
 
 
         val btnUnirse: Button = this.findViewById(R.id.unirseTrajecte)
+        val currentUsername : String = SessionController.getUsername(this)
+        if (currentUsername == username) btnUnirse.visibility = View.GONE
+
         btnUnirse.setOnClickListener {
             val context = this
             val intent = Intent(context, ChatConversation::class.java).apply {
-                val currentUsername : String = SessionController.getUsername(context)
                 putExtra("userA", currentUsername)
                 putExtra("userB", username)
             }
             context.startActivity(intent)
         }
+
 
         val infoUserHost : LinearLayout = this.findViewById(R.id.infoUserHost)
         infoUserHost.setOnClickListener{
