@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
-            android:text="Default Description"
+            android:text="@string/default_description"
             android:textAlignment="textStart"
             android:textSize="16sp" />
 

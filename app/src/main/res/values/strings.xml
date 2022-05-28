@@ -213,6 +213,7 @@
     <string name="ValoracioEliminada">Has eliminat la valoració.</string>
     <string name="ErrorEliminarValoracio">No s\'ha pogut eliminar la valoració.</string>
     <string name="ModificarValoracio">Modificar</string>
+    <string name="default_description">Descripció per defecte</string>
 
 
 </resources>
