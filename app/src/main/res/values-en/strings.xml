@@ -219,6 +219,7 @@
 
     <string name="DriverAlreadyExists">You are already a driver.</string>
     <string name="DriverRequestRecived">Petition sent.</string>
+
     <string name="errorFilterTrips">An error has occurred trying to obtain the trips. Try it later</string>
     <string name="invalidFieldsFilter">The start time and date are not valid. Please indicate a start time and date from actual date to forward</string>
     <string name="invalidDateFilter">The selected date is not valid</string>
@@ -242,4 +243,9 @@
     <string name="members">Members:</string>
     <string name="airPollution">Air pollution:</string>
     <string name="opneningDialog">Your trips are being searched. A new window will be opened soon</string>
+
+    <string name="ActiveTrip">Active</string>
+    <string name="FinishedTrip">Finalized</string>
+    <string name="CancelledTrip">Cancelled</string>
+
 </resources>

@@ -217,6 +217,7 @@
     <string name="DriverAlreadyExists">Ja estas registrat com a conductor.</string>
     <string name="DriverRequestRecived">La sol·licitud ha estat enviada correctament</string>
 
+
     <string name="errorFilterTrips">Hi ha hagut un error al servidor intentant obtenir els trajectes. Intenta-ho més tard</string>
     <string name="invalidFieldsFilter">L\'hora d\'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals</string>
     <string name="invalidDateFilter">La data seleccionada és incorrecta</string>
@@ -240,4 +241,10 @@
     <string name="members">Participants:</string>
     <string name="airPollution">Qualitat del aire:</string>
     <string name="opneningDialog">S\'esta cercant els trajectes. En breu s\'obrirà una finestra per tal d\'afegir el particiant</string>
+
+    <string name="ActiveTrip">Actiu</string>
+    <string name="FinishedTrip">Finalitzat</string>
+    <string name="CancelledTrip">Cancel·lat</string>
+
+
 </resources>

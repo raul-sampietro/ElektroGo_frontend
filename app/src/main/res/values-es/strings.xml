@@ -221,6 +221,7 @@
     <string name="ModificarValoracio">Modificar</string>
     <string name="default_description">Descripción por defecto</string>
 
+
     <string name="errorFilterTrips">Ha habido un error al intentar obtener los trayectos. Intentalo de niuevo más tarde</string>
     <string name="invalidFieldsFilter">La hora de inicio y la fecha seleccionada son incorrectas. Indique una fecha y hora posterior a las actuales</string>
     <string name="invalidDateFilter">La fecha seleccionada es incorrecta</string>
@@ -244,5 +245,10 @@
     <string name="members">Participantes:</string>
     <string name="airPollution">Calidad del aire:</string>
     <string name="opneningDialog">Se estan recopilando tus trayecto. En breves se abrira una nueva ventana</string>
+
+    <string name="ActiveTrip">Activo</string>
+    <string name="FinishedTrip">Finalizado</string>
+    <string name="CancelledTrip">Cancelado</string>
+
 
 </resources>
