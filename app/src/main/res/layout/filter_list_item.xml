@@ -73,10 +73,10 @@
                         android:autoSizeMaxTextSize="16sp"
                         android:autoSizeMinTextSize="12sp"
                         android:autoSizeTextType="uniform"
-                        android:text="Barcelona"
                         android:maxLines="1"
-                        android:textSize="16sp"
-                        android:textColor="@color/black" />
+                        android:text="Barcelona"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/citynameDest"
@@ -88,14 +88,12 @@
                         android:autoSizeTextType="uniform"
                         android:maxLines="1"
                         android:text="Madrid"
-                        android:textSize="16sp"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
 
             </LinearLayout>
-
-
 
 
             <LinearLayout
@@ -107,8 +105,8 @@
                 <RelativeLayout
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginStart="10dp"
                     android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -131,11 +129,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:layout_marginTop="15dp"
-                        android:autoSizeTextType="uniform"
-                        android:autoSizeMinTextSize="12sp"
                         android:autoSizeMaxTextSize="24sp"
-                        android:textColor="@color/black"
+                        android:autoSizeMinTextSize="12sp"
+                        android:autoSizeTextType="uniform"
                         android:text="Marina Alapont"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -178,21 +176,22 @@
                             android:layout_height="27dp"
                             android:layout_marginStart="5dp"
                             android:src="@drawable/ic_starplena" />
+
                         <TextView
+                            android:id="@+id/numberValorations"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/numberValorations"
-                            android:layout_marginTop="3dp"
                             android:layout_marginStart="10dp"
+                            android:layout_marginTop="3dp"
                             android:text="(0)"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -213,9 +212,26 @@
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="normal" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:id="@+id/estat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:text="@string/ActiveTrip"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="normal" />
+
                     </LinearLayout>
 
                 </LinearLayout>
+
+
+
+
 
 
             </LinearLayout>

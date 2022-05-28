@@ -219,4 +219,8 @@
 
     <string name="DriverAlreadyExists">You are already a driver.</string>
     <string name="DriverRequestRecived">Petition sent.</string>
+
+    <string name="ActiveTrip">Active</string>
+    <string name="FinishedTrip">Finalized</string>
+    <string name="CancelledTrip">Cancelled</string>
 </resources>

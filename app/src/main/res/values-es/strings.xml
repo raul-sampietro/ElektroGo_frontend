@@ -221,4 +221,8 @@
     <string name="ModificarValoracio">Modificar</string>
     <string name="default_description">Descripción por defecto</string>
 
+    <string name="ActiveTrip">Activo</string>
+    <string name="FinishedTrip">Finalizado</string>
+    <string name="CancelledTrip">Cancelado</string>
+
 </resources>

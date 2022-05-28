@@ -216,4 +216,9 @@
 
     <string name="DriverAlreadyExists">Ja estas registrat com a conductor.</string>
     <string name="DriverRequestRecived">La sol·licitud ha estat enviada correctament</string>
+
+    <string name="ActiveTrip">Actiu</string>
+    <string name="FinishedTrip">Finalitzat</string>
+    <string name="CancelledTrip">Cancel·lat</string>
+
 </resources>
