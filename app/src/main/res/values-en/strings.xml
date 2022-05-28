@@ -248,4 +248,19 @@
     <string name="FinishedTrip">Finalized</string>
     <string name="CancelledTrip">Cancelled</string>
 
+    <string name="month">Month</string>
+
+    <string name="Jan">January</string>
+    <string name="Feb">February</string>
+    <string name="Mar">March</string>
+    <string name="Apr">April</string>
+    <string name="May">May</string>
+    <string name="Jun">June</string>
+    <string name="Jul">July</string>
+    <string name="Aug">August</string>
+    <string name="Sept">September</string>
+    <string name="Oct">October</string>
+    <string name="Nov">November</string>
+    <string name="Dec">December</string>
+
 </resources>
