@@ -246,15 +246,23 @@ class TripDetails : AppCompatActivity() {
 
 
         val btnUnirse: Button = this.findViewById(R.id.unirseTrajecte)
+        val currentUsername : String = SessionController.getUsername(this)
+        // no es mostra el boto per als teus propis trajectes
+        if (currentUsername == username) btnUnirse.visibility = View.GONE
+        // si l'usuari ja es membre del trajecte no es mosstra el boto
+        for (user: User in memberList) {
+            if (user.username == currentUsername) btnUnirse.visibility = View.GONE
+        }
+
         btnUnirse.setOnClickListener {
             val context = this
             val intent = Intent(context, ChatConversation::class.java).apply {
-                val currentUsername : String = SessionController.getUsername(context)
                 putExtra("userA", currentUsername)
                 putExtra("userB", username)
             }
             context.startActivity(intent)
         }
+
 
         val infoUserHost : LinearLayout = this.findViewById(R.id.infoUserHost)
         infoUserHost.setOnClickListener{
