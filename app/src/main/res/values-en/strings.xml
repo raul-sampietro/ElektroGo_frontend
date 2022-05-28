@@ -8,7 +8,6 @@
     <string name="places_autocomplete_search_hint">Search location</string>
     <string name="origen">Origin:</string>
     <string name="dest">Destination:</string>
-    <string name="dest">Destination:</string>
     <string name="autonomia_actual">Actual range:</string>
     <string name="km">km</string>
     <string name="autonomia">Range:</string>
