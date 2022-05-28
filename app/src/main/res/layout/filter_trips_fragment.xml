@@ -192,7 +192,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="16dp"
-                android:contentDescription="Afegir trajecte"
+                android:contentDescription="@string/createTrip"
                 app:srcCompat="@drawable/ic_add_24"
                 app:backgroundTint="@color/green_logo"/>
 

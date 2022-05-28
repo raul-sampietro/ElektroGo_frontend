@@ -7,7 +7,7 @@
     <string name="generar_ruta">Generate route</string>
     <string name="places_autocomplete_search_hint">Search location</string>
     <string name="origen">Origin:</string>
-    <string name="dest">Destnation:</string>
+    <string name="dest">Destination:</string>
     <string name="autonomia_actual">Actual range:</string>
     <string name="km">km</string>
     <string name="autonomia">Range:</string>
@@ -220,7 +220,32 @@
     <string name="DriverAlreadyExists">You are already a driver.</string>
     <string name="DriverRequestRecived">Petition sent.</string>
 
+    <string name="errorFilterTrips">An error has occurred trying to obtain the trips. Try it later</string>
+    <string name="invalidFieldsFilter">The start time and date are not valid. Please indicate a start time and date from actual date to forward</string>
+    <string name="invalidDateFilter">The selected date is not valid</string>
+    <string name="invalidTimeFilter">The range of time is not correct. The first has to be smaller than the second one.</string>
+    <string name="errorRatings">An error has occurred. It has not been possible to obtain the ratings.</string>
+    <string name="membersError">An error has occurred. It has not been possible to obtain the members of the trip.</string>
+    <string name="errorDeleteMember">Is has not been possible to delete the member of the trip</string>
+    <string name="addMemberDialogTitle">Add member to a trip</string>
+    <string name="memberAlreadyAdded">You have already added the user to the selected trip</string>
+    <string name="fullTripError">It is not possible to add any more members. It is full</string>
+    <string name="memberAdded">Member added successfully</string>
+    <string name="signOutSuccesfull">Successfully signed out</string>
+    <string name="deleteAccountVerification">Are you sure you want to delete your account?</string>
+    <string name="errorDeleteAccount">An error has occurred. It is not possible to delete the account.</string>
+    <string name="deleteAccountOk">Successfully deleted the account</string>
+    <string name="noDeleteAccount">The account has not been deleted</string>
+    <string name="selectToAdd">Select a trip to add a member</string>
+    <string name="availableSeatsItem">free seats</string>
+    <string name="createTrip">Add trip</string>
+    <string name="noMembersYet">There are no members yet</string>
+    <string name="members">Members:</string>
+    <string name="airPollution">Air pollution:</string>
+    <string name="opneningDialog">Your trips are being searched. A new window will be opened soon</string>
+
     <string name="ActiveTrip">Active</string>
     <string name="FinishedTrip">Finalized</string>
     <string name="CancelledTrip">Cancelled</string>
+
 </resources>

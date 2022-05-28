@@ -236,9 +236,34 @@
     <string name="DriverAlreadyExists">Ja estas registrat com a driver.</string>
     <string name="DriverRequestRecived">La sol·licitud ha estat enviada correctament</string>
 
+    <string name="errorFilterTrips">Hi ha hagut un error al servidor intentant obtenir els trajectes. Intenta-ho més tard</string>
+    <string name="invalidDateFilter">La data seleccionada és incorrecta</string>
+    <string name="invalidTimeFilter">El rang d\'hores no és correcte. La primera hora donada ha de ser anterior a la segona.</string>
+    <string name="invalidFieldsFilter">L\'hora d\'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals</string>
+    <string name="errorRatings">Hi ha hagut un error. No s\'han pogut obtenir les valoracions</string>
+    <string name="membersError">Hi ha hagut un error. No s\'han pogut obtenir els participants del trajecte.</string>
+    <string name="errorDeleteMember">No s\'ha pogut eliminar el membre del trajecte.</string>
+    <string name="addMemberDialogTitle">Add member to a trip</string>
+    <string name="memberAlreadyAdded">Ja has afegit aquest usuari al trajecte seleccionat</string>
+    <string name="fullTripError">No es pot afegir cap membre més. No hi cap.</string>
+    <string name="memberAdded">Membre afegit correctament</string>
+    <string name="signOutSuccesfull">Successfully signed out</string>
+    <string name="deleteAccountVerification">Estas segur d\'esborrar el teu compte?</string>
+    <string name="errorDeleteAccount">Hi ha hagut un problema. No s\'ha pogut esborrar el compte.</string>
+    <string name="deleteAccountOk">Successfully deleted the account</string>
+    <string name="noDeleteAccount">El compte no s\'ha esborrat</string>
+    <string name="selectToAdd">Selecciona un trajecte en el qual afegir el membre</string>
+    <string name="availableSeatsItem">seients disponibles</string>
+    <string name="createTrip">Afegir trajecte</string>
+    <string name="noMembersYet">No hi ha cap membre encara</string>
+    <string name="members">Membres:</string>
+    <string name="airPollution">Qualitat del aire:</string>
+    <string name="opneningDialog">S\'esta cercant els trajectes. En breu s\'obrirà una finestra per tal d\'afegir el particiant</string>
+
     <string name="ActiveTrip">Actiu</string>
     <string name="FinishedTrip">Finalitzat</string>
     <string name="CancelledTrip">Cancelled</string>
+
 
 
 </resources>

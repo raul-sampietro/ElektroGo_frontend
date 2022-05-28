@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
-        android:text="Selecciona un trajecte en el qual afegir el membre"/>_
+        android:text="@string/selectToAdd"/>_
     <ListView
         android:id="@+id/addMemberTripsList"
         android:layout_width="match_parent"
