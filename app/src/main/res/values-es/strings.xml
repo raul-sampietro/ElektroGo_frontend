@@ -174,7 +174,7 @@
     <string name="ajustos">Ajustes</string>
     <string name="nom_d_usuari">Nombre de usuario:</string>
     <string name="correu_electronic">Correo electrónico:</string>
-    <string name="eliminar_compte">Delete Account</string>
+    <string name="eliminar_compte">Eliminar Cuenta</string>
     <string name="block">Bloquear</string>
     <string name="report">Denunciar</string>
     <string name="deleteAccount" >Borrar cuenta</string>
@@ -186,6 +186,7 @@
     <string name="youBlocked">Has bloqeuado este usuario</string>
 
     <string name="verificant">Los administradores están verificando tu solicitud</string>
+    <string name="confirmation">Confirmación</string>
 
     <string name="insertDNImage">Añade una imagen de la part frontal del carnet de conducir</string>
     <string name="insert2DNImage">Añade una imagen de la part reversa del carnet de conducir</string>
@@ -201,5 +202,23 @@
     <string name="buttonJoinTrip">¡Unirse al viaje!</string>
     <string name="abandonTrip">Abandonar viaje</string>
     <string name="errorAbandonTrip">Ha habido un error abandonando el trayecto</string>
+    <string name="MotiuCancelacio">Da un motivo y confirma</string>
+    <string name="ConfirmarButton">CONFIRMAR</string>
+    <string name="trajecteCancelat">Trayecto cancelado</string>
+    <string name="ErrorCancelarTrajecte">No se ha podido cancelar el trayecto.</string>
+    <string name="GetStationsServerTimeout">No se ha podido conectar con el servidor.</string>
+    <string name="GetStationsServerError">No se han podido obtener las estaciones de carga. ERROR:</string>
+    <string name="SanTrobat">Se han encontrado</string>
+    <string name="EstacionsDeCarrega">estaciones de carga</string>
+    <string name="Valora">Valora</string>
+    <string name="ComValorar">¿Cómo quieres valorar a</string>
+    <string name="HasValoratA">Has valorado a</string>
+    <string name="amb">con</string>
+    <string name="Estrelles">estrellas.</string>
+    <string name="NoSHaPogutValorarA">No se ha podido valorar a</string>
+    <string name="ValoracioEliminada">Has eliminado la valoración.</string>
+    <string name="ErrorEliminarValoracio">No se ha podido eliminar la valoración.</string>
+    <string name="ModificarValoracio">Modificar</string>
+    <string name="default_description">Descripción por defecto</string>
 
 </resources>

@@ -28,14 +28,12 @@ class CancelTripDialog : DialogFragment() {
 
                 val motiu = textMotiu.findViewById<TextInputEditText>(R.id.motiu)
 
-                setTitle("Confirmació")
+                setTitle(R.string.confirmation)
 
-                setMessage("Dona un motiu i confirma")
+                setMessage(getString(R.string.MotiuCancelacio))
 
-                setPositiveButton("CONFIRMAR",
+                setPositiveButton(getString(R.string.ConfirmarButton),
                     DialogInterface.OnClickListener { dialog, id ->
-
-                        //TODO: Treue strings hardcodejades
 
                         val tripID = arguments?.getString("tripID")!!
 
@@ -49,8 +47,8 @@ class CancelTripDialog : DialogFragment() {
                         try { status = runBlocking{ FrontendController.cancelTrip(trajecteCancelat) } }
                         catch (e: Exception) {}
 
-                        if (status == 200) Toast.makeText(context, "Trajecte cancel·lat", Toast.LENGTH_SHORT).show()
-                        else Toast.makeText(activity, "No s'ha pogut canel·lar el trajecte.", Toast.LENGTH_SHORT).show()
+                        if (status == 200) Toast.makeText(context, getString(R.string.trajecteCancelat), Toast.LENGTH_SHORT).show()
+                        else Toast.makeText(activity, getString(R.string.ErrorCancelarTrajecte), Toast.LENGTH_SHORT).show()
 
                         requireActivity().finish()
                     })

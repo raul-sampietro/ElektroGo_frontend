@@ -175,9 +175,10 @@
     <string name="ajustos">Settings</string>
     <string name="nom_d_usuari"> Username:</string>
     <string name="correu_electronic">E-mail:</string>
-    <string name="eliminar_compte">Eliminar Cuenta</string>
+    <string name="eliminar_compte">Delete Account</string>
     <string name="block">Block</string>
     <string name="report">Report</string>
+    <string name="confirmation">Confirmation</string>
     <string name="buttonJoinTrip">Join trip!</string>
     <string name="deleteAccount" >Delete Account</string>
     <string name="blocked">You have been blocked by this user</string>
@@ -191,6 +192,24 @@
 
     <string name="verificant">Admins are currently verifing your request</string>
 
+    <string name="MotiuCancelacio">Give a reason and confirm</string>
+    <string name="ConfirmarButton">CONFIRM</string>
+    <string name="trajecteCancelat">Trip cancelled</string>
+    <string name="ErrorCancelarTrajecte">The trip could not be cancelled.</string>
+    <string name="GetStationsServerTimeout">Unable to connect to the server.</string>
+    <string name="GetStationsServerError">Failed to get charging stations. ERROR:</string>
+    <string name="SanTrobat">Found</string>
+    <string name="EstacionsDeCarrega">charging stations</string>
+    <string name="Valora">Rate</string>
+    <string name="ComValorar">How will your rate</string>
+    <string name="HasValoratA">You rated</string>
+    <string name="amb">with</string>
+    <string name="Estrelles">stars.</string>
+    <string name="NoSHaPogutValorarA">Failed to rate</string>
+    <string name="ValoracioEliminada">Rating deleted.</string>
+    <string name="ErrorEliminarValoracio">Rating could not be deleted.</string>
+    <string name="ModificarValoracio">Modify</string>
+    <string name="default_description">Default Description</string>
     <string name="insertDNImage">Insert a image of the frontal part of the drivers license</string>
     <string name="insert2DNImage">Insert a image of the reverse part of the drivers license</string>
     <string name="sendButton">Send</string>
