@@ -243,5 +243,6 @@
     <string name="noMembersYet">No hay ningún participante aún</string>
     <string name="members">Participantes:</string>
     <string name="airPollution">Calidad del aire:</string>
+    <string name="opneningDialog">Se estan recopilando tus trayecto. En breves se abrira una nueva ventana</string>
 
 </resources>

@@ -241,4 +241,5 @@
     <string name="noMembersYet">There are no members yet</string>
     <string name="members">Members:</string>
     <string name="airPollution">Air pollution:</string>
+    <string name="opneningDialog">Your trips are being searched. A new window will be opened soon</string>
 </resources>

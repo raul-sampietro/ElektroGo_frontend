@@ -239,4 +239,5 @@
     <string name="noMembersYet">No hi ha cap participant encara</string>
     <string name="members">Participants:</string>
     <string name="airPollution">Qualitat del aire:</string>
+    <string name="opneningDialog">S\'esta cercant els trajectes. En breu s\'obrirà una finestra per tal d\'afegir el particiant</string>
 </resources>
