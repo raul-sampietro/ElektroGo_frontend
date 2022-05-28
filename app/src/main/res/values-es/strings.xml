@@ -71,7 +71,7 @@
     <string name="DriverVehicleAlreadyExists">Ya has creado este vehículo</string>
     <string name="VehicleAlreadyExists">Este vehículo ya existe</string>
     <string name="WrongVehicleInfo">Ya existe un vehículo con la misma matricula pero información diferente</string>
-    <string name="ServerError">Ha habido un error con el servidor, intentalo más tarde</string>
+    <string name="ServerError">Ha habido un error con el servidor, no se ha podido conectar. Intentalo más tarde</string>
     <string name="btnValorar">Valora</string>
     <string name="valorar_usuari">Valorar Usuario</string>
 
@@ -220,5 +220,28 @@
     <string name="ErrorEliminarValoracio">No se ha podido eliminar la valoración.</string>
     <string name="ModificarValoracio">Modificar</string>
     <string name="default_description">Descripción por defecto</string>
+
+    <string name="errorFilterTrips">Ha habido un error al intentar obtener los trayectos. Intentalo de niuevo más tarde</string>
+    <string name="invalidFieldsFilter">La hora de inicio y la fecha seleccionada son incorrectas. Indique una fecha y hora posterior a las actuales</string>
+    <string name="invalidDateFilter">La fecha seleccionada es incorrecta</string>
+    <string name="invalidTimeFilter">El intervalo de horas no es correcto. La primera hora debe ser anterior a la segunda</string>
+    <string name="errorRatings">Ha habido un error. No se ha podido obtener las valoraciones</string>
+    <string name="membersError">Ha habido un error. No se ha podido obtener los participantes del trayecto</string>
+    <string name="errorDeleteMember">No se ha podido eliminar el participante del trayecto</string>
+    <string name="addMemberDialogTitle">Añadir participante al trayecto</string>
+    <string name="memberAlreadyAdded">Ya has añadido al usuario al trayecto</string>
+    <string name="fullTripError">No se puede añadir ningún participante más. No cabe</string>
+    <string name="memberAdded">Participante añadido correctamente</string>
+    <string name="signOutSuccesfull">Se ha cerrado sessión exitosamente</string>
+    <string name="deleteAccountVerification">Estas seguro de eliminar tu cuenta?</string>
+    <string name="errorDeleteAccount">Ha habido un problema, no se ha podido eliminar la cuenta</string>
+    <string name="deleteAccountOk">Se ha eliminado la cuenta exitosamente</string>
+    <string name="noDeleteAccount">La cuenta no se ha eliminado</string>
+    <string name="selectToAdd">Seleccione un trayeto para añadir al usuario</string>
+    <string name="availableSeatsItem">asientos disponibles</string>
+    <string name="createTrip">Añadir trayecto</string>
+    <string name="noMembersYet">No hay ningún participante aún</string>
+    <string name="members">Participantes:</string>
+    <string name="airPollution">Calidad del aire:</string>
 
 </resources>

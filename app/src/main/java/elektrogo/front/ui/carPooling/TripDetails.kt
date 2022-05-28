@@ -86,12 +86,13 @@ class TripDetails : AppCompatActivity() {
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
         val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
-        //Obtenci dels membres que participen en el trajecte
+
+        //Obtencio dels membres que participen en el trajecte
         val listView: ListView = this.findViewById(R.id.listMembers)
         var memberList : ArrayList<User> = arrayListOf()
         var resultDefault : Pair <Int, ArrayList<User>> = viewModel.askForMembersOfATrip(id!!)
         if (resultDefault.first != 200) {
-            Toast.makeText(this, "Hi ha hagut un error, intenta-ho més tard2", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.membersError), Toast.LENGTH_LONG).show()
         }
         else {
             memberList = resultDefault.second
@@ -140,7 +141,7 @@ class TripDetails : AppCompatActivity() {
 
         val ratingPair = viewModel.getRating(username)
         if (ratingPair.first != 200) {
-            Toast.makeText(this, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.errorRatings), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue)
         val numValorations : TextView = this.findViewById(R.id.numberValorations)
         numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
@@ -262,7 +263,6 @@ class TripDetails : AppCompatActivity() {
             }
             context.startActivity(intent)
         }
-
 
         val infoUserHost : LinearLayout = this.findViewById(R.id.infoUserHost)
         infoUserHost.setOnClickListener{

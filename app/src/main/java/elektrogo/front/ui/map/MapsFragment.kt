@@ -326,7 +326,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
                     mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f))
                     mMap.addMarker(MarkerOptions().position(latLng).title(place.name))
-                } else Toast.makeText(context, "hi ha hagut un error", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(context, getString(R.string.errorOnLocation), Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(status: Status) {

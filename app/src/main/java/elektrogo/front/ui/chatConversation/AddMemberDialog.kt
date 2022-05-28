@@ -29,16 +29,15 @@ class AddMemberDialog : DialogFragment() {
             val builder = androidx.appcompat.app.AlertDialog.Builder(it)
 
             builder.apply {
-                Log.i("add", "Estoy en el dialog")
 
-                setTitle("Add member to a trip")
+                setTitle(getString(R.string.addMemberDialogTitle))
                 val fragmentAdd = layoutInflater.inflate(R.layout.add_member_fragment, null)
                 setView(fragmentAdd)
                 val listView: ListView = fragmentAdd.findViewById(R.id.addMemberTripsList ) as ListView
 
                 var result : Pair <Int, ArrayList<CarPooling>> = viewModel.getUserCreatedTrips(SessionController.getUsername(requireContext()))
                 if (result.first != 200) {
-                    Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.errorFilterTrips), Toast.LENGTH_LONG).show()
                 }
                 else {
                     resultList = result.second
@@ -50,18 +49,17 @@ class AddMemberDialog : DialogFragment() {
                 listView.setOnItemClickListener { parent, view, position, id ->
                     val status = viewModel.addMemberToATrip(username, resultList[position].id)
                     if (status!=200) {
-                        Log.i("holaaaaa", status.toString())
                         if (status == 448){
-                            Log.i("holaaaaa", "${status}")
-                            Toast.makeText(context, "Ja has afegit aquest usuari al trajecte seleccionat", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, getString(R.string.memberAlreadyAdded), Toast.LENGTH_LONG).show()
                         }
+                        else if (status ==450) Toast.makeText(context, getString(R.string.fullTripError), Toast.LENGTH_LONG).show()
                         else {
-                            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, getString(R.string.ServerError), Toast.LENGTH_LONG).show()
                         }
                         dismiss()
                     }
                     else {
-                        Toast.makeText(requireContext(),"Membre afegit correctament", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),getString(R.string.memberAdded), Toast.LENGTH_SHORT).show()
                         dismiss()
                     }
                 }
