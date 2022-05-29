@@ -203,6 +203,10 @@ class TripDetails : AppCompatActivity() {
                     }
                     listView.adapter = MembersListAdapter(this as Activity, memberListAux,id, trip)
                     (btnCancel.parent as ViewManager).removeView(btnCancel)
+                    occupied = (offeredSeats - (occupiedSeats-1)).toString() //Occupied seats now is 1 less
+                    occupied += "/"
+                    occupied += offeredSeats.toString()
+                    seatsText.text = occupied
                     Toast.makeText(
                         this,
                         R.string.tripAbandonedSuccesfully,
