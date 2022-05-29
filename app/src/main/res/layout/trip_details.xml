@@ -115,7 +115,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -173,7 +173,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_width="match_parent"
             android:layout_height="7dp"
             android:layout_marginTop="10dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -201,7 +201,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
 
         <TextView
@@ -228,7 +228,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_width="match_parent"
             android:layout_height="7dp"
             android:layout_marginTop="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -278,7 +278,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_width="match_parent"
             android:layout_height="7dp"
             android:layout_marginTop="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -395,7 +395,7 @@ tools:context=".ui.carPooling.TripDetails">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="7dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
 
         <TextView
