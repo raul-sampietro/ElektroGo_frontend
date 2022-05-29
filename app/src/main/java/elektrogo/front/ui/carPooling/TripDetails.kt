@@ -21,13 +21,12 @@ import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import elektrogo.front.R
-import elektrogo.front.controller.FrontendController.finishTrip
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
 import elektrogo.front.model.User
 import elektrogo.front.ui.chatConversation.ChatConversation
 import elektrogo.front.ui.profile.ProfileActivity
-import elektrogo.front.ui.vehicleList.VehicleListActivity
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -162,9 +161,11 @@ class TripDetails : AppCompatActivity() {
 
         val btnCancel : Button = this.findViewById(R.id.btn_cancelarTrajecte)
 
-        val today = Calendar.getInstance().time
+        var today = Calendar.getInstance().time
         val formatter = SimpleDateFormat("yyyy-MM-dd")
+        today = formatter.parse(formatter.format((today)))
         val cancelDay = formatter.parse(cancelDate)
+
 
 
         var userParticipates = false;
@@ -173,7 +174,15 @@ class TripDetails : AppCompatActivity() {
                 userParticipates = true;
             }
         }
-        if (userParticipates && (SessionController.getUsername(this) != username) && (today < cancelDay) && state !="cancelled" && state != "finished") {
+
+        val startDay = formatter.parse(startDate)
+
+        val formatterTime = SimpleDateFormat("HH:mm:ss")
+        val dateStartTime = formatterTime.parse(startTime)
+        val startTimeT = Time(dateStartTime.time)
+        var actualTime = Time(System.currentTimeMillis())
+        actualTime = Time(formatterTime.parse(formatterTime.format(actualTime)).time)
+        if (userParticipates && (SessionController.getUsername(this) != username) && (today < startDay || (today == startDay && actualTime < startTimeT)) && state !="cancelled" && state != "finished") {
             btnCancel.setText(R.string.abandonTrip)
             btnCancel.setOnClickListener {
                 val status = viewModel.abandonTrip(id, SessionController.getUsername(this));
@@ -212,10 +221,10 @@ class TripDetails : AppCompatActivity() {
         }
 
         val btnFinish: Button = findViewById(R.id.btn_finalitzarTrajecte)
-        val startDay = formatter.parse(startDate)
 
-        if ((SessionController.getUsername(this) != username) || (today < startDay) || (state == "finished"))
+        if ((SessionController.getUsername(this) != username) || (today < startDay || (today == startDay && actualTime < startTimeT)) || (state == "finished")) {
             (btnFinish.parent as ViewManager).removeView(btnFinish)
+        }
         else {
             btnFinish.setOnClickListener {
                 val alertDialog: AlertDialog? = this.let {
