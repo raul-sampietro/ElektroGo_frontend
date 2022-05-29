@@ -121,6 +121,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:drawableRight="@drawable/clock"
+                    android:drawableTint="@color/black"
                     android:backgroundTint="@color/green_D"
                     android:text="@string/DesdeFilter" />
 
@@ -131,6 +132,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
+                    android:drawableTint="@color/black"
                     android:backgroundTint="@color/green_D"
                     android:drawableRight="@drawable/clock"
                     android:text="@string/FinsFilter" />
@@ -185,7 +187,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                tools:listitem="@layout/filter_list_item">
+                tools:listitem="@layout/filter_list_item"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false">
 
             </ListView>
 

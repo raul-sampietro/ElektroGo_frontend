@@ -20,9 +20,11 @@
 
             <!-- TODO Insertar foto aquí -->
             <androidx.cardview.widget.CardView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
                 android:layout_gravity="center"
                 app:cardCornerRadius="50dp">
 
@@ -48,10 +50,10 @@
                     android:id="@+id/listUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="2dp"
                     android:text="Test3"
                     android:textColor="@color/black"
-                    android:textSize="26sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
@@ -63,7 +65,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="13dp"
             android:layout_marginEnd="25dp"
             android:backgroundTint="@color/red"
             android:gravity="center"

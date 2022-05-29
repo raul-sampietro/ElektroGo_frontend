@@ -139,12 +139,13 @@
             android:layout_gravity="start"
             android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
+            android:paddingStart="15dp"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/trophyImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 />
 
@@ -155,7 +156,7 @@
                 android:layout_marginTop="5dp"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/trophyPoints"
@@ -163,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textSize="20sp"/>
+                android:textSize="14sp"/>
 
         </LinearLayout>
 

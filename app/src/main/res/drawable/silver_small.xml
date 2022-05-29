@@ -3,8 +3,8 @@
 
     <item
         android:drawable="@drawable/silver"
-        android:width="90dp"
-        android:height="90dp"
+        android:width="10dp"
+        android:height="10dp"
         />
 
 </layer-list>
