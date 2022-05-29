@@ -121,6 +121,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:drawableRight="@drawable/clock"
+                    android:drawableTint="@color/black"
+                    android:backgroundTint="@color/green_D"
                     android:text="@string/DesdeFilter" />
 
                 <Button
@@ -130,6 +132,8 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
+                    android:drawableTint="@color/black"
+                    android:backgroundTint="@color/green_D"
                     android:drawableRight="@drawable/clock"
                     android:text="@string/FinsFilter" />
 
@@ -147,6 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:drawableRight="@drawable/calendar"
+                    android:backgroundTint="@color/green_D"
                     android:text="@string/DataFilter" />
 
                 <Button
@@ -154,6 +159,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/reset"
                     android:layout_marginStart="10dp"
+                    android:backgroundTint="@color/green_D"
                     android:text="@string/resetFilters" />
                 <Button
                     android:id="@+id/Filtrar"
@@ -165,7 +171,7 @@
                     android:autoSizeMaxTextSize="14sp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:backgroundTint="#2E7005"
+                    android:backgroundTint="@color/green_E"
                     android:text="@string/buscarFiltrar" />
 
             </LinearLayout>
@@ -181,20 +187,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clickable="true"
-                tools:listitem="@layout/filter_list_item">
+                tools:listitem="@layout/filter_list_item"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false">
 
             </ListView>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/createTrip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/createTrip"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:layout_margin="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:contentDescription="@string/createTrip"
-                app:srcCompat="@drawable/ic_add_24"
-                app:backgroundTint="@color/green_logo"/>
+                app:backgroundTint="@color/green_logo"
+                app:srcCompat="@drawable/ic_add_24" />
 
         </RelativeLayout>
 

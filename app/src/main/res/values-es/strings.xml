@@ -180,7 +180,7 @@
     <string name="deleteAccount" >Borrar cuenta</string>
     <string name="blocked">Este usuario te ha bloqueado</string>
     <string name="bttDenuncia">Hacer denuncia</string>
-    <string name="hintDenuncia">El  motivo de la denuncia és...</string>
+    <string name="hintDenuncia">El  motivo de la denuncia es...</string>
     <string name="enunciatDenuncia">Indique a continuación el motivo de la denuncia:</string>
     <string name="channel_name">Chat</string>
     <string name="youBlocked">Has bloqeuado este usuario</string>

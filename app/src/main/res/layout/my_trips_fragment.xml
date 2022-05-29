@@ -14,55 +14,57 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95C59A"
-            android:gravity="center"
-            android:backgroundTint="#95C59A"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/backwardMonth"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:adjustViewBounds="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:background="#00FFFFFF"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="arrow to change month backward"
-                android:scaleType="fitCenter"
-                android:src="@drawable/calendar_arrow" />
-
-            <TextView
-                android:id="@+id/textMonth"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/month"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <ImageButton
-                android:id="@+id/forwardMonth"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:adjustViewBounds="true"
-                android:background="#00FFFFFF"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="arrow to change month backward"
-                android:scaleType="fitCenter"
-                android:src="@drawable/calendar_arrow_right" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_layout"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#95C59A"
+                android:backgroundTint="@color/green_f"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/backwardMonth"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:adjustViewBounds="true"
+                    android:background="#00FFFFFF"
+                    android:backgroundTint="#00FFFFFF"
+                    android:contentDescription="arrow to change month backward"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/calendar_arrow" />
+
+                <TextView
+                    android:id="@+id/textMonth"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/month"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="@color/black" />
+
+                <ImageButton
+                    android:id="@+id/forwardMonth"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:adjustViewBounds="true"
+                    android:background="#00FFFFFF"
+                    android:backgroundTint="#00FFFFFF"
+                    android:contentDescription="arrow to change month backward"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/calendar_arrow_right" />
+
+            </LinearLayout>
 
             <com.github.sundeepk.compactcalendarview.CompactCalendarView
                 android:id="@+id/compactcalendar_view"
@@ -74,12 +76,12 @@
                 android:background="@drawable/rounded_layout"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                app:compactCalendarBackgroundColor="#95C59A"
-                app:compactCalendarCurrentDayBackgroundColor="#C8B50B"
-                app:compactCalendarCurrentSelectedDayBackgroundColor="#50B855"
-                app:compactCalendarMultiEventIndicatorColor="#fff"
+                app:compactCalendarBackgroundColor="@color/green_f"
+                app:compactCalendarCurrentDayBackgroundColor="#c3c91c"
+                app:compactCalendarCurrentSelectedDayBackgroundColor="@color/green_E"
+                app:compactCalendarMultiEventIndicatorColor="@color/red"
                 app:compactCalendarTargetHeight="250dp"
-                app:compactCalendarTextColor="#000000"
+                app:compactCalendarTextColor="#ffff"
                 app:compactCalendarTextSize="12sp" />
         </LinearLayout>
 

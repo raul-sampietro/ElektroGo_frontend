@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/list_chat_view"
-        tools:listitem="@layout/fragment_chat_list_item"/>
+        tools:listitem="@layout/fragment_chat_list_item"
+        android:paddingBottom="150dp"
+        android:clipToPadding="false"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

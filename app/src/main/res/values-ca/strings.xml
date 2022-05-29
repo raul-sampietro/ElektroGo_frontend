@@ -115,7 +115,7 @@
     <string name="shareOwnTrip">He creat un nou trajecte a ElektroGo per al dia %1$s a les %2$s amb origen %3$s i destinació %4$s. Només queden %5$s seients lliures! \n\nUneix-te a mi a través de l\'aplicació: https://marccastellsdostal.wixsite.com/elektrogo</string>
     <string name="shareTrip">He trobat aquest trajecte a l\'app d\'ElektroGo per al dia %1$s a les %2$s amb origen %3$s i destinació %4$s. Només queden %5$s seients lliures! \n\nUneix-te  a través de l\'aplicació: https://marccastellsdostal.wixsite.com/elektrogo</string>
     <string name="share">Compartir a</string>
-    <string name="chat">Chat</string>
+    <string name="chat">xat</string>
     <string name="message">Message</string>
     <string name="resetFilters">Reset</string>
     <string name="textProva">Això és un text de prova</string>

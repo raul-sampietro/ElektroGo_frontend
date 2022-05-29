@@ -28,7 +28,7 @@ tools:context=".ui.carPooling.TripDetails">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#95C59A"
+            android:background="@color/green_f"
             android:layout_gravity="center"
             android:orientation="vertical">
 
@@ -115,7 +115,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -173,7 +173,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_width="match_parent"
             android:layout_height="7dp"
             android:layout_marginTop="10dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -201,7 +201,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
 
         <TextView
@@ -228,7 +228,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_width="match_parent"
             android:layout_height="7dp"
             android:layout_marginTop="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -271,7 +271,6 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:backgroundTint="#FF4BBD23"
             android:text="@string/buttonJoinTrip"
             android:layout_gravity="center"
             tools:ignore="TextContrastCheck" />
@@ -279,7 +278,7 @@ tools:context=".ui.carPooling.TripDetails">
             android:layout_width="match_parent"
             android:layout_height="7dp"
             android:layout_marginTop="20dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -396,7 +395,7 @@ tools:context=".ui.carPooling.TripDetails">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="7dp"
-            android:background="#95C59A" />
+            android:background="@color/green_f" />
 
 
         <TextView
@@ -440,7 +439,7 @@ tools:context=".ui.carPooling.TripDetails">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#FF0000"
+                android:backgroundTint="@color/red"
                 android:text="@string/buttonCancelTrip"
                 tools:ignore="TextContrastCheck" />
 
@@ -457,7 +456,6 @@ tools:context=".ui.carPooling.TripDetails">
 
 
     </LinearLayout>
-
 
 </ScrollView>
 </LinearLayout>
