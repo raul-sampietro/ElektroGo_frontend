@@ -18,24 +18,16 @@
             android:background="@drawable/rounded_layout"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewOrigin"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/origen"
-                android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:id="@+id/linear1"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
                     android:background="@drawable/rounded_box"
@@ -70,24 +62,16 @@
                     android:clickable="true" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textViewDestination"
-                android:layout_width="116dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/dest"
-                android:textSize="20sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp">
 
                 <LinearLayout
                     android:id="@+id/linear2"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginEnd="25dp"
                     android:background="@drawable/rounded_box"
@@ -126,8 +110,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/textViewAutonomia"

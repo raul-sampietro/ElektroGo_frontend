@@ -146,6 +146,7 @@ class RouteFragment() : Fragment() {
      */
     private fun getAutocompleteLocation () {
         autocompleteSupportFragment = childFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
+        autocompleteSupportFragment.setHint(getString(R.string.OrigenString))
         autocompleteSupportFragment.setPlaceFields(listOf(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG))
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener{
             override fun onPlaceSelected(place: Place) {
@@ -158,6 +159,7 @@ class RouteFragment() : Fragment() {
             }
         })
         autocompleteSupportFragment2 = childFragmentManager.findFragmentById(R.id.autocomplete_fragment2) as AutocompleteSupportFragment
+        autocompleteSupportFragment2.setHint(getString(R.string.DestiString))
         autocompleteSupportFragment2.setPlaceFields(listOf(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG))
         autocompleteSupportFragment2.setOnPlaceSelectedListener(object : PlaceSelectionListener{
             override fun onPlaceSelected(place: Place) {

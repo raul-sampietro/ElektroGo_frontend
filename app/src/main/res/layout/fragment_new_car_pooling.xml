@@ -132,10 +132,10 @@
 
                 <Button
                     android:id="@+id/DateButton"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
-                    style="?attr/materialButtonOutlinedStyle"
                     android:text="@string/dateLabel"
                     tools:ignore="TextContrastCheck" />
 
@@ -158,10 +158,10 @@
 
                 <Button
                     android:id="@+id/HourButton"
+                    style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
-                    style="?attr/materialButtonOutlinedStyle"
                     android:text="@string/HourButton"
                     tools:ignore="TextContrastCheck" />
 
@@ -191,7 +191,7 @@
             <EditText
                 android:id="@+id/detailsInput"
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
@@ -201,7 +201,7 @@
                 android:inputType="textMultiLine"
                 android:textColor="#000000"
                 android:textColorHint="#757575"
-                android:textSize="18sp" />
+                android:textSize="19sp" />
 
             <TextView
                 android:id="@+id/VehicleLabel"
@@ -242,8 +242,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:spinnerMode="dropdown"
-                tools:ignore="SpeakableTextPresentCheck"
-                />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/restLabel"
@@ -259,7 +258,7 @@
             <EditText
                 android:id="@+id/restInput"
                 android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"

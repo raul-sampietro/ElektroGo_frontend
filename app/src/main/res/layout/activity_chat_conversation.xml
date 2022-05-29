@@ -13,7 +13,7 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FF4BBD23"
+        android:background="@color/green_logo"
         android:id="@+id/toolbarConversation"
         tools:ignore="MissingConstraints">
 

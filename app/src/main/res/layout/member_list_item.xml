@@ -120,7 +120,7 @@
         android:layout_gravity="center"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:backgroundTint="#FF0000"
+        android:backgroundTint="@color/red"
         android:layout_marginTop="5dp"
         app:tint="@color/white"
         android:src="@drawable/ic_delete_24"

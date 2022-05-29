@@ -159,7 +159,7 @@
             <Button
                 android:id="@+id/addImage"
                 android:layout_width="260dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="23dp"
                 android:text="@string/VehicleImageButton" />
