@@ -8,8 +8,8 @@ import kotlinx.coroutines.runBlocking
 
 class MyTripsViewModel : ViewModel() {
 
-    fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?): Pair <Int, ArrayList<CarPooling>> = runBlocking{
-        return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax)
+    fun askForTrips(latLngOrigin: LatLng?, latLngDestination: LatLng?, dateIni:String?, startTimeMin:String?, startTimeMax:String?, username: String): Pair <Int, ArrayList<CarPooling>> = runBlocking{
+        return@runBlocking FrontendController.getTrips(latLngOrigin!!.latitude, latLngOrigin.longitude, latLngDestination!!.latitude,latLngDestination.longitude,dateIni, startTimeMin, startTimeMax, username)
     }
 
     fun askForTripsForUser(username : String?): Pair <Int, ArrayList<CarPooling>> = runBlocking{

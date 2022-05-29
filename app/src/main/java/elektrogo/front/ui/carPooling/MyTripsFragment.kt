@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.github.sundeepk.compactcalendarview.CompactCalendarView
 import com.github.sundeepk.compactcalendarview.CompactCalendarView.CompactCalendarViewListener
 import com.github.sundeepk.compactcalendarview.domain.Event
+import com.google.gson.Gson
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
@@ -49,9 +50,13 @@ class MyTripsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+       onViewCreatedMethod()
+    }
+
+    private fun onViewCreatedMethod(){
         initialize()
 
-        val listView: ListView = view.findViewById(R.id.filterListView)
+        val listView: ListView = requireView().findViewById(R.id.filterListView)
         val date : LocalDate = LocalDate.now()
         month = date.monthValue
         year = date.year
@@ -107,16 +112,8 @@ class MyTripsFragment : Fragment() {
 
         listView.setOnItemClickListener { parent, Listview, position, id ->
             val i = Intent(context, TripDetails::class.java)
-            i.putExtra("username", filteredList[position].username)
-            i.putExtra("startDate", filteredList[position].startDate)
-            i.putExtra("startTime", filteredList[position].startTime)
-            i.putExtra("offeredSeats", filteredList[position].offeredSeats)
-            i.putExtra("occupiedSeats", filteredList[position].occupiedSeats)
-            i.putExtra("restrictions", filteredList[position].restrictions)
-            i.putExtra("details", filteredList[position].details)
-            i.putExtra("originString", filteredList[position].origin)
-            i.putExtra("destinationString", filteredList[position].destination)
-            i.putExtra("vehicleNumberPlate", filteredList[position].vehicleNumberPlate)
+            val myjson : String = Gson().toJson(filteredList[position])
+            i.putExtra("Trip", myjson)
             startActivity(i)
         }
 
@@ -156,6 +153,7 @@ class MyTripsFragment : Fragment() {
 
     private fun initialize() {
         calendar = requireActivity().findViewById(R.id.compactcalendar_view)
+        calendar.removeAllEvents()
         forwardMonth = requireActivity().findViewById(R.id.forwardMonth)
         backwardMonth = requireActivity().findViewById(R.id.backwardMonth)
         actualMonth = requireActivity().findViewById(R.id.textMonth)
@@ -169,6 +167,11 @@ class MyTripsFragment : Fragment() {
             else println("$dateString is not equal to ${cP.startDate} ")
         }
         return tripsOnDate
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onViewCreatedMethod()
     }
 
 

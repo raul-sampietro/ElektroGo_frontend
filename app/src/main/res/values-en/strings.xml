@@ -7,7 +7,7 @@
     <string name="generar_ruta">Generate route</string>
     <string name="places_autocomplete_search_hint">Search location</string>
     <string name="origen">Origin:</string>
-    <string name="dest">Destnation:</string>
+    <string name="dest">Destination:</string>
     <string name="autonomia_actual">Actual range:</string>
     <string name="km">km</string>
     <string name="autonomia">Range:</string>
@@ -149,6 +149,122 @@
     <string name="encara_hi_ha">There are still</string>
     <string name="seients_disponibles">free seats</string>
     <string name="anfitrio">Host:</string>
+    <string name="buttonCancelTrip">Cancel trip</string>
+    <string name="rao_de_cancel_lacio">Reason</string>
+    <string name="eliminaValoracio">Delete</string>
+    <string name="comentariValoracio">Escribe un comentario</string>
+    <string name="ok">ok</string>
+    <string name="pregunta_difusio">Select who you want to send the message to</string>
+    <string name="cancel">cancel</string>
+    <string name="channel_description">Notifications coming from messages received on the chat</string>
+    <string name="next">next</string>
+    <string name="message_to_send">Type the message you want to send</string>
+    <string name="message_sent">messages sent</string>
+    <string name="esborrarXat">Do you want to delete this chat?</string>
+    <string name="si">YES</string>
+    <string name="esborrantXat">Deleting chat</string>
+    <string name="xatNoEsborrat">Chat not deleted</string>
+    <string name="no">NO</string>
+    <string name="envia">send</string>
+    <string name="buscaUsuari">Find...</string>
+    <string name="confirma">confirm</string>
+    <string name="errorChatNotFound">Error: chat conversation not found</string>
+    <string name="TripsNavMenu">My trips</string>
+    <string name="vehiclesMenu">My vehicles</string>
+    <string name="perfil">Profile</string>
+    <string name="ajustos">Settings</string>
+    <string name="nom_d_usuari"> Username:</string>
+    <string name="correu_electronic">E-mail:</string>
+    <string name="eliminar_compte">Delete Account</string>
+    <string name="block">Block</string>
+    <string name="report">Report</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="buttonJoinTrip">Join trip!</string>
+    <string name="deleteAccount" >Delete Account</string>
+    <string name="blocked">You have been blocked by this user</string>
+    <string name="bttDenuncia">Report</string>
+    <string name="hintDenuncia">The reason of the report is ..</string>
+    <string name="enunciatDenuncia">Indicate below the reason of the report:</string>
+    <string name="channel_name">Chat</string>
+    <string name="youBlocked">You have blocked this user</string>
+    <string name="abandonTrip">Abandon trip</string>
+    <string name="errorAbandonTrip">There was an error leaving the trip</string>
+
+    <string name="verificant">Admins are currently verifing your request</string>
+
+    <string name="MotiuCancelacio">Give a reason and confirm</string>
+    <string name="ConfirmarButton">CONFIRM</string>
+    <string name="trajecteCancelat">Trip cancelled</string>
+    <string name="ErrorCancelarTrajecte">The trip could not be cancelled.</string>
+    <string name="GetStationsServerTimeout">Unable to connect to the server.</string>
+    <string name="GetStationsServerError">Failed to get charging stations. ERROR:</string>
+    <string name="SanTrobat">Found</string>
+    <string name="EstacionsDeCarrega">charging stations</string>
+    <string name="Valora">Rate</string>
+    <string name="ComValorar">How will your rate</string>
+    <string name="HasValoratA">You rated</string>
+    <string name="amb">with</string>
+    <string name="Estrelles">stars.</string>
+    <string name="NoSHaPogutValorarA">Failed to rate</string>
+    <string name="ValoracioEliminada">Rating deleted.</string>
+    <string name="ErrorEliminarValoracio">Rating could not be deleted.</string>
+    <string name="ModificarValoracio">Modify</string>
+    <string name="default_description">Default Description</string>
+    <string name="insertDNImage">Insert a image of the frontal part of the drivers license</string>
+    <string name="insert2DNImage">Insert a image of the reverse part of the drivers license</string>
+    <string name="sendButton">Send</string>
+
+    <string name="internalError">There was an error with the server</string>
+    <string name="requiredImage">You must add both images before sending the request</string>
+
+    <string name="DriverAlreadyExists">You are already a driver.</string>
+    <string name="DriverRequestRecived">Petition sent.</string>
+
+    <string name="errorFilterTrips">An error has occurred trying to obtain the trips. Try it later</string>
+    <string name="invalidFieldsFilter">The start time and date are not valid. Please indicate a start time and date from actual date to forward</string>
+    <string name="invalidDateFilter">The selected date is not valid</string>
+    <string name="invalidTimeFilter">The range of time is not correct. The first has to be smaller than the second one.</string>
+    <string name="errorRatings">An error has occurred. It has not been possible to obtain the ratings.</string>
+    <string name="membersError">An error has occurred. It has not been possible to obtain the members of the trip.</string>
+    <string name="errorDeleteMember">Is has not been possible to delete the member of the trip</string>
+    <string name="addMemberDialogTitle">Add member to a trip</string>
+    <string name="memberAlreadyAdded">You have already added the user to the selected trip</string>
+    <string name="fullTripError">It is not possible to add any more members. It is full</string>
+    <string name="memberAdded">Member added successfully</string>
+    <string name="signOutSuccesfull">Successfully signed out</string>
+    <string name="deleteAccountVerification">Are you sure you want to delete your account?</string>
+    <string name="errorDeleteAccount">An error has occurred. It is not possible to delete the account.</string>
+    <string name="deleteAccountOk">Successfully deleted the account</string>
+    <string name="noDeleteAccount">The account has not been deleted</string>
+    <string name="selectToAdd">Select a trip to add a member</string>
+    <string name="availableSeatsItem">free seats</string>
+    <string name="createTrip">Add trip</string>
+    <string name="noMembersYet">There are no members yet</string>
+    <string name="members">Members:</string>
+    <string name="airPollution">Air pollution:</string>
+    <string name="opneningDialog">Your trips are being searched. A new window will be opened soon</string>
+
+    <string name="ActiveTrip">Active</string>
+    <string name="FinishedTrip">Finalized</string>
+    <string name="CancelledTrip">Cancelled</string>
+
+    <string name="month">Month</string>
+
+    <string name="Jan">January</string>
+    <string name="Feb">February</string>
+    <string name="Mar">March</string>
+    <string name="Apr">April</string>
+    <string name="May">May</string>
+    <string name="Jun">June</string>
+    <string name="Jul">July</string>
+    <string name="Aug">August</string>
+    <string name="Sept">September</string>
+    <string name="Oct">October</string>
+    <string name="Nov">November</string>
+    <string name="Dec">December</string>
+
+
+    <string name="tripAbandonedSuccesfully">Trip abandoned successfully</string>
 
 
 </resources>

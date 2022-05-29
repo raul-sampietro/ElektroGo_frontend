@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -19,9 +20,8 @@ import elektrogo.front.R
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ProfileFragmentBinding
-import elektrogo.front.languages.Languages
+import elektrogo.front.model.Achievement
 import elektrogo.front.model.Driver
-import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.login.LoginActivity
 import elektrogo.front.ui.vehicleList.VehicleListActivity
 import kotlinx.coroutines.runBlocking
@@ -49,14 +49,42 @@ class ProfileFragment : Fragment() {
         username.text = SessionController.getUsername(requireActivity())
 
         val user = SessionController.getUsername(requireActivity());
-        val imageViewProfile : ImageView = view.findViewById(R.id.profile_image)
+        val imageViewProfile: ImageView = view.findViewById(R.id.profile_image)
         val imagePath = viewModel.getUsersProfilePhoto(user)
-        if (!imagePath.equals("null")  and !imagePath.equals("") ) Picasso.get().load(imagePath).into(imageViewProfile)
+        if (!imagePath.equals("null") and !imagePath.equals("")) Picasso.get().load(imagePath)
+            .into(imageViewProfile)
         else imageViewProfile.setImageResource(R.drawable.avatar)
+
+        if (viewModel.getDriver(user)) {
+            val imageVerificat: ImageView = view.findViewById(R.id.verificat)
+            imageVerificat.setImageResource(R.drawable.verificat)
+        }
+
+        val a : Achievement = viewModel.getAchievement("Traveler", SessionController.getUsername(requireActivity()))
+        val trophyImg : ImageView = view.findViewById(R.id.trophyImg)
+        val trophyName : TextView = view.findViewById(R.id.trophyName)
+        val trophyPoints : TextView = view.findViewById(R.id.trophyPoints)
+
+        if (a.points < 10) {
+            trophyImg.setImageResource(R.drawable.no_prize_small)
+        }
+        else if (a.points in 10..20) {
+            trophyImg.setImageResource(R.drawable.bronze_small)
+        }
+        else if (a.points in 20..30) {
+            trophyImg.setImageResource(R.drawable.silver_small)
+        }
+        else if (a.points > 30) {
+            trophyImg.setImageResource(R.drawable.gold_small)
+        }
+
+        trophyName.text = a.achievement
+        trophyPoints.text = a.points.toString()
 
         val ratingPair = viewModel.getRating(user)
         if (ratingPair.first != 200) {
-            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG)
+                .show()
         } else {
             val star1: ImageView = view.findViewById(R.id.estrella1)
             val star2: ImageView = view.findViewById(R.id.estrella2)
@@ -64,8 +92,8 @@ class ProfileFragment : Fragment() {
             val star4: ImageView = view.findViewById(R.id.estrella4)
             val star5: ImageView = view.findViewById(R.id.estrella5)
 
-            var rating = ratingPair.second!!.ratingValue/2
-            var decimalValue = rating - rating.toInt()
+            val rating = ratingPair.second!!.ratingValue / 2
+            val decimalValue = rating - rating.toInt()
             var enterValue = rating.toInt()
 
             when (enterValue) {
@@ -145,62 +173,19 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        val userCompleteName: TextView = view.findViewById(R.id.completeName)
-        userCompleteName.text = SessionController.getName(requireActivity());
-
-        val userMail: TextView = view.findViewById(R.id.email)
-        userMail.text = SessionController.getEmail(requireActivity());
-
-        val provider: TextView = view.findViewById(R.id.login)
-        provider.text = SessionController.getProvider(requireActivity());
-
-        val buttonDriver: Button = view.findViewById(R.id.profile_become_driver)
-        buttonDriver.setOnClickListener {
-            val new = Driver(SessionController.getUsername(requireContext()))
-            val httpStatus: Int = addDriver(new)
-            Toast.makeText(requireContext(), httpStatus.toString(), Toast.LENGTH_SHORT).show()
-        }
-
-        val buttonCars: Button = view.findViewById(R.id.AddVehicleButton)
-        buttonCars.setOnClickListener {
-            val intent = Intent(container?.context, VehicleListActivity::class.java)
-            startActivity(intent)
-        }
-
-        val buttonTrips: Button = view.findViewById(R.id.profile_MyTrips)
-        buttonTrips.setOnClickListener {
-            val intent = Intent(container?.context, TripsActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Logout button
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-        val mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
-        view.findViewById<Button>(R.id.profile_logout).setOnClickListener {
-            mGoogleSignInClient.signOut()
-                .addOnCompleteListener(requireActivity(), OnCompleteListener  {
-                    val intent = Intent(requireActivity(), LoginActivity::class.java)
-                    startActivity(intent)
-                    SessionController.setCurrentSession(null)
-                    Toast.makeText(requireActivity(), "Successfully signed out", Toast.LENGTH_SHORT).show()
-                    requireActivity().finish()
-                })
-
-        }
-
-        val deleteButton: Button = view.findViewById(R.id.profile_delete_account)
-        deleteButton.setOnClickListener {
-
-        }
-
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-    private fun addDriver(driver: Driver): Int = runBlocking {
-        FrontendController.addDriver(driver)
+        val userCompleteName: TextView = view.findViewById(R.id.completeName)
+        userCompleteName.text = SessionController.getName(requireActivity())
+
+        val userMail: TextView = view.findViewById(R.id.email)
+        userMail.text = SessionController.getEmail(requireActivity())
+
+        val provider: TextView = view.findViewById(R.id.login)
+        provider.text = SessionController.getProvider(requireActivity())
     }
 
     override fun onDestroyView() {

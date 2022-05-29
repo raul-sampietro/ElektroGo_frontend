@@ -6,7 +6,11 @@
 
 package elektrogo.front
 
+import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
@@ -14,7 +18,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBar
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -23,8 +28,13 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
+import elektrogo.front.controller.FrontendController
+import elektrogo.front.controller.session.SessionController
 import elektrogo.front.databinding.ActivityMainBinding
 import elektrogo.front.languages.MyContextWrapper
 import elektrogo.front.languages.Preference
@@ -32,9 +42,11 @@ import elektrogo.front.ui.route.RouteFragment
 import elektrogo.front.ui.carPooling.FilterTripsFragment
 import elektrogo.front.ui.carPooling.TripsActivity
 import elektrogo.front.ui.map.MapsFragment
-import elektrogo.front.ui.profile.ProfileFragment
 import elektrogo.front.ui.chatList.ChatListFragment
-import elektrogo.front.ui.preferences.PreferencesActivity
+import elektrogo.front.ui.login.LoginActivity
+import elektrogo.front.ui.profile.ProfileActivity
+import elektrogo.front.ui.vehicleList.VehicleListActivity
+import kotlinx.coroutines.runBlocking
 
 /**
  * @brief La classe MainActivity incorpora el menú principal i permet visualitzar els fragments de les funcionalitats principals d'ElektroGo.
@@ -49,6 +61,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var toolbar2 : androidx.appcompat.widget.Toolbar
     lateinit var currentFragment: String
 
+    //configura les notificacions del sistema
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        val name = getString(R.string.channel_name)
+        val descriptionText = getString(R.string.channel_description)
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channelId = "ChatChannel"
+        val channel = NotificationChannel(channelId, name, importance).apply {
+            description = descriptionText
+        }
+        // Register the channel with the system
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
 
     //Configuració dels events clic
     private val mOnNavigationItemSelectedListener = NavigationBarView.OnItemSelectedListener { item ->
@@ -82,17 +110,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 openFragment(chatFragment)
                 return@OnItemSelectedListener true
             }
-            R.id.perfil -> {
-                toolbar2.title = getString(R.string.ToolbarPerfil)
-                val perfilFragment = ProfileFragment()
-                currentFragment= "ProfileFragment"
-                openFragment(perfilFragment)
-                return@OnItemSelectedListener true
-            }
         }
         false
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         context = this
@@ -110,7 +130,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setHomeButtonEnabled(true)
 
         val navigationView : NavigationView = findViewById(R.id.nav_view)
+        val header : View = navigationView.getHeaderView(0)
+        val profileImage : ImageView = header.findViewById(R.id.profile_imageNav)
+        val usernameText : TextView = header.findViewById(R.id.usernameNav)
+        val clickeableLayout :LinearLayout = header.findViewById(R.id.headerProfile)
+        if (SessionController.getImageUrl(this)!="null") {
+            Picasso.get().load(SessionController.getImageUrl(this)).into(profileImage)
+        }
+        else profileImage.setImageResource(R.drawable.avatar)
+        usernameText.text= SessionController.getUsername(this)
         navigationView.setNavigationItemSelectedListener(this)
+
+        clickeableLayout.setOnClickListener {
+            var i  = Intent(this, ProfileActivity::class.java)
+            i.putExtra("username", SessionController.getUsername(this))
+            startActivity(i)
+        }
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation_view)
         bottomNavigation.setOnItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -120,10 +155,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (intent.getStringExtra("origin").isNullOrBlank()) {
             bottomNavigation.selectedItemId = R.id.mapa
             currentFragment = "MapsFragment"
-        }
-        else if (intent.getStringExtra("origin").equals("vehicleList")) {
-            bottomNavigation.selectedItemId = R.id.perfil
-            currentFragment="ProfileFragment"
         }
         else if (intent.getStringExtra("origin").equals("MapsFragment")) {
             bottomNavigation.selectedItemId = R.id.mapa
@@ -141,22 +172,91 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             bottomNavigation.selectedItemId = R.id.chat
             currentFragment = "ChatListFragment"
         }
-        else if (intent.getStringExtra("origin").equals("ProfileFragment")) {
-            bottomNavigation.selectedItemId = R.id.perfil
-            currentFragment = "ProfileFragment"
+
+
+        //Iniciem el service que envia notificacions per al xat
+        createNotificationChannel()
+        Intent(this, ChatService::class.java).also { intent ->
+            startService(intent)
         }
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_item_one -> {
-                var i : Intent = Intent(this, PreferencesActivity::class.java)
+                var i  = Intent(this, ProfileActivity::class.java)
+                i.putExtra("username", SessionController.getUsername(this))
                 startActivity(i)
+            }
+            R.id.nav_item_two -> {
+                val intent = Intent(this, TripsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_three -> {
+                val intent = Intent(this, VehicleListActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_item_four -> {
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build()
+                val mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+                    mGoogleSignInClient.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                SessionController.setCurrentSession(null)
+                Toast.makeText(this, getString(R.string.signOutSuccesfull), Toast.LENGTH_SHORT).show()
+                this.finish()
+
+            }
+            R.id.nav_item_seven ->{
+                val alertDialog: AlertDialog? = this.let {
+                    val builder = AlertDialog.Builder(it)
+                    // TODO 3 hardcoded strings
+                    builder.setMessage(getString(R.string.deleteAccountVerification))
+                    builder.apply {
+                        setPositiveButton("SI",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                val status = runBlocking { FrontendController.deleteUser(SessionController.getUsername(context)) }
+                                if (status != 200)  Toast.makeText(context,getString(R.string.errorDeleteAccount), Toast.LENGTH_SHORT).show()
+                                else {
+                                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                                        .requestEmail()
+                                        .build()
+                                    val mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
+                                    mGoogleSignInClient.signOut()
+                                    val intent = Intent(context, LoginActivity::class.java)
+                                    startActivity(intent)
+                                    SessionController.setCurrentSession(null)
+                                    Toast.makeText(context, getString(R.string.deleteAccountOk), Toast.LENGTH_SHORT).show()
+                                    finish();
+                                }
+                            })
+                        setNegativeButton("NO",
+                            DialogInterface.OnClickListener { dialog, id ->
+                                Toast.makeText(context, getString(R.string.noDeleteAccount), Toast.LENGTH_LONG).show()
+                            })
+                    }
+                    builder.create()
+                }
+                alertDialog?.show()
             }
 
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun setLanguage(lang: String) {
+        Preference.setLoginCount(lang)
+        finish();
+        overridePendingTransition(0, 0);
+        val intent = Intent(context, MainActivity::class.java)
+        intent.putExtra("origin", currentFragment)
+        Log.i("CurrentFragment", currentFragment)
+        startActivity(intent);
+        overridePendingTransition(0, 0);
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -168,6 +268,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onConfigurationChanged(newConfig)
         toggle.onConfigurationChanged(newConfig)
     }
+
     /**
      * @brief Metode per obrir un fragment.
      * @param fragment Fragment que es vol obrir.
@@ -190,34 +291,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.catalan -> {
-                Preference.setLoginCount("ca")
-                finish();
-                overridePendingTransition(0, 0);
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("origin", currentFragment)
-                Log.i("CurrentFragment", currentFragment)
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+                setLanguage("ca")
             }
             R.id.spanish -> {
-                Preference.setLoginCount("es")
-                finish();
-                overridePendingTransition(0, 0);
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("origin", currentFragment)
-                Log.i("CurrentFragment", currentFragment)
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+                setLanguage("es")
             }
             R.id.english -> {
-                Preference.setLoginCount("en")
-                finish();
-                overridePendingTransition(0, 0);
-                val intent = Intent(context, MainActivity::class.java)
-                intent.putExtra("origin", currentFragment)
-                Log.i("CurrentFragment", currentFragment)
-                startActivity(intent)
-                overridePendingTransition(0, 0);
+                setLanguage("en")
             }
         }
         return true

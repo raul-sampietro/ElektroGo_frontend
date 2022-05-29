@@ -55,20 +55,32 @@
 
 
             <TextView
+                android:id="@+id/NameofUserB"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name of User"
-                android:textSize="20sp"
-                android:layout_toEndOf="@id/cardViewUserConversation"
-                android:id="@+id/NameofUserB"
-                android:layout_marginStart="10dp"
                 android:layout_centerVertical="true"
-                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/cardViewUserConversation"
+                android:clickable="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="Name of User"
                 android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 tools:ignore="UnknownId">
 
             </TextView>
 
+            <ImageButton
+                android:id="@+id/addMemberButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@android:color/transparent"
+                android:src="@drawable/add_icon"
+                app:tint="@color/white" />
         </RelativeLayout>
 
 

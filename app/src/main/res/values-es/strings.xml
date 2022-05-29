@@ -71,7 +71,7 @@
     <string name="DriverVehicleAlreadyExists">Ya has creado este vehículo</string>
     <string name="VehicleAlreadyExists">Este vehículo ya existe</string>
     <string name="WrongVehicleInfo">Ya existe un vehículo con la misma matricula pero información diferente</string>
-    <string name="ServerError">Ha habido un error con el servidor, intentalo más tarde</string>
+    <string name="ServerError">Ha habido un error con el servidor, no se ha podido conectar. Intentalo más tarde</string>
     <string name="btnValorar">Valora</string>
     <string name="valorar_usuari">Valorar Usuario</string>
 
@@ -90,7 +90,7 @@
     <string name="HoraIncorrecte">La hora del trayecto es incorrecta</string>
 
     <string name="savedCarpooling">El trayecto se ha publicado</string>
-    <string name="errorCarpooling">Ha havido un error con el serivors. Intentalo más tarde.</string>
+    <string name="errorCarpooling">Ha habido un error con el servidor. Intentalo más tarde.</string>
 
     <string name="hora_d_inici">hora de inicio</string>
     <string name="dataFiltrar">Fecha</string>
@@ -110,7 +110,7 @@
     <string name="facebook_app_id">850446215915012</string>
     <string name="fb_login_protocol_scheme">fb850446215915012</string>
     <string name="facebook_client_token">d2fe733d766ef258b456bfcbbdb78de2</string>
-    <string name="profile_logout_button">Tancar Sessió</string>
+    <string name="profile_logout_button">Cerrar Sesión</string>
 
     <string name="shareOwnTrip">He creado un nuevo trayecto en ElektroGo para el día %1$s a las %2$s con origen %3$s y destinación %4$s. Solo quedan %5$s asientos libres! \n\nÚnete a mi a traves de la aplicación: https://marccastellsdostal.wixsite.com/elektrogo</string>
     <string name="shareTrip">He encontrado un trayecto en la app de ElektroGo para el día %1$s a las %2$s con origen %3$s y destinación %4$s. Solo quedan %5$s asientos libres! \n\nÚnete a traves de la aplicación: https://marccastellsdostal.wixsite.com/elektrogo</string>
@@ -148,6 +148,124 @@
     <string name="encara_hi_ha">Aún hay</string>
     <string name="seients_disponibles">asientos disponibles</string>
     <string name="anfitrio">Anfitrión:</string>
+    <string name="buttonCancelTrip">Cancelar trayecto</string>
+    <string name="rao_de_cancel_lacio">Motivo</string>
+    <string name="eliminaValoracio">Elimina</string>
+    <string name="comentariValoracio">Write a comment</string>
+    <string name="ok">De acuerdo</string>
+    <string name="pregunta_difusio">Selecciona a quien quieras enviar el mensaje</string>
+    <string name="cancel">cancelar</string>
+    <string name="channel_description">Notifications coming from messages received on the chat</string>
+    <string name="next">continuar</string>
+    <string name="message_to_send">Escribe el mensaje que quieres enviar</string>
+    <string name="message_sent">mensajes enviados</string>
+    <string name="esborrarXat">Quieres borrar este chat?</string>
+    <string name="si">SI</string>
+    <string name="esborrantXat">Borrando chat</string>
+    <string name="xatNoEsborrat">Chat no borrado</string>
+    <string name="no">NO</string>
+    <string name="envia">enviar</string>
+    <string name="buscaUsuari">Buscar a...</string>
+    <string name="confirma">confirmar</string>
+    <string name="errorChatNotFound">Error, conversación no encontrada</string>
+    <string name="TripsNavMenu">Mis trayectos</string>
+    <string name="vehiclesMenu">Mis vehículos</string>
+    <string name="perfil">Perfil</string>
+    <string name="ajustos">Ajustes</string>
+    <string name="nom_d_usuari">Nombre de usuario:</string>
+    <string name="correu_electronic">Correo electrónico:</string>
+    <string name="eliminar_compte">Eliminar Cuenta</string>
+    <string name="block">Bloquear</string>
+    <string name="report">Denunciar</string>
+    <string name="deleteAccount" >Borrar cuenta</string>
+    <string name="blocked">Este usuario te ha bloqueado</string>
+    <string name="bttDenuncia">Hacer denuncia</string>
+    <string name="hintDenuncia">El  motivo de la denuncia és...</string>
+    <string name="enunciatDenuncia">Indique a continuación el motivo de la denuncia:</string>
+    <string name="channel_name">Chat</string>
+    <string name="youBlocked">Has bloqeuado este usuario</string>
+
+    <string name="verificant">Los administradores están verificando tu solicitud</string>
+    <string name="confirmation">Confirmación</string>
+
+    <string name="insertDNImage">Añade una imagen de la part frontal del carnet de conducir</string>
+    <string name="insert2DNImage">Añade una imagen de la part reversa del carnet de conducir</string>
+    <string name="sendButton">Enviar</string>
+
+    <string name="internalError">Ha habido un error con el servidor</string>
+    <string name="requiredImage">Tienes que añadir las dos imagenes antes de enviar el formulario</string>
+
+    <string name="DriverAlreadyExists">Ya estas registrado como conductor.</string>
+    <string name="DriverRequestRecived">La solicitud ha sido enviada correctamente</string>
+
+
+    <string name="buttonJoinTrip">¡Unirse al viaje!</string>
+    <string name="abandonTrip">Abandonar viaje</string>
+    <string name="errorAbandonTrip">Ha habido un error abandonando el trayecto</string>
+    <string name="MotiuCancelacio">Da un motivo y confirma</string>
+    <string name="ConfirmarButton">CONFIRMAR</string>
+    <string name="trajecteCancelat">Trayecto cancelado</string>
+    <string name="ErrorCancelarTrajecte">No se ha podido cancelar el trayecto.</string>
+    <string name="GetStationsServerTimeout">No se ha podido conectar con el servidor.</string>
+    <string name="GetStationsServerError">No se han podido obtener las estaciones de carga. ERROR:</string>
+    <string name="SanTrobat">Se han encontrado</string>
+    <string name="EstacionsDeCarrega">estaciones de carga</string>
+    <string name="Valora">Valora</string>
+    <string name="ComValorar">¿Cómo quieres valorar a</string>
+    <string name="HasValoratA">Has valorado a</string>
+    <string name="amb">con</string>
+    <string name="Estrelles">estrellas.</string>
+    <string name="NoSHaPogutValorarA">No se ha podido valorar a</string>
+    <string name="ValoracioEliminada">Has eliminado la valoración.</string>
+    <string name="ErrorEliminarValoracio">No se ha podido eliminar la valoración.</string>
+    <string name="ModificarValoracio">Modificar</string>
+    <string name="default_description">Descripción por defecto</string>
+
+
+    <string name="errorFilterTrips">Ha habido un error al intentar obtener los trayectos. Intentalo de niuevo más tarde</string>
+    <string name="invalidFieldsFilter">La hora de inicio y la fecha seleccionada son incorrectas. Indique una fecha y hora posterior a las actuales</string>
+    <string name="invalidDateFilter">La fecha seleccionada es incorrecta</string>
+    <string name="invalidTimeFilter">El intervalo de horas no es correcto. La primera hora debe ser anterior a la segunda</string>
+    <string name="errorRatings">Ha habido un error. No se ha podido obtener las valoraciones</string>
+    <string name="membersError">Ha habido un error. No se ha podido obtener los participantes del trayecto</string>
+    <string name="errorDeleteMember">No se ha podido eliminar el participante del trayecto</string>
+    <string name="addMemberDialogTitle">Añadir participante al trayecto</string>
+    <string name="memberAlreadyAdded">Ya has añadido al usuario al trayecto</string>
+    <string name="fullTripError">No se puede añadir ningún participante más. No cabe</string>
+    <string name="memberAdded">Participante añadido correctamente</string>
+    <string name="signOutSuccesfull">Se ha cerrado sessión exitosamente</string>
+    <string name="deleteAccountVerification">Estas seguro de eliminar tu cuenta?</string>
+    <string name="errorDeleteAccount">Ha habido un problema, no se ha podido eliminar la cuenta</string>
+    <string name="deleteAccountOk">Se ha eliminado la cuenta exitosamente</string>
+    <string name="noDeleteAccount">La cuenta no se ha eliminado</string>
+    <string name="selectToAdd">Seleccione un trayeto para añadir al usuario</string>
+    <string name="availableSeatsItem">asientos disponibles</string>
+    <string name="createTrip">Añadir trayecto</string>
+    <string name="noMembersYet">No hay ningún participante aún</string>
+    <string name="members">Participantes:</string>
+    <string name="airPollution">Calidad del aire:</string>
+    <string name="opneningDialog">Se estan recopilando tus trayecto. En breves se abrira una nueva ventana</string>
+
+    <string name="ActiveTrip">Activo</string>
+    <string name="FinishedTrip">Finalizado</string>
+    <string name="CancelledTrip">Cancelado</string>
+
+    <string name="month">Mes</string>
+
+    <string name="Jan">Enero</string>
+    <string name="Feb">Febrero</string>
+    <string name="Mar">Marzo</string>
+    <string name="Apr">Abril</string>
+    <string name="May">Mayo</string>
+    <string name="Jun">Junio</string>
+    <string name="Jul">Julio</string>
+    <string name="Aug">Agosto</string>
+    <string name="Sept">Septiembre</string>
+    <string name="Oct">Octubre</string>
+    <string name="Nov">Noviembre</string>
+    <string name="Dec">Diciembre</string>
+
+    <string name="tripAbandonedSuccesfully">Trayecto abandonado satisfactoriamente</string>
 
 
 </resources>

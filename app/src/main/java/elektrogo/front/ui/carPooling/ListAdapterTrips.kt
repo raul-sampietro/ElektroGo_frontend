@@ -8,6 +8,8 @@ package elektrogo.front.ui.carPooling
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +43,7 @@ class ListAdapterTrips (private val context : Activity, private val filteredList
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.filter_list_item, null)
 
+
         // TODO imageView
         val occupiedseats : TextView = view.findViewById(R.id.occupiedseats)
         val origin : TextView = view.findViewById(R.id.citynameOrigin)
@@ -48,11 +51,12 @@ class ListAdapterTrips (private val context : Activity, private val filteredList
         val startTime : TextView = view.findViewById(R.id.time)
         val date :TextView = view.findViewById(R.id.dateFiltered)
         val user : TextView = view.findViewById(R.id.username)
-
+        val state : TextView = view.findViewById(R.id.estat);
+        setState(state, position)
         val f = filteredList[position]
         val ratingPair = viewModel.getRating(f.username)
         if (ratingPair.first != 200) {
-            Toast.makeText(context, context.getString(R.string.ServerError), Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.errorRatings), Toast.LENGTH_LONG).show()
         } else renderRating(ratingPair.second!!.ratingValue, view)
         val numValorations : TextView = view.findViewById(R.id.numberValorations)
         numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
@@ -92,13 +96,31 @@ class ListAdapterTrips (private val context : Activity, private val filteredList
         else imageViewProfile.setImageResource(R.drawable.avatar)
         return view
     }
+
+    private fun setState(state: TextView, position: Int) {
+        when(filteredList[position].state) {
+            "finished" -> {
+                state.setText(R.string.FinishedTrip)
+                state.setTextColor(Color.parseColor("#006400"))
+            }
+            "cancelled" -> {
+                state.setText(R.string.CancelledTrip)
+                state.setTextColor(Color.RED)
+            }
+            else -> {
+                state.setText(R.string.ActiveTrip)
+                state.setTextColor(Color.GREEN)
+            }
+        }
+    }
+
     /**
      * @brief Metode que s'encarrega de renderitzar les estrelles que te l'usuari segons la valoracio mitjana que rep.
      * @pre
      * @post Es mostren les estrelles segons la valoracio que l'usuari te.
      */
     private fun renderRating(ratingPassed: Double, view: View?) {
-     val star1 : ImageView = view!!.findViewById(R.id.estrella1)
+        val star1 : ImageView = view!!.findViewById(R.id.estrella1)
      val star2 : ImageView = view.findViewById(R.id.estrella2)
      val star3 : ImageView = view.findViewById(R.id.estrella3)
      val star4 : ImageView = view.findViewById(R.id.estrella4)

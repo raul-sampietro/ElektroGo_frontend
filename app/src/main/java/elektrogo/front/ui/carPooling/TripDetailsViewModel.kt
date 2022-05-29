@@ -9,6 +9,7 @@ package elektrogo.front.ui.carPooling
 import androidx.lifecycle.ViewModel
 import elektrogo.front.controller.FrontendController
 import elektrogo.front.model.RatingAvg
+import elektrogo.front.model.User
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -34,5 +35,23 @@ class TripDetailsViewModel : ViewModel() {
     fun getUsersProfilePhoto(username: String): String = runBlocking {
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
+
+    fun getAirQuality(lat: Double, lon: Double): String = runBlocking {
+        return@runBlocking FrontendController.getAirQuality(lat, lon)
+    }
+
+    fun askForMembersOfATrip(id: Long): Pair<Int, ArrayList<User>> = runBlocking {
+        return@runBlocking FrontendController.getMembersByTrip(id)
+    }
+
+    fun finishTrip(id: Int): Int = runBlocking {
+        FrontendController.finishTrip(id)
+    }
+
+
+    fun abandonTrip(id: Long, username: String): Int = runBlocking{
+        return@runBlocking FrontendController.abandonTrip(id,username)
+    }
+
 
 }

@@ -71,7 +71,7 @@
     <string name="DriverVehicleAlreadyExists">Ja has creat aquest vehícle</string>
     <string name="VehicleAlreadyExists">Aquest vehícle ja existeix</string>
     <string name="WrongVehicleInfo">Ja existeix un vehícle amb la mateixa matricula però amb informació diferent</string>
-    <string name="ServerError">Hi ha hagut un error amb el servidor. Intenta-ho de nou més tard.</string>
+    <string name="ServerError">Hi ha hagut un error amb el servidor. No s\'ha pogut connectar. Intenta-ho de nou més tard.</string>
     <string name="btnValorar">Valora</string>
     <string name="valorar_usuari">Valorar Usuari</string>
 
@@ -147,6 +147,119 @@
     <string name="encara_hi_ha">Encara hi ha</string>
     <string name="seients_disponibles">seients disponibles</string>
     <string name="anfitrio">Anfitrió:</string>
+    <string name="buttonCancelTrip">Cancel·lar trajecte</string>
+    <string name="rao_de_cancel_lacio">Motiu</string>
+    <string name="eliminaValoracio">Elimina</string>
+    <string name="comentariValoracio">Escriu un comentari</string>
+    <string name="ok">D\'acord</string>
+    <string name="pregunta_difusio">Escull a qui vols enviar el missatge</string>
+    <string name="cancel">cancel·lar</string>
+    <string name="next">continuar</string>
+    <string name="message_to_send">Escriu el missatge que vols enviar</string>
+    <string name="message_sent">missatges enviats</string>
+    <string name="esborrarXat">Vols esborrar aquest xat?</string>
+    <string name="si">SI</string>
+    <string name="esborrantXat">Esborrant xat</string>
+    <string name="xatNoEsborrat">Xat no esborrat</string>
+    <string name="no">NO</string>
+    <string name="envia">enviar</string>
+    <string name="buscaUsuari">Buscar a...</string>
+    <string name="confirma">confirmar</string>
+    <string name="errorChatNotFound">Error, conversa no trobada</string>
+    <string name="TripsNavMenu">Els meus trajectes</string>
+    <string name="vehiclesMenu">Els meus vehicles</string>
+    <string name="perfil">Perfil</string>
+    <string name="ajustos">Ajustos</string>
+    <string name="nom_d_usuari">Nom d\'usuari:</string>
+    <string name="correu_electronic">Correu electrònic:</string>
+    <string name="eliminar_compte">Eliminar Compte</string>
+    <string name="block">Bloquejar</string>
+    <string name="report">Denunciar</string>
+    <string name="confirmation">Confirmació</string>
 
+    <string name="MotiuCancelacio">Dona un motiu i confirma</string>
+    <string name="ConfirmarButton">CONFIRMAR</string>
+    <string name="trajecteCancelat">Trajecte cancel·lat</string>
+    <string name="ErrorCancelarTrajecte">No s\'ha pogut canel·lar el trajecte.</string>
+    <string name="GetStationsServerTimeout">No s\'ha pogut connectar amb el servidor.</string>
+    <string name="GetStationsServerError">No s\'han pogut obtenir les estacions de càrrega. ERROR:</string>
+    <string name="SanTrobat">S\'han trobat</string>
+    <string name="EstacionsDeCarrega">estacions de càrrega</string>
+    <string name="Valora">Valora</string>
+    <string name="ComValorar">Com vols valorar a</string>
+    <string name="HasValoratA">Has valorat a</string>
+    <string name="amb">amb</string>
+    <string name="Estrelles">estrelles.</string>
+    <string name="NoSHaPogutValorarA">No s\'ha pogut valorar a</string>
+    <string name="ValoracioEliminada">Has eliminat la valoració.</string>
+    <string name="ErrorEliminarValoracio">No s\'ha pogut eliminar la valoració.</string>
+    <string name="ModificarValoracio">Modificar</string>
+    <string name="default_description">Descripció per defecte</string>
+    <string name="verificant">Els administradors estan verificant la teva sol·licitud</string>
+
+    <string name="buttonJoinTrip">Uneix-te al viatge!</string>
+    <string name="deleteAccount" >Esborrar compte</string>
+    <string name="blocked">Aquest usuari t\'ha bloquejat</string>
+    <string name="bttDenuncia">Fer denúncia</string>
+    <string name="hintDenuncia">El motiu de la denuncia és...</string>
+    <string name="enunciatDenuncia">Indica a continuació el motiu de la denúncia:</string>
+    <string name="channel_name" translatable="false">Xat</string>
+    <string name="youBlocked">Has bloquejat aquest usuari</string>
+    <string name="abandonTrip">Abandonar trajecte</string>
+    <string name="errorAbandonTrip">Hi ha hagut un error abandonant el trajecte</string>
+
+    <string name="insertDNImage">Insereix una imatge de la part frontal del carnet de conduir</string>
+    <string name="insert2DNImage">Insereix una imatge de la part reversa del carnet de conduir</string>
+    <string name="sendButton">Enviar</string>
+    <string name="internalError">Hi ha hagut un error amb el servidor</string>
+    <string name="requiredImage">Has d\'afegir les dues imatges abans d\'enviar</string>
+
+    <string name="DriverAlreadyExists">Ja estas registrat com a conductor.</string>
+    <string name="DriverRequestRecived">La sol·licitud ha estat enviada correctament</string>
+
+
+    <string name="errorFilterTrips">Hi ha hagut un error al servidor intentant obtenir els trajectes. Intenta-ho més tard</string>
+    <string name="invalidFieldsFilter">L\'hora d\'inici i la data seleccionades son incorrectes. Indiqui una data i hora posteriors a les actuals</string>
+    <string name="invalidDateFilter">La data seleccionada és incorrecta</string>
+    <string name="invalidTimeFilter">El rang d\'hores no és correcte. La primera hora donada ha de ser anterior a la segona</string>
+    <string name="errorRatings">Hi ha hagut un error. No s\'han pogut obtenir les valoracions</string>
+    <string name="membersError">Hi ha hagut un error. No s\'han pogut obtenir els participants del trajecte</string>
+    <string name="errorDeleteMember">No s\'ha pogut eliminar el participant del trajecte</string>
+    <string name="addMemberDialogTitle">Afegir usuari a un trajecte</string>
+    <string name="memberAlreadyAdded">Ja has afegit aquest usuari al trajecte seleccionat</string>
+    <string name="fullTripError">No es pot afegir cap participant més. No hi cap</string>
+    <string name="memberAdded">Participant afegit correctament</string>
+    <string name="signOutSuccesfull">S\'ha tancat la sessió exitosament</string>
+    <string name="deleteAccountVerification">Estas segur d\'esborrar el teu compte?</string>
+    <string name="errorDeleteAccount">Hi ha hagut un problema. No s\'ha pogut esborrar el compte</string>
+    <string name="deleteAccountOk">S\'ha esborrat el compte exitosament</string>
+    <string name="noDeleteAccount">El compte no s\'ha esborrat</string>
+    <string name="selectToAdd">Selecciona un trajecte en el qual afegir al usuari</string>
+    <string name="availableSeatsItem">seients disponibles</string>
+    <string name="createTrip">Afegir trajecte</string>
+    <string name="noMembersYet">No hi ha cap participant encara</string>
+    <string name="members">Participants:</string>
+    <string name="airPollution">Qualitat del aire:</string>
+    <string name="opneningDialog">S\'esta cercant els trajectes. En breu s\'obrirà una finestra per tal d\'afegir el particiant</string>
+
+    <string name="ActiveTrip">Actiu</string>
+    <string name="FinishedTrip">Finalitzat</string>
+    <string name="CancelledTrip">Cancel·lat</string>
+
+    <string name="month">Mes</string>
+    <string name="Jan">Gener</string>
+    <string name="Feb">Febrer</string>
+    <string name="Mar">Març</string>
+    <string name="Apr">Abril</string>
+    <string name="May">Maig</string>
+    <string name="Jun">Juny</string>
+    <string name="Jul">Juliol</string>
+    <string name="Aug">Agost</string>
+    <string name="Sept">Setembre</string>
+    <string name="Oct">Octubre</string>
+    <string name="Nov">Novembre</string>
+    <string name="Dec">Decembre</string>
+
+    <string name="tripAbandonedSuccesfully">Trajecte abandonat satisfactoriament</string>
 
 </resources>

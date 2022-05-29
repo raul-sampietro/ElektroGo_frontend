@@ -176,12 +176,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ListView
-            android:id="@+id/filterListView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            tools:listitem="@layout/filter_list_item">
+            <ListView
+                android:id="@+id/filterListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                tools:listitem="@layout/filter_list_item">
 
             </ListView>
 
@@ -192,7 +192,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="16dp"
-                android:contentDescription="Afegir trajecte"
+                android:contentDescription="@string/createTrip"
                 app:srcCompat="@drawable/ic_add_24"
                 app:backgroundTint="@color/green_logo"/>
 

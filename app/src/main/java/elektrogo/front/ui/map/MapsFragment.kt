@@ -216,14 +216,13 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         val status = AllChargingStations.getLastStatus()
 
         if (status != 200) { // NOT OK
-            if (status == -1) Toast.makeText(activity, "No s'ha pogut connectar amb el servidor", Toast.LENGTH_LONG).show()
-            else Toast.makeText(activity, "No s'han pogut obtenir les estacions de càrrega. ERROR: $status", Toast.LENGTH_LONG).show()
-            //Toast.makeText(activity, "${AllChargingStations.getAllStations()}", Toast.LENGTH_LONG).show()
+            if (status == -1) Toast.makeText(activity, getString(R.string.GetStationsServerTimeout), Toast.LENGTH_LONG).show()
+            else Toast.makeText(activity, getString(R.string.GetStationsServerError) + " $status", Toast.LENGTH_LONG).show()
         }
         else { // OK
 
             val stations = AllChargingStations.getAllStations()
-            Toast.makeText(activity, "S'han trobat ${stations.size} estacions de càrrega", Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, getString(R.string.SanTrobat) + " ${stations.size} " + getString(R.string.EstacionsDeCarrega), Toast.LENGTH_LONG).show()
 
             for ((id, stat) in stations) {
                 mMap.addMarker(
@@ -327,7 +326,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
                     mMap.moveCamera(CameraUpdateFactory.zoomTo(17.0f))
                     mMap.addMarker(MarkerOptions().position(latLng).title(place.name))
-                } else Toast.makeText(context, "hi ha hagut un error", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(context, getString(R.string.errorOnLocation), Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(status: Status) {

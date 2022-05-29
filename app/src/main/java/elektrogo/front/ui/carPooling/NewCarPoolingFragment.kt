@@ -21,7 +21,6 @@ import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.AddressComponent
-import com.google.android.libraries.places.api.model.AddressComponents
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -29,11 +28,9 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.CarPooling
-import io.ktor.http.*
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -279,8 +276,8 @@ class NewCarPoolingFragment() : Fragment() {
                 val hour = selectedHour.text.toString() + ":00"
                 var cancelDate: LocalDate = LocalDate.parse(dataJSON!!, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusDays(1)
                 var newCarPoolingInfo = CarPooling(null, dataJSON,hour, dropSeats.selectedItem.toString().toInt(),
-                    1, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
-                    SessionController.getUsername(requireContext()), cancelDate.toString(), latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
+                    0, restDescription.text.toString(), detailsDescription.text.toString(), dropVehicles.selectedItem.toString(), originName, destinationName,
+                    SessionController.getUsername(requireContext()), cancelDate.toString(), "current", latLngOrigin!!.latitude.toDouble(), latLngOrigin!!.longitude.toDouble(),
                     latLngDestination!!.latitude.toDouble(), latLngDestination!!.longitude.toDouble())
 
                 Log.i("INFO VEHICLE:", newCarPoolingInfo.toString())
@@ -288,7 +285,7 @@ class NewCarPoolingFragment() : Fragment() {
                 val status = viewModel.saveCarpooling(newCarPoolingInfo)
                 if (status == 200){
                     Toast.makeText(context, resources.getString(R.string.savedCarpooling),Toast.LENGTH_SHORT).show()
-                    fragmentManager?.popBackStack()
+                    requireActivity().finish()
                 } else Toast.makeText(context, resources.getString(R.string.errorCarpooling),Toast.LENGTH_SHORT).show()
 
             }
@@ -317,12 +314,19 @@ class NewCarPoolingFragment() : Fragment() {
         autocompleteSupportFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 var addressList : List<AddressComponent> = place.addressComponents.asList()
+                Log.i("address", place.addressComponents.toString())
                 var addressNumber : String? = null
                 var addressFirst : String = ""
                 var addressSecond : String = ""
                 var hasFirst : Boolean = false
+                var hasSecond : Boolean = false
                 var i : AddressComponent
                 for (i in addressList) {
+                    if (i == addressList[0]) {
+                        Log.i("address", "soy el primero")
+                        hasFirst=true
+                        addressFirst = i.name
+                    }
                     if (i.types[0].equals("street_number")) {
                         addressNumber = i.name
                     }
@@ -331,18 +335,27 @@ class NewCarPoolingFragment() : Fragment() {
                         hasFirst=true
                     }
                     else if (i.types[0].equals("locality")){
-                        if(hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            if (addressFirst != i.name) {
+                                addressSecond = i.name
+                                hasSecond = true
+                            }
+                        }
                         else addressFirst = i.name
                     }
                     else if (i.types[0].equals("administrative_area_level_2")) {
-                        if(!hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            if(!hasSecond) addressSecond = i.name
+                        }
+                        else addressFirst= i.name
                     }
                 }
 
                 originText.error = null
                 latLngOrigin = place.latLng
                 originName = addressFirst
-                if (addressFirst != addressSecond){
+                Log.i("address2", addressSecond)
+                if (addressFirst != addressSecond && addressSecond!=""){
                     if(addressNumber != null) {
                         originName += " "
                         originName += addressNumber
@@ -361,13 +374,18 @@ class NewCarPoolingFragment() : Fragment() {
         autocompleteSupportFragment2.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
                 var addressList : List<AddressComponent> = place.addressComponents.asList()
-
                 var addressNumber : String? = null
                 var addressFirst : String = ""
                 var addressSecond : String = ""
                 var hasFirst : Boolean = false
+                var hasSecond : Boolean = false
                 var i : AddressComponent
                 for (i in addressList) {
+                    if (i == addressList[0]) {
+                        Log.i("address", "soy el primero")
+                        hasFirst=true
+                        addressFirst = i.name
+                    }
                     if (i.types[0].equals("street_number")) {
                         addressNumber = i.name
                     }
@@ -376,11 +394,19 @@ class NewCarPoolingFragment() : Fragment() {
                         hasFirst=true
                     }
                     else if (i.types[0].equals("locality")){
-                        if(hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            if (addressFirst != i.name) {
+                                addressSecond = i.name
+                                hasSecond = true
+                            }
+                        }
                         else addressFirst = i.name
                     }
                     else if (i.types[0].equals("administrative_area_level_2")) {
-                        if(!hasFirst) addressSecond = i.name
+                        if(hasFirst) {
+                            if(!hasSecond) addressSecond = i.name
+                        }
+                        else addressFirst= i.name
                     }
                 }
 
@@ -388,7 +414,8 @@ class NewCarPoolingFragment() : Fragment() {
                 destinationText.error = null
                 latLngDestination = place.latLng
                 destinationName = addressFirst
-                if (addressFirst != addressSecond){
+                Log.i("address2", addressSecond)
+                if (addressFirst != addressSecond && addressSecond!=""){
                     if(addressNumber != null) {
                         destinationName += " "
                         destinationName += addressNumber
