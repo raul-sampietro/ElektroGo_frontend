@@ -449,7 +449,7 @@ tools:context=".ui.carPooling.TripDetails">
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/green_logo"
-                android:text="Finalitzar trajecte"
+                android:text="@string/finalitzar_trajecte"
                 tools:ignore="TextContrastCheck" />
 
         </LinearLayout>

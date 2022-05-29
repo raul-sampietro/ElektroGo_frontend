@@ -266,6 +266,7 @@
     <string name="preguntaEsborrarVehicle">Quiere eliminar el vehículo con matrícula</string>
     <string name="vehicleErased">El vehículo ha sido eliminado</string>
     <string name="profile_my_trips">Mis trayectos</string>
+    <string name="finalitzar_trajecte">Finalizar trayecto</string>
 
 
 </resources>
