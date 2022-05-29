@@ -162,7 +162,6 @@
     <string name="esborrarXat">Quieres borrar este chat?</string>
     <string name="si">SI</string>
     <string name="esborrantXat">Borrando chat</string>
-    <string name="xatNoEsborrat">Chat no borrado</string>
     <string name="no">NO</string>
     <string name="envia">enviar</string>
     <string name="buscaUsuari">Buscar a...</string>
@@ -264,6 +263,9 @@
     <string name="Dec">Diciembre</string>
 
     <string name="tripAbandonedSuccesfully">Trayecto abandonado satisfactoriamente</string>
+    <string name="preguntaEsborrarVehicle">Quiere eliminar el vehículo con matrícula</string>
+    <string name="vehicleErased">El vehículo ha sido eliminado</string>
+    <string name="profile_my_trips">Mis trayectos</string>
 
 
 </resources>

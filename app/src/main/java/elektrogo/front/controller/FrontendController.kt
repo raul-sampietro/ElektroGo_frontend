@@ -217,7 +217,6 @@ object FrontendController {
         val stream = ByteArrayOutputStream()
         frontImage.compress(Bitmap.CompressFormat.PNG, 1, stream)
         val image = stream.toByteArray()
-        // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
             url = "${URL_DRIVERS}/${username}/imageFront",
             formData = formData {
