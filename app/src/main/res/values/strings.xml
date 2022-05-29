@@ -217,8 +217,6 @@
     <string name="ErrorCancelarTrajecte">No s\'ha pogut canel·lar el trajecte.</string>
     <string name="GetStationsServerTimeout">No s\'ha pogut connectar amb el servidor.</string>
     <string name="GetStationsServerError">No s\'han pogut obtenir les estacions de càrrega. ERROR:</string>
-    <string name="SanTrobat">S\'han trobat</string>
-    <string name="EstacionsDeCarrega">estacions de càrrega</string>
     <string name="Valora">Valora</string>
     <string name="ComValorar">Com vols valorar a</string>
     <string name="HasValoratA">Has valorat a</string>

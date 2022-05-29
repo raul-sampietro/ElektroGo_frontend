@@ -222,7 +222,6 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
         else { // OK
 
             val stations = AllChargingStations.getAllStations()
-            Toast.makeText(activity, getString(R.string.SanTrobat) + " ${stations.size} " + getString(R.string.EstacionsDeCarrega), Toast.LENGTH_LONG).show()
 
             for ((id, stat) in stations) {
                 mMap.addMarker(

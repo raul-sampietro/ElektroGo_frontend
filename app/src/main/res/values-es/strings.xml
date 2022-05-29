@@ -208,8 +208,6 @@
     <string name="ErrorCancelarTrajecte">No se ha podido cancelar el trayecto.</string>
     <string name="GetStationsServerTimeout">No se ha podido conectar con el servidor.</string>
     <string name="GetStationsServerError">No se han podido obtener las estaciones de carga. ERROR:</string>
-    <string name="SanTrobat">Se han encontrado</string>
-    <string name="EstacionsDeCarrega">estaciones de carga</string>
     <string name="Valora">Valora</string>
     <string name="ComValorar">¿Cómo quieres valorar a</string>
     <string name="HasValoratA">Has valorado a</string>

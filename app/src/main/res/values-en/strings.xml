@@ -198,8 +198,6 @@
     <string name="ErrorCancelarTrajecte">The trip could not be cancelled.</string>
     <string name="GetStationsServerTimeout">Unable to connect to the server.</string>
     <string name="GetStationsServerError">Failed to get charging stations. ERROR:</string>
-    <string name="SanTrobat">Found</string>
-    <string name="EstacionsDeCarrega">charging stations</string>
     <string name="Valora">Rate</string>
     <string name="ComValorar">How will your rate</string>
     <string name="HasValoratA">You rated</string>
