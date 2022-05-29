@@ -265,5 +265,7 @@
     <string name="Nov">Noviembre</string>
     <string name="Dec">Diciembre</string>
 
+    <string name="tripAbandonedSuccesfully">Trayecto abandonado satisfactoriamente</string>
+
 
 </resources>

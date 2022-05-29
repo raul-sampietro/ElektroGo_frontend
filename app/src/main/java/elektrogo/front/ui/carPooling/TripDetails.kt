@@ -203,6 +203,11 @@ class TripDetails : AppCompatActivity() {
                     }
                     listView.adapter = MembersListAdapter(this as Activity, memberListAux,id, trip)
                     (btnCancel.parent as ViewManager).removeView(btnCancel)
+                    Toast.makeText(
+                        this,
+                        R.string.tripAbandonedSuccesfully,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 

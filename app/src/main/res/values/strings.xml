@@ -264,6 +264,8 @@
     <string name="FinishedTrip">Finalitzat</string>
     <string name="CancelledTrip">Cancelled</string>
 
+    <string name="tripAbandonedSuccesfully">Trip abandoned successfully</string>
+
 
 
 </resources>
