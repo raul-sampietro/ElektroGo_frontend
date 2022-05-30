@@ -267,5 +267,12 @@
     <string name="finalitzar_trajecte">Finish trip</string>
     <string name="errorChat">Something went wrong, try it later on</string>
 
+    <string name="Good">Good</string>
+    <string name="Mid">Mid</string>
+    <string name="Bad">Bad</string>
+    <string name="error">Error</string>
+
+    <string name="Loading">Loading</string>
+
 
 </resources>

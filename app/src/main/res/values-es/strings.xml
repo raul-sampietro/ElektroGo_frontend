@@ -268,5 +268,9 @@
     <string name="finalitzar_trajecte">Finalizar trayecto</string>
     <string name="errorChat">Ha habido un error, intentelo de nuevo</string>
 
-
+    <string name="Good">Buena</string>
+    <string name="Mid">Media</string>
+    <string name="Bad">Mala</string>
+    <string name="error">Error</string>
+    <string name="Loading">Cargando</string>
 </resources>
