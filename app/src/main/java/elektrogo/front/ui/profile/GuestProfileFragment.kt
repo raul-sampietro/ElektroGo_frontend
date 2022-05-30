@@ -159,6 +159,8 @@ class GuestProfileFragment : Fragment() {
             if (ratingPair.first != 200) {
                 Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
             } else {
+                val numValorations : TextView = view.findViewById(R.id.numRatesGuest)
+                numValorations.text = "(${ratingPair.second!!.numberOfRatings})"
                 val star1: ImageView = view.findViewById(R.id.estrella1)
                 val star2: ImageView = view.findViewById(R.id.estrella2)
                 val star3: ImageView = view.findViewById(R.id.estrella3)
