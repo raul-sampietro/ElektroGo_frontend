@@ -577,7 +577,7 @@ object FrontendController {
         } else httpResponse.receive()
     }
 
-    suspend fun Block(username: String, userBlock: String): Boolean {
+    suspend fun block(username: String, userBlock: String): Boolean {
         val httpResponse : HttpResponse = client.post("${URL_BASE}/blocks/${username}/block/${userBlock}")
         return httpResponse.status.value == 200
     }

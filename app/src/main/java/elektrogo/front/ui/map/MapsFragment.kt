@@ -101,7 +101,7 @@ class MapsFragment(mainActivity: MainActivity) : Fragment() {
 
     /**
      * @brief Metode executat un cop el mapa s'ha creat.
-     * @param GoogleMap instancia de GoogleMap, adquirida gracies a la connexio amb l'API.
+     * @param googleMap instancia de GoogleMap, adquirida gracies a la connexio amb l'API.
      * @pre el metode onCreateView() s'ha executat sense problemes
      * @post Es mostra el mapa amb l'opcio de geolocalitzacio. El mapa esta centrat primerament en la ubicacio actual aproximada del dispositiu si els permissos estan garantits.
      */
