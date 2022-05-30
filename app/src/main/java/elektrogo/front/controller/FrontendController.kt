@@ -488,7 +488,7 @@ object FrontendController {
         longitudeDestination: Double,
         drivingRange: Int
     ): ArrayList<Double> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}/route/calculate") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}/routes/calculate") {
             parameter("latO", latitudeOrigin)
             parameter("longO", longitudeOrigin)
             parameter("latD", latitudeDestination)
