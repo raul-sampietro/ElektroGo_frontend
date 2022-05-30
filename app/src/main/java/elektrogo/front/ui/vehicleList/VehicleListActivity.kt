@@ -27,6 +27,7 @@ class VehicleListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_vehicle_list)
         toolbar2  = findViewById(R.id.toolbar_main)
         toolbar2.title= getString(R.string.llistaVehicles)
+        toolbar2.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(toolbar2)
 
 

@@ -261,6 +261,9 @@
 
 
     <string name="tripAbandonedSuccesfully">Trip abandoned successfully</string>
+    <string name="valorarMenu">Rate</string>
+    <string name="denunciarMenu">Report</string>
+    <string name="bloquejarMenu">Block</string>
     <string name="preguntaEsborrarVehicle">Do you want to remove the vehicle with number plate</string>
     <string name="vehicleErased">Vehicle has been erased</string>
     <string name="profile_my_trips">My trips</string>

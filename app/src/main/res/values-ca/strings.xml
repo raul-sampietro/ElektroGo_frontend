@@ -258,6 +258,9 @@
     <string name="Dec">Decembre</string>
 
     <string name="tripAbandonedSuccesfully">Trajecte abandonat satisfactoriament</string>
+    <string name="valorarMenu">Valorar</string>
+    <string name="denunciarMenu">Denunciar</string>
+    <string name="bloquejarMenu">Bloquejar</string>
     <string name="preguntaEsborrarVehicle">Vols esborrar el vehicle amb matrícula</string>
     <string name="vehicleErased">El vehicle ha estat esborrat</string>
     <string name="profile_my_trips">Els meus trajectes</string>

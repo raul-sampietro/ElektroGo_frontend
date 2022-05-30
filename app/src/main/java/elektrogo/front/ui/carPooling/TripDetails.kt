@@ -55,6 +55,7 @@ class TripDetails : AppCompatActivity() {
         setContentView(R.layout.trip_details)
         toolbar2  = findViewById(R.id.toolbar_main)
         toolbar2.title= getString(R.string.detailsLabel)
+        toolbar2.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(toolbar2)
 
         val tripSerialized = intent.getStringExtra("Trip")

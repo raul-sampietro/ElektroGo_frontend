@@ -262,6 +262,9 @@
     <string name="CancelledTrip">Cancelled</string>
 
     <string name="tripAbandonedSuccesfully">Trip abandoned successfully</string>
+    <string name="valorarMenu">Valorar</string>
+    <string name="denunciarMenu">Denunciar</string>
+    <string name="bloquejarMenu">Bloquejar</string>
     <string name="vehicleErased">El vehicle ha estat esborrat</string>
     <string name="preguntaEsborrarVehicle">Vols esborrar el vehicle amb matrícula</string>
     <string name="finalitzar_trajecte">Finalitzar trajecte</string>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuProfile"
+        android:iconTint="@color/white"
+        android:icon="@drawable/more_vert"
+        app:showAsAction="ifRoom"
+        android:title="actions">
+
+        <menu>
+            <item
+                android:title="@string/valorarMenu"
+                android:id="@+id/valorar"
+                android:icon="@drawable/ic_baseline_star_outline_24"
+                app:showAsAction="always" />
+            <item
+                android:title="@string/denunciarMenu"
+                android:id="@+id/denunciar"
+                android:icon="@drawable/ic_baseline_report_24"
+                app:showAsAction="always" />
+            <item
+                android:title="@string/bloquejarMenu"
+                android:id="@+id/bloquejar"
+                android:icon="@drawable/ic_block"
+                app:showAsAction="always" />
+
+        </menu>
+    </item>
+
+
+</menu>

@@ -129,11 +129,9 @@
                 android:padding="8dp"
                 android:src="@drawable/ic_baseline_send_24"
                 android:backgroundTint="@android:color/transparent"
-                android:background="@android:color/transparent"
                 android:id="@+id/sendMessage"
                 android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                app:tint="@color/white">
+                android:scaleType="centerCrop">
 
             </ImageButton>
 

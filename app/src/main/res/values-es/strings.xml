@@ -262,6 +262,9 @@
     <string name="Dec">Diciembre</string>
 
     <string name="tripAbandonedSuccesfully">Trayecto abandonado satisfactoriamente</string>
+    <string name="valorarMenu">Valorar</string>
+    <string name="denunciarMenu">Denunciar</string>
+    <string name="bloquejarMenu">Bloquear</string>
     <string name="preguntaEsborrarVehicle">Quiere eliminar el vehículo con matrícula</string>
     <string name="vehicleErased">El vehículo ha sido eliminado</string>
     <string name="profile_my_trips">Mis trayectos</string>
