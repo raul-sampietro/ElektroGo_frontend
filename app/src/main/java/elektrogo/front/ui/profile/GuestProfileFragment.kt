@@ -261,4 +261,5 @@ class GuestProfileFragment : Fragment() {
 
         return view
     }
+
 }

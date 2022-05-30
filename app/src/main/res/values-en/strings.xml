@@ -265,6 +265,9 @@
 
 
     <string name="tripAbandonedSuccesfully">Trip abandoned successfully</string>
+    <string name="valorarMenu">Rate</string>
+    <string name="denunciarMenu">Report</string>
+    <string name="bloquejarMenu">Block</string>
 
 
 </resources>

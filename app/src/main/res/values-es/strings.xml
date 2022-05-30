@@ -266,6 +266,9 @@
     <string name="Dec">Diciembre</string>
 
     <string name="tripAbandonedSuccesfully">Trayecto abandonado satisfactoriamente</string>
+    <string name="valorarMenu">Valorar</string>
+    <string name="denunciarMenu">Denunciar</string>
+    <string name="bloquejarMenu">Bloquear</string>
 
 
 </resources>
