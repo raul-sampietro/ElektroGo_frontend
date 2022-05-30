@@ -270,4 +270,6 @@
     <string name="error">Error</string>
 
     <string name="Loading">Carregant</string>
+    <string name="youReported">Has reportat a</string>
+    <string name="youCouldNotReport">No s\'ha pogut reportar a</string>
 </resources>

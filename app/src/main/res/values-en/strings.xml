@@ -273,6 +273,8 @@
     <string name="error">Error</string>
 
     <string name="Loading">Loading</string>
+    <string name="youReported">You have reported</string>
+    <string name="youCouldNotReport">It was not possible to report</string>
 
 
 </resources>
