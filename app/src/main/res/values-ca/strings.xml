@@ -262,5 +262,6 @@
     <string name="vehicleErased">El vehicle ha estat esborrat</string>
     <string name="profile_my_trips">Els meus trajectes</string>
     <string name="finalitzar_trajecte">Finalitzar trajecte</string>
+    <string name="errorChat">Hi ha hagut un error, intenta-ho més tard</string>
 
 </resources>

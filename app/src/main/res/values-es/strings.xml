@@ -155,7 +155,6 @@
     <string name="ok">De acuerdo</string>
     <string name="pregunta_difusio">Selecciona a quien quieras enviar el mensaje</string>
     <string name="cancel">cancelar</string>
-    <string name="channel_description">Notifications coming from messages received on the chat</string>
     <string name="next">continuar</string>
     <string name="message_to_send">Escribe el mensaje que quieres enviar</string>
     <string name="message_sent">mensajes enviados</string>
@@ -267,6 +266,7 @@
     <string name="vehicleErased">El vehículo ha sido eliminado</string>
     <string name="profile_my_trips">Mis trayectos</string>
     <string name="finalitzar_trajecte">Finalizar trayecto</string>
+    <string name="errorChat">Ha habido un error, intentelo de nuevo</string>
 
 
 </resources>

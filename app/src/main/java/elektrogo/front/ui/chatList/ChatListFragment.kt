@@ -76,7 +76,7 @@ class ChatListFragment() : Fragment() {
 
         val result = viewModel.getChatList(username)
         if (result.first != 200) {
-            Toast.makeText(context, "Hi ha hagut un error, intenta-ho més tard", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.errorChat, Toast.LENGTH_LONG).show()
             chatList = ArrayList<String>()
         }
         else {
