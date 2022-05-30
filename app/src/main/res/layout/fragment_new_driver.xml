@@ -24,11 +24,12 @@
                 <ImageView
                     android:id="@+id/frontImage"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="175dp"
                     android:layout_marginTop="10dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_image_not_supported_24" />
+                    android:src="@drawable/ic_baseline_image_not_supported_24"
+                    app:tint="@color/black" />
 
                 <Button
                     android:id="@+id/frontalButton"
@@ -41,11 +42,12 @@
                 <ImageView
                     android:id="@+id/reverseImage"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="175dp"
                     android:layout_marginTop="20dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_baseline_image_not_supported_24" />
+                    android:src="@drawable/ic_baseline_image_not_supported_24"
+                    app:tint="@color/black"/>
 
                 <Button
                     android:id="@+id/reverseButton"
