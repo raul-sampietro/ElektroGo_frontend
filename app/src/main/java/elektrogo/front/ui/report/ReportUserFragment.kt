@@ -58,7 +58,7 @@ class ReportUserFragment : Fragment() {
                 textReport.setError(resources.getString(R.string.ObligatoryField))
             }
             else {
-                val rep = Report(userWhoRates, reportedUser, "mal")
+                val rep = Report(userWhoRates, reportedUser, textReport.text.toString())
                 var status = -1
                 try { status = runBlocking{ FrontendController.reportUser(rep)} }
                 catch (e: Exception) {}
