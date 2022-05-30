@@ -66,7 +66,6 @@ class ProfileActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.valorar -> {
-                Toast.makeText(this, "item1", Toast.LENGTH_LONG).show()
                 val valorarDialog = ValorarUsuariDialog()
 
                 val bundle = Bundle()
@@ -83,7 +82,6 @@ class ProfileActivity : AppCompatActivity() {
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.profile_container, reportUserFragment)
                 transaction.commit()
-                Toast.makeText(this, "item2", Toast.LENGTH_LONG).show()
 
             }
             R.id.bloquejar -> {
@@ -92,7 +90,6 @@ class ProfileActivity : AppCompatActivity() {
                     viewModel.blockUser(userActual, user)
                 }
                 loadGuestFragment(user)
-                Toast.makeText(this, "item3", Toast.LENGTH_LONG).show()
             }
         }
         return true
