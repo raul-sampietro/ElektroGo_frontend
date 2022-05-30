@@ -58,13 +58,13 @@ class ReportUserFragment : Fragment() {
                 textReport.setError(resources.getString(R.string.ObligatoryField))
             }
             else {
-                val rep = Report(userWhoRates, reportedUser, "mal")
+                val rep = Report(userWhoRates, reportedUser, textReport.text.toString())
                 var status = -1
                 try { status = runBlocking{ FrontendController.reportUser(rep)} }
                 catch (e: Exception) {}
 
-                if (status == 200) Toast.makeText(activity, "Has reportat a $reportedUser", Toast.LENGTH_SHORT).show()
-                else Toast.makeText(activity, "No s'ha pogut reportar a $reportedUser.", Toast.LENGTH_SHORT).show()
+                if (status == 200) Toast.makeText(activity, getString(R.string.youReported) + " $reportedUser", Toast.LENGTH_SHORT).show()
+                else Toast.makeText(activity, getString(R.string.youCouldNotReport) + " $reportedUser.", Toast.LENGTH_SHORT).show()
 
 
             }

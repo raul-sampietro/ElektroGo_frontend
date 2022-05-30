@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     // TODO 3 hardcoded strings
                     builder.setMessage(getString(R.string.deleteAccountVerification))
                     builder.apply {
-                        setPositiveButton("SI",
+                        setPositiveButton(R.string.si,
                             DialogInterface.OnClickListener { dialog, id ->
                                 val status = runBlocking { FrontendController.deleteUser(SessionController.getUsername(context)) }
                                 if (status != 200)  Toast.makeText(context,getString(R.string.errorDeleteAccount), Toast.LENGTH_SHORT).show()
@@ -244,7 +244,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                                     finish();
                                 }
                             })
-                        setNegativeButton("NO",
+                        setNegativeButton(R.string.no,
                             DialogInterface.OnClickListener { dialog, id ->
                                 Toast.makeText(context, getString(R.string.noDeleteAccount), Toast.LENGTH_LONG).show()
                             })

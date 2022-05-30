@@ -59,7 +59,6 @@ class ChatListAdapter(private val context : Activity, private val chatList : Arr
                         })
                     setNegativeButton(R.string.no,
                         DialogInterface.OnClickListener { dialog, id ->
-                            Toast.makeText(parent.context, R.string.xatNoEsborrat, Toast.LENGTH_LONG).show()
                         })
                 }
                 // Create the AlertDialog

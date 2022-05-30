@@ -155,14 +155,12 @@
     <string name="ok">De acuerdo</string>
     <string name="pregunta_difusio">Selecciona a quien quieras enviar el mensaje</string>
     <string name="cancel">cancelar</string>
-    <string name="channel_description">Notifications coming from messages received on the chat</string>
     <string name="next">continuar</string>
     <string name="message_to_send">Escribe el mensaje que quieres enviar</string>
     <string name="message_sent">mensajes enviados</string>
     <string name="esborrarXat">Quieres borrar este chat?</string>
     <string name="si">SI</string>
     <string name="esborrantXat">Borrando chat</string>
-    <string name="xatNoEsborrat">Chat no borrado</string>
     <string name="no">NO</string>
     <string name="envia">enviar</string>
     <string name="buscaUsuari">Buscar a...</string>
@@ -208,8 +206,6 @@
     <string name="ErrorCancelarTrajecte">No se ha podido cancelar el trayecto.</string>
     <string name="GetStationsServerTimeout">No se ha podido conectar con el servidor.</string>
     <string name="GetStationsServerError">No se han podido obtener las estaciones de carga. ERROR:</string>
-    <string name="SanTrobat">Se han encontrado</string>
-    <string name="EstacionsDeCarrega">estaciones de carga</string>
     <string name="Valora">Valora</string>
     <string name="ComValorar">¿Cómo quieres valorar a</string>
     <string name="HasValoratA">Has valorado a</string>
@@ -269,6 +265,17 @@
     <string name="valorarMenu">Valorar</string>
     <string name="denunciarMenu">Denunciar</string>
     <string name="bloquejarMenu">Bloquear</string>
+    <string name="preguntaEsborrarVehicle">Quiere eliminar el vehículo con matrícula</string>
+    <string name="vehicleErased">El vehículo ha sido eliminado</string>
+    <string name="profile_my_trips">Mis trayectos</string>
+    <string name="finalitzar_trajecte">Finalizar trayecto</string>
+    <string name="errorChat">Ha habido un error, intentelo de nuevo</string>
 
-
+    <string name="Good">Buena</string>
+    <string name="Mid">Media</string>
+    <string name="Bad">Mala</string>
+    <string name="error">Error</string>
+    <string name="Loading">Cargando</string>
+    <string name="youReported">Has reportado a</string>
+    <string name="youCouldNotReport">No se ha podido denunciar a</string>
 </resources>

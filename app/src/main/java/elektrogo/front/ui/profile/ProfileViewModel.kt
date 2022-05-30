@@ -33,6 +33,6 @@ class ProfileViewModel : ViewModel() {
     }
 
     fun blockUser(username: String, blockUser: String) : Boolean = runBlocking {
-        return@runBlocking FrontendController.Block(username, blockUser)
+        return@runBlocking FrontendController.block(username, blockUser)
     }
 }

@@ -27,6 +27,7 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         val view = inflater.inflate(R.layout.fragment_vehicle_list_item, null)
 
         val numberPlate : TextView = view.findViewById(R.id.listNumberPlate)
+        val verificated : ImageView = view.findViewById(R.id.vehicleVerificat)
         val brand : TextView = view.findViewById(R.id.listBrand)
         val model : TextView = view.findViewById(R.id.listModel)
         val fabricationYear : TextView = view.findViewById(R.id.listFabricationYear)
@@ -37,6 +38,8 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         val nPlate = v.numberPlate
         Picasso.get().load("http://10.4.41.58:8080/vehicles/${nPlate}/image").into(imageViewPhoto)
         numberPlate.text = nPlate
+        if (v.verification == "verified")
+            verificated.setImageResource(R.drawable.verificat)
         brand.text = v.brand
         model.text = v.model
         fabricationYear.text = v.fabricationYear.toString()
@@ -47,19 +50,17 @@ class VehicleListAdapter(private val context : Activity, private val vehicleList
         deleteVehicleButton.setOnClickListener {
             val alertDialog: AlertDialog? = parent.context.let {
                 val builder = AlertDialog.Builder(it)
-                // TODO hardcoded strings
-                builder.setMessage("Vols esborrar el vehicle amb matrícula ${v.numberPlate}?")
+                builder.setMessage(context.getString(R.string.preguntaEsborrarVehicle) + " ${v.numberPlate}?")
                 builder.apply {
-                    setPositiveButton("SI",
+                    setPositiveButton(R.string.si,
                         DialogInterface.OnClickListener { dialog, id ->
-                            Toast.makeText(parent.context, "Yes", Toast.LENGTH_LONG).show()
+                            Toast.makeText(parent.context, context.getString(R.string.vehicleErased), Toast.LENGTH_LONG).show()
                             deleteVehicle(v.numberPlate, SessionController.getUsername(parent.context))
                             val intent = Intent(parent.context, VehicleListActivity::class.java)
                             parent.context.startActivity(intent)
                         })
-                    setNegativeButton("NO",
+                    setNegativeButton(R.string.no,
                         DialogInterface.OnClickListener { dialog, id ->
-                            Toast.makeText(parent.context, "El vehicle no s'ha esborrat", Toast.LENGTH_LONG).show()
                         })
                 }
                 // Create the AlertDialog

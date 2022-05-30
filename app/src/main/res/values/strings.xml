@@ -185,7 +185,6 @@
     <string name="esborrarXat">Vols esborrar aquest xat?</string>
     <string name="si">SI</string>
     <string name="esborrantXat">Esborrant xat</string>
-    <string name="xatNoEsborrat">Xat no esborrat</string>
     <string name="no">NO</string>
     <string name="envia">enviar</string>
     <string name="buscaUsuari">Buscar a...</string>
@@ -217,8 +216,6 @@
     <string name="ErrorCancelarTrajecte">No s\'ha pogut canel·lar el trajecte.</string>
     <string name="GetStationsServerTimeout">No s\'ha pogut connectar amb el servidor.</string>
     <string name="GetStationsServerError">No s\'han pogut obtenir les estacions de càrrega. ERROR:</string>
-    <string name="SanTrobat">S\'han trobat</string>
-    <string name="EstacionsDeCarrega">estacions de càrrega</string>
     <string name="Valora">Valora</string>
     <string name="ComValorar">Com vols valorar a</string>
     <string name="HasValoratA">Has valorat a</string>
@@ -268,6 +265,18 @@
     <string name="valorarMenu">Valorar</string>
     <string name="denunciarMenu">Denunciar</string>
     <string name="bloquejarMenu">Bloquejar</string>
+    <string name="vehicleErased">El vehicle ha estat esborrat</string>
+    <string name="preguntaEsborrarVehicle">Vols esborrar el vehicle amb matrícula</string>
+    <string name="finalitzar_trajecte">Finalitzar trajecte</string>
+    <string name="errorChat">Hi ha hagut un error, intenta-ho més tard</string>
+
+    <string name="Good">Bona</string>
+    <string name="Mid">Mitjana</string>
+    <string name="Bad">Dolenta</string>
+    <string name="error">Error</string>
+    <string name="Loading">Carregant</string>
+    <string name="youReported">Has reportat a</string>
+    <string name="youCouldNotReport">No s\'ha pogut reportar a</string>
 
 
 </resources>

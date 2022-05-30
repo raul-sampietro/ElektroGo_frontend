@@ -93,14 +93,14 @@ class MyTripsFragment : Fragment() {
         }
         else {
             addEvents(result.second)
-            filteredList = TripsOnDate(result.second, date)
+            filteredList = tripsOnDate(result.second, date)
             listView.adapter = ListAdapterTrips(context as Activity, filteredList)
         }
 
         calendar.setListener(object : CompactCalendarViewListener {
             override fun onDayClick(dateClicked: Date) {
                 val localDate = dateClicked.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-                filteredList = TripsOnDate(result.second, localDate)
+                filteredList = tripsOnDate(result.second, localDate)
                 listView.adapter = ListAdapterTrips(context as Activity, filteredList)
 
             }
@@ -159,7 +159,7 @@ class MyTripsFragment : Fragment() {
         actualMonth = requireActivity().findViewById(R.id.textMonth)
     }
 
-    private fun TripsOnDate(trips: ArrayList<CarPooling>, date: LocalDate?): ArrayList<CarPooling> {
+    private fun tripsOnDate(trips: ArrayList<CarPooling>, date: LocalDate?): ArrayList<CarPooling> {
         val tripsOnDate : ArrayList<CarPooling> = ArrayList<CarPooling>()
         for (cP: CarPooling in trips) {
             val dateString = date.toString()
