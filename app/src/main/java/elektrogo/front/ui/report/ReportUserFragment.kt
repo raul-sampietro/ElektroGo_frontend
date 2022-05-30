@@ -5,6 +5,7 @@
  *
  */
 package elektrogo.front.ui.report
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -19,6 +20,7 @@ import elektrogo.front.controller.session.SessionController
 import elektrogo.front.model.Rating
 import elektrogo.front.model.Report
 import elektrogo.front.ui.profile.GuestProfileFragment
+import elektrogo.front.ui.profile.ProfileActivity
 import kotlinx.coroutines.runBlocking
 
 
@@ -63,12 +65,16 @@ class ReportUserFragment : Fragment() {
                 try { status = runBlocking{ FrontendController.reportUser(rep)} }
                 catch (e: Exception) {}
 
-                if (status == 200) Toast.makeText(activity, getString(R.string.youReported) + " $reportedUser", Toast.LENGTH_SHORT).show()
+                if (status == 200){
+                    Toast.makeText(activity, getString(R.string.youReported) + " $reportedUser", Toast.LENGTH_SHORT).show()
+                    requireActivity().finish()
+                    val intent = Intent(requireContext(), ProfileActivity::class.java)
+                    intent.putExtra("username", reportedUser)
+                    startActivity(intent)
+                }
                 else Toast.makeText(activity, getString(R.string.youCouldNotReport) + " $reportedUser.", Toast.LENGTH_SHORT).show()
 
-
             }
-
         }
     }
 
