@@ -60,6 +60,7 @@ class AddVehicle : AppCompatActivity() {
         setContentView(R.layout.activity_add_vehicle)
         toolbar2  = findViewById(R.id.toolbar_main)
         toolbar2.title= getString(R.string.AddVehicle)
+        toolbar2.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(toolbar2)
 
 

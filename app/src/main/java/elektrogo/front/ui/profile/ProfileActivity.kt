@@ -19,6 +19,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         toolbar2  = findViewById(R.id.toolbar_main)
         toolbar2.title= getString(R.string.perfil)
+        toolbar2.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(toolbar2)
         if (user == SessionController.getUsername(this)) loadFragment(ProfileFragment())
         else user?.let { loadGuestFragment(it) }

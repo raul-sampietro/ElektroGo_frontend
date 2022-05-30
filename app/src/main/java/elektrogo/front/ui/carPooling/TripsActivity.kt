@@ -22,6 +22,7 @@ class TripsActivity : AppCompatActivity() {
          fragToLoad = intent.getStringExtra("fragment").toString()
         if (fragToLoad == "NewCarPoolingFragment") {
             toolbar2  = findViewById(R.id.toolbar_main)
+            toolbar2.setTitleTextColor(getColor(R.color.white))
             toolbar2.title= getString(R.string.CrearTrajecte)
             setSupportActionBar(toolbar2)
             loadFragment(NewCarPoolingFragment())
@@ -30,6 +31,7 @@ class TripsActivity : AppCompatActivity() {
             loadFragment(MyTripsFragment())
             toolbar2  = findViewById(R.id.toolbar_main)
             toolbar2.title = getString(R.string.MyTrips)
+            toolbar2.setTitleTextColor(getColor(R.color.white))
             setSupportActionBar(toolbar2)
         }
     }
