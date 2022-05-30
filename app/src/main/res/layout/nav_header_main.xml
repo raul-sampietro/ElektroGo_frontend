@@ -48,7 +48,7 @@
                 android:autoSizeMaxTextSize="24sp"
                 android:autoSizeMinTextSize="12sp"
                 android:autoSizeTextType="uniform"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"/>
 
 

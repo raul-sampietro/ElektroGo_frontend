@@ -121,7 +121,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="20dp"
                     android:drawableRight="@drawable/clock"
-                    android:drawableTint="@color/black"
+                    android:drawableTint="@color/white"
                     android:backgroundTint="@color/green_D"
                     android:text="@string/DesdeFilter" />
 
@@ -132,7 +132,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
-                    android:drawableTint="@color/black"
+                    android:drawableTint="@color/white"
                     android:backgroundTint="@color/green_D"
                     android:drawableRight="@drawable/clock"
                     android:text="@string/FinsFilter" />
@@ -152,6 +152,7 @@
                     android:layout_height="48dp"
                     android:drawableRight="@drawable/calendar"
                     android:backgroundTint="@color/green_D"
+                    android:drawableTint="@color/white"
                     android:text="@string/DataFilter" />
 
                 <Button
