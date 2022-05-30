@@ -168,29 +168,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_marginTop="20dp"
-            android:id="@+id/profile_guest_valorar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/btnValorar" />
-
-        <Button
-            android:layout_marginTop="20dp"
-            android:id="@+id/profile_guest_denuciar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/report" />
-
-        <Button
-            android:layout_marginTop="20dp"
-            android:id="@+id/profile_guest_bloquejar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/block" />
 
         <TextView
             android:layout_marginTop="20dp"

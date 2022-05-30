@@ -38,14 +38,24 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val actualUser = SessionController.getUsername(this)
         val blockedList : ArrayList<Block> = viewModel.getBlocks(user)
         var blocked = false
         for (block in blockedList) {
-            if (block.userBlocking == SessionController.getUsername(this)) {
+            if (block.userBlocking == actualUser) {
                 blocked = true
             }
         }
-        if (user != SessionController.getUsername(this) && !blocked) {
+
+        val blockedListuser : ArrayList<Block> =  viewModel.getBlocks(actualUser)
+        var youAreBlocked = false
+        for (block in blockedListuser) {
+            if (block.userBlocking == user) {
+                youAreBlocked = true
+            }
+        }
+        if (user != SessionController.getUsername(this) && !blocked && !youAreBlocked) {
             var inflater: MenuInflater = menuInflater
             inflater.inflate(R.menu.menu_profile, menu)
             return true

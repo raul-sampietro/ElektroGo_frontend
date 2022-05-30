@@ -70,9 +70,9 @@ class GuestProfileFragment : Fragment() {
         val trophy : LinearLayout = view.findViewById(R.id.trophy)
         val textBlock : TextView = view.findViewById(R.id.block)
         val youBlocktext : TextView = view.findViewById(R.id.youBlock)
-        val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
-        val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
-        val blockButton : Button = view.findViewById(R.id.profile_guest_bloquejar)
+      //  val rateButton : Button = view.findViewById(R.id.profile_guest_valorar)
+       // val reportButton : Button = view.findViewById(R.id.profile_guest_denuciar)
+        // val blockButton : Button = view.findViewById(R.id.profile_guest_bloquejar)
 
 
         if (blockedList != null) {
@@ -85,9 +85,9 @@ class GuestProfileFragment : Fragment() {
             if (blocked) {
                 achivementText.setVisibility(View.GONE)
                 trophy.setVisibility(View.GONE)
-                rateButton.setVisibility(View.GONE)
-                reportButton.setVisibility(View.GONE)
-                blockButton.setVisibility(View.GONE)
+                //rateButton.setVisibility(View.GONE)
+                //reportButton.setVisibility(View.GONE)
+                //blockButton.setVisibility(View.GONE)
             }
             else {
                 val a : Achievement? =
@@ -129,7 +129,7 @@ class GuestProfileFragment : Fragment() {
                 }
             }
             if (youBlocked) {
-                blockButton.setVisibility(View.GONE)
+             //   blockButton.setVisibility(View.GONE)
             }
             else {
                 youBlocktext.setVisibility(View.GONE)
@@ -137,13 +137,13 @@ class GuestProfileFragment : Fragment() {
         }
         else Toast.makeText(context, "Hi ha hagut un error", Toast.LENGTH_LONG).show()
 
-       blockButton.setOnClickListener {
+    /*   blockButton.setOnClickListener {
            if (username != null) {
                viewModel.blockUser(userActual, username)
            }
-       }
+       }*/
        
-        reportButton.setOnClickListener {
+      /*  reportButton.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("guestUser", username) //passem l'usuari que es vol valorar al dialog
             val reportUserFragment = ReportUserFragment();
@@ -152,7 +152,7 @@ class GuestProfileFragment : Fragment() {
             transaction.replace(this.id, reportUserFragment)
             transaction.commit()
 
-        }
+        }*/
 
         val ratingPair = username?.let { viewModel.getRating(it) }
         if (ratingPair != null) {
@@ -248,7 +248,7 @@ class GuestProfileFragment : Fragment() {
         }
 
 
-        val btnValorar = view.findViewById<Button>(R.id.profile_guest_valorar)
+       /* val btnValorar = view.findViewById<Button>(R.id.profile_guest_valorar)
         btnValorar.setOnClickListener {
             val valorarDialog = ValorarUsuariDialog()
 
@@ -257,7 +257,7 @@ class GuestProfileFragment : Fragment() {
 
             valorarDialog.arguments = bundle
             valorarDialog.show(childFragmentManager, "confirmDialog")
-        }
+        }*/
 
         return view
     }
