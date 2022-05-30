@@ -217,7 +217,6 @@ object FrontendController {
         val stream = ByteArrayOutputStream()
         frontImage.compress(Bitmap.CompressFormat.PNG, 1, stream)
         val image = stream.toByteArray()
-        // TODO pas de parametres Http
         val response: HttpResponse = client.submitFormWithBinaryData(
             url = "${URL_DRIVERS}/${username}/imageFront",
             formData = formData {
@@ -489,7 +488,7 @@ object FrontendController {
         longitudeDestination: Double,
         drivingRange: Int
     ): ArrayList<Double> {
-        val httpResponse: HttpResponse = client.get("${URL_BASE}/route/calculate") {
+        val httpResponse: HttpResponse = client.get("${URL_BASE}/routes/calculate") {
             parameter("latO", latitudeOrigin)
             parameter("longO", longitudeOrigin)
             parameter("latD", latitudeDestination)
@@ -578,7 +577,7 @@ object FrontendController {
         } else httpResponse.receive()
     }
 
-    suspend fun Block(username: String, userBlock: String): Boolean {
+    suspend fun block(username: String, userBlock: String): Boolean {
         val httpResponse : HttpResponse = client.post("${URL_BASE}/blocks/${username}/block/${userBlock}")
         return httpResponse.status.value == 200
     }

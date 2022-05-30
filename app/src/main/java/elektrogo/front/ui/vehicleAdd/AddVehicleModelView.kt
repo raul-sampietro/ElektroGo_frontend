@@ -47,7 +47,6 @@ public class AddVehicleModelView : ViewModel() {
     /**
      * @brief S'encarrega de fer les crides a FrontendController corresponents per tal d'enviar la informacio del vehicle i la imatge d'aquest.
      * @param vehicleInfo instancia de la data class serialitzable Vehicle amb la informacio del vehicle que l'usuari ha afegit
-     * @param bitmapVehiclePic bitmap amb la imatge del vehicle corresponent al vehicleInfo.
      * @pre vehicleInfo te tots els camps del vehicle complerts excepte la imatge i bitmapVehiclePic no es null
      * @return Retorna el statusCode de la primera crida rebuda d'executar la crida amb FrontendController.
      */
