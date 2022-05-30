@@ -85,6 +85,7 @@ class TripDetails : AppCompatActivity() {
         val destinationFull : TextView = this.findViewById(R.id.destinationFull)
         val originFull : TextView = this.findViewById(R.id.originFull)
         val qaImage : ImageView = this.findViewById(R.id.airqualityImage)
+        val qaText : TextView = this.findViewById(R.id.stringQA)
 
         //Obtencio dels membres que participen en el trajecte
         val listView: ListView = this.findViewById(R.id.listMembers)
@@ -105,10 +106,22 @@ class TripDetails : AppCompatActivity() {
 
         //TODO: Crida amb el servei de RevPollution
         val qualityAir: String = viewModel.getAirQuality(latDest, lonDest)
-        if (qualityAir == "Bad") qaImage.setImageResource(R.drawable.airbad)
-        else if (qualityAir == "Mid") qaImage.setImageResource(R.drawable.airmid)
-        else if (qualityAir == "Good") qaImage.setImageResource(R.drawable.airgood)
-        else qaImage.setImageResource(R.drawable.ic_baseline_wifi_off_24)
+        if (qualityAir == "Bad"){
+            qaImage.setImageResource(R.drawable.airbad)
+            qaText.text = getString(R.string.Bad)
+        }
+        else if (qualityAir == "Mid"){
+            qaImage.setImageResource(R.drawable.airmid)
+            qaText.text = getString(R.string.Mid)
+        }
+        else if (qualityAir == "Good"){
+            qaImage.setImageResource(R.drawable.airgood)
+            qaText.text = getString(R.string.Good)
+        }
+        else{
+            qaImage.setImageResource(R.drawable.ic_baseline_wifi_off_24)
+            qaText.text = getString(R.string.error)
+        }
 
 
         usernameText.text = username

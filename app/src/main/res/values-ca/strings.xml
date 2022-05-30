@@ -264,4 +264,10 @@
     <string name="finalitzar_trajecte">Finalitzar trajecte</string>
     <string name="errorChat">Hi ha hagut un error, intenta-ho més tard</string>
 
+    <string name="Good">Bona</string>
+    <string name="Mid">Mitjana</string>
+    <string name="Bad">Dolenta</string>
+    <string name="error">Error</string>
+
+    <string name="Loading">Carregant</string>
 </resources>
