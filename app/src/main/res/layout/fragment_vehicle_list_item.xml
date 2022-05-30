@@ -126,6 +126,7 @@
             android:insetRight="0dp"
             android:insetBottom="0dp"
             app:icon="@drawable/ic_delete_24"
+            app:iconTint="@color/white"
             app:iconGravity="textStart"
             app:iconPadding="0dp" />
 

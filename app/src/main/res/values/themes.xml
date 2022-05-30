@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green_logo</item>
         <item name="colorPrimaryVariant">@color/green_f</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/green_B</item>
         <item name="colorSecondaryVariant">@color/green_A</item>
@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColorSecondary">@color/white</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

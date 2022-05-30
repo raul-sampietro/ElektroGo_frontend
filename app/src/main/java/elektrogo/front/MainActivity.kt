@@ -23,6 +23,7 @@ import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -122,6 +123,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(binding.root)
 
         toolbar2  = findViewById(R.id.toolbar_main)
+        toolbar2.setTitleTextColor(getColor(R.color.white))
         setSupportActionBar(toolbar2)
         drawer = findViewById(R.id.main)
         toggle = ActionBarDrawerToggle(this, drawer, toolbar2, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -155,22 +157,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (intent.getStringExtra("origin").isNullOrBlank()) {
             bottomNavigation.selectedItemId = R.id.mapa
             currentFragment = "MapsFragment"
+            toolbar2.title = getString(R.string.title_map)
         }
         else if (intent.getStringExtra("origin").equals("MapsFragment")) {
             bottomNavigation.selectedItemId = R.id.mapa
             currentFragment = "MapsFragment"
+            toolbar2.title = getString(R.string.title_map)
+
         }
         else if (intent.getStringExtra("origin").equals("RouteFragment")) {
             bottomNavigation.selectedItemId = R.id.ruta
             currentFragment = "RouteFragment"
+            toolbar2.title = getString(R.string.title_route)
+
         }
         else if (intent.getStringExtra("origin").equals("FilterTripsFragment")) {
             bottomNavigation.selectedItemId = R.id.pooling
             currentFragment = "FilterTripsFragment"
+            toolbar2.title = getString(R.string.title_pooling)
+
         }
         else if (intent.getStringExtra("origin").equals("ChatListFragment")) {
             bottomNavigation.selectedItemId = R.id.chat
             currentFragment = "ChatListFragment"
+            toolbar2.title = getString(R.string.ToolbarChat)
+
         }
 
 

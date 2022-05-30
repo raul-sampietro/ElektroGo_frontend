@@ -5,7 +5,7 @@
         android:title="Language"
         android:id="@+id/language"
         android:icon="@drawable/translate"
-        android:iconTint="@color/black"
+        android:iconTint="@color/white"
         app:showAsAction="always|withText" >
 
         <menu>
