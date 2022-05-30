@@ -441,6 +441,7 @@ tools:context=".ui.carPooling.TripDetails">
                 android:layout_weight="1"
                 android:backgroundTint="@color/red"
                 android:text="@string/buttonCancelTrip"
+                android:textColor="@color/white"
                 tools:ignore="TextContrastCheck" />
 
             <Button
@@ -449,6 +450,7 @@ tools:context=".ui.carPooling.TripDetails">
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/green_logo"
+                android:textColor="@color/white"
                 android:text="Finalitzar trajecte"
                 tools:ignore="TextContrastCheck" />
 
