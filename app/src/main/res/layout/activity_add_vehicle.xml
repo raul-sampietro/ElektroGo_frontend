@@ -155,7 +155,6 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="70dp"
                 android:backgroundTint="@color/black"
-
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
