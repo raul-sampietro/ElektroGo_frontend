@@ -275,4 +275,5 @@
     <string name="Loading">Carregant</string>
     <string name="youReported">Has reportat a</string>
     <string name="youCouldNotReport">No s\'ha pogut reportar a</string>
+    <string name="cantAddBlock">No pots afegir un usuari a qui has bloquejat o t\'ha bloquejat</string>
 </resources>
