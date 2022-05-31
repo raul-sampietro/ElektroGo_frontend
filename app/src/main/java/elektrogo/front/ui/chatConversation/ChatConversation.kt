@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
@@ -14,6 +15,7 @@ import com.squareup.picasso.Picasso
 import elektrogo.front.ChatService
 import elektrogo.front.R
 import elektrogo.front.controller.session.SessionController
+import elektrogo.front.model.Block
 import elektrogo.front.model.Message
 import elektrogo.front.ui.profile.ProfileActivity
 import elektrogo.front.ui.valorarUsuari.ValorarUsuariDialog
@@ -27,6 +29,8 @@ class ChatConversation : AppCompatActivity() {
     private lateinit var thread: Thread
     private lateinit var recyclerView: RecyclerView
     private var interrupted: Boolean = false
+    lateinit var userA2 : String
+    lateinit var userB2 : String
     //userA is the current user
 
     private fun changeData(newConversation: ArrayList<Message>) {
@@ -65,6 +69,8 @@ class ChatConversation : AppCompatActivity() {
 
         val userA = b?.getString("userA").toString()
         val userB = b?.getString("userB").toString()
+        userA2 = userA
+        userB2= userB
 
         val sessionController = SessionController
         val currentUser = sessionController.getUsername(this)
@@ -118,15 +124,36 @@ class ChatConversation : AppCompatActivity() {
 
         val addMemberButton : ImageButton = findViewById(R.id.addMemberButton)
 
+        val blockedList : ArrayList<Block> = viewModel.getBlocks(userB)
+        var blocked = false
+        for (block in blockedList) {
+            if (block.userBlocking == userA) {
+                blocked = true
+            }
+        }
+
+        val blockedListuser : ArrayList<Block> =  viewModel.getBlocks(userA)
+        var youAreBlocked = false
+        for (block in blockedListuser) {
+            if (block.userBlocking == userB) {
+                youAreBlocked = true
+            }
+        }
+        if (youAreBlocked || blocked) {
+            addMemberButton.visibility= View.GONE
+        }
         addMemberButton.setOnClickListener {
             Toast.makeText(this, getString(R.string.opneningDialog), Toast.LENGTH_LONG).show()
-            val addMember = AddMemberDialog()
-            val bundle = Bundle()
-            bundle.putString("member", b!!.getString("userB"))
-            addMember.arguments = bundle
-            addMember.show( supportFragmentManager , "AddMemberDialog")
+            if (!youAreBlocked && !blocked) {
+                val addMember = AddMemberDialog()
+                val bundle = Bundle()
+                bundle.putString("member", b!!.getString("userB"))
+                addMember.arguments = bundle
+                addMember.show( supportFragmentManager , "AddMemberDialog")
+            }
         }
     }
+
     override fun onBackPressed() {
         if (thread.isAlive) {
             interrupted = true

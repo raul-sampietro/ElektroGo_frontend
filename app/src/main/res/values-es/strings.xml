@@ -278,4 +278,5 @@
     <string name="Loading">Cargando</string>
     <string name="youReported">Has reportado a</string>
     <string name="youCouldNotReport">No se ha podido denunciar a</string>
+    <string name="cantAddBlock">No puedes añadir un usuari al que tienes bloqueado o que te ha bloqueado</string>
 </resources>

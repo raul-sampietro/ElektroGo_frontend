@@ -2,6 +2,7 @@ package elektrogo.front.ui.chatConversation
 
 import androidx.lifecycle.ViewModel
 import elektrogo.front.controller.FrontendController
+import elektrogo.front.model.Block
 import elektrogo.front.model.Chat
 import elektrogo.front.model.Message
 import kotlinx.coroutines.runBlocking
@@ -22,4 +23,7 @@ class ChatConversationViewModel : ViewModel(){
         return@runBlocking FrontendController.getUserProfilePhoto(username)
     }
 
+    fun getBlocks(username: String) : ArrayList<Block> = runBlocking {
+        return@runBlocking FrontendController.getBlocks(username)
+    }
 }
