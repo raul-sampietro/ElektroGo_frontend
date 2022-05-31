@@ -225,8 +225,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:background="@color/white"
                 android:spinnerMode="dropdown"
+                android:backgroundTint="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
@@ -247,8 +247,8 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
-                android:background="@color/white"
                 android:spinnerMode="dropdown"
+                android:backgroundTint="@color/black"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
