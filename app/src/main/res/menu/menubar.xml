@@ -13,15 +13,18 @@
                 android:title="@string/catalaMenu"
                 android:id="@+id/catalan"
                 android:icon="@drawable/ic_language_24"
+                android:iconTint="@color/black"
                 app:showAsAction="always" />
             <item
                 android:title="@string/castellaMenu"
                 android:id="@+id/spanish"
+                android:iconTint="@color/black"
                 android:icon="@drawable/ic_language_24"
                 app:showAsAction="always" />
             <item
                 android:title="@string/anglesMenu"
                 android:id="@+id/english"
+                android:iconTint="@color/black"
                 android:icon="@drawable/ic_language_24"
                 app:showAsAction="always" />
 
