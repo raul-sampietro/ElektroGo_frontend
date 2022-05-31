@@ -136,6 +136,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
+                    android:backgroundTint="@color/white"
                     android:text="@string/dateLabel"
                     tools:ignore="TextContrastCheck" />
 
@@ -162,6 +163,7 @@
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="20dp"
+                    android:backgroundTint="@color/white"
                     android:text="@string/HourButton"
                     tools:ignore="TextContrastCheck" />
 
@@ -193,7 +195,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
+                android:background="@color/white"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/ExampleDetailsTraject"
@@ -219,10 +223,11 @@
                 android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
+                android:background="@color/white"
                 android:spinnerMode="dropdown"
-                tools:ignore="SpeakableTextPresentCheck"
-                />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
                 android:id="@+id/SeatsOffered"
@@ -240,7 +245,9 @@
                 android:layout_width="180dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
+                android:background="@color/white"
                 android:spinnerMode="dropdown"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -260,7 +267,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="20dp"
+                android:background="@color/white"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/RestTextExample"

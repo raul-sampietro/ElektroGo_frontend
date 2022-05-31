@@ -112,6 +112,14 @@
                             android:layout_marginStart="5dp"
                             android:src="@drawable/ic_starplena" />
 
+                        <TextView
+                            android:id="@+id/numRatesGuest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:text="(0)" />
+
                     </LinearLayout>
 
                 </LinearLayout>
